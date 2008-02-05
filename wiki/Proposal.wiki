@@ -12,15 +12,22 @@ Define the scope of the project and the objectives to be satisfied by this proje
 
 
 
-Category values:						Impact values:
-PS – Product Size Risk						1 – catastrophic
-BU – Business Impact Risk					2 – critical
-CU – Customer Relations Risk					3 – marginal
-PR – Process Risk						4 – negligible
-TE – Technology Risk
-DE – Development Environment Risk
-ST – Risk Associated with Staff Size and Experience
+Category values:
+  PS – Product Size Risk
+  BU – Business Impact Risk
+  CU – Customer Relations Risk
+  PR – Process Risk
+  TE – Technology Risk
+  DE – Development Environment Risk
+  ST – Risk Associated with Staff Size and Experience
 
+Impact values:
+  # – catastrophic
+  # – critical
+  # – marginal
+  # – negligible
+						
+						
 =Discussion of Risks to Be Managed=
 Summarize the contents of the risk table. Indicate why project includes or does not include certain risks. Explain the severity and probability of the risks.
 Risk Mitigation, Monitoring, and Management Plan
@@ -36,7 +43,7 @@ Explain what will be done for each risk if the risk becomes a problem. (Keep in 
 Below is a list of tasks associated with the project, a Gantt chart depicting task durations, dependencies and completion dates, and a summary of resource assignments for each task.
 
 Task List
-1.…
+  # …
 Timeline Chart
 Gantt Chart (with dates)
 Resource Table
