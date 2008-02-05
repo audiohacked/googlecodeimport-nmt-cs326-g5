@@ -1,0 +1,12 @@
+#summary Features that may end up into the final product.
+
+== Client Features ==
+  * Cross Platform, ie must run on atleast Linux, Windows XP, and Mac OS X
+  * HTTP Downloading and Browser
+  * FTP Downloading
+  * BitTorrent Filesharing
+  * Content Browsers (two or three ??)
+
+== Server?? Features ==
+  * backend for User Management
+  * Per User Content Magagement/Tracking
