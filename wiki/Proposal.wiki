@@ -2,69 +2,80 @@
 
 =Team 5 - Project Title=
 =Project Proposal & Plan=
-=Introduction=
+
+==Introduction==
 Describe in one or two paragraph the motivation for the project.
-=Project Overview and Statement of Proposal=
+
+===Project Overview and Statement of Proposal===
 Provide an overview of the project and then make a statement of proposal.
-Statement of Proposal: We propose to …
-=Project Scope and Objectives=
+*Statement of Proposal*: _We propose to …_
+
+===Project Scope and Objectives===
 Define the scope of the project and the objectives to be satisfied by this project. 
 
+== Risk Management Strategy ==
+=== Risk Table ===
+|| Risks || Category || Probability || Impact || RMMM ||
+||       ||          ||             ||        ||      ||
 
+*Category values*:
+  * PS – Product Size Risk
+  * BU – Business Impact Risk
+  * CU – Customer Relations Risk
+  * PR – Process Risk
+  * TE – Technology Risk
+  * DE – Development Environment Risk
+  * ST – Risk Associated with Staff Size and Experience
 
-Category values:
-  PS – Product Size Risk
-  BU – Business Impact Risk
-  CU – Customer Relations Risk
-  PR – Process Risk
-  TE – Technology Risk
-  DE – Development Environment Risk
-  ST – Risk Associated with Staff Size and Experience
-
-Impact values:
+*Impact values*:
   # – catastrophic
   # – critical
   # – marginal
   # – negligible
 						
 						
-=Discussion of Risks to Be Managed=
+===Discussion of Risks to Be Managed===
 Summarize the contents of the risk table. Indicate why project includes or does not include certain risks. Explain the severity and probability of the risks.
-Risk Mitigation, Monitoring, and Management Plan
+
+===Risk Mitigation, Monitoring, and Management Plan===
 This section describes what is to be done to avoid each risk (Section 2.3.1), how the team will monitor its activities to detect when a risk becomes a problem (Section 2.3.2), and what will be done for each risk if it becomes a problem (Section 2.3.3).
-Risk Mitigation
+
+====Risk Mitigation====
 Explain how each risk will be avoided. (Keep in mind that some activities may help to mitigate more than one risk while some risks may require multiple mitigation activities.)
-Risk Monitoring
+
+====Risk Monitoring====
 Explain how the team will monitor each risk to detect if the risk is becoming a problem. (Keep in mind that some activities may help to monitor more than one risk while some risks may require multiple monitors.)
-Risk Management (Contingency Plans)
+
+====Risk Management (Contingency Plans)====
 Explain what will be done for each risk if the risk becomes a problem. (Keep in mind that the same contingency plan may apply to more than one risk.)
 
-=Schedule=
+==Schedule==
 Below is a list of tasks associated with the project, a Gantt chart depicting task durations, dependencies and completion dates, and a summary of resource assignments for each task.
 
-Task List
+===Task List===
   # …
-Timeline Chart
+
+===Timeline Chart===
 Gantt Chart (with dates)
-Resource Table
-Task
-People
-Hardware & Software
-Special
 
+===Resource Table===
+||Task||People||Hardware & Software||Special||
+||    ||      ||                   ||       ||
 
+==Project Resources==
 
+===People===
+  # ...
+  # ...
+  # ...
+  # ...
+  # ...
 
-Project Resources
-People
-1.
-2.
-3.
-4.
-5.
-Hardware and Software Resources
+===Hardware and Software Resources===
 Indicate the anticipated software and hardware resources required to complete the project.
-Special Resources
+
+===Special Resources===
 List any special resources needed to complete the project.
-Appendices
+
+==Appendices==
 This section contains any additional information that you would like to include in the project proposal and plan.
