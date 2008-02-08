@@ -5,10 +5,12 @@
 
 ==Introduction==
 Describe in one or two paragraph the motivation for the project.
+The purpose of this software project is to develop a client application which facilitates file distribution.  The project aims to utilize multiple file transfer protocols and be available on many operating systems.  The software's primary motivation is the desire to provide a universal, intuitive, and streamlined method for retrieving files in an efficient manner.
 
 ===Project Overview and Statement of Proposal===
 Provide an overview of the project and then make a statement of proposal.
 *Statement of Proposal*: _We propose to …_
+We propose to..make what I described above?
 
 ===Project Scope and Objectives===
 Define the scope of the project and the objectives to be satisfied by this project. 
