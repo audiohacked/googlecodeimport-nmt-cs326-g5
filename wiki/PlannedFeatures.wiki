@@ -14,3 +14,4 @@
 == Development Environment ==
   * Use CMake for cross-platform build system, auto-creates project files for linux, mac, and Windows VC++
   * Open Source libraries ??
+  * wxWidgets for GUI
