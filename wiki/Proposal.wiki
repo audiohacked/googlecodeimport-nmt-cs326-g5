@@ -67,14 +67,23 @@ Gantt Chart (with dates)
 ==Project Resources==
 
 ===People===
-  # ...
+  # Sean Nelson - Project Leader, Documentation, Developer
   # ...
   # ...
   # ...
   # ...
 
 ===Hardware and Software Resources===
-Indicate the anticipated software and hardware resources required to complete the project.
+====Software====
+  * wxWidgets
+  * Subversion
+  * Google Code
+  * CMake
+
+====Hardware====
+  * Linux
+  * Windows 2000 to Windows Vista
+  * Mac OS X 10.4 & 10.5
 
 ===Special Resources===
 List any special resources needed to complete the project.
