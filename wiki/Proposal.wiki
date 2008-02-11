@@ -65,7 +65,7 @@ Below is a list of tasks associated with the project, a Gantt chart depicting ta
       ## Sample Projects w/ wxWidgets
       ## Simple Prototypes
   # Design Specification
-      ## Cross-platform Backend
+      ## Cross-platform Backend Design
       ## Universal GUI Design
       ## File Transfer Protocols
       ## Database Schema
@@ -76,7 +76,7 @@ Below is a list of tasks associated with the project, a Gantt chart depicting ta
       ## Platform-specific Code
       ## Database Reporting
   # Testing
-  # Documentation
+  # Final Documentation
 
 ===Timeline Chart===
 Gantt Chart (with dates)
