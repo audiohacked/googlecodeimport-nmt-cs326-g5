@@ -21,6 +21,7 @@ The client will support two file transfer protocols seamlessly, namely HTTP and 
 || Team member leaves || ST || low || critical || Redistribute workload ||
 || Project is behind schedule || PR, CU, BU || medium || marginal || Increase work-hours and meeting times ||
 || Member falls behind || ST || medium || marginal || Redistribute workload, possibly increase meeting times ||
+|| Hardware for targeted platform is unavailable || TE, DE || marginal || Find alternative machines or use TCC ||
 
 
 *Category values*:
@@ -41,7 +42,7 @@ The client will support two file transfer protocols seamlessly, namely HTTP and 
 						
 ===Discussion of Risks to Be Managed===
 The primary risk in this project is not maintaining cross platform code.  The more platform-dependent code becomes a part of the project, the difficulty in developing the client increases as a platform-specific solution must be found for other operating systems; maintaining each client becomes more difficult as well.  The probability of this occurring is not negligible, and thus this critical risk must constantly be monitored during the course of the project. 
-Other risks for the project are less catastrophic, and include relatively common occurrences such as machine failure or a member falling behind on their work. Though the probability of these risks occurring ranges from improbable to highly probable, their impact to the project is mostly negligible with adequate mitigation strategies.
+Other risks for the project are less catastrophic, and include relatively common occurrences such as machine unavailability or a member falling behind on their work. Though the probability of these risks occurring ranges from improbable to highly probable, their impact to the project is mostly negligible with adequate mitigation strategies.
 
 ===Risk Mitigation, Monitoring, and Management Plan===
 ====Risk Mitigation====
