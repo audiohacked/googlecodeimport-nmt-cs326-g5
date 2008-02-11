@@ -21,7 +21,7 @@ The client will support two file transfer protocols seamlessly, namely HTTP and 
 || Team member leaves || ST || low || critical || Redistribute workload ||
 || Project is behind schedule || PR, CU, BU || medium || marginal || Increase work-hours and meeting times ||
 || Member falls behind || ST || medium || marginal || Redistribute workload, possibly increase meeting times ||
-|| Hardware for targeted platform is unavailable || TE, DE || marginal || Find alternative machines or use TCC ||
+|| Hardware for targeted platform is unavailable || TE, DE || low || marginal || Find alternative machines or use TCC ||
 
 
 *Category values*:
