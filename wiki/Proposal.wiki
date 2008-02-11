@@ -44,8 +44,6 @@ The primary risk in this project is not maintaining cross platform code.  The mo
 Other risks for the project are less catastrophic, and include relatively common occurrences such as machine failure or a member falling behind on their work. Though the probability of these risks occurring ranges from improbable to highly probable, their impact to the project is mostly negligible with adequate mitigation strategies.
 
 ===Risk Mitigation, Monitoring, and Management Plan===
-This section describes what is to be done to avoid each risk (Section 2.3.1), how the team will monitor its activities to detect when a risk becomes a problem (Section 2.3.2), and what will be done for each risk if it becomes a problem (Section 2.3.3).
-
 ====Risk Mitigation====
 Minor risks related to scheduling and project progress will be avoided by maintaining consistent communication between all project members via a Google Group with a related Google Code repository.  Through these tools, members will discuss all aspects of the project and also have a central repository for project code and documents.  In addition, regular weekly meetings will be held in person with all group members.
 The cross-platform code risk is more delicate, and must be avoided by having constant diligence towards the issue during the entire design and implementation phases of the project.  This risk will primarily be dealt with through the use of cross-platform libraries, but situations may arise in which there is no obvious cross-platform solution to a problem; in this case, the group will come together and discuss further mitigation options.
