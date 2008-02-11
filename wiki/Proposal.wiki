@@ -4,7 +4,7 @@
 =Project Proposal & Plan=
 
 ==Introduction==
-Although many file distribution platforms exist in modern computing, there is a notable lack of any universal, general purpose platform for file transfer.  Notable platforms currently in operation include Valve's Steam platform, which distributes and sales games and related media files on the Windows operating system, as well as less centralized but still popular file transfer clients like Kazaa or BitTorrent.  While these platforms facilitate file distribution and content promotion very well, they are not general purpose and are often exclusive to an operating system, architecture, or file transfer protocol.
+Although many file distribution platforms exist in modern computing, there is a notable lack of any universal, general purpose platform for file transfer.  Notable platforms currently in operation include Valve's Steam platform, which distributes and sales games and related media files on the Windows operating system, as well as less centralized but still popular file transfer applications like Kazaa or bit torrent clients.  While these platforms facilitate file distribution and content promotion very well, they are not general purpose and are often exclusive to an operating system, architecture, or file transfer protocol.
 
 ===Project Overview and Statement of Proposal===
 The project aims to provide a universal, intuitive, and streamlined method for retrieving files in an efficient manner.  We propose to develop a client application which facilitates file distribution.  This client will be cross-platform, running on the Windows, Linux, and OS X operating systems.  The client will also support mainstream file transfer protocols in a seamless manner.
