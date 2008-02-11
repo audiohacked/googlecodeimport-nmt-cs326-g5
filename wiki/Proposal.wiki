@@ -18,10 +18,10 @@ The client will support two file transfer protocols seamlessly, namely HTTP and 
 || Risks || Category || Probability || Impact || RMMM ||
 || Maintaining cross-platform code || TE, DE, PR || medium-high || Critical || Use of cross-platform libraries and strategies ||
 || Three separate client applications become disparate || PS, DE, TE || medium || Critical || Use of cross-platform code, peer review, and constant integration ||
-|| Team member leaves || ST || low || critical || Redistribute workload ||
-|| Project is behind schedule || PR, CU, BU || medium || marginal || Increase work-hours and meeting times ||
-|| Member falls behind || ST || medium || marginal || Redistribute workload, possibly increase meeting times ||
-|| Hardware for targeted platform is unavailable || TE, DE || low || negligible || Find alternative machines or use TCC ||
+|| Team member leaves || ST || low || Critical || Redistribute workload ||
+|| Project is behind schedule || PR, CU, BU || medium || Marginal || Increase work-hours and meeting times ||
+|| Member falls behind || ST || medium || Marginal || Redistribute workload, possibly increase meeting times ||
+|| Hardware for targeted platform is unavailable || TE, DE || low || Negligible || Find alternative machines or use TCC ||
 
 
 *Category values*:
