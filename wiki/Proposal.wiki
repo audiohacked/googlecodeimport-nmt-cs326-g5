@@ -118,6 +118,3 @@ http://nmt-cs326-g5.googlecode.com/files/ganttchart.JPG
   
 ===Special Resources===
   * Server for centralized content and database
-
-==Appendices==
-This section contains any additional information that you would like to include in the project proposal and plan.
