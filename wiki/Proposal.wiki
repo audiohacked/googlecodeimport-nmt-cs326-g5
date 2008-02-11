@@ -79,7 +79,7 @@ Below is a list of tasks associated with the project, a Gantt chart depicting ta
   # Final Documentation
 
 ===Timeline Chart===
-Gantt Chart (with dates)
+http://nmt-cs326-g5.googlecode.com/files/ganttchart.JPG
 
 ===Resource Table===
 ||Task||People||Hardware & Software||Special||
