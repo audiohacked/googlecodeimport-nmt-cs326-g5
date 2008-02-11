@@ -15,7 +15,7 @@ The client will support two file transfer protocols seamlessly, namely HTTP and 
 
 == Risk Management Strategy ==
 === Risk Table ===
-|| Risks || Category || Probability || Impact || RMMM ||
+|| *Risks* || *Category* || *Probability* || *Impact* || *RMMM* ||
 || Maintaining cross-platform code || TE, DE, PR || medium-high || Critical || Use of cross-platform libraries and strategies ||
 || Three separate client applications become disparate || PS, DE, TE || medium || Critical || Use of cross-platform code, peer review, and constant integration ||
 || Team member leaves || ST || low || Critical || Redistribute workload ||
@@ -84,7 +84,8 @@ Below is a list of tasks associated with the project, a Gantt chart depicting ta
 http://nmt-cs326-g5.googlecode.com/files/ganttchart.JPG
 
 ===Resource Table===
-||Task||People||Hardware & Software||Special||
+||*Task*||*People*||*Hardware & Software*||*Special*||
+
 ||Requirement Specification and Analysis|| All || N/A || N/A ||
 ||Programmatic Experimentation|| All || All (Listed Below) || N/A ||
 ||Design Specification|| All || N/A || N/A ||
