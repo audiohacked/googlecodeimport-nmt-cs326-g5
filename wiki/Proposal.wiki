@@ -13,13 +13,17 @@ The project aims to provide a universal, intuitive, and streamlined method for r
 
 ===Project Scope and Objectives===
 The project's primary goal is to produce a client application which facilitates file transfer and runs on Windows, Linux, and OS X.  The client aims to use as much portable code as possible; maintaining cross-platform capability is a primary objective.  
-The client will support two file transfer protocols seamlessly, namely HTTP and bit torrent.  If time permits, the client will also aim to support FTP as well.
+The client will support two file transfer protocols seamlessly, namely HTTP and bit torrent.  If time permits, the client will also aim to support FTP as well.  In addition, the client will report to a centralized database with information concerning file transfers in order to report statistics and other information about file downloads and the client itself.
 
 == Risk Management Strategy ==
-{GOING TO FILL THESE IN AS THE RISK PAGE GETS FILLED IN}
 === Risk Table ===
 || Risks || Category || Probability || Impact || RMMM ||
-||       ||          ||             ||        ||      ||
+|| Maintaining cross-platform code || TE, DE, PR || medium-high || Critical || Use of cross-platform libraries and strategies ||
+|| Three separate client applications become disparate || PS, DE, TE || medium || Critical || Use of cross-platform code, peer review, and constant integration ||
+|| Team member leaves || ST || low || critical || Redistribute workload ||
+|| Project is behind schedule || PR, CU, BU || medium || marginal || Increase work-hours and meeting times ||
+|| Member falls behind || ST || medium || marginal || Redistribute workload, possibly increase meeting times ||
+
 
 *Category values*:
   * PS – Product Size Risk
@@ -38,43 +42,68 @@ The client will support two file transfer protocols seamlessly, namely HTTP and 
 						
 						
 ===Discussion of Risks to Be Managed===
-{Summarize the contents of the risk table. Indicate why project includes or does not include certain risks. Explain the severity and probability of the risks.}
-The primary risk in this project is not maintaining cross platform code.  The more platform-dependent code becomes a part of the project, the difficulty in developing the client increases as a platform-specific solution must be found for other operating systems; maintaining each client becomes more difficult as well.  The probability of this occurring is not negligible, and thus this critical risk must constantly be monitored during the course of the project. {EXPAND}
-Other risks for the project are less catastrophic, and include relatively common occurrences such as machine failure or a member falling behind on their work. Though the probability of these risks occurring ranges from improbable to highly probable, their impact to the project is mostly negligible. {EXPAND}
+The primary risk in this project is not maintaining cross platform code.  The more platform-dependent code becomes a part of the project, the difficulty in developing the client increases as a platform-specific solution must be found for other operating systems; maintaining each client becomes more difficult as well.  The probability of this occurring is not negligible, and thus this critical risk must constantly be monitored during the course of the project. 
+Other risks for the project are less catastrophic, and include relatively common occurrences such as machine failure or a member falling behind on their work. Though the probability of these risks occurring ranges from improbable to highly probable, their impact to the project is mostly negligible with adequate mitigation strategies.
 
 ===Risk Mitigation, Monitoring, and Management Plan===
 This section describes what is to be done to avoid each risk (Section 2.3.1), how the team will monitor its activities to detect when a risk becomes a problem (Section 2.3.2), and what will be done for each risk if it becomes a problem (Section 2.3.3).
 
 ====Risk Mitigation====
-Explain how each risk will be avoided. (Keep in mind that some activities may help to mitigate more than one risk while some risks may require multiple mitigation activities.)
+Minor risks related to scheduling and project progress will be avoided by maintaining consistent communication between all project members via a Google Group with a related Google Code repository.  Through these tools, members will discuss all aspects of the project and also have a central repository for project code and documents.  In addition, regular weekly meetings will be held in person with all group members.
+The cross-platform code risk is more delicate, and must be avoided by having constant diligence towards the issue during the entire design and implementation phases of the project.  This risk will primarily be dealt with through the use of cross-platform libraries, but situations may arise in which there is no obvious cross-platform solution to a problem; in this case, the group will come together and discuss further mitigation options.
 
 ====Risk Monitoring====
-Explain how the team will monitor each risk to detect if the risk is becoming a problem. (Keep in mind that some activities may help to monitor more than one risk while some risks may require multiple monitors.)
+By maintaining communication and holding weekly meetings, group members will give essentially continuous progress reports on their work.  This method will make the process of scheduling and progress risk monitoring fairly simple and rapid.  Peer review of code and constant integration of code changes as well as a collaborative, researched design plan will help in the monitoring of the cross-platform project risks.
 
 ====Risk Management (Contingency Plans)====
-Explain what will be done for each risk if the risk becomes a problem. (Keep in mind that the same contingency plan may apply to more than one risk.)
+The scheduling, progress, and individual member risks will be managed via team discussion and resolutions.  In the case that progress of the project or an individual member becomes an issue, tasks may be redistributed or more meetings held, perhaps even with the purpose of dedicated development.  If the cross-platform risk becomes a serious problem, the team will meet and discuss solutions, trying first to find alternatives which are platform-independent.  If no cross-platform solution can be found for a given problem, the team will assign the tasks of creating a minimized platform-specific solution for each client.
 
 ==Schedule==
 Below is a list of tasks associated with the project, a Gantt chart depicting task durations, dependencies and completion dates, and a summary of resource assignments for each task.
 
 ===Task List===
-  # …
+  # Requirement Specification and Analysis
+  # Programmatic Experimentation
+      ## Sample Projects w/ wxWidgets
+      ## Simple Prototypes
+  # Design Specification
+      ## Cross-platform Backend
+      ## Universal GUI Design
+      ## File Transfer Protocols
+      ## Database Schema
+  # Implementation
+      ## System Framework
+      ## GUI w/ wxWidgets
+      ## File Transfer 
+      ## Platform-specific Code
+      ## Database Reporting
+  # Testing
+  # Documentation
 
 ===Timeline Chart===
 Gantt Chart (with dates)
 
 ===Resource Table===
 ||Task||People||Hardware & Software||Special||
-||    ||      ||                   ||       ||
+||Requirement Specification and Analysis|| All || N/A || N/A ||
+||Programmatic Experimentation|| All || All (Listed Below) || N/A ||
+||Design Specification|| All || N/A || N/A ||
+||Implementation - System Framework || All || Windows/Linux/Mac || N/A ||
+||Implementation - GUI|| Sean, Josh, Corey || wxWidgets || N/A ||
+||Implementation - File Transfer|| Sean, Josh, Adam, Kensie || All || N/A ||
+||Implementation - Platform-specific Code|| All || All || N/A ||
+||Implementation - Database Reporting|| Sean, Josh, Corey || SQLite/mySQL || Temporary Server||
+||Testing|| All || All || N/A||
+||Documentation|| All || N/A || N/A ||
 
 ==Project Resources==
 
 ===People===
   # Sean Nelson - Project Leader, Documentation, Developer
   # Joshua Barron - Documentation, Developer
-  # ...
-  # ...
-  # ...
+  # Corey Brown - Developer
+  # Adam Troemner - Developer
+  # Kensie Sturdevant - Developer
 
 ===Hardware and Software Resources===
 ====Software====
@@ -82,14 +111,15 @@ Gantt Chart (with dates)
   * Subversion
   * Google Code
   * CMake
+  * DBMS software (Likely SQLite or mySQL)
 
 ====Hardware====
   * Linux
   * Windows 2000 to Windows Vista
   * Mac OS X 10.4 & 10.5
-
+  
 ===Special Resources===
-List any special resources needed to complete the project.
+  * Server for centralized content and database
 
 ==Appendices==
 This section contains any additional information that you would like to include in the project proposal and plan.
