@@ -1,0 +1,31 @@
+#summary We can do our requirements report here.
+
+=Universal File Transfer Client=
+=Team #5=
+==Requirements Specification==
+
+===Project Overview===
+Describe the motivation for the project and then provide a project overview.
+===Scope and Objectives===
+Define the scope of the project and the objectives to be satisfied by this project. 
+===Supplementary Requirements===
+Describe the non-functional requirements (grouped according to type – i.e., interface, physical, design, and implementation) identified for this project.
+===Customer Requirements===
+This section contains the architecture view of your use-case model. It includes 
+use-case diagram(s), 
+actor descriptions and 
+prioritized use-case descriptions.
+
+==Requirements Analysis== 
+===Structural Analysis===
+Briefly describe each analysis class (organized according to type - boundary, control, and entity) and class diagrams
+===Behavioral Analysis=== 
+This section presents a use-case realization for each use-case using sequence diagram and activity diagram.
+===User Interface Analysis===
+In this section, present a user interface (navigational paths and screen mock-ups).
+===Validation and Criteria===
+Describe how will you assert via testing that you satisfy a use case.
+==Appendices==
+Appendix
+==Project Status==
+Report on the progress of your project. Include an updated plan that shows your progress towards completing project tasks.
