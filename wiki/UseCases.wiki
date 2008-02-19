@@ -2,8 +2,8 @@
 
 = List of Actors =
 List probable actors below:
-  * Basic User
-  * Content Distributor
+  * Basic User (human)
+  * Content Distributor (human)
   * Database
   * Centralized Content Server (?)
 
