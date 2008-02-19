@@ -1,0 +1,33 @@
+#summary We can brainstorm and detail use cases here.
+
+= List of Actors =
+List probable actors below:
+  * Basic User
+  * Content Distributor
+  * Database
+  * Centralized Content Server (?)
+
+= Use Case Diagram =
+
+When we're satisfied with the use cases below we can convert them into a big use case diagram here. 
+
+= Use Case Details =
+Below is a table containing every use case along with auxiliary information.
+
+|| _Use Case_ || _Actor(s)_ || _Entry Condition_ || _Exit Condition_  || _Extends/Includes/Inherits_ ||
+|| DownloadFile || Basic User || User initiates a file download. || User finishes file download. || N/A ||
+|| DownloadSponsoredFile || Basic User, Centralized Content Server || User initiates a file download from the centralized content server. || User finishes file download. || *Inherits* DownloadFile, *Includes* ReportFileDownload ||
+|| DownloadTorrentFile || Basic User || User initiates a file download via BitTorrent. || User completes download and shares file to a specified ratio, or user opts to stop sharing the file prematurely. || *Inherits* DownloadFile ||
+|| ReportFileDownload || Database || Sponsored file finishes downloading. || File download statistics are reported and stored in the database. || N/A ||
+|| ReportFileUpload || Database, Centralized Content Server || Sponsored file finishes uploading to the Centralized Content Server. || The database has allocated the proper space and structure to accommodate statistics for the sponsored file. || N/A ||
+|| UploadSponsoredFile || Content Distributor, Centralized Content Server  || Content Distributor selects a file which will become sponsored content. || File is uploaded to centralized content server. || *Includes* ReportFileUpload ||
+
+
+= Flow of Events = 
+Below is a list of use cases with detailed flow of events.
+
+== ReportFileDownload ==
+  # Client completes a sponsored file download, opens connection with database.
+  # Client sends file download statistics concerning the recent file transfer (completion time, average speed, incrementing the total number of downloads recorded, etc.) via an insert/update query to an appropriate table in the database.
+  # Database performs the queries and commits changes to database.
+  # Client closes connection to database.
