@@ -1,0 +1,18 @@
+#summary We can come up with classes and a class diagram here.
+
+= Class Diagram =
+
+Class diagram will go here at some point.
+
+= Classes =
+
+Below is a table of potential classes w/ attributes and methods.
+
+|| _Class_ || _Description_ || _Attributes_ || _Methods_ ||
+
+
+= Classes and Relationships=
+
+Below is a table textually describing relationships between classes.
+
+|| _Class_ || _Related Class_ || _Relationship Type_ || _Cardinalities_ || _Additional Info_  ||
