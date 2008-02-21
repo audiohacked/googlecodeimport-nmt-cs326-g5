@@ -25,10 +25,4 @@ Below is a table containing every use case along with auxiliary information.
 
 
 = Flow of Events = 
-Below is a list of use cases with detailed flow of events.
-
-== ReportFileDownload ==
-  # Client completes a sponsored file download, opens connection with database.
-  # Client sends file download statistics concerning the recent file transfer (completion time, average speed, incrementing the total number of downloads recorded, etc.) via an insert/update query to an appropriate table in the database.
-  # Database performs the queries and commits changes to database.
-  # Client closes connection to database.
+Below is a list of use cases with a brief flow of events.  Use cases for which a detailed flow of events is available have separate pages.
