@@ -6,7 +6,7 @@ List probable actors below:
   * Content Distributor (human)
   * Database
   * Centralized Content Server (?)
-  * Tracker
+  * Tracker (for torrents)
 
 = Use Case Diagram =
 
