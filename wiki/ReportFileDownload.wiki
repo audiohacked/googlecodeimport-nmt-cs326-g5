@@ -6,7 +6,12 @@ This is the detailed use case for ReportFileDownload.
 
 = Flow of Events = 
 
-   1. Client completes a sponsored file download, opens connection with database.
-   2. Client sends file download statistics concerning the recent file transfer (completion time, average speed, incrementing the total number of downloads recorded, etc.) via an insert/update query to an appropriate table in the database.
-   3. Database performs the queries and commits changes to database.
-   4. Client closes connection to database. 
+Actor: Database
+
+     1. Client completes a sponsored file download, opens connection with database.
+
+     2. Client sends file download statistics concerning the recent file transfer (completion time, average speed, incrementing the total number of downloads recorded, etc.) via an insert/update query to an appropriate table in the database.
+
+3. Database performs the queries and commits changes to database.
+
+     4. Client closes connection to database. 
