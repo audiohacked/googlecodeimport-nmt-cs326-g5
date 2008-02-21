@@ -8,6 +8,7 @@ The user queries the server for the .torrent file and downloads it if it is ther
 = Details =
 Actors: *User, File Server, Database Server, Torrent Tracker*
 Flow of events:
+
 # *User* selects file in file browser portion of program
 # *User* selects download
 # Client sends out a request to the *File Server* for the .torrent file
