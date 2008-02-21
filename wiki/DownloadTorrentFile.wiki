@@ -1,0 +1,19 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+The user queries the server for the .torrent file and downloads it if it is there.
+
+
+= Details =
+1. User selects file in file browser portion of program
+2. User selects download
+3. Client sends out a request to the server for the .torrent file
+          4. Server returns status of .torrent file
+5. If .torrent file is available, client downloads it
+6. Client performs checksum on .torrent file to make sure it was transferred successfully
+7. Client queries tracker to get list of other clients with file or files defined by .torrent file
+          8. Tracker adds client to list of clients downloading file
+9. Client queries other clients to find out who had what pieces of file or files
+          10. Other clients reply and specify what data is available for download
+11. Client downloads files piece by piece
