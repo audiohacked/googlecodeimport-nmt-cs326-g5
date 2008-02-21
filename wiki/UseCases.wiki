@@ -27,6 +27,7 @@ Below is a table containing every use case along with auxiliary information.
 || ReportTransferProgress || Basic User || User begins a file transfer. || File transfer completes. || N/A ||
 || SetClientPreferences || Basic User || User opens Preferences dialog. || User's preferences are committed to a configuration file. || N/A ||
 || AbortFileTransfer || Basic User || User opts to cancel a file transfer or an error occurs. || File transfer is stopped and any intermediate data is disposed of. || N/A ||
+|| GUIUseCases || .. || We should put some GUI use cases in, like opening file menus or displaying information, or rendering HTML, etc. || .. || .. ||
 || ExTransferError || Basic User _and/or_ Centralized Content Server || Error occurs during a file transfer. || Error is resolved and/or reported to the user. || *Includes* AbortFileTransfer, *Extends* DownloadFile ||
 || ExHTTPTransferError || Basic User _and/or_ Centralized Content Server || An error occurs during an HTTP file transfer. || Error is resolved and/or reported to the user.  If the file was a sponsored file, error is reported to the content server. || *Inherits* ExTransferError, *Extends* DownloadSponsoredFile ||
 || ExTorrentTransferError || Basic User, Tracker || An error occurs during a BitTorrent file transfer.  || Error is resolved and/or reported to the user and the tracker. || *Inherits* ExTransferError, *Extends* DownloadTorrentFile ||
