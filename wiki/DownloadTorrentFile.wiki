@@ -11,16 +11,30 @@ Actors: *User, File Server, Database Server, Torrent Tracker*
 Flow of events:
 
 1. *User* selects file in file browser portion of program
+
 2. *User* selects download
+
 3. Client sends out a request to the *File Server* for the .torrent file
+
           4. *File Server* queries *Database Server* as to the status of the file
+
           5. *Database Server* returns status of .torrent file to *File Server*
+
           6. *File Server* returns status of .torrent file to *User*
+
 7. If .torrent file is available, client downloads it from *File Server*
+
 8. Client performs checksum on .torrent file to make sure it was transferred successfully
-9. Client queries *Torrent Tracker* for list of other clients with file or files defined by .torrent file
+
+9. Client queries *Torrent Tracker* for list of other clients with file or files defined 
+by .torrent file
+
           10. *Torrent Tracker* returns list of clients if it exists, error if not
+
           11. *Torrent Tracker* adds client to list of clients downloading file
+
 12. Client queries other clients to find out who had what pieces of file or files
+
           13. Other clients reply and specify what data is available for download
+
 14. Client downloads files piece by piece
