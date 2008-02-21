@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary The client downloads a .torrent file (and the actual torrent, or should this be another use case?)
 
 = Introduction =
 
