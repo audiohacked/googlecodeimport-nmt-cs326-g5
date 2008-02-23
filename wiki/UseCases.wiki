@@ -11,6 +11,9 @@ List probable actors below:
 = Use Case Diagram =
 
 When we're satisfied with the use cases below we can convert them into a big use case diagram here. 
+First Version:
+http://nmt-cs326-g5.googlecode.com/files/usecase.jpeg
+I really tried to minimize criss-crossing the lines and came up with this.  I color coded the <<include>>, <<extends>, and inheritance relationships.
 
 = Use Case Details =
 Below is a table containing every use case along with auxiliary information.
