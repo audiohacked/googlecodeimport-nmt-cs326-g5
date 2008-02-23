@@ -25,11 +25,12 @@ Below is a table containing every use case along with auxiliary information.
 || DesignateFileSponsoredStatus || Content Distributor, Database || Content distributor designates a file which he/she wants to have/lose sponsored status. || File's database entry is updated to reflect desired sponsored status. || N/A ||
 || GetFileStatistics || Basic User, Database || User selects a file for which usage statistics are desired. || Database completes reporting relevant information about desired file to client. || N/A ||
 || ReportTransferProgress || Basic User || User begins a file transfer. || File transfer completes. || N/A ||
+|| RemoveFile || Basic User, Centralized Content Server, Database || User/Distributor selects a file to be removed from the distribution system. || The server has deleted the file, the database has removed/archived information about the file. || N/A ||
 || SetClientPreferences || Basic User || User opens Preferences dialog. || User's preferences are committed to a configuration file. || N/A ||
 || SetServerPreferences || Content Distributor, Centralized Content Server || User opens Server Preferences dialog (could be in website with credentials). || New preferences are committed to server configuration file. || N/A ||
 || AbortFileTransfer || Basic User || User opts to cancel a file transfer or an error occurs. || File transfer is stopped and any intermediate data is disposed of. || N/A ||
-|| GUIUseCases || .. || We should put some GUI use cases in, like opening file menus or displaying information, or rendering HTML, etc. || .. || .. ||
 || ExTransferError || Basic User _and/or_ Centralized Content Server || Error occurs during a file transfer. || Error is resolved and/or reported to the user. || *Includes* AbortFileTransfer, *Extends* DownloadFile, UploadFile ||
+|| ExFileNotFoundError || Centralized Content Server || Server cannot locate requested file. || Server logs the error and aborts the transfer. || *Inherits* ExTransferError ||
 || ExHTTPTransferError || Basic User _and/or_ Centralized Content Server || An error occurs during an HTTP file transfer. || Error is resolved and/or reported to the user.  If the file was a sponsored file, error is reported to the content server. || *Inherits* ExTransferError, *Extends* DownloadHTTPFile ||
 || ExTorrentTransferError || Basic User, Tracker || An error occurs during a BitTorrent file transfer.  || Error is resolved and/or reported to the user and the tracker. || *Inherits* ExTransferError, *Extends* DownloadTorrentFile ||
 
