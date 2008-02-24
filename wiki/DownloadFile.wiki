@@ -1,0 +1,12 @@
+#summary The generic download interface which includes the other download types
+
+= Introduction =
+
+A user downloads a file from a generic server.
+
+
+= Details =
+1. User chooses a file to download in file browser
+2. Client software queries server to status of file
+        3. Sever responds with status of file
+4. Client downloads file if available, using the appropriate protocol
