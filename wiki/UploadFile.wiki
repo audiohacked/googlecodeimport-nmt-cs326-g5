@@ -8,9 +8,10 @@ Add your content here.
 = Details =
 
 Actor: Centralized Content Server, Basic User/Content Distributor
+
 Pre-condition: user has upload privileges.
  
-1.  User selects a file to upload.
-2.  Client opens connection (if necessary) with the content server.
-3.  Client transfers file to content server over HTTP.
-4.  Server dynamically updates appropriate pages to reflect new content.
+  #User selects a file to upload.
+  #Client opens connection (if necessary) with the content server.
+  #Client transfers file to content server over HTTP.
+  #Server dynamically updates appropriate pages to reflect new content.
