@@ -1,0 +1,18 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+Add your content here.
+
+
+= Details =
+
+Actor: Database
+
+   1. Client completes a sponsored file upload, opens connection with database. 
+
+    2. Client sends file download statistics concerning the recent file transfer (completion time, average speed, incrementing the total number of downloads recorded, etc.) via an insert/update query to an appropriate table in the database. 
+
+3. Database performs the queries and commits changes to database.
+
+    4. Client closes connection to database. 
