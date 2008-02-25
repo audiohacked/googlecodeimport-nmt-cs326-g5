@@ -9,6 +9,12 @@ Class diagram will go here at some point.
 Below is a table of potential classes w/ attributes and methods.
 
 || _Class_ || _Description_ || _Attributes_ || _Methods_ ||
+|| GUI || Graphical user interface which wraps wxWidgets methods. || ?? || ?? ||
+|| DBManager || Handles connections/transactions with the database. || connectionString, databaseType || connectToDB(), disconnect(), select(...), insert(...), update(...), remove(...) ||
+|| ContentManager || Handles connections/transactions/authentications with the centralized content server. || location || getFileLocation(), authenticateUser(), getUserPermissions(), connect() ||
+|| TransferManager || Super class for transfer protocols. || file(s), transferSpeeds, etc. || downloadFile(location), getTransferSpeed(file), getPercentCompleted(file) ||
+|| HTTPTransferManager || Manager for HTTP file transfers. || inherited || downloadFile(location), rest are inherited ||
+|| TorrentTransferManager || Manager for torrent file transfers. || trackerLocation, peerLocation(s) || downloadTorrent(torrent), connectToTracker() ||
 
 
 = Classes and Relationships=
@@ -16,3 +22,4 @@ Below is a table of potential classes w/ attributes and methods.
 Below is a table textually describing relationships between classes.
 
 || _Class_ || _Related Class_ || _Relationship Type_ || _Cardinalities_ || _Additional Info_  ||
+|| TransferManager || HTTPTransferManager, TorrentTransferManager || Inheritance || 1:1 || N/A ||
