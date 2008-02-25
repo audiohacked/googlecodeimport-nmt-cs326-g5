@@ -1,0 +1,11 @@
+#summary Detailed use case.
+
+= Details =
+
+Actors: Content Distributor, Database
+
+  # Content Distributor selects a file which is to have it's sponsored status modified.
+  # Client opens connection with database, queries the sponsored status of the selected file.
+  # Content Distributor is given the option to modify this status.
+  # If changed, the new status is committed to the database.
+  # Client closes connection to database.
