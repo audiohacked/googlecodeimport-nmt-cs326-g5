@@ -1,0 +1,8 @@
+#summary Use case for reporting transfer information.
+
+= Details =
+
+Actors: Basic User
+
+  # User selects a file (or merely is transferring a file) for which transfer information (% completed, number of bytes downloaded, transfer speed, etc.) is desired.
+  # Client calculates transfer information and displays it to the user (often continuously).
