@@ -15,6 +15,8 @@ Below is a table of potential classes w/ attributes and methods.
 || TransferManager || Super class for transfer protocols. || file(s), transferSpeeds, etc. || downloadFile(location), getTransferSpeed(file), getPercentCompleted(file) ||
 || HTTPTransferManager || Manager for HTTP file transfers. || inherited || downloadFile(location), rest are inherited ||
 || TorrentTransferManager || Manager for torrent file transfers. || trackerLocation, peerLocation(s) || downloadTorrent(torrent), connectToTracker() ||
+|| File || Superclass for files. || name, extension, ?? || ?? ||
+|| TorrentFile || Subclass for torrent file (maybe not necessary) || ?? || ?? ||
 
 
 = Classes and Relationships=
