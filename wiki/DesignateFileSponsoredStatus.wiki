@@ -1,4 +1,4 @@
-#summary Detailed use case.
+#summary Detailed use case for changing sponsored status of a file.
 
 = Details =
 
