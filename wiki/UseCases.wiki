@@ -12,10 +12,22 @@ List probable actors below:
 
 When we're satisfied with the use cases below we can convert them into a big use case diagram here. 
 ==Second Version==
-http://nmt-cs326-g5.googlecode.com/files/usecasev2_revised.jpeg
+http://nmt-cs326-g5.googlecode.com/files/usecasev2_2.jpeg
 ==First Version==
 http://nmt-cs326-g5.googlecode.com/files/usecase.jpeg
 I really tried to minimize criss-crossing the lines and came up with this.  I color coded the <<include>>, <<extends>, and inheritance relationships.
+
+= Use Case Diagram by Actors =
+==Basic User==
+http://nmt-cs326-g5.googlecode.com/files/UseCase_BasicUser.jpeg
+==Content Distributor==
+http://nmt-cs326-g5.googlecode.com/files/UseCase_ContentDistributor.jpeg
+==Tracker==
+http://nmt-cs326-g5.googlecode.com/files/UseCase_Tracker.jpeg
+==Centralized Content Server==
+http://nmt-cs326-g5.googlecode.com/files/UseCase_ContentServer.jpeg
+==Database==
+http://nmt-cs326-g5.googlecode.com/files/UseCase_Database.jpeg
 
 = Use Case Details =
 Below is a table containing every use case along with auxiliary information.
