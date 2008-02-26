@@ -1,7 +1,9 @@
 #summary We can come up with classes and a class diagram here.
 
 = Class Diagram =
-
+= Version Two =
+With the methods implied by the use case diagram.
+http://nmt-cs326-g5.googlecode.com/files/class%20diagramV2.jpeg
 = Version One =
 I'm gonna match this to the updated use case diagram, of course. Criticisms, ideas, etc. welcome!
 http://nmt-cs326-g5.googlecode.com/files/class%20diagram.jpeg
