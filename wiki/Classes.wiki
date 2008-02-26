@@ -2,7 +2,8 @@
 
 = Class Diagram =
 
-Class diagram will go here at some point.
+= Version One =
+http://nmt-cs326-g5.googlecode.com/files/class%20diagram.jpeg
 
 = Classes =
 
