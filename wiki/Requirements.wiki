@@ -1,6 +1,6 @@
 #summary We can do our requirements report here.
 
-=Universal File Transfer Client=
+=Digital Content Distribution and Publishing System=
 =Team #5=
 ==Requirements Specification==
 
@@ -10,6 +10,28 @@ This program will provide a universal file distribution service. It will use a c
 Define the scope of the project and the objectives to be satisfied by this project. 
 ===Supplementary Requirements===
 Describe the non-functional requirements (grouped according to type – i.e., interface, physical, design, and implementation) identified for this project.
+*FURPS Non-functional Requirements (Quality)*
+_Usability_
+  * Users familiar with other content distribution platforms and file transfer clients should feel at ease with this system.
+  * User interface should always strive for simplicity and intuitiveness.
+  * User interface should follow a tabbed system to divide functionality and reduce complexity.
+
+_Reliability_
+  * The entire system must be robust enough to handle common networking issues like dropped connections, missing files, and transfer errors.
+  * User authentication system should use common security practices.
+
+_Performance_
+  * File transfers should initiate within two seconds of a client's request.
+  * Content server should responsibly manage available bandwidth to achieve optimal browsing and transfer speeds.
+
+_Supportability_
+  * Content server's closed website system should be mostly dynamic, adapting to file additions/removals as well as changes in existing files' properties.
+
+*FURPS+ Additional Non-functional Requirements (Constraints)*
+
+_Implementation_
+  * The client will be implemented in C++, utilizing the gtkWidgets library for cross-platform code.
+
 ===Customer Requirements===
 This section contains the architecture view of your use-case model. It includes 
 use-case diagram(s), 
