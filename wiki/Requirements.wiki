@@ -47,6 +47,7 @@ prioritized use-case descriptions.
     * Tracker (for torrents) - communicated with the client software during a torrent download.
 
 *Deployment Diagram*
+
 http://nmt-cs326-g5.googlecode.com/files/DeploymentDiagram.jpeg
 
 ==Requirements Analysis== 
