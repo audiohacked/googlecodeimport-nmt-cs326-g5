@@ -41,4 +41,4 @@ Below is a table containing every use case along with auxiliary information.
 || ExTorrentTransferError || Basic User, Tracker || An error occurs during a BitTorrent file transfer.  || Error is resolved and/or reported to the user and the tracker. || *Inherits* ExTransferError, *Extends* DownloadTorrentFile ||
 
 = Flow of Events = 
-Below is a list of use cases with a brief flow of events.  Use cases for which a detailed flow of events is available have separate pages.
+See each use case for its flow of events.
