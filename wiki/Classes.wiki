@@ -3,6 +3,7 @@
 = Class Diagram =
 
 = Version One =
+I'm gonna match this to the updated use case diagram, of course. Criticisms, ideas, etc. welcome!
 http://nmt-cs326-g5.googlecode.com/files/class%20diagram.jpeg
 
 = Classes =
