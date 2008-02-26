@@ -12,7 +12,7 @@ List probable actors below:
 
 When we're satisfied with the use cases below we can convert them into a big use case diagram here. 
 ==Second Version==
-http://nmt-cs326-g5.googlecode.com/files/usecasev2.jpeg
+http://nmt-cs326-g5.googlecode.com/files/usecasev2_revised.jpeg
 ==First Version==
 http://nmt-cs326-g5.googlecode.com/files/usecase.jpeg
 I really tried to minimize criss-crossing the lines and came up with this.  I color coded the <<include>>, <<extends>, and inheritance relationships.
