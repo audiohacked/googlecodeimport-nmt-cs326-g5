@@ -11,6 +11,7 @@ Define the scope of the project and the objectives to be satisfied by this proje
 ===Supplementary Requirements===
 Describe the non-functional requirements (grouped according to type – i.e., interface, physical, design, and implementation) identified for this project.
 *FURPS Non-functional Requirements (Quality)*
+
 _Usability_
   * Users familiar with other content distribution platforms and file transfer clients should feel at ease with this system.
   * User interface should always strive for simplicity and intuitiveness.
