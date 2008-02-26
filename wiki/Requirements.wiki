@@ -39,12 +39,15 @@ use-case diagram(s),
 actor descriptions and 
 prioritized use-case descriptions.
 
-Actors -
+*Actors*
     * Basic User (human) - the target audience for downloads, uses the client software
     * Content Distributor/Server Admin (human, inherits from user) - the manager of the Centralized Content Server
     * Database - provides storage and retrieval for information on downloads. This includes file location, file attributes, statistics including number of downloads, and other vital information.
     * Centralized Content Server - communicates with the client software and the database.
     * Tracker (for torrents) - communicated with the client software during a torrent download.
+
+*Deployment Diagram*
+http://nmt-cs326-g5.googlecode.com/files/DeploymentDiagram.jpeg
 
 ==Requirements Analysis== 
 ===Structural Analysis===
