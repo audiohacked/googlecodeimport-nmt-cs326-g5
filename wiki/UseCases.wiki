@@ -21,7 +21,7 @@ Below is a table containing every use case along with auxiliary information.
 || _Use Case_ || _Actor(s)_ || _Entry Condition_ || _Exit Condition_  || _Extends/Includes/Inherits_ ||
 || DownloadFile || Basic User || User initiates a file download from the content server (can be an actual file or a torrent file). || User finishes file download or file download error. || *Includes* ReportTransferProgress, ReportFileDownload ||
 || DownloadHTTPFile || Basic User || User downloads a file from content server over HTTP. || File transfer completes or file transfer error. || *Inherits* DownloadFile ||
-|| DownloadTorrentFile || Basic User, Tracker || User initiates a file download via BitTorrent. || User completes download and shares file to a specified ratio, or user opts to stop sharing the file prematurely. || *Inherits* DownloadFile ||
+|| DownloadTorrentFile || Basic User, Tracker || User initiates a file download via BitTorrent. || User completes download and shares file to a specified ratio, or user opts to stop sharing or downloading the file prematurely. || *Inherits* DownloadFile ||
 || ReportFileDownload || Database || A file transfer to the client completes. || File download statistics are reported and stored in the database. || N/A ||
 || ReportFileUpload || Database || File finishes uploading to the Centralized Content Server. || The database has allocated the proper space and structure to accommodate statistics for the sponsored file. || N/A ||
 || UploadFile || Basic User, Centralized Content Server  || User selects a file which will become sponsored content. || File is uploaded to centralized content server. || *Includes* ReportFileUpload, ReportTransferProgress, DesignateFileSponsoredStatus ||
