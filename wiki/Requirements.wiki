@@ -5,9 +5,11 @@
 ==Requirements Specification==
 
 ===Project Overview===
-This program will provide a universal file distribution service. It will use a client-server model whereas the server can be controlled by a specific client. The client can choose to use the server to distribute sponsored files or allow users to upload their own content.
+The program will provide a cross-platform content distribution and publishing service. It will use a client-server model where the server will use and provide service through standard programs/services like Apache and MySQL. The customer can choose to use the server to distribute published files or allow users to upload their own content that can be sponsored/featured on the server.
+
 ===Scope and Objectives===
-Define the scope of the project and the objectives to be satisfied by this project. 
+The scope of the project is to build a base platform for customers to create a digital community and publishing system while also supporting at least Linux, Windows, and Mac user alike. The main function of the system is to provide an end-user a way to obtain digital content like movies, music, and other entertainment. The system has to be fast, native-looking, and easily changeable/upgradeable. To insure the user's client is up to date, it will include an self updater. To facilitate downloading, the client will use bittorrent and http/ftp. Also the client can be configured to include Community Portal and /or a web browser.
+
 ===Supplementary Requirements===
 Describe the non-functional requirements (grouped according to type – i.e., interface, physical, design, and implementation) identified for this project.
 *FURPS Non-functional Requirements (Quality)*
