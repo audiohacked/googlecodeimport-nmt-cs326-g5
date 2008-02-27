@@ -6,6 +6,7 @@ A user downloads a file from a generic server.
 
 
 _Use Case Name_  DownloadFile
+
 _Flow of events:_
 
 1. User chooses a file to download in file browser
