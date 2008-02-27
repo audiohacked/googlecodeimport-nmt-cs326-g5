@@ -2,9 +2,13 @@
 
 = Details =
 
-Actors: Basic User
+_Use case name_
 
-*Flow of Events*
+_Participating actors_ 
+
+Initiated by Basic User
+
+_Flow of Events_
 
   # User selects to edit their preferences from a drop-down menu.
   # GUI opens a preferences dialog.
@@ -12,6 +16,6 @@ Actors: Basic User
   # Client commits preferences to memory and applies any immediately relevant changes.
   # GUI closes preferences dialog.
 
-= Sequence Diagram =
+*Sequence Diagram*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_setclientpreferences.jpeg
