@@ -1,0 +1,11 @@
+#summary Server could not find file.
+
+= Details =
+
+Preconditions: User has requested a file that the server could not locate
+
+Actors: Central content server, Basic user
+
+  1.  Server reports error.
+
+  2.  Error reported to user.
