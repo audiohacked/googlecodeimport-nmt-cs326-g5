@@ -612,7 +612,25 @@ http://nmt-cs326-g5.googlecode.com/files/winvista.png
 http://nmt-cs326-g5.googlecode.com/files/macosx.png
 
 ===Validation and Criteria===
-Describe how will you assert via testing that you satisfy a use case.
+The following are validation and testing criterion for each category of use cases.  In addition to the testing strategies described, all categories have an addition of testing the use case across all targeted operating systems.
+
+*Download/Upload Use Cases*
+
+These use cases will be tested via a direct examination of each of the respective functionalities.  Multiple file types will be tested as well as different connections for uploading/downloading to measure performance.
+
+*Database Use Cases*
+
+These use cases will be tested individually as well as simultaneously alongside the download/upload use cases (as the database use cases are often invoked as a result of these use cases).  Invalid queries will also be made on the database to ensure that the database constraints are sufficient to maintain the integrity of the system's relational structure.
+
+*Miscellaneous Client/Server Use Cases (Preferences, Browsing, etc.)*
+
+These use cases will be tested via a direct examination of each functionality; for example, changing server preferences will be tested to see if its intended functionality is in place as well as the functionality to refute/correct improper changes in preferences.
+
+*Exceptional Use Cases (Errors)*
+
+These use cases will be tested by forcing each respective error to occur as well as simulating conditions in which each error might be likely to occur.
+
+*Examples of Specific Testing Cases*
 
   * Successfully complete an HTTP download
   * Successfully complete a torrent download
