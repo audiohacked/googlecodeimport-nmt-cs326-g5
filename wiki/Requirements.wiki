@@ -605,7 +605,9 @@ See activity diagram for *`ExTransferError`*.
 ----
 
 ===User Interface Analysis===
-In this section, present a user interface (navigational paths and screen mock-ups).
+The essential design of the user interface is a tabbed client which allows the user to switch from viewing features like a Content Browser (in-house web browser for the content server's website), a Community Portal (allowing users to manage content), or a Transfer tab (detailing current downloads/uploads).  Drop-down menus are also provided which support an 'expected' set of functionality on each OS, such as closing the client or setting preferences.
+
+The following are two screenshots of a sample client, running first in Windows Vista, the second in Macintosh OS X.  
 
 http://nmt-cs326-g5.googlecode.com/files/winvista.png
 
@@ -641,7 +643,7 @@ These use cases will be tested by forcing each respective error to occur as well
   * `ContentServer` can successfully communicate the location and attributes of a specific file download, both in the case of HTTP downloads and the case of torrent downloads
 
 ==Appendices==
-Appendix
+System Resource Documentation:
 
 WxWidgets -
 http://www.wxwidgets.org/
