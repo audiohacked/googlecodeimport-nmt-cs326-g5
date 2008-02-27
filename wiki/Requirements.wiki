@@ -13,7 +13,6 @@ The motivation for this project is the lack of a general-purpose, platform-indep
 The scope of the project is to build a base platform for customers to create a digital community and publishing system while also supporting at least Linux, Windows, and Mac user alike. The main function of the system is to provide an end-user a way to obtain any digital content, such as movies, music, and other entertainment. The system has to be fast, native-looking, and easily changeable/upgradeable. To insure the user's client is up to date, it will include an self updater. To facilitate downloading, the client will use bittorrent and http/ftp. Finally, the client can also be configured to include Community Portal and/or a web browser.
 
 ===Supplementary Requirements===
-Describe the non-functional requirements (grouped according to type – i.e., interface, physical, design, and implementation) identified for this project.
 *FURPS Non-functional Requirements (Quality)*
 
 _Usability_
@@ -642,6 +641,13 @@ These use cases will be tested by forcing each respective error to occur as well
   * `DBManager` can successfully communicate with the actual database, verified by doing database inserts, selects, deletes and edits, and verifying the actual data inserted by accessing the database through the command line
   * `ContentServer` can successfully communicate the location and attributes of a specific file download, both in the case of HTTP downloads and the case of torrent downloads
 
+==Project Status==
+The project is on schedule with the requirements elicitation and analysis phases completed.  Via mockups and experimentation, some of the design and implementation is complete as well.
+
+Below is an updated Gantt chart showing project progress thus far:
+
+http://nmt-cs326-g5.googlecode.com/files/ganttchart_2.JPG
+
 ==Appendices==
 System Resource Documentation:
 
@@ -668,10 +674,3 @@ http://www.apache.org/
 
 MySQL Relational Database system -
 http://www.mysql.com/
-
-==Project Status==
-The project is on schedule with the requirements elicitation and analysis phases completed.  Via mockups and experimentation, some of the design and implementation is complete as well.
-
-Below is an updated Gantt chart showing project progress thus far:
-
-http://nmt-cs326-g5.googlecode.com/files/ganttchart_2.JPG
