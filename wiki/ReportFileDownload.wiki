@@ -15,3 +15,7 @@ Actor: Database
 3. Database performs the queries and commits changes to database.
 
      4. Client closes connection to database. 
+
+= Sequence Diagram = 
+
+http://nmt-cs326-g5.googlecode.com/files/seq_reportfiledownload.jpeg
