@@ -670,4 +670,8 @@ MySQL Relational Database system -
 http://www.mysql.com/
 
 ==Project Status==
-Report on the progress of your project. Include an updated plan that shows your progress towards completing project tasks.
+The project is on schedule with the requirements elicitation and analysis phases completed.  Via mockups and experimentation, some of the design and implementation is complete as well.
+
+Below is an updated Gantt chart showing project progress thus far:
+
+http://nmt-cs326-g5.googlecode.com/files/ganttchart_2.JPG
