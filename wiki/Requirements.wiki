@@ -360,6 +360,10 @@ _Exit Condition_
 _Quality Requirements_
   * A connection must be maintained between the `Client` and the `ContentServer` at all times
 
+*Activity Diagram*
+
+See the authentication/designation section of the UploadFile activity diagram.
+
 ----
 
 _Use case name_  *`GetFileStatistics`*
