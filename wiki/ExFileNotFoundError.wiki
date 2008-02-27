@@ -2,6 +2,7 @@
 
 = Details =
 
+_Use case name_ *ExFileNotFoundError*
 
 _Participating Actors:_ Central content server, Basic user
 
