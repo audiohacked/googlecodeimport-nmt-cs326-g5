@@ -2,14 +2,20 @@
 
 = Details =
 
-Actors: Basic User, Centralized Content Server
+_Use case name_  BrowseContentSite
+
+_Participating Actors_
+
+ Initiated by Basic User
+
+ Communicates with Centralized Content Server
 
 *Flow of Events*
 
-  # Basic user requests a page via the in-house browser from the content server.
-  # Content server receives request and serves page to client.
-  # Client renders page in browser.
+  1. BasicUser requests a page via the in-house browser from the content server.
+         2. ContentServer receives request and serves page to client.
+  3. Client renders page in browser.
 
-= Sequence Diagram =
+*Sequence Diagram*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_browsecontent.jpeg
