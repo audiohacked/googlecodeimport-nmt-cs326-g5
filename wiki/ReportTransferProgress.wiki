@@ -12,3 +12,7 @@ _Flow of Events_
 
   # BasicUser selects a file (or merely is transferring a file) for which transfer information (% completed, number of bytes downloaded, transfer speed, etc.) is desired.
   # Client calculates transfer information and displays it to the user (often continuously).
+
+= Sequence Diagram = 
+
+http://nmt-cs326-g5.googlecode.com/files/seq_reporttransferprogress.jpeg
