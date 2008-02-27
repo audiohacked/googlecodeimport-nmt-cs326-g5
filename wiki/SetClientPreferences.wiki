@@ -2,7 +2,7 @@
 
 = Details =
 
-_Use case name_  SetClientPreferences
+_Use case name_  *SetClientPreferences*
 
 _Participating actors_ 
 
