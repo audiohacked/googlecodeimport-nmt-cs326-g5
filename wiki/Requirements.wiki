@@ -65,7 +65,7 @@ _Control_
 
 _Entity_
     * DBManager - provides an interface to the ContentManager to update and query the database, which provides lists and attributes of downloads and the files that make up the downloads.
-    * Download - provides an interface that other downloads implement that includes methods and attributes that are common to all downloads.
+    * Download - provides an interface that specific downloads implement that includes methods and attributes that are common to all downloads.
     * TorrentDownload - implements the Download interface and includes methods and attributes that are unique to torrent downloading, such as peerLocations and trackerLocations. Includes one or more file objects.
     * HTTPDownload - implements the Download interface and includes methods and attributes that are unique to HTTP downloads, such as getFileName. Includes one file.
     * file - includes attributes of a file and a method for retrieving those attributes.
