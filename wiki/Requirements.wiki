@@ -362,7 +362,7 @@ _Quality Requirements_
 
 *Activity Diagram*
 
-See the authentication/designation section of the UploadFile activity diagram.
+See the authentication/designation section of the 'UploadFile' activity diagram.
 
 ----
 
