@@ -47,23 +47,23 @@ http://nmt-cs326-g5.googlecode.com/files/usecasev2_2.jpeg
 
 *Actor Descriptions and Use-Cases by Actor*
 
-_Basic User_ - the target audience for downloads, uses the client software.
+`BasicUser` - the target audience for downloads, uses the client software.
 
 http://nmt-cs326-g5.googlecode.com/files/UseCase_BasicUser.jpeg
 
-_Content Distributor/Server Admin_ - the manager of the Centralized Content Server, inherits functionality from Basic User.
+`ContentDistributor` - the manager of the Centralized Content Server, inherits functionality from Basic User.
 
 http://nmt-cs326-g5.googlecode.com/files/UseCase_ContentDistributor.jpeg
 
-_Database_ - provides storage and retrieval for information on downloads. This includes file location, file attributes, statistics including number of downloads, and other vital information.
+`Database` - provides storage and retrieval for information on downloads. This includes file location, file attributes, statistics including number of downloads, and other vital information.
 
 http://nmt-cs326-g5.googlecode.com/files/UseCase_Database.jpeg
 
-_Centralized Content Server_ - communicates with the client software and the database.
+`Content Server` - communicates with the client software and the database.
 
 http://nmt-cs326-g5.googlecode.com/files/UseCase_ContentServer.jpeg
 
-_Tracker_ - communicates with the client software during a torrent download to provide connection information to peers.
+`Tracker` - communicates with the client software during a torrent download to provide connection information to peers.
 
 http://nmt-cs326-g5.googlecode.com/files/UseCase_Tracker.jpeg
 
