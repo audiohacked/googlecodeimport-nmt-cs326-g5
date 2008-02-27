@@ -11,3 +11,5 @@ Actors: Basic User, Centralized Content Server
   # Client renders page in browser.
 
 = Sequence Diagram =
+
+http://nmt-cs326-g5.googlecode.com/files/seq_browsecontent.jpeg
