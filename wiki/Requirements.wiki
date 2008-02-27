@@ -574,5 +574,24 @@ http://nmt-cs326-g5.googlecode.com/files/macosx.png
 Describe how will you assert via testing that you satisfy a use case.
 ==Appendices==
 Appendix
+
+WxWidgets -
+www.wxwidgets.org/
+
+CMake -
+www.cmake.org/
+
+Bittorrent specifications -
+http://wiki.theory.org/BitTorrentSpecification#Identification
+
+BEncoding C implementation -
+http://funzix.svn.sourceforge.net/viewvc/funzix/trunk/bencode/bencode.c?view=markup
+
+Libtorrent -
+http://www.rasterbar.com/products/libtorrent/
+
+cURL file transfer tool -
+http://curl.haxx.se/
+
 ==Project Status==
 Report on the progress of your project. Include an updated plan that shows your progress towards completing project tasks.
