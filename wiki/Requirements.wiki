@@ -73,6 +73,11 @@ _Entity_
 This section presents a use-case realization for each use-case using sequence diagram and activity diagram.
 ===User Interface Analysis===
 In this section, present a user interface (navigational paths and screen mock-ups).
+
+http://nmt-cs326-g5.googlecode.com/files/winvista.png
+
+http://nmt-cs326-g5.googlecode.com/files/macosx.png
+
 ===Validation and Criteria===
 Describe how will you assert via testing that you satisfy a use case.
 ==Appendices==
