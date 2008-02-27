@@ -7,7 +7,9 @@ The user queries the server for the .torrent file and downloads it if it is ther
 
 = Details =
 _Use Case Name_    DownloadTorrentFile
-Actors: Initiated by Basic User
+
+_Participating Actors:_
+        Initiated by Basic User
         Communicates with File Server, Database Server, Torrent Tracker
 
 _Flow of events:_
