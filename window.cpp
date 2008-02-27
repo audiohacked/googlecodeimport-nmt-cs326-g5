@@ -8,19 +8,14 @@ wxSeanTabbed::wxSeanTabbed(wxWindow *parent, wxWindowID id,
 	const wxPoint& pos, const wxSize& size, long style) :
 wxNotebook(parent, id, pos, size, style)
 {
-	//win = self.makeHomepage(check.netAppHomepage)
-	//win = GassTools.ToolsList(self, check.appNetConfig)
-	//win = GassGames.GamesList(self, check.appNetConfig)
-	//win = GassMedia.MediaList(self, check.appNetConfig)
-	//win = self.makeHomepage(check.netAppHomepage, communityTab=True)
-
 	/* holders for each tab */
 	wxPanel *Home, *Community, *Games, *Media, *Tools;
 
 	/* Home is the first tab in the interface */
+	#ifdef BUILTIN_BROWSER
 	Home = new wxSeanDummyPanel(this, -1, wxDefaultPosition, wxDefaultSize,
 		wxTAB_TRAVERSAL|wxCLIP_CHILDREN|wxNO_BORDER);
-	
+	#endif
 	#ifdef COMMUNITY_PORTAL		
 		/* Community is 2nd tab */
 		Community = new wxSeanDummyPanel(this, -1, wxDefaultPosition, wxDefaultSize,
@@ -36,12 +31,12 @@ wxNotebook(parent, id, pos, size, style)
 	second field is the name of the tab in the interface
 	*/
 	#ifdef BUILTIN_BROWSER
-		AddPage(Home, _T("Tab 1"));
+		AddPage(Home, _T("Browser"));
 	#endif
 	#ifdef COMMUNITY_PORTAL
-		AddPage(Community, _T("Tab 2"));
+		AddPage(Community, _T("Community Portal"));
 	#endif
-	AddPage(Games, _T("Tab 3"));
+	AddPage(Games, _T("Downloads"));
 	//AddPage(Media, _T("My Media"));
 	//AddPage(Tools, _T("Tools"));
 }
@@ -68,8 +63,9 @@ wxSeanDummyPanel::wxSeanDummyPanel(wxWindow *parent, wxWindowID id, const wxPoin
 	const wxSize& size, long style) : wxPanel(parent, id, pos, size, style)
 {
 	wxTextCtrl *MainEditBox = new wxTextCtrl(this, TEXT_Main,
-	      wxT("Hi!"), wxDefaultPosition, wxDefaultSize,
-	      wxTE_MULTILINE | wxTE_RICH , wxDefaultValidator, wxTextCtrlNameStr);
+		wxT("This is where a webbrowser, community info, or Download List will go!"),
+	 	wxDefaultPosition, wxDefaultSize,
+		wxTE_MULTILINE | wxTE_RICH , wxDefaultValidator, wxTextCtrlNameStr);
 
 	/* make a sizer so that the text box fills the screen */
 	wxGridSizer *sizer = new wxGridSizer(1, 0, 0);
