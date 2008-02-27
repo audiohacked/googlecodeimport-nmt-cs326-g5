@@ -55,13 +55,13 @@ http://nmt-cs326-g5.googlecode.com/files/UseCase_ContentDistributor.jpeg
 
 ----
 
-`Database` - provides storage and retrieval for information on downloads. This includes file location, file attributes, statistics including number of downloads, and other vital information.
+`DBManager` - provides storage and retrieval for information on downloads. This includes file location, file attributes, statistics including number of downloads, and other vital information.
 
 http://nmt-cs326-g5.googlecode.com/files/UseCase_Database.jpeg
 
 ----
 
-`Content Server` - communicates with the client software and the database.
+`ContentServer` - communicates with the client software and the database. Is responsible for communication between client and database.
 
 http://nmt-cs326-g5.googlecode.com/files/UseCase_ContentServer.jpeg
 
