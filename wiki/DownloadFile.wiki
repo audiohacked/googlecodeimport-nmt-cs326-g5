@@ -15,3 +15,5 @@ A user downloads a file from a generic server.
 4. Client downloads file if available, using the appropriate protocol
 
 = Sequence Diagram =
+
+http://nmt-cs326-g5.googlecode.com/files/seq_absdownload.jpeg
