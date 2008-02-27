@@ -49,6 +49,6 @@ wxSeanMenu::wxSeanMenu() : wxMenuBar()
 	/* now we actually append the menus to the menubar */
 	Append(FileMenu, _T("&File"));
 	Append(ViewMenu, _T("&View"));
-	Append(GamesMenu, _T("&Games"));
+	Append(GamesMenu, _T("&DigiContent"));
 	Append(HelpMenu, _T("&Help"));
 }
