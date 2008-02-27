@@ -1,0 +1,14 @@
+#summary Use case for setting server preferences
+
+= Details =
+
+Actors: Content Distributor, Content Server
+
+*Flow of Events*
+
+  # Content Distributor edits server preferences via configuration file.
+  # Content Server reads and implements changed preferences.
+
+= Sequence Diagram = 
+
+http://nmt-cs326-g5.googlecode.com/files/seq_setserverpreferences.jpeg
