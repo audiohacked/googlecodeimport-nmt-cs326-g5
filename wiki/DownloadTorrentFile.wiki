@@ -35,13 +35,13 @@ _Flow of events:_
 9. Client queries *Torrent Tracker* for list of other clients with file or files defined 
 by .torrent file
 
-          10. *Torrent Tracker* returns list of clients if it exists, error if not
+           10. *Torrent Tracker* returns list of clients if it exists, error if not
 
-          11. *Torrent Tracker* adds client to list of clients downloading file
+           11. *Torrent Tracker* adds client to list of clients downloading file
 
 12. Client queries other clients to find out who had what pieces of file or files
 
-          13. Other clients reply and specify what data is available for download
+           13. Other clients reply and specify what data is available for download
 
 14. Client downloads files piece by piece
 
