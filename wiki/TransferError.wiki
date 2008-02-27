@@ -1,0 +1,7 @@
+#summary TransferError
+
+= Details =
+
+Actors: Content Server, Basic User
+
+report error to server and user
