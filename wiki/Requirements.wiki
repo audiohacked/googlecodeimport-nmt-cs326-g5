@@ -92,7 +92,9 @@ _Entity_
     * TorrentDownload - implements the Download interface and includes methods and attributes that are unique to torrent downloading, such as peerLocations and trackerLocations. Includes one or more file objects.
     * HTTPDownload - implements the Download interface and includes methods and attributes that are unique to HTTP downloads, such as getFileName. Includes one file.
     * file - includes attributes of a file and a method for retrieving those attributes.
+
 ===Behavioral Analysis=== 
+
 The following is a table describing the use cases; below the table are sequence or activity diagrams detailing the use cases' flow of events.
 
 || _Use Case_ || _Actor(s)_ || _Entry Condition_ || _Exit Condition_  || _Extends/Includes/Inherits_ ||
@@ -114,6 +116,7 @@ The following is a table describing the use cases; below the table are sequence 
 || ExFileNotFoundError || Centralized Content Server || Server cannot locate requested file. || Server logs the error and aborts the transfer. || *Inherits* ExTransferError ||
 || ExHTTPTransferError || Basic User _and/or_ Centralized Content Server || An error occurs during an HTTP file transfer. || Error is resolved and/or reported to the user.  If the file was a sponsored file, error is reported to the content server. || *Inherits* ExTransferError, *Extends* DownloadHTTPFile ||
 || ExTorrentTransferError || Basic User, Tracker || An error occurs during a BitTorrent file transfer.  || Error is resolved and/or reported to the user and the tracker. || *Inherits* ExTransferError, *Extends* DownloadTorrentFile ||
+
 ===User Interface Analysis===
 In this section, present a user interface (navigational paths and screen mock-ups).
 
