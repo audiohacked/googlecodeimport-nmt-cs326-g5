@@ -55,6 +55,8 @@ http://nmt-cs326-g5.googlecode.com/files/DeploymentDiagram.jpeg
 ==Requirements Analysis== 
 ===Structural Analysis===
 
+http://nmt-cs326-g5.googlecode.com/files/class%20diagramV2.jpeg
+
 _Boundary_
     * GUI - Provides the user interface, the main interaction between the user and the program. Used to initiate downloads, uploads, browse the content server, and edit user preferences.  Calls the preferenceDialogue when preferences are changed and communicates with the ContentManager class to initiate downloads/uploads.
     * preferenceDialogue - allows the user to edit their preferences relating to the operation of the program, including options related to torrenting and user interface options.
