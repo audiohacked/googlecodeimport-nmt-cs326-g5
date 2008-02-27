@@ -16,4 +16,4 @@ A user downloads a file from a generic server.
 
 = Sequence Diagram =
 
-http://nmt-cs326-g5.googlecode.com/files/seq_absdownload.jpeg
+http://nmt-cs326-g5.googlecode.com/files/seq_abstractdownload.jpeg
