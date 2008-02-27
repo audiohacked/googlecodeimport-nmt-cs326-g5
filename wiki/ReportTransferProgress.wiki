@@ -2,7 +2,13 @@
 
 = Details =
 
-Actors: Basic User
+_Use case name_  ReportTransferProgress
 
-  # User selects a file (or merely is transferring a file) for which transfer information (% completed, number of bytes downloaded, transfer speed, etc.) is desired.
+_Participating Actors_
+
+initiated by BasicUser
+
+_Flow of Events_
+
+  # BasicUser selects a file (or merely is transferring a file) for which transfer information (% completed, number of bytes downloaded, transfer speed, etc.) is desired.
   # Client calculates transfer information and displays it to the user (often continuously).
