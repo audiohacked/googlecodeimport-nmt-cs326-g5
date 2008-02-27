@@ -236,7 +236,7 @@ _Exit Condition_
 _Quality Requirements_
   * The operation must complete within 30 seconds
 
-= Sequence Diagram = 
+=== Sequence Diagram ===
 
 http://nmt-cs326-g5.googlecode.com/files/seq_reportfiledownload.jpeg
 
