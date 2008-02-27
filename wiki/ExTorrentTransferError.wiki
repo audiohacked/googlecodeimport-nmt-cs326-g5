@@ -3,6 +3,10 @@
 
 = Details =
 
+Preconditions: User is downloading torrent and an error occurs.
+
+Actors: Tracker, Basic User
+
   1.   Report Error to Tracker.
 
   2.   Report Error to user.
