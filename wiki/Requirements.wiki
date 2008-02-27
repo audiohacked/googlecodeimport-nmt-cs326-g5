@@ -281,7 +281,7 @@ http://nmt-cs326-g5.googlecode.com/files/seq_reportfileupload.jpeg
 
 ----
 
-_Use Case Name_  *Upload*
+_Use Case Name_  *UploadFile*
 
 _Participating Actors_  
 Communicates with ContentServer
