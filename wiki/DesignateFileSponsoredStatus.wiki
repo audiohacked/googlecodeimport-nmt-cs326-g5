@@ -11,10 +11,15 @@ Initiated by ContentDistributor
 _Flow of Events:_
 
   1. ContentDistributor selects a file which is to have it's sponsored status modified.
+
   2. Client opens connection with ContentServer, queries the sponsored status of the selected file.
+
        3. ContentServer connects with and queries DBManager
+
   4. ContentDistributor is given the option to modify this status.
+
   5. If changed, the new status is committed to the database.
+
   6. Client closes connection to database.
 
 _Entry Condition_
