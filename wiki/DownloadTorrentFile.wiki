@@ -22,7 +22,7 @@ _Flow of events:_
 
 3. Client sends out a request to the *ContentServer* for the .torrent file
 
-          4. *ContentServer* queries *Database Server* as to the status of the file
+          4. *ContentServer* queries *DBServer* as to the status of the file
 
           5. *DBServer* returns status of .torrent file to *ContentServer*
 
