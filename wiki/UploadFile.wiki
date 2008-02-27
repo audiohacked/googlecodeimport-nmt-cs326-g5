@@ -1,15 +1,29 @@
 #summary Upload use case.
 
 = Details =
+_Use Case Name_  Upload
 
-Actor: Centralized Content Server, Basic User/Content Distributor
+_Participating Actors_  
+Communicates with ContentServer
+Initiated by BasicUser or ContentDistributor
 
-Pre-condition: user has upload privileges.
- 
-  # User selects a file to upload.
-  # Client opens connection (if necessary) with the content server.
-  # Client transfers file to content server over HTTP.
-  # Server dynamically updates appropriate pages to reflect new content.
+_Flow of Events:_
+
+  # BasicUser or ContentDistributor selects a file to upload.
+  # Client opens connection (if necessary) with the ContentServer.
+  # Client transfers file or files to ContentServer over HTTP.
+        # ContentServer connects to DBManager if not already connected
+  # ContentServer dynamically updates appropriate pages to reflect new content.
+
+_Entry Condition_
+  * BasicUser or ContentDistributor who initiated the upload has upload privileges
+
+_Exit Condition_
+  * The database is updated
+  * The database does not respond
+
+_Quality Requirements_
+  * A connection must be maintained between the Client and the ContentServer at all times
 
 = Activity Diagram =
 
