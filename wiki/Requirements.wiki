@@ -466,7 +466,7 @@ http://nmt-cs326-g5.googlecode.com/files/seq_setserverpreferences.jpeg
 
 ----
 
-_Use Case Name_        AbortFileTransfer
+_Use Case Name_        *AbortFileTransfer*
 
 _Participating Actors_ Initiated by Basic User
 
@@ -477,15 +477,19 @@ _Participating Actors_ Initiated by Basic User
 
 _Entry Condition_    * The Basic User is downloading a file or files.
 
-_Exit Condition_     * The GUI successfully deletes the partially downloaded files and removes the downloads from the list of active downloads. OR
-                     * The Basic User clicks "no" in the confirmation dialogue box, thereby cancelling the cancellation.
-_Quality Requirements_    * The dialogue box only appears for 10 seconds, before the cancellation is automatically cancelled.
+_Exit Condition_     
+  * The GUI successfully deletes the partially downloaded files and removes the downloads from the list of active downloads. OR
+  * The Basic User clicks "no" in the confirmation dialogue box, thereby cancelling the cancellation.
+_Quality Requirements_    
+  * The dialogue box only appears for 10 seconds, before the cancellation is automatically cancelled.
 
 *Activity Diagram*
 
 http://nmt-cs326-g5.googlecode.com/files/act_aborttransfer.jpeg
 
 ----
+
+
 
 ===User Interface Analysis===
 In this section, present a user interface (navigational paths and screen mock-ups).
