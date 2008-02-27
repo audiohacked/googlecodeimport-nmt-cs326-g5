@@ -387,12 +387,63 @@ _Participating Actors_
 *Flow of Events*
 
   1. BasicUser requests a page via the in-house browser from the content server.
-         2. ContentServer receives request and serves page to client.
+ 
+        2. ContentServer receives request and serves page to client.
+
   3. Client renders page in browser.
 
 *Sequence Diagram*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_browsecontent.jpeg
+
+----
+
+_Use case name_  RemoveFile
+
+_Participating Actors_
+Initiated by BasicUser
+Communicates with ContentServer, DBManager
+
+  1. BasicUser selects a file for deletion.
+  2. Client sends delete request to content server.
+         3. Content server removes file and any related information, opens a connection to the DBManager and sends a corresponding delete (this may actually be an archival rather than a physical deletion) query for the file's database entries.
+         4. DBManager completes query, ContentServer reports success to client.
+  5. Client reports success to user.
+
+_Entry condition_
+  * BasicUser has rights over the file for deletion or is a ContentDistributor.
+
+_Exit condition_
+  * File is successfully deleted by ContentServer
+  * File's information is successfully deleted from database by DBManager
+  * There is a fatal error and the operation cannot continue
+
+_Quality requirements_
+  * The user interface must provide an "are you sure" dialogue to the user
+
+*Activity Diagram*
+
+http://nmt-cs326-g5.googlecode.com/files/act_removefile.jpeg
+
+----
+
+_Use case name_  *SetClientPreferences*
+
+_Participating actors_ 
+
+Initiated by Basic User
+
+_Flow of Events_
+
+  # User selects to edit their preferences from a drop-down menu.
+  # GUI opens a preferences dialog.
+  # User changes their preferences.
+  # Client commits preferences to memory and applies any immediately relevant changes.
+  # GUI closes preferences dialog.
+
+*Sequence Diagram*
+
+http://nmt-cs326-g5.googlecode.com/files/seq_setclientpreferences.jpeg
 
 ----
 
