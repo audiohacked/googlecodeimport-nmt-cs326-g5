@@ -67,51 +67,32 @@ _Tracker_ - communicates with the client software during a torrent download to p
 
 http://nmt-cs326-g5.googlecode.com/files/UseCase_Tracker.jpeg
 
-*Detailed Use Cases*
+===Detailed Use Cases===
+
 The following are detailed use cases; some use cases also have an activity or sequence diagram in addition to a textual description.
 
 _Use Case Name_    DownloadTorrentFile
-
 _Participating Actors:_
-
         Initiated by BasicUser
-
         Communicates with ContentServer, DBServer, Tracker
-
-_Flow of events:_
-
+_Flow of Events:_
 1. *BasicUser* selects file in file browser portion of program
-
 2. *BasicUser* selects download
-
 3. Client sends out a request to the *ContentServer* for the .torrent file
-
           4. *ContentServer* queries *DBServer* as to the status of the file
-
           5. *DBServer* returns status of .torrent file to *ContentServer*
-
           6. *ContentServer* returns status of .torrent file to *BasicUser*
-
 7. If .torrent file is available, client downloads it from *ContentServer*
-
 8. Client performs checksum on .torrent file to make sure it was transferred successfully
-
 9. Client queries *Tracker* for list of other clients with file or files defined 
 by .torrent file
-
            10. *Tracker* returns list of clients if it exists, error if not
-
            11. *Tracker* adds client to list of clients downloading file
-
 12. Client queries other clients to find out who had what pieces of file or files
-
            13. Other clients reply and specify what data is available for download
-
 14. Client downloads files piece by piece
-
 _Entry Condition_
     * The user selects a download package in the interface that includes a torrent file
-
 _Exit Condition_
     * Download completes, all files reside on local hard drive. OR
     * Download is cancelled by user. OR
