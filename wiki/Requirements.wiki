@@ -225,7 +225,7 @@ Communicates with `DBManager`
 
 _Flow of Events:_
 
-     1. Client completes a `BasicUser` initiated sponsored file download, opens connection with `ContentServer`.
+     1. `Client` completes a `BasicUser` initiated sponsored file download, opens connection with `ContentServer`.
 
 2. `ContentServer` attempts to open a connection to `DBManager`, if it is not already open, and notifies the `Client` to send data
 
@@ -264,7 +264,7 @@ Communicates with `DBManager`
 
 _Flow of Events:_
 
-     1. Client completes a `BasicUser` initiated sponsored file upload, opens connection with `ContentServer`.
+     1. `Client` completes a `BasicUser` initiated sponsored file upload, opens connection with `ContentServer`.
 
 2. `ContentServer` attempts to open a database connection, if it is not already open, and notifies the `Client` to send data
 
@@ -274,7 +274,7 @@ _Flow of Events:_
 
 5. `DBManager` performs the queries and commits changes to database.
 
-6. `DBManager` notifies `ContentServer` of completion, `ContentServer` notifies client
+6. `DBManager` notifies `ContentServer` of completion, `ContentServer` notifies `Client`
 
      7. `Client` closes connection to `ContentServer`. 
 
@@ -457,10 +457,10 @@ Initiated by `BasicUser`
 _Flow of Events_
 
   # `BasicUser` selects to edit their preferences from a drop-down menu.
-  # GUI opens a preferences dialog.
+  # `Client` opens a preferences dialog.
   # `BasicUser` changes their preferences.
   # `Client` commits preferences to memory and applies any immediately relevant changes.
-  # GUI closes preferences dialog.
+  # `Client` closes preferences dialog.
 
 *Sequence Diagram*
 
@@ -497,7 +497,7 @@ _Flow of events_
 
 1. `BasicUser` clicks the cancel button in the interface
 
-          2. GUI responds with a message asking the user if they are sure
+          2. `Client` responds with a message asking the user if they are sure
 
 3. If `BasicUser` clicks yes, the client software deletes the partially downloaded file
 
@@ -507,7 +507,7 @@ _Entry Condition_
   * The `BasicUser` is downloading a file or files.
 
 _Exit Condition_     
-  * The GUI successfully deletes the partially downloaded files and removes the downloads from the list of active downloads. OR
+  * The `Client` successfully deletes the partially downloaded files and removes the downloads from the list of active downloads. OR
   * The `BasicUser` clicks "no" in the confirmation dialogue box, thereby cancelling the cancellation.
 _Quality Requirements_    
   * The dialogue box only appears for 10 seconds, before the cancellation is automatically cancelled.
