@@ -130,7 +130,7 @@ The following is a table describing the use cases; below the table are sequence 
 
 Specific use case descriptions and sequence diagrams:
 
-_Use Case Name_  *`DownloadFile`*
+_Use Case Name_      *`DownloadFile`*
 
 _Participating Actors:_
 
@@ -165,7 +165,7 @@ http://nmt-cs326-g5.googlecode.com/files/seq_abstractdownload.jpeg
 
 ----
 
-_Use Case Name_    *`DownloadTorrentFile`*
+_Use Case Name_        *`DownloadTorrentFile`*
 
 _Participating Actors:_
 
@@ -217,7 +217,7 @@ _Quality Requirements_
 
 ----
 
-_Use Case Name_  *`ReportFileDownload`*
+_Use Case Name_      *`ReportFileDownload`*
 
 _Participating Actors_  
 
