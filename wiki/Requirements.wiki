@@ -289,11 +289,11 @@ Initiated by BasicUser or ContentDistributor
 
 _Flow of Events:_
 
-  # BasicUser or ContentDistributor selects a file to upload.
-  # Client opens connection (if necessary) with the ContentServer.
-  # Client transfers file or files to ContentServer over HTTP.
-        # ContentServer connects to DBManager if not already connected
-  # ContentServer dynamically updates appropriate pages to reflect new content.
+  1. BasicUser or ContentDistributor selects a file to upload.
+  2. Client opens connection (if necessary) with the ContentServer.
+  3. Client transfers file or files to ContentServer over HTTP.
+        4. ContentServer connects to DBManager if not already connected
+  5. ContentServer dynamically updates appropriate pages to reflect new content.
 
 _Entry Condition_
   * BasicUser or ContentDistributor who initiated the upload has upload privileges
