@@ -1,6 +1,7 @@
 #summary User cancels a download.
 
 _Use Case Name_        AbortFileTransfer
+
 _Participating Actors_ Initiated by Basic User
 
 1. Basic User clicks the cancel button in the interface
