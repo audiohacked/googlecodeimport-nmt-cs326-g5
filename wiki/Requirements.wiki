@@ -126,6 +126,8 @@ The following is a table describing the use cases; below the table are sequence 
 || ExHTTPTransferError || Basic User _and/or_ Centralized Content Server || An error occurs during an HTTP file transfer. || Error is resolved and/or reported to the user.  If the file was a sponsored file, error is reported to the content server. || *Inherits* ExTransferError, *Extends* DownloadHTTPFile ||
 || ExTorrentTransferError || Basic User, Tracker || An error occurs during a BitTorrent file transfer.  || Error is resolved and/or reported to the user and the tracker. || *Inherits* ExTransferError, *Extends* DownloadTorrentFile ||
 
+----
+
 Specific use case descriptions and sequence diagrams:
 
 _Use Case Name_  *`DownloadFile`*
@@ -163,7 +165,7 @@ http://nmt-cs326-g5.googlecode.com/files/seq_abstractdownload.jpeg
 
 ----
 
-_Use Case Name_    *DownloadTorrentFile*
+_Use Case Name_    *`DownloadTorrentFile`*
 
 _Participating Actors:_
 
@@ -215,7 +217,7 @@ _Quality Requirements_
 
 ----
 
-_Use Case Name_  *ReportFileDownload*
+_Use Case Name_  *`ReportFileDownload`*
 
 _Participating Actors_  
 
@@ -257,7 +259,7 @@ http://nmt-cs326-g5.googlecode.com/files/seq_reportfiledownload.jpeg
 
 ----
 
-_Use Case Name_  *ReportFileUpload*
+_Use Case Name_  *`ReportFileUpload`*
 
 _Participating Actors_  
 Participated in by `BasicUser`
@@ -296,7 +298,7 @@ http://nmt-cs326-g5.googlecode.com/files/seq_reportfileupload.jpeg
 
 ----
 
-_Use Case Name_  *UploadFile*
+_Use Case Name_  *`UploadFile`*
 
 _Participating Actors_  
 Communicates with `ContentServer`
@@ -331,7 +333,7 @@ http://nmt-cs326-g5.googlecode.com/files/act_upload.jpeg
 
 ----
 
-_Use Case Name_  *DesignateFileSponsoredStatus*
+_Use Case Name_  *`DesignateFileSponsoredStatus`*
 
 _Participating Actors_  
 Communicates with `ContentServer`
@@ -364,7 +366,7 @@ _Quality Requirements_
 
 ----
 
-_Use case name_  *GetFileStatistics*
+_Use case name_  *`GetFileStatistics`*
 
 _Participating Actors_
 
@@ -378,7 +380,7 @@ Communicates with `ContentServer`, `Database`
 
 ----
 
-_Use case name_  *ReportTransferProgress*
+_Use case name_  *`ReportTransferProgress`*
 
 _Participating Actors_
 
@@ -391,7 +393,7 @@ _Flow of Events_
 
 ----
 
-_Use case name_  *BrowseContentSite*
+_Use case name_  *`BrowseContentSite`*
 
 _Participating Actors_
 
@@ -413,7 +415,7 @@ http://nmt-cs326-g5.googlecode.com/files/seq_browsecontent.jpeg
 
 ----
 
-_Use case name_  *RemoveFile*
+_Use case name_  *`RemoveFile`*
 
 _Participating Actors_
 Initiated by `BasicUser`
@@ -442,7 +444,7 @@ http://nmt-cs326-g5.googlecode.com/files/act_removefile.jpeg
 
 ----
 
-_Use case name_  *SetClientPreferences*
+_Use case name_  *`SetClientPreferences`*
 
 _Participating actors_ 
 
@@ -462,7 +464,7 @@ http://nmt-cs326-g5.googlecode.com/files/seq_setclientpreferences.jpeg
 
 ----
 
-_Use case name_  *SetServerPreferences*
+_Use case name_  *`SetServerPreferences`*
 
 _Participating Actors:_ 
 
@@ -481,7 +483,7 @@ http://nmt-cs326-g5.googlecode.com/files/seq_setserverpreferences.jpeg
 
 ----
 
-_Use Case Name_        *AbortFileTransfer*
+_Use Case Name_        *`AbortFileTransfer`*
 
 _Participating Actors_ 
 
@@ -512,7 +514,7 @@ http://nmt-cs326-g5.googlecode.com/files/act_aborttransfer.jpeg
 
 ----
 
-_Use case name_ *ExFileNotFoundError*
+_Use case name_ *`ExFileNotFoundError`*
 
 _Participating Actors:_ `ContentServer`, `BasicUser`
 
@@ -528,7 +530,7 @@ _Entry conditions_
 
 ----
 
-_Use case name_ *ExTorrentTransferError*
+_Use case name_ *`ExTorrentTransferError`*
 _Participating Actors:_ `Tracker`, `BasicUser`
 
 _Flow of events_
