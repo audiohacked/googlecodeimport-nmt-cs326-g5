@@ -359,13 +359,13 @@ _Use case name_  *GetFileStatistics*
 
 _Participating Actors_
 
-Initiated by Basic User or ContentServer
+Initiated by `BasicUser` or `ContentServer`
 
-Communicates with Content Server, Database
+Communicates with `ContentServer`, `Database`
 
-  # BasicUser queries ContentServer or ContentServer opens a connection with DBManager and queries statistics (number of downloads per day, month, year, or total, popularity rating, sponsored status, etc.) about a given file.
-  # DBManager completes the requested query and serves data to user or server.
-  # Connection between BasicUser/ContentServer is closed.
+  # `BasicUser` queries `ContentServer` or `ContentServer` opens a connection with `DBManager` and queries statistics (number of downloads per day, month, year, or total, popularity rating, sponsored status, etc.) about a given file.
+  # `DBManager` completes the requested query and serves data to user or server.
+  # Connection between `BasicUser`/`ContentServer` is closed.
 
 ----
 
@@ -373,12 +373,12 @@ _Use case name_  *ReportTransferProgress*
 
 _Participating Actors_
 
-initiated by BasicUser
+initiated by `BasicUser`
 
 _Flow of Events_
 
-  # BasicUser selects a file (or merely is transferring a file) for which transfer information (% completed, number of bytes downloaded, transfer speed, etc.) is desired.
-  # Client calculates transfer information and displays it to the user (often continuously).
+  # `BasicUser` selects a file (or merely is transferring a file) for which transfer information (% completed, number of bytes downloaded, transfer speed, etc.) is desired.
+  # `Client` calculates transfer information and displays it to the user (often continuously).
 
 ----
 
@@ -386,17 +386,17 @@ _Use case name_  *BrowseContentSite*
 
 _Participating Actors_
 
- Initiated by Basic User
+ Initiated by `Basic User`
 
- Communicates with Centralized Content Server
+ Communicates with `ContentServer`
 
 *Flow of Events*
 
-  1. BasicUser requests a page via the in-house browser from the content server.
+  1. `BasicUser` requests a page via the in-house browser from the content server.
  
-        2. ContentServer receives request and serves page to client.
+        2. `ContentServer` receives request and serves page to client.
 
-  3. Client renders page in browser.
+  3. `Client` renders page in browser.
 
 *Sequence Diagram*
 
@@ -407,21 +407,21 @@ http://nmt-cs326-g5.googlecode.com/files/seq_browsecontent.jpeg
 _Use case name_  *RemoveFile*
 
 _Participating Actors_
-Initiated by BasicUser
-Communicates with ContentServer, DBManager
+Initiated by `BasicUser`
+Communicates with `ContentServer`, `DBManager`
 
-  1. BasicUser selects a file for deletion.
-  2. Client sends delete request to content server.
-         3. Content server removes file and any related information, opens a connection to the DBManager and sends a corresponding delete (this may actually be an archival rather than a physical deletion) query for the file's database entries.
-         4. DBManager completes query, ContentServer reports success to client.
-  5. Client reports success to user.
+  1. `BasicUser` selects a file for deletion.
+  2. `Client` sends delete request to content server.
+         3. `ContentServer` removes file and any related information, opens a connection to the `DBManager` and sends a corresponding delete (this may actually be an archival rather than a physical deletion) query for the file's database entries.
+         4. `DBManager` completes query, `ContentServer` reports success to `Client`.
+  5. `Client` reports success to user.
 
 _Entry condition_
-  * BasicUser has rights over the file for deletion or is a ContentDistributor.
+  * `BasicUser` has rights over the file for deletion or is a `ContentDistributor`.
 
 _Exit condition_
-  * File is successfully deleted by ContentServer
-  * File's information is successfully deleted from database by DBManager
+  * File is successfully deleted by `ContentServer`
+  * File's information is successfully deleted from database by `DBManager`
   * There is a fatal error and the operation cannot continue
 
 _Quality requirements_
@@ -437,14 +437,14 @@ _Use case name_  *SetClientPreferences*
 
 _Participating actors_ 
 
-Initiated by Basic User
+Initiated by `BasicUser`
 
 _Flow of Events_
 
-  # User selects to edit their preferences from a drop-down menu.
+  # `BasicUser` selects to edit their preferences from a drop-down menu.
   # GUI opens a preferences dialog.
-  # User changes their preferences.
-  # Client commits preferences to memory and applies any immediately relevant changes.
+  # `BasicUser` changes their preferences.
+  # `Client` commits preferences to memory and applies any immediately relevant changes.
   # GUI closes preferences dialog.
 
 *Sequence Diagram*
@@ -457,14 +457,14 @@ _Use case name_  *SetServerPreferences*
 
 _Participating Actors:_ 
 
-Initiated by ContentDistributor
+Initiated by `ContentDistributor`
 
-Communicates with ContentServer
+Communicates with `ContentServer`
 
 _Flow of Events_
 
-  # ContentDistributor edits server preferences via configuration file.
-  # ContentServer reads and implements changed preferences.
+  # `ContentDistributor` edits server preferences via configuration file.
+  # `ContentServer` reads and implements changed preferences.
 
 *Sequence Diagram*
 
@@ -474,19 +474,26 @@ http://nmt-cs326-g5.googlecode.com/files/seq_setserverpreferences.jpeg
 
 _Use Case Name_        *AbortFileTransfer*
 
-_Participating Actors_ Initiated by Basic User
+_Participating Actors_ 
 
-1. Basic User clicks the cancel button in the interface
-          2. Interface responds with a message asking the user if they are sure
-3. If user clicks yes, the client software deletes the partially downloaded file
-4. The client software then removes the download from the list of downloads
+Initiated by `BasicUser`
+
+_Flow of events_
+
+1. `BasicUser` clicks the cancel button in the interface
+
+          2. GUI responds with a message asking the user if they are sure
+
+3. If `BasicUser` clicks yes, the client software deletes the partially downloaded file
+
+4. The `Client` software then removes the download from the list of downloads
 
 _Entry Condition_    
-  * The Basic User is downloading a file or files.
+  * The `BasicUser` is downloading a file or files.
 
 _Exit Condition_     
   * The GUI successfully deletes the partially downloaded files and removes the downloads from the list of active downloads. OR
-  * The Basic User clicks "no" in the confirmation dialogue box, thereby cancelling the cancellation.
+  * The `BasicUser` clicks "no" in the confirmation dialogue box, thereby cancelling the cancellation.
 _Quality Requirements_    
   * The dialogue box only appears for 10 seconds, before the cancellation is automatically cancelled.
 
@@ -498,45 +505,45 @@ http://nmt-cs326-g5.googlecode.com/files/act_aborttransfer.jpeg
 
 _Use case name_ *ExFileNotFoundError*
 
-_Participating Actors:_ Central content server, Basic user
+_Participating Actors:_ `ContentServer`, `BasicUser`
 
 _Flow of events_
 
-  1.  Server reports error.
+  1.  `ContentServer` reports error.
 
-  2.  Error reported to user.
+  2.  Error reported to `BasicUser`.
 
 _Entry conditions_
 
-  * User has requested a file that the server could not locate
+  * `BasicUser` has requested a file that the server could not locate
 
 ----
 
 _Use case name_ *ExTorrentTransferError*
-_Participating Actors:_ Tracker, BasicUser
+_Participating Actors:_ `Tracker`, `BasicUser`
 
 _Flow of events_
 
-  1.   Client detects an error with a torrent transfer.
+  1.   `Client` detects an error with a torrent transfer.
 
-  2.   Client reports error to BasicUser.
+  2.   `Client` reports error to `BasicUser`.
 
-  3.   Client asks BasicUser to either retry download or to delete torrent file and/or downloaded files.
+  3.   `Client` asks `BasicUser` to either retry download or to delete torrent file and/or downloaded files.
 
-  4.   Client deletes files as necessary.
+  4.   `Client` deletes files as necessary.
 
 _Entry conditions_
 
-  * BasicUser is downloading torrent and an error occurs.
+  * `BasicUser` is downloading torrent and an error occurs.
 
 _Exit conditions_
 
   * Data is deleted
-  * User selects retry download
+  * `BasicUser` selects retry download
 
 _Quality requirements_
 
-  * Client must only delete files pertaining to the affected download
+  * `Client` must only delete files pertaining to the affected download
   * Minor issues (particularly temporary connection issues) must be dealt with automatically
 
 ----
