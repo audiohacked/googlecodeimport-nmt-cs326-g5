@@ -36,10 +36,6 @@ _Implementation_
   * The client will be implemented in C++, utilizing the gtkWidgets library for cross-platform code.
 
 ===Customer Requirements===
-This section contains the architecture view of your use-case model. It includes 
-use-case diagram(s), 
-actor descriptions and 
-prioritized use-case descriptions.
 
 *Use-Case Diagram - Entire System*
 
