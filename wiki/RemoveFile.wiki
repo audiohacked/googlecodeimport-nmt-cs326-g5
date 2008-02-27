@@ -2,14 +2,20 @@
 
 = Details =
 
-Actors: Basic User, Centralized Content Server, Database
-Pre-condition: User has rights over the file for deletion or is a content distributor.
+_Use case name_  RemoveFile
+
+_Participating Actors_
+Initiated Basic User
+Communicates with ContentServer, DBManager
 
   # User selects a file for deletion.
   # Client sends delete request to content server.
   # Content server removes file and any related information, opens a connection to the database and sends a corresponding delete (this may actually be an archival rather than a physical deletion) query for the file's database entries.
   # Database completes query, server reports success to client.
   # Client reports success to user.
+
+_Entry condition_
+  *BasicUser has rights over the file for deletion or is a ContentDistributor.
 
 = Activity Diagram =
 
