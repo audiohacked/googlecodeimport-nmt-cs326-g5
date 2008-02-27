@@ -10,3 +10,7 @@ Pre-condition: user has upload privileges.
   # Client opens connection (if necessary) with the content server.
   # Client transfers file to content server over HTTP.
   # Server dynamically updates appropriate pages to reflect new content.
+
+= Activity Diagram =
+
+http://nmt-cs326-g5.googlecode.com/files/act_upload.jpeg
