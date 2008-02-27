@@ -52,7 +52,6 @@ http://nmt-cs326-g5.googlecode.com/files/DeploymentDiagram.jpeg
 
 ==Requirements Analysis== 
 ===Structural Analysis===
-Briefly describe each analysis class (organized according to type - boundary, control, and entity) and class diagrams
 
 _Boundary_
     * GUI - Provides the user interface, the main interaction between the user and the program. Used to initiate downloads, uploads, browse the content server, and edit user preferences.  Calls the preferenceDialogue when preferences are changed and communicates with the ContentManager class to initiate downloads/uploads.
