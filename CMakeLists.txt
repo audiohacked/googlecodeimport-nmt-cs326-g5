@@ -1,41 +1,54 @@
 PROJECT( wxSeanApp )
 
+CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
+
 SET(WX_SEAN_APP_VERSION "1.0")
 SET(CMAKE_FIND_LIBRARY_PREFIXES "")
 SET(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
 SET(wxWidgets_USE_LIBS base core net)
+
+OPTION(COMMUNITY_PORTAL "Add Community Support" ON)
+OPTION(USER_UPLOAD "Add User Upload capabilities" ON)
+OPTION(BUILTIN_BROWSER "Add the Built-in Browser Support" ON)
+
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake
+	${CMAKE_BINARY_DIR}/config.h)
+
+SET(SRCS 
+	frame.cpp
+	main.cpp
+	menu.cpp 
+	window.cpp
+)
+
+SET(HDRS
+	enum.h
+	events.h
+	frame.h
+	main.h
+	menu.h 
+	window.h 
+)
+
+
 FIND_PACKAGE(wxWidgets)
  
 IF(wxWidgets_FOUND)
+
 	INCLUDE(
 		${wxWidgets_USE_FILE}
 	)
 
 	INCLUDE_DIRECTORIES(
-		${wxSeanApp_SOURCE_DIR}
+		${CMAKE_SOURCE_DIR}
+		${CMAKE_BINARY_DIR}
 		${wxWidgets_INCLUDE_DIRS}
-	)
- 
-	SET(SRCS 
-		frame.cpp
-		main.cpp
-		menu.cpp 
-		window.cpp
-	)
-	
-	SET(HDRS
-		config.h
-		enum.h
-		events.h
-		frame.h
-		main.h
-		menu.h 
-		window.h 
 	)
 
 	IF(WIN32)
 		SET(GUI_TYPE WIN32)
 		SET(SRCS ${SRCS} wxSean.rc)
+		#SET(CMAKE_CONFIGURATION_TYPES Release)
 	ELSE(WIN32)
 		IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 			SET(MACOSX_BUNDLE_INFO_STRING "")
