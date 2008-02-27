@@ -1,0 +1,12 @@
+#summary Torrent transfer error.
+
+
+= Details =
+
+  1.   Report Error to Tracker.
+
+  2.   Report Error to user.
+
+  3.   Ask user to delete torrent file and/or downloaded files.
+
+  4.   Delete as necessary.
