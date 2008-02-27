@@ -107,12 +107,12 @@ _Entity_
 The following is a table describing the use cases; below the table are sequence or activity diagrams detailing the use cases' flow of events.
 
 || _Use Case_ || _Actor(s)_ || _Entry Condition_ || _Exit Condition_  || _Extends/Includes/Inherits_ ||
-|| DownloadFile || Basic User || User initiates a file download from the content server (can be an actual file or a torrent file). || User finishes file download or file download error. || *Includes* ReportTransferProgress, ReportFileDownload ||
-|| DownloadHTTPFile || Basic User, Centralized Content Server || User downloads a file from content server over HTTP. || File transfer completes or file transfer error. || *Inherits* DownloadFile ||
-|| DownloadTorrentFile || Basic User, Tracker || User initiates a file download via BitTorrent. || User completes download and shares file to a specified ratio, or user opts to stop sharing or downloading the file prematurely. || *Inherits* DownloadFile ||
-|| ReportFileDownload || Database || A file transfer to the client completes. || File download statistics are reported and stored in the database. || N/A ||
-|| ReportFileUpload || Database || File finishes uploading to the Centralized Content Server. || The database has allocated the proper space and structure to accommodate statistics for the sponsored file. || N/A ||
-|| UploadFile || Basic User, Centralized Content Server  || User selects a file which will become sponsored content. || File is uploaded to centralized content server. || *Includes* ReportFileUpload, ReportTransferProgress, DesignateFileSponsoredStatus ||
+|| *`DownloadFile`* || `BasicUser` || `BasicUser` initiates a file download from the `ContentServer` (can be an actual file or a torrent file). || `BasicUser` finishes file download or file download error. || *Includes* *`ReportTransferProgress`*, *`ReportFileDownload`* ||
+|| *`DownloadHTTPFile`* || `BasicUser`, `ContentServer` || `BasicUser` downloads a file from content server over HTTP. || File transfer completes or file transfer error. || *Inherits* *`DownloadFile`* ||
+|| *`DownloadTorrentFile`* || `BasicUser`, `Tracker` || `BasicUser` initiates a file download via BitTorrent. || `BasicUser` completes download and shares file to a specified ratio, or user opts to stop sharing or downloading the file prematurely. || *Inherits* *`DownloadFile`* ||
+|| *`ReportFileDownload`* || `DBManager` || A file transfer to the client completes. || File download statistics are reported and stored in the database. || N/A ||
+|| *`ReportFileUpload`* || Database || File finishes uploading to the Centralized Content Server. || The database has allocated the proper space and structure to accommodate statistics for the sponsored file. || N/A ||
+|| *`UploadFile`* || Basic User, Centralized Content Server  || User selects a file which will become sponsored content. || File is uploaded to centralized content server. || *Includes* ReportFileUpload, ReportTransferProgress, DesignateFileSponsoredStatus ||
 || DesignateFileSponsoredStatus || Content Distributor, Database || Content distributor designates a file which he/she wants to have/lose sponsored status. || File's database entry is updated to reflect desired sponsored status. || N/A ||
 || GetFileStatistics || Basic User, Database || User selects a file for which usage statistics are desired. || Database completes reporting relevant information about desired file to client. || N/A ||
 || ReportTransferProgress || Basic User || User begins a file transfer. || File transfer completes. || N/A ||
