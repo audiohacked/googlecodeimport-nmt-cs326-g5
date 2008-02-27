@@ -558,6 +558,10 @@ _Entry conditions_
 
   * `BasicUser` has requested a file that the server could not locate
 
+*Activity Diagram*
+
+See activity diagram for *`ExTransferError`*.
+
 ----
 
 _Use case name_ *`ExTorrentTransferError`*
@@ -587,6 +591,10 @@ _Quality requirements_
 
   * `Client` must only delete files pertaining to the affected download
   * Minor issues (particularly temporary connection issues) must be dealt with automatically
+
+*Activity Diagram*
+
+See activity diagram for *`ExTransferError`*.
 
 ----
 
