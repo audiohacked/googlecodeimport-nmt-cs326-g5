@@ -4,4 +4,8 @@
 
 Actors: Content Server, Basic User
 
-report error to server and user
+1.  Report error to server and user
+
+= Activity Diagram = 
+
+http://nmt-cs326-g5.googlecode.com/files/act_exception.jpeg
