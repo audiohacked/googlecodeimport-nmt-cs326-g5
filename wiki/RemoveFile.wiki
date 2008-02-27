@@ -10,3 +10,7 @@ Pre-condition: User has rights over the file for deletion or is a content distri
   # Content server removes file and any related information, opens a connection to the database and sends a corresponding delete (this may actually be an archival rather than a physical deletion) query for the file's database entries.
   # Database completes query, server reports success to client.
   # Client reports success to user.
+
+= Activity Diagram =
+
+http://nmt-cs326-g5.googlecode.com/files/act_removefile.jpeg
