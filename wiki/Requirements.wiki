@@ -613,6 +613,15 @@ http://nmt-cs326-g5.googlecode.com/files/macosx.png
 
 ===Validation and Criteria===
 Describe how will you assert via testing that you satisfy a use case.
+
+  * Successfully complete an HTTP download
+  * Successfully complete a torrent download
+  * Downloads will be verified using a checksum, thereby verifying that the files downloaded are identical to the files on the server
+  * `BasicUser` can successfully change preferences using the proper dialogue
+  * `ContentServer` can communicate with the `DBManager`, verified by doing database inserts,selects,deletes and edits
+  * `DBManager` can successfully communicate with the actual database, verified by doing database inserts, selects, deletes and edits, and verifying the actual data inserted by accessing the database through the command line
+  * `ContentServer` can successfully communicate the location and attributes of a specific file download, both in the case of HTTP downloads and the case of torrent downloads
+
 ==Appendices==
 Appendix
 
