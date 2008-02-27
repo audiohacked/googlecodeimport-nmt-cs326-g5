@@ -632,5 +632,11 @@ http://www.rasterbar.com/products/libtorrent/
 cURL file transfer tool -
 http://curl.haxx.se/
 
+Apache HTTP server -
+http://www.apache.org/
+
+MySQL Relational Database system -
+http://www.mysql.com/
+
 ==Project Status==
 Report on the progress of your project. Include an updated plan that shows your progress towards completing project tasks.
