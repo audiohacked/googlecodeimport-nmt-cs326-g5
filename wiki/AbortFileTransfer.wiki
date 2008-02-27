@@ -15,6 +15,6 @@ _Exit Condition_     * The GUI successfully deletes the partially downloaded fil
                      * The Basic User clicks "no" in the confirmation dialogue box, thereby cancelling the cancellation.
 _Quality Requirements_    * The dialogue box only appears for 10 seconds, before the cancellation is automatically cancelled.
 
-= Activity Diagram =
+*Activity Diagram*
 
 http://nmt-cs326-g5.googlecode.com/files/act_aborttransfer.jpeg
