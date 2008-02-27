@@ -3,6 +3,7 @@
 
 = Details =
 
+_Use case name_  *ExTorrentTransferError*
 
 _Participating Actors:_ Tracker, BasicUser
 
