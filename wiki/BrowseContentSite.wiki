@@ -1,0 +1,13 @@
+#summary Browsing Use Case
+
+= Details =
+
+Actors: Basic User, Centralized Content Server
+
+*Flow of Events*
+
+  # Basic user requests a page via the in-house browser from the content server.
+  # Content server receives request and serves page to client.
+  # Client renders page in browser.
+
+= Sequence Diagram =
