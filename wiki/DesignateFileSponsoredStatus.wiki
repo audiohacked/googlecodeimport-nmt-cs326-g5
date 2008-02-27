@@ -4,8 +4,10 @@
 
 _Use Case Name_  *DesignateFileSponsoredStatus*
 
-_Participating Actors_  
+_Participating Actors_ 
+ 
 Communicates with ContentServer
+
 Initiated by ContentDistributor
 
 _Flow of Events:_
