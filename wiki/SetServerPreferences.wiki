@@ -2,7 +2,13 @@
 
 = Details =
 
-Actors: Content Distributor, Content Server
+_Use case name_
+
+_Participating Actors:_ 
+
+Initiated by ContentDistributor
+
+Communicates with ContentServer
 
 *Flow of Events*
 
