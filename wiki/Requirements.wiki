@@ -78,20 +78,20 @@ http://nmt-cs326-g5.googlecode.com/files/class%20diagramV2.jpeg
 
 _Boundary_
     * `GUI` - Provides the user interface, the main interaction between the user and the program. Used to initiate downloads, uploads, browse the content server, and edit user preferences.  Calls the preferenceDialogue when preferences are changed and communicates with the ContentManager class to initiate downloads/uploads.
-    * preferenceDialogue - allows the user to edit their preferences relating to the operation of the program, including options related to torrenting and user interface options.
+    * `preferenceDialogue` - allows the user to edit their preferences relating to the operation of the program, including options related to torrenting and user interface options.
 
 _Control_
-    * ContentManager - is the controller that provides the client with all information pertaining to downloads available, browsing the downloads available, user authentication, and uploading of files. Communicates directly with the database server through the DBManager class.
-    * TransferManager - provides the interface that the other transfer managers implement
-    * TorrentTransferManager - implements methods included in TransferManager and methods specific to torrent downloads, such as connectToTracker()
-    * HTTPTransferManager - implements methods included in TransferManager and methods specific to HTTP transfers
+    * `ContentManager` - is the controller that provides the client with all information pertaining to downloads available, browsing the downloads available, user authentication, and uploading of files. Communicates directly with the database server through the DBManager class.
+    * `TransferManager` - provides the interface that the other transfer managers implement
+    * `TorrentTransferManager` - implements methods included in TransferManager and methods specific to torrent downloads, such as connectToTracker()
+    * `HTTPTransferManager` - implements methods included in TransferManager and methods specific to HTTP transfers
 
 _Entity_
-    * DBManager - provides an interface to the ContentManager to update and query the database, which provides lists and attributes of downloads and the files that make up the downloads.
-    * Download - provides an interface that specific downloads implement that includes methods and attributes that are common to all downloads.
-    * TorrentDownload - implements the Download interface and includes methods and attributes that are unique to torrent downloading, such as peerLocations and trackerLocations. Includes one or more file objects.
-    * HTTPDownload - implements the Download interface and includes methods and attributes that are unique to HTTP downloads, such as getFileName. Includes one file.
-    * file - includes attributes of a file and a method for retrieving those attributes.
+    * `DBManager` - provides an interface to the ContentManager to update and query the database, which provides lists and attributes of downloads and the files that make up the downloads.
+    * `Download` - provides an interface that specific downloads implement that includes methods and attributes that are common to all downloads.
+    * `TorrentDownload` - implements the Download interface and includes methods and attributes that are unique to torrent downloading, such as peerLocations and trackerLocations. Includes one or more file objects.
+    * `HTTPDownload` - implements the Download interface and includes methods and attributes that are unique to HTTP downloads, such as getFileName. Includes one file.
+    * `file` - includes attributes of a file and a method for retrieving those attributes.
 
 ===Behavioral Analysis=== 
 
@@ -121,15 +121,21 @@ Specific use case descriptions and sequence diagrams:
 
 _Use Case Name_  *DownloadFile*
 
+_Participating Actors:_
+
+Initiated by `BasicUser`
+
+Communicates with `ContentServer`
+
 _Flow of events:_
 
-1. User chooses a file to download in file browser
+1. `BasicUser` chooses a file to download in file browser
 
-2. Client software queries server to status of file
+2. `Client` software queries server to status of file
 
-        3. Sever responds with status of file
+        3. `ContentServer` responds with status of file
 
-4. Client downloads file if available, using the appropriate protocol
+4. `Client` downloads file if available, using the appropriate protocol
 
 _Entry Condition_
     * The user initiates a download
@@ -140,7 +146,7 @@ _Exit Condition_
     * There is a download error and the download cannot continue
 
 _Quality Requirements_
-    * The server and client must communicate within a certain amount of time.
+    * The `ContentServer` and `Client` must communicate within a certain amount of time.
 
 *Sequence Diagram*
 
@@ -152,43 +158,43 @@ _Use Case Name_    *DownloadTorrentFile*
 
 _Participating Actors:_
 
-        Initiated by BasicUser
+        Initiated by `BasicUser`
 
-        Communicates with ContentServer, DBServer, Tracker
+        Communicates with `ContentServer`, `DBServer`, `Tracker`
 
 _Flow of events:_
 
-1. *BasicUser* selects file in file browser portion of program
+1. `BasicUser` selects file in file browser portion of program
 
-2. *BasicUser* selects download
+2. `BasicUser` selects download
 
-3. Client sends out a request to the *ContentServer* for the .torrent file
+3. Client sends out a request to the `ContentServer` for the .torrent file
 
-          4. *ContentServer* queries *DBServer* as to the status of the file
+          4. `ContentServer` queries `DBServer` as to the status of the file
 
-          5. *DBServer* returns status of .torrent file to *ContentServer*
+          5. `DBServer` returns status of .torrent file to `ContentServer`
 
-          6. *ContentServer* returns status of .torrent file to *BasicUser*
+          6. `ContentServer` returns status of .torrent file to `BasicUser`
 
-7. If .torrent file is available, client downloads it from *ContentServer*
+7. If .torrent file is available, `Client` downloads it from `ContentServer`
 
-8. Client performs checksum on .torrent file to make sure it was transferred successfully
+8. `Client` performs checksum on .torrent file to make sure it was transferred successfully
 
-9. Client queries *Tracker* for list of other clients with file or files defined 
+9. `Client` queries `Tracker` for list of other clients with file or files defined 
 by .torrent file
 
-           10. *Tracker* returns list of clients if it exists, error if not
+           10. `Tracker` returns list of clients if it exists, error if not
 
-           11. *Tracker* adds client to list of clients downloading file
+           11. `Tracker` adds client to list of clients downloading file
 
-12. Client queries other clients to find out who had what pieces of file or files
+12. `Client` queries other clients to find out who had what pieces of file or files
 
            13. Other clients reply and specify what data is available for download
 
-14. Client downloads files piece by piece
+14. `Client` downloads files piece by piece
 
 _Entry Condition_
-    * The user selects a download package in the interface that includes a torrent file
+    * `BasicUser` selects a download package in the interface that includes a torrent file
 
 _Exit Condition_
     * Download completes, all files reside on local hard drive. OR
@@ -204,27 +210,27 @@ _Use Case Name_  *ReportFileDownload*
 
 _Participating Actors_  
 
-Participated in by BasicUser
+Participated in by `BasicUser`
 
-Communicates with ContentServer
+Communicates with `ContentServer`
 
-Communicates with DBManager
+Communicates with `DBManager`
 
 _Flow of Events:_
 
-     1. Client completes a BasicUser initiated sponsored file download, opens connection with ContentServer.
+     1. Client completes a `BasicUser` initiated sponsored file download, opens connection with `ContentServer`.
 
-2. ContentServer attempts to open a database connection, if it is not already open, and notifies the Client to send data
+2. `ContentServer` attempts to open a connection to `DBManager`, if it is not already open, and notifies the `Client` to send data
 
-     3. Client sends file download statistics concerning the recent file transfer (completion time, average speed, incrementing the total number of downloads recorded, etc.) to ContentServer.
+     3. `Client` sends file download statistics concerning the recent file transfer (completion time, average speed, incrementing the total number of downloads recorded, etc.) to `ContentServer`.
 
-4. ContentServer sends an update/insert command to the DBManager
+4. `ContentServer` sends an update/insert command to the `DBManager`
 
-5. DBManager performs the queries and commits changes to database.
+5. `DBManager` performs the queries and commits changes to database.
 
-6. DBManager notifies ContentServer of completion, ContentServer notifies client
+6. `DBManager` notifies `ContentServer` of completion, `ContentServer` notifies `Client`
 
-     7. Client closes connection to ContentServer. 
+     7. `Client` closes connection to `ContentServer`. 
 
 _Entry Condition_
   * The user completes a download
@@ -245,25 +251,25 @@ http://nmt-cs326-g5.googlecode.com/files/seq_reportfiledownload.jpeg
 _Use Case Name_  *ReportFileUpload*
 
 _Participating Actors_  
-Participated in by BasicUser
-Communicates with ContentServer
-Communicates with DBManager
+Participated in by `BasicUser`
+Communicates with `ContentServer`
+Communicates with `DBManager`
 
 _Flow of Events:_
 
-     1. Client completes a BasicUser initiated sponsored file upload, opens connection with ContentServer.
+     1. Client completes a `BasicUser` initiated sponsored file upload, opens connection with `ContentServer`.
 
-2. ContentServer attempts to open a database connection, if it is not already open, and notifies the Client to send data
+2. `ContentServer` attempts to open a database connection, if it is not already open, and notifies the `Client` to send data
 
-     3. Client sends file upload statistics concerning the recent file transfer (size of file, type of file, description of file, a human readable name of the file, etc.) to ContentServer.
+     3. `Client` sends file upload statistics concerning the recent file transfer (size of file, type of file, description of file, a human readable name of the file, etc.) to `ContentServer`.
 
-4. ContentServer sends an update/insert command to the DBManager
+4. `ContentServer` sends an update/insert command to the `DBManager`
 
-5. DBManager performs the queries and commits changes to database.
+5. `DBManager` performs the queries and commits changes to database.
 
-6. DBManager notifies ContentServer of completion, ContentServer notifies client
+6. `DBManager` notifies `ContentServer` of completion, `ContentServer` notifies client
 
-     7. Client closes connection to ContentServer. 
+     7. `Client` closes connection to `ContentServer`. 
 
 _Entry Condition_
   * The user completes a sponsored file upload
@@ -284,31 +290,31 @@ http://nmt-cs326-g5.googlecode.com/files/seq_reportfileupload.jpeg
 _Use Case Name_  *UploadFile*
 
 _Participating Actors_  
-Communicates with ContentServer
-Initiated by BasicUser or ContentDistributor
+Communicates with `ContentServer`
+Initiated by `BasicUser` or `ContentDistributor`
 
 _Flow of Events:_
 
-  1. BasicUser or ContentDistributor selects a file to upload.
+  1. `BasicUser` or `ContentDistributor` selects a file to upload.
 
 
-  2. Client opens connection (if necessary) with the ContentServer.
+  2. `Client` opens connection (if necessary) with the `ContentServer`.
 
-  3. Client transfers file or files to ContentServer over HTTP.
+  3. `Client` transfers file or files to `ContentServer` over HTTP.
 
-        4. ContentServer connects to DBManager if not already connected
+        4. `ContentServer` connects to `DBManager` if not already connected
 
-  5. ContentServer dynamically updates appropriate pages to reflect new content.
+  5. `ContentServer` dynamically updates appropriate pages to reflect new content.
 
 _Entry Condition_
-  * BasicUser or ContentDistributor who initiated the upload has upload privileges
+  * `BasicUser` or `ContentDistributor` who initiated the upload has upload privileges
 
 _Exit Condition_
   * The database is updated
   * The database does not respond
 
 _Quality Requirements_
-  * A connection must be maintained between the Client and the ContentServer at all times
+  * A connection must be maintained between the `Client` and the `ContentServer` at all times
 
 *Activity Diagram*
 
@@ -319,33 +325,33 @@ http://nmt-cs326-g5.googlecode.com/files/act_upload.jpeg
 _Use Case Name_  *DesignateFileSponsoredStatus*
 
 _Participating Actors_  
-Communicates with ContentServer
-Initiated by ContentDistributor
+Communicates with `ContentServer`
+Initiated by `ContentDistributor`
 
 _Flow of Events:_
 
-1. ContentDistributor selects a file which is to have it's sponsored status modified.
+1. `ContentDistributor` selects a file which is to have it's sponsored status modified.
 
-2. Client opens connection with ContentServer, queries the sponsored status of the selected file.
+2. `Client` opens connection with `ContentServer`, queries the sponsored status of the selected file.
 
-       3. ContentServer connects with and queries DBManager
+       3. `ContentServer` connects with and queries `DBManager`
 
-4. ContentDistributor is given the option to modify this status.
+4. `ContentDistributor` is given the option to modify this status.
 
-       5. If changed, the new status is committed to the database by ContentServer.
+       5. If changed, the new status is committed to the database by `ContentServer`.
 
-6. Client closes connection to ContentServer.
+6. Client closes connection to `ContentServer`.
 
 _Entry Condition_
-  * ContentDistributor who initiated the operation has administrator privileges
+  * `ContentDistributor` who initiated the operation has administrator privileges
 
 _Exit Condition_
   * The database is updated
   * The database does not respond
-  * ContentDistributor cancels request
+  * `ContentDistributor` cancels request
 
 _Quality Requirements_
-  * A connection must be maintained between the Client and the ContentServer at all times
+  * A connection must be maintained between the `Client` and the `ContentServer` at all times
 
 ----
 
