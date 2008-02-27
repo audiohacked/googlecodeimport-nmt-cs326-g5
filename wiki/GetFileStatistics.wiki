@@ -2,8 +2,12 @@
 
 = Details =
 
-Actors: Basic User, Content Server, Database
+_Use case name_  GetFileStatistics
 
-  # User or Server opens a connection with and queries statistics (number of downloads per day, month, year, or total, popularity rating, sponsored status, etc.) about a given file.
-  # Database completes the requested query and serves data to user or server.
-  # Connection between user/server is closed.
+_Participating Actors_
+Initiated by Basic User or ContentServer
+Communicates with Content Server, Database
+
+  # BasicUser queries ContentServer or ContentServer opens a connection with DBManager and queries statistics (number of downloads per day, month, year, or total, popularity rating, sponsored status, etc.) about a given file.
+  # DBManager completes the requested query and serves data to user or server.
+  # Connection between BasicUser/ContentServer is closed.
