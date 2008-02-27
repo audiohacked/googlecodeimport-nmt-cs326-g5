@@ -475,7 +475,8 @@ _Participating Actors_ Initiated by Basic User
 3. If user clicks yes, the client software deletes the partially downloaded file
 4. The client software then removes the download from the list of downloads
 
-_Entry Condition_    * The Basic User is downloading a file or files.
+_Entry Condition_    
+  * The Basic User is downloading a file or files.
 
 _Exit Condition_     
   * The GUI successfully deletes the partially downloaded files and removes the downloads from the list of active downloads. OR
@@ -489,7 +490,21 @@ http://nmt-cs326-g5.googlecode.com/files/act_aborttransfer.jpeg
 
 ----
 
+_Use case name_ *ExFileNotFoundError*
 
+_Participating Actors:_ Central content server, Basic user
+
+_Flow of events_
+
+  1.  Server reports error.
+
+  2.  Error reported to user.
+
+_Entry conditions_
+
+  * User has requested a file that the server could not locate
+
+----
 
 ===User Interface Analysis===
 In this section, present a user interface (navigational paths and screen mock-ups).
