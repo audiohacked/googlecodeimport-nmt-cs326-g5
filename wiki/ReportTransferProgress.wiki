@@ -15,4 +15,4 @@ _Flow of Events_
 
 = Sequence Diagram = 
 
-http://nmt-cs326-g5.googlecode.com/files/seq_reporttransferprogress2.jpeg
+http://nmt-cs326-g5.googlecode.com/files/seq_reporttransferprogress2.JPG
