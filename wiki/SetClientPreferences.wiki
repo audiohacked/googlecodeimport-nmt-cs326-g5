@@ -1,0 +1,17 @@
+#summary Use case for setting client preferences.
+
+= Details =
+
+Actors: Basic User
+
+*Flow of Events*
+
+  # User selects to edit their preferences from a drop-down menu.
+  # GUI opens a preferences dialog.
+  # User changes their preferences.
+  # Client commits preferences to memory and applies any immediately relevant changes.
+  # GUI closes preferences dialog.
+
+= Sequence Diagram =
+
+http://nmt-cs326-g5.googlecode.com/files/seq_setclientpreferences.jpeg
