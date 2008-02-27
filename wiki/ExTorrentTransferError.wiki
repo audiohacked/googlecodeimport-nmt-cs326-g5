@@ -3,14 +3,29 @@
 
 = Details =
 
-Preconditions: User is downloading torrent and an error occurs.
 
-Actors: Tracker, Basic User
+_Participating Actors:_ Tracker, BasicUser
 
-  1.   Report Error to Tracker.
+_Flow of events_
 
-  2.   Report Error to user.
+  1.   Client detects an error with a torrent transfer.
 
-  3.   Ask user to delete torrent file and/or downloaded files.
+  2.   Client reports error to BasicUser.
 
-  4.   Delete as necessary.
+  3.   Client asks BasicUser to either retry download or to delete torrent file and/or downloaded files.
+
+  4.   Client deletes files as necessary.
+
+_Entry conditions_
+
+  * BasicUser is downloading torrent and an error occurs.
+
+_Exit conditions_
+
+  * Data is deleted
+  * User selects retry download
+
+_Quality requirements_
+
+  * Client must only delete files pertaining to the affected download
+  * Minor issues (particularly temporary connection issues) must be dealt with automatically
