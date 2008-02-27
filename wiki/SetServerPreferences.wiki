@@ -10,10 +10,10 @@ Initiated by ContentDistributor
 
 Communicates with ContentServer
 
-*Flow of Events*
+_Flow of Events_
 
-  # Content Distributor edits server preferences via configuration file.
-  # Content Server reads and implements changed preferences.
+  # ContentDistributor edits server preferences via configuration file.
+  # ContentServer reads and implements changed preferences.
 
 = Sequence Diagram = 
 
