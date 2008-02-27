@@ -362,7 +362,7 @@ _Quality Requirements_
 
 *Activity Diagram*
 
-See the authentication/designation section of the 'UploadFile' activity diagram.
+See the authentication/designation section of the *`UploadFile`* activity diagram.
 
 ----
 
@@ -407,7 +407,7 @@ _Participating Actors_
 
 *Flow of Events*
 
-  1. `BasicUser` requests a page via the in-house browser from the content server.
+  1. `BasicUser` requests a page via the in-house browser from the `ContentServer`.
  
         2. `ContentServer` receives request and serves page to client.
 
@@ -426,9 +426,13 @@ Initiated by `BasicUser`
 Communicates with `ContentServer`, `DBManager`
 
   1. `BasicUser` selects a file for deletion.
+
   2. `Client` sends delete request to content server.
+
          3. `ContentServer` removes file and any related information, opens a connection to the `DBManager` and sends a corresponding delete (this may actually be an archival rather than a physical deletion) query for the file's database entries.
+
          4. `DBManager` completes query, `ContentServer` reports success to `Client`.
+
   5. `Client` reports success to user.
 
 _Entry condition_
