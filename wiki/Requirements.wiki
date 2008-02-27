@@ -363,6 +363,39 @@ Communicates with Content Server, Database
 
 ----
 
+_Use case name_  *ReportTransferProgress*
+
+_Participating Actors_
+
+initiated by BasicUser
+
+_Flow of Events_
+
+  # BasicUser selects a file (or merely is transferring a file) for which transfer information (% completed, number of bytes downloaded, transfer speed, etc.) is desired.
+  # Client calculates transfer information and displays it to the user (often continuously).
+
+----
+
+_Use case name_  *BrowseContentSite*
+
+_Participating Actors_
+
+ Initiated by Basic User
+
+ Communicates with Centralized Content Server
+
+*Flow of Events*
+
+  1. BasicUser requests a page via the in-house browser from the content server.
+         2. ContentServer receives request and serves page to client.
+  3. Client renders page in browser.
+
+*Sequence Diagram*
+
+http://nmt-cs326-g5.googlecode.com/files/seq_browsecontent.jpeg
+
+----
+
 
 
 ===User Interface Analysis===
