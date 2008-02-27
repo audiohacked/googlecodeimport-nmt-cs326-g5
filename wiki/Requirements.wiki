@@ -576,10 +576,10 @@ Describe how will you assert via testing that you satisfy a use case.
 Appendix
 
 WxWidgets -
-www.wxwidgets.org/
+http://www.wxwidgets.org/
 
 CMake -
-www.cmake.org/
+http://www.cmake.org/
 
 Bittorrent specifications -
 http://wiki.theory.org/BitTorrentSpecification#Identification
