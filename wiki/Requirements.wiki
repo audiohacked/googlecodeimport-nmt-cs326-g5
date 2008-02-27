@@ -398,7 +398,7 @@ http://nmt-cs326-g5.googlecode.com/files/seq_browsecontent.jpeg
 
 ----
 
-_Use case name_  RemoveFile
+_Use case name_  *RemoveFile*
 
 _Participating Actors_
 Initiated by BasicUser
