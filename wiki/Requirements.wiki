@@ -119,7 +119,7 @@ The following is a table describing the use cases; below the table are sequence 
 
 Specific use case descriptions and sequence diagrams:
 
-_Use Case Name_  DownloadFile
+_Use Case Name_  *DownloadFile*
 
 _Flow of events:_
 
@@ -142,13 +142,13 @@ _Exit Condition_
 _Quality Requirements_
     * The server and client must communicate within a certain amount of time.
 
-=== Sequence Diagram ===
+*Sequence Diagram*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_abstractdownload.jpeg
 
 ----
 
-_Use Case Name_    DownloadTorrentFile
+_Use Case Name_    *DownloadTorrentFile*
 
 _Participating Actors:_
 
@@ -200,7 +200,7 @@ _Quality Requirements_
 
 ----
 
-_Use Case Name_  ReportFileDownload.
+_Use Case Name_  *ReportFileDownload*
 
 _Participating Actors_  
 
@@ -236,7 +236,7 @@ _Exit Condition_
 _Quality Requirements_
   * The operation must complete within 30 seconds
 
-=== Sequence Diagram ===
+*Sequence Diagram*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_reportfiledownload.jpeg
 
