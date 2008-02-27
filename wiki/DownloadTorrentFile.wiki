@@ -6,9 +6,11 @@ The user queries the server for the .torrent file and downloads it if it is ther
 
 
 = Details =
-Actors: *User, File Server, Database Server, Torrent Tracker*
+_Use Case Name_    DownloadTorrentFile
+Actors: Initiated by Basic User
+        Communicates with File Server, Database Server, Torrent Tracker
 
-Flow of events:
+_Flow of events:_
 
 1. *User* selects file in file browser portion of program
 
@@ -38,3 +40,14 @@ by .torrent file
           13. Other clients reply and specify what data is available for download
 
 14. Client downloads files piece by piece
+
+_Entry Condition_
+    * The user selects a download package in the interface that includes a torrent file
+
+_Exit Condition_
+    * Download completes, all files reside on local hard drive. OR
+    * Download is cancelled by user. OR
+    * There is a fatal download error
+
+_Quality Requirements_
+    * All servers will respond within a certain amount of time, determined by server settings.
