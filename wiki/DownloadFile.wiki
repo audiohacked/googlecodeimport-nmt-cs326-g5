@@ -13,3 +13,7 @@ A user downloads a file from a generic server.
         3. Sever responds with status of file
 
 4. Client downloads file if available, using the appropriate protocol
+
+= Sequence Diagram =
+
+http://nmt-cs326-g5.googlecode.com/files/seq_download.jpeg
