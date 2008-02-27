@@ -506,6 +506,7 @@ _Entry conditions_
 
 ----
 
+_Use case name_ *ExTorrentTransferError*
 _Participating Actors:_ Tracker, BasicUser
 
 _Flow of events_
