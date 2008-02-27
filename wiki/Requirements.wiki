@@ -53,6 +53,20 @@ http://nmt-cs326-g5.googlecode.com/files/DeploymentDiagram.jpeg
 ==Requirements Analysis== 
 ===Structural Analysis===
 Briefly describe each analysis class (organized according to type - boundary, control, and entity) and class diagrams
+====Boundary====
+GUI - Provides the user interface, the main interaction between the user and the program. Used to initiate downloads, uploads, browse the content server, and edit user preferences.  Calls the preferenceDialogue when preferences are changed and communicates with the ContentManager class to initiate downloads/uploads.
+preferenceDialogue - allows the user to edit their preferences relating to the operation of the program, including options related to torrenting and user interface options.
+====Control====
+ContentManager - is the controller that provides the client with all information pertaining to downloads available, browsing the downloads available, user authentication, and uploading of files. Communicates directly with the database server through the DBManager class.
+TransferManager - provides the interface that the other transfer managers implement
+TorrentTransferManager - implements methods included in TransferManager and methods specific to torrent downloads, such as connectToTracker()
+HTTPTransferManager - implements methods included in TransferManager and methods specific to HTTP transfers
+====Entity====
+DBManager - provides an interface to the ContentManager to update and query the database, which provides lists and attributes of downloads and the files that make up the downloads.
+Download - provides an interface that other downloads implement that includes methods and attributes that are common to all downloads.
+TorrentDownload - implements the Download interface and includes methods and attributes that are unique to torrent downloading, such as peerLocations and trackerLocations. Includes one or more file objects.
+HTTPDownload - implements the Download interface and includes methods and attributes that are unique to HTTP downloads, such as getFileName (since HTTP downloads by definition include 1 file).
+file - includes attributes of a file and a method for retrieving those attributes.
 ===Behavioral Analysis=== 
 This section presents a use-case realization for each use-case using sequence diagram and activity diagram.
 ===User Interface Analysis===
