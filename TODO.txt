@@ -1,0 +1,7 @@
+audiohacked: bittorrent-based downloader
+audiohacked: jabber-based Messenger
+audiohacked: xml-based user config, ie games, login, etc
+new004lagmaster: add a way to link a shortcut from a non-Gass game like Battlefield 42 or ut in to Gass
+audiohacked: Self-Updater
+audiohacked: Login Window first, then main window
+audiohacked: ???

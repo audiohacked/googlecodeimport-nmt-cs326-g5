@@ -1,0 +1,141 @@
+File --->
+	Backup games...
+	Change user...
+	Settings
+	Check for Steam client updates...
+	Go Offline...
+	Exit
+
+
+View --->
+	Switch to mini games list
+	-------------------------
+	News
+	Friends
+	Servers
+	Settings
+	Support
+	Forums
+	-------------------------
+	Bandwidth monitor
+	-------------------------
+	Store
+	My Games
+	My Media
+	Tools
+
+
+Games --->
+	Activate a product on Steam...
+	Manage guest passes... 
+
+
+Help --->
+	Technical support page		-> http://support.steampowered.com/
+	System information
+	--------------------------
+	Privacy policy			-> http://www.valvesoftware.com/privacy.htm
+	Legal information		-> http://www.valvesoftware.com/legal.htm 
+	Steam Subscriber Agreement 	-> http://www.steampowered.com/v/index.php?area=subscriber_agreement
+	--------------------------
+	About Steam
+
+
+
+
+
+About Steam:
+	Steam windows client
+	Built: Jun 27 2007, at 10:42:37
+	Steam API: v006
+	Steam package versions: 36/333
+	http://www.steampowered.com
+	Steam skin based on design by random_n
+
+
+
+
+
+Steam - System information:
+	Steam has detected the following hardware in your system:
+==============================================================================
+Processor Information:
+    Vendor:  AuthenticAMD
+    Speed: 2000 Mhz
+    1 logical processor
+    1 physical processor
+    HyperThreading:  Unsupported
+    RDTSC:  Supported
+    CMOV:  Supported
+    FCMOV:  Supported
+    SSE:  Supported
+    SSE2:  Unsupported
+    3DNOW:  Supported
+    
+Network Information:
+    Network Speed:  
+    IP Address:  192.168.1.XXX
+    192.168.1.XXX
+    
+Windows Version:
+    Windows XP (32 bit)
+    NTFS:  Supported
+    
+Video Card:
+    Driver:  NVIDIA GeForce 6200 
+    DirectX Driver Name:  nv4_disp.dll
+    Driver Version:  6.14.10.9424
+    DirectX Driver Version:  6.14.10.9424
+    Driver Date: 19 Apr 2007
+    Desktop Color Depth: 32 bits per pixel
+    Monitor Refresh Rate: 60 Hz
+    DirectX Card: NVIDIA GeForce 6200 
+    VendorID:  0x10de
+    DeviceID:  0x221
+    Number of Monitors:  2
+    Number of Video Cards:  2
+    No SLI or Crossfire Detected
+    Primary Display Resolution:  1024 x 768
+    Desktop Resolution: 2048 x 768
+    Primary Display Size: 12.60" x 9.45"  (15.75" diag)
+                             32.0cm x 24.0cm  (40.0cm diag)
+    Primary Display Type: CRT
+    Primary Bus: AGP 8x
+    Primary AGP GART: 256 MB
+    Primary VRAM: 128 MB
+    Primary Monitor Vendor:  Daytek
+    Primary Monitor Model:  Daytek Analog Display
+    Supported MSAA Modes:  2x 4x 
+
+    
+    
+Game Display Settings
+
+    
+Sound card:
+    Audio device: Realtek AC97 Audio
+  
+Memory:
+    RAM:  767 Mb
+    
+Miscellaneous:
+    UI Language:  English
+    Microphone:  Not set
+    Media Type:  DVD
+    Total Hard Disk Space Available:  114470 Mb
+    Largest Free Hard Disk Block:  43648 Mb
+==============================================================================    
+Compare your hardware to other Steam users -> http://www.steampowered.com/status/survey.html
+
+
+
+
+
+Tools --->
+	Tools, Status (Not installed/100% - Ready), Update, Developer
+My media --->
+	Title, Status, Type, Producer
+My games --->
+	Games, Status, Update, Metascore, Developer
+
+STATUS BAR BUTTONS: News, Friends, Servers, Settings, Support
