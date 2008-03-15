@@ -1,0 +1,70 @@
+Planned - 0.4.1.0:
+add Jabber-based messenger
+
+Planned - 0.4.0.0:
+add Login Dialog/ability
+
+Planned - 0.3.x.x:
+add Function Buttons below tab-windows: Chat, Download Queue, News, Settings, Support, etc
+needs to be done for each tab
+
+Planned - 0.3.0.0:
+Move from XML to SQL for scalability and etc
+
+Finished - 0.2.6.0:
+add back and home buttons for Browsers
+
+Finished - 0.2.5.0:
+add GassTools, ie copy of GassMedia for the Tools tab
+added Minimize to Tray feature
+
+Finished - 0.2.4.0:
+add manual way of checking for app updates
+
+Finished - x.x.xx.xxxx:
+Integrate all the build scripts into one
+
+Finished - 0.2.3.0:
+convert from xml.dom.minidom to xml.etree.ElementTree for memory
+and speed increases;
+
+Finished - 0.2.2.0:
+Add AboutBox and full menu system, see steam_menus.txt
+Add TaskbarIcon Features
+
+Finished - 0.2.1.0:
+update downloader code to include Updater-dialog, and http progress
+converted updater code to use ElementTree instead of minidom
+
+Finished - 0.2.0.0:
+add way to extract new version of exe into folder, then download 
+new copy of userconfig.xml
+
+Finished - 0.1.9.0:
+Add Auto-Updater; quit when in offline mode;
+
+Finished - 0.1.8.0:
+Add offline mode
+
+Finished - 0.1.7.0:
+Add ability to configure homepage, update-url, app-version-checking.
+for app-version-checking i had to implement the executible version 
+search and compare to online config file for auto-updater
+
+Finished - 0.1.6.0:
+libtorrent based bitorrent downloader and Download Dialog added
+
+Finished - 0.1.5.0:
+ListCtrl based Games, Media, and Tools tabs
+
+Finished - 0.1.4.0:
+wxMozilla integrated browser
+
+Finished - 0.1.3.0:
+GridCtrl based Games/Media/Tools tabs
+
+Finished - 0.1.2.0:
+Internet Explorer integrated browser
+
+Finished - 0.1.1.0:
+initial version with Safari-based integrated browser. main tabs integrated

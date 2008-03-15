@@ -1,0 +1,23 @@
+<GassAppService>
+	<service-info>
+		<app>
+			
+			<homepage>http://www.nmt.edu/~nmtlan/</homepage>
+			<version>0.2.7.2</version>
+			<update-url>http://www.seancrazy.net/GassApp_win.zip</update-url>
+			<net-config>http://www.seancrazy.net/ListGass.xml</net-config>
+		</app>
+	</service-info>
+	<service-media>
+		<games>
+		<package name="Test 2"><homepage>http://</homepage><package-url>http://www.seancrazy.net/GassApp_win.zip</package-url><preview-url>http://</preview-url><score>00</score><build>http://</build></package><package name="Test 3"><homepage>http://</homepage><package-url>http://www.seancrazy.net/GassApp_mac.zip</package-url><preview-url>http://</preview-url><score>00</score><build>http://</build></package><package name="Test 4"><homepage>http://</homepage><package-url>http://www.seancrazy.net/GassApp_linux.zip</package-url><preview-url>http://</preview-url><score>00</score><build>http://</build></package></games>
+		<media>
+			<package name="Gentoo x86 2007.0-r1">
+				<package-url>http://www.seancrazy.net/GassAppData/install-x86-minimal-2007.0-r1.torrent</package-url>
+				<package-homepage>http://www.gentoo.org/</package-homepage>
+				<package-type>ISO9660</package-type>
+			</package>
+		</media>
+		<tools />
+	</service-media>
+</GassAppService>
