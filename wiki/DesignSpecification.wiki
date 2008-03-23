@@ -1,0 +1,58 @@
+#summary We can do our design specification here.
+
+=(Project Title)=
+
+=Design Specification=
+
+==1. Project Overview==
+
+This section contains a revised version of the same section in the requirements specification.
+
+===1.1 Scope and Objectives===
+
+This section contains a revised version of the same section in the requirements specification.
+
+===1.2 Supplementary Requirements===
+
+This section contains a revised version of the same section in the requirements specification.
+
+==2. Customer Requirements==
+
+This section contains a revised version of the same section in the requirements specification.
+
+==3. Architectural Design==
+
+Briefly overview your architectural design. Discuss alternatives examined. Indicate why the architecture discussed in section 3.1 & 3.2 was chosen and why the alternatives were eliminated. 
+
+===3.1 Subsystem Architecture===
+
+This section should include a subsystem dependency diagram and supporting discussion. 
+
+===3.2 Deployment Model===
+
+This section should include a deployment diagram (and supporting discussion) that includes a mapping of subsystems to deployment.
+
+==4. Use Case Realization Design==
+
+For each use case a sequence diagram depicting important interactions among subsystems, interfaces, & architecturally significant design classes as well as class diagrams depicting relationships among interaction participants. E.g., one sequence diagram and one class diagram per use case.
+
+==5. Subsystem Design==
+
+Subsections 5.1, 5.2, … present the design of each subsystem depicted in the system architecture - one subsection per subsystem. Nested subsystems should be sub-subsections. E.g., section "5.1.1 Subsystem A.1" would present a nested subsystem of subsystem A.
+5.1	Subsystem A
+Each subsystem design should include a description of subsystem interfaces, a class diagram of subsystem design classes and interfaces, sequence diagrams that depict the internal interactions that support subsystem interfaces, and any nested subsystems.
+5.2	Subsystem B …
+
+==6. Human Interfaces==
+
+Mockup designs for each user interface.
+
+==7. System/Data Dependencies & Requirements==
+
+These are drawn primarily from supplementary requirements.
+
+==8. Testing Plan==
+
+==9. Appendices==
+
+===9.1 Project Status===
