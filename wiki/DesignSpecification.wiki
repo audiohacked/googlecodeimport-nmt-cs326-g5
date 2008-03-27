@@ -7,19 +7,80 @@
 
 ==1. Project Overview==
 
-This section contains a revised version of the same section in the requirements specification.
+The program will provide a cross-platform content distribution and publishing service. It will use a client-server model where the server will use and provide service through standard programs/services like Apache and MySQL. The customer can choose to use the server to distribute published files or allow users to upload their own content that can be sponsored/featured on the server.
+
+The motivation for this project is the lack of a general-purpose, platform-independent content distribution service in the market.  Many content distribution services, such as Valve's Steam platform for game distribution, Apple's iTunes service for music distribution, or Netflix's online movie watching software, have some form of platform-dependency (whether it be a an operating system or browser) and/or are content-specific; this is to say that they allow the distribution of only certain forms of digital content.
+
 
 ===1.1 Scope and Objectives===
 
-This section contains a revised version of the same section in the requirements specification.
+The scope of the project is to build a base platform for customers to create a digital community and publishing system while also supporting at least Linux, Windows, and Mac user alike. The main function of the system is to provide an end-user a way to obtain any digital content, such as movies, music, and other entertainment. The system has to be fast, native-looking, and easily changeable/upgradeable. To insure the user's client is up to date, it will include an self updater. To facilitate downloading, the client will use bittorrent and http/ftp. Finally, the client can also be configured to include Community Portal and/or a web browser.
 
 ===1.2 Supplementary Requirements===
 
-This section contains a revised version of the same section in the requirements specification.
+*FURPS Non-functional Requirements (Quality)*
+
+_Usability_
+  * Users familiar with other content distribution platforms and file transfer clients should feel at ease with this system.
+  * User interface should always strive for simplicity and intuitiveness.
+  * User interface should follow a tabbed system to divide functionality and reduce complexity.
+
+_Reliability_
+  * The entire system must be robust enough to handle common networking issues like dropped connections, missing files, and transfer errors.
+  * User authentication system should use common security practices.
+
+_Performance_
+  * File transfers should initiate within two seconds of a client's request.
+  * Content server should responsibly manage available bandwidth to achieve optimal browsing and transfer speeds.
+
+_Supportability_
+  * Content server's closed website system should be mostly dynamic, adapting to file additions/removals as well as changes in existing files' properties.
+
+*FURPS+ Additional Non-functional Requirements (Constraints)*
+
+_Implementation_
+  * The client will be implemented in C++, utilizing the gtkWidgets library for cross-platform code.
 
 ==2. Customer Requirements==
+*Use-Case Diagram - Entire System*
 
-This section contains a revised version of the same section in the requirements specification.
+http://nmt-cs326-g5.googlecode.com/files/usecasev2_2.jpeg
+
+*Actor Descriptions and Use-Cases by Actor*
+
+`BasicUser` - the target audience for downloads, uses the client software.
+
+http://nmt-cs326-g5.googlecode.com/files/UseCase_BasicUser.jpeg
+
+----
+
+`ContentDistributor` - the manager of the Centralized Content Server, inherits functionality from Basic User.
+
+http://nmt-cs326-g5.googlecode.com/files/UseCase_ContentDistributor.jpeg
+
+----
+
+`DBManager` - provides storage and retrieval for information on downloads. This includes file location, file attributes, statistics including number of downloads, and other vital information.
+
+http://nmt-cs326-g5.googlecode.com/files/UseCase_Database.jpeg
+
+----
+
+`ContentServer` - communicates with the client software and the database. Is responsible for communication between client and database.
+
+http://nmt-cs326-g5.googlecode.com/files/UseCase_ContentServer.jpeg
+
+----
+
+`Tracker` - communicates with the client software during a torrent download to provide connection information to peers.
+
+http://nmt-cs326-g5.googlecode.com/files/UseCase_Tracker.jpeg
+
+
+*Deployment Diagram*
+
+http://nmt-cs326-g5.googlecode.com/files/DeploymentDiagram.jpeg
+
 
 ==3. Architectural Design==
 
