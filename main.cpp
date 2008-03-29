@@ -45,7 +45,7 @@ void sAppFrame::AboutBox(wxCommandEvent& WXUNUSED(event))
 sAppTabbed::sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	 const wxSize &size, long style) : wxNotebook(parent, id, pos, size, style)
 {
-	#ifdef BULTIN_BROWSER
+	#ifdef BUILTIN_BROWSER
 		wxMozillaBrowser *Home = new wxMozillaBrowser(this, -1, wxDefaultPosition,
 			wxDefaultSize);
 		Home->LoadURL(wxT("http://www.google.com/"));

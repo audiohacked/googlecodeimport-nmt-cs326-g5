@@ -46,7 +46,9 @@ IF(wxWidgets_FOUND)
 		${wxWidgets_INCLUDE_DIRS}
 		${WXMOZ_INCLUDE_DIR}
 	)
-
+	LINK_DIRECTORIES(
+		${WXMOZ_LINK_DIR}
+	)
 	IF(WIN32)
 		SET(GUI_TYPE WIN32)
 		SET(SRCS ${SRCS} wxSean.rc)
