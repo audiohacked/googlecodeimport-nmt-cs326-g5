@@ -100,6 +100,123 @@ This section should include a deployment diagram (and supporting discussion) tha
 
 For each use case a sequence diagram depicting important interactions among subsystems, interfaces, & architecturally significant design classes as well as class diagrams depicting relationships among interaction participants. E.g., one sequence diagram and one class diagram per use case.
 
+Specific use case descriptions and sequence diagrams:
+
+_Use Case Name_      *`DownloadFile`* _(Also applies to *'DownloadHTTPFile'*)_
+
+*Sequence Diagram*
+
+http://nmt-cs326-g5.googlecode.com/files/seq_abstractdownload.jpeg
+
+----
+
+_Use Case Name_        *`DownloadTorrentFile`*
+
+----
+
+_Use Case Name_      *`ReportFileDownload`*
+
+*Sequence Diagram*
+
+http://nmt-cs326-g5.googlecode.com/files/seq_reportfiledownload.jpeg
+
+----
+
+_Use Case Name_  *`ReportFileUpload`*
+
+*Sequence Diagram*
+
+http://nmt-cs326-g5.googlecode.com/files/seq_reportfileupload.jpeg
+
+----
+
+_Use Case Name_  *`UploadFile`*
+
+*Activity Diagram*
+
+http://nmt-cs326-g5.googlecode.com/files/act_upload.jpeg
+
+----
+
+_Use Case Name_  *`DesignateFileSponsoredStatus`*
+
+*Activity Diagram*
+
+See the authentication/designation section of the *`UploadFile`* activity diagram.
+
+----
+
+_Use case name_  *`GetFileStatistics`*
+
+----
+
+_Use case name_  *`ReportTransferProgress`*
+
+----
+
+_Use case name_  *`BrowseContentSite`*
+
+*Sequence Diagram*
+
+http://nmt-cs326-g5.googlecode.com/files/seq_browsecontent.jpeg
+
+----
+
+_Use case name_  *`RemoveFile`*
+
+*Activity Diagram*
+
+http://nmt-cs326-g5.googlecode.com/files/act_removefile.jpeg
+
+----
+
+_Use case name_  *`SetClientPreferences`*
+
+*Sequence Diagram*
+
+http://nmt-cs326-g5.googlecode.com/files/seq_setclientpreferences.jpeg
+
+----
+
+_Use case name_  *`SetServerPreferences`*
+
+*Sequence Diagram*
+
+http://nmt-cs326-g5.googlecode.com/files/seq_setserverpreferences.jpeg
+
+----
+
+_Use Case Name_        *`AbortFileTransfer`*
+
+*Activity Diagram*
+
+http://nmt-cs326-g5.googlecode.com/files/act_aborttransfer.jpeg
+
+----
+_Use case name_ *`ExTransferError`*
+
+*Activity Diagram*
+
+http://nmt-cs326-g5.googlecode.com/files/act_exception.jpeg
+
+----
+_Use case name_ *`ExFileNotFoundError`*
+
+*Activity Diagram*
+
+See activity diagram for *`ExTransferError`*.
+
+----
+
+_Use case name_ *`ExTorrentTransferError`*
+
+*Activity Diagram*
+
+See activity diagram for *`ExTransferError`*.
+
+----
+
+
 ==5. Subsystem Design==
 
 Subsections 5.1, 5.2, … present the design of each subsystem depicted in the system architecture - one subsection per subsystem. Nested subsystems should be sub-subsections. E.g., section "5.1.1 Subsystem A.1" would present a nested subsystem of subsystem A.
