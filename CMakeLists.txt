@@ -29,7 +29,6 @@ SET(HDRS
 
 FIND_PACKAGE(wxWidgets)
 
-
 INCLUDE( ${CMAKE_ROOT}/Modules/UsePkgConfig.cmake )
 PKGCONFIG(wxmozilla WXMOZ_INCLUDE_DIR WXMOZ_LINK_DIR WXMOZ_LINK_FLAGS WXMOZ_CFLAGS)
 SET(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} ${WXMOZ_LINK_FLAGS})
@@ -45,6 +44,7 @@ IF(wxWidgets_FOUND)
 		${CMAKE_BINARY_DIR}
 		${wxWidgets_INCLUDE_DIRS}
 		${WXMOZ_INCLUDE_DIR}
+		${CMAKE_SOURCE_DIR}/includes
 	)
 	LINK_DIRECTORIES(
 		${WXMOZ_LINK_DIR}
@@ -52,6 +52,29 @@ IF(wxWidgets_FOUND)
 	IF(WIN32)
 		SET(GUI_TYPE WIN32)
 		SET(SRCS ${SRCS} wxSean.rc)
+		LINK_DIRECTORIES(
+			${LINK_DIRECTORIES}
+			"C:\\wxMozilla-0.5.7\\mozilla\\lib"
+			"C:\\wxMozilla-0.5.7\\build\\Bakefiles\\DLL\ Release\ Monolithic\ WX_PYTHON_0"
+		)
+		LINK_LIBRARIES(
+			embed_base_s.lib
+			xpcom.lib
+			xul.lib
+			profdirserviceprovider_s.lib
+			nspr4.lib
+			plc4.lib
+			plds4.lib
+			wxmsw28_core.lib
+			wxbase28.lib
+			wxtiff.lib
+			wxjpeg.lib
+			wxpng.lib
+			wxzlib.lib
+			wxregex.lib
+			wxexpat.lib
+			wxmozilla_lib.lib
+		)
 		#SET(CMAKE_CONFIGURATION_TYPES Release)
 	ELSE(WIN32)
 		IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
@@ -70,7 +93,7 @@ IF(wxWidgets_FOUND)
 	ENDIF(WIN32)
 
 	ADD_EXECUTABLE(sApp ${GUI_TYPE} ${SRCS} ${HDRS})
-	TARGET_LINK_LIBRARIES(sApp ${wxWidgets_LIBRARIES} )
+	TARGET_LINK_LIBRARIES(sApp ${wxWidgets_LIBRARIES})
  
 ELSE(wxWidgets_FOUND)
 	MESSAGE("wxWidgets not found!")
