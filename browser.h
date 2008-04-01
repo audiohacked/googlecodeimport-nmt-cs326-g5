@@ -7,4 +7,10 @@
 
 	#include <wxmozilla/wxMozilla.h>
 
+	/*class sAppBrowser : public wxMozillaBrowser
+	{
+		public:
+			sAppBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size);
+	};*/
+	
 #endif

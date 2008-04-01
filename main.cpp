@@ -70,8 +70,22 @@ sAppPanel::sAppPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 {
 	sAppTabbed *tabs = new sAppTabbed(this, -1, wxDefaultPosition, wxDefaultSize,
 		wxNB_FIXEDWIDTH);
+
 	
-	wxGridSizer *sizer = new wxGridSizer(1, 0, 0);
-	sizer->Add(tabs, 0, wxEXPAND|wxLEFT|wxRIGHT|wxBOTTOM, 5);
+	wxButton *News = new wxButton(this, -1, "News");
+	wxButton *Settings = new wxButton(this, -1, "Settings");
+	wxButton *Support = new wxButton(this, -1, "Support");
+	wxButton *InstaMessenger = new wxButton(this, -1, "InstaMessenger");
+	
+
+	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
+	wxBoxSizer *button_sizer = new wxBoxSizer(wxHORIZONTAL);
+	sizer->Add(tabs, 1, wxEXPAND|wxALL, 10);
+	sizer->Add(button_sizer, 0, wxALIGN_BOTTOM, 10);
+	button_sizer->Add(News, 0, wxALL, 10);
+	button_sizer->Add(Settings, 0, wxALL, 10);
+	button_sizer->Add(Support, 0, wxALL, 10);
+	button_sizer->Add(InstaMessenger, 0, wxALL, 10);
 	SetSizer(sizer);
+	sizer->SetSizeHints(this);
 }
