@@ -4,13 +4,14 @@
 	#ifndef WX_PRECOMP
 		#include <wx/wx.h>
 	#endif
-
+	
 	#include <wxmozilla/wxMozilla.h>
-
-	/*class sAppBrowser : public wxMozillaBrowser
+	
+	class sAppBrowser : public wxPanel
 	{
 		public:
 			sAppBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size);
-	};*/
+			wxMozillaBrowser *browser;
+	};
 	
 #endif
