@@ -1,7 +1,6 @@
 #include "main.h"
 #include "menu.h"
 #include "browser.h"
-
 #include "events.h"
 
 IMPLEMENT_APP(sApp)
@@ -46,16 +45,16 @@ sAppTabbed::sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	 const wxSize &size, long style) : wxNotebook(parent, id, pos, size, style)
 {
 	#ifdef BUILTIN_BROWSER
-		wxMozillaBrowser *Home = new wxMozillaBrowser(this, -1, wxDefaultPosition,
+		sAppBrowser *Home = new sAppBrowser(this, -1, wxDefaultPosition,
 			wxDefaultSize);
-		Home->LoadURL(wxT("http://www.google.com/"));
+		Home->browser->LoadURL(wxT("http://www.google.com/"));
 		AddPage(Home, _T("Browser"));
 	#endif
 	
 	#ifdef COMMUNITY_PORTAL
 		wxMozillaBrowser *Community = new wxMozillaBrowser(this, -1, 
 			wxDefaultPosition, wxDefaultSize);
-		Community->LoadURL(wxT("http://www.google.com/"));
+		Community->LoadURL(wxT("http://www.nmt.edu/"));
 		AddPage(Community, _T("Community"));
 	#endif
 	/*
@@ -80,8 +79,8 @@ sAppPanel::sAppPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 
 	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 	wxBoxSizer *button_sizer = new wxBoxSizer(wxHORIZONTAL);
-	sizer->Add(tabs, 1, wxEXPAND|wxALL, 10);
-	sizer->Add(button_sizer, 0, wxALIGN_BOTTOM, 10);
+	sizer->Add(tabs, 1, wxEXPAND|wxALL, 5);
+	sizer->Add(button_sizer, 0, wxALIGN_BOTTOM, 5);
 	button_sizer->Add(News, 0, wxALL, 10);
 	button_sizer->Add(Settings, 0, wxALL, 10);
 	button_sizer->Add(Support, 0, wxALL, 10);
