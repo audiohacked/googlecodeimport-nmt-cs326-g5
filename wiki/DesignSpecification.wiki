@@ -152,6 +152,10 @@ _Use case name_  *`GetFileStatistics`*
 
 _Use case name_  *`ReportTransferProgress`*
 
+*Sequence Diagram*
+
+http://nmt-cs326-g5.googlecode.com/files/seq_reporttransferprogress2.JPG
+
 ----
 
 _Use case name_  *`BrowseContentSite`*
