@@ -120,6 +120,8 @@ http://nmt-cs326-g5.googlecode.com/files/seq_abstractdownload.jpeg
 
 http://nmt-cs326-g5.googlecode.com/files/downloadFileClassDiagram.png
 
+This generic use case includes all more specific download use cases, which include HTTP and Torrent downloads, at this time. The Basic User selects the download in the GUI, which then communicates the request for the download to the proper TransferManager, which is specific to each type of transfer. The transfer manager then initiates a connection with the server to be downloaded from, using information from the ContentManager server.
+
 ----
 
 _Use Case Name_        *`DownloadTorrentFile`*
