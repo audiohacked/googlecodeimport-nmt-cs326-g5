@@ -391,19 +391,77 @@ http://nmt-cs326-g5.googlecode.com/files/Capture.PNG
 
 ==7. System/Data Dependencies & Requirements==
 
-These are drawn primarily from supplementary requirements.
+The application requires a server of moderate system requirements to run the Content Manager subsystem.  In addition, the same server may house the (server-side) Database Manager subsystem (as well as the physical database), or the Database Manager may reside on another remote server.  
 
+The client application requires a machine with an internet connection, and the Microsoft Windows, Mac OS X, or most flavors of Linux to function.
 ----
 
 ==8. Testing Plan==
+
+The system will be deployed in the configuration specified by the deployment diagram, though several variations on operating systems will be used in the client to insure cross-platform compatibility.  The machine used to host the server and database systems will be varied as well during the testing phase.
+
+The testing plan will encompass the use cases, as specified from the Requirements Analysis:
+
+*Download/Upload Use Cases*
+
+These use cases will be tested via a direct examination of each of the respective functionalities.  Multiple file types will be tested as well as different connections for uploading/downloading to measure performance.
+
+*Database Use Cases*
+
+These use cases will be tested individually as well as simultaneously alongside the download/upload use cases (as the database use cases are often invoked as a result of these use cases).  Invalid queries will also be made on the database to ensure that the database constraints are sufficient to maintain the integrity of the system's relational structure.
+
+*Miscellaneous Client/Server Use Cases (Preferences, Browsing, etc.)*
+
+These use cases will be tested via a direct examination of each functionality; for example, changing server preferences will be tested to see if its intended functionality is in place as well as the functionality to refute/correct improper changes in preferences.
+
+*Exceptional Use Cases (Errors)*
+
+These use cases will be tested by forcing each respective error to occur as well as simulating conditions in which each error might be likely to occur.
+
+*Examples of Specific Testing Cases*
+
+  * Successfully complete an HTTP download
+  * Successfully complete a torrent download
+  * Downloads will be verified using a checksum, thereby verifying that the files downloaded are identical to the files on the server
+  * `BasicUser` can successfully change preferences using the proper dialogue
+  * `ContentServer` can communicate with the `DBManager`, verified by doing database inserts,selects,deletes and edits
+  * `DBManager` can successfully communicate with the actual database, verified by doing database inserts, selects, deletes and edits, and verifying the actual data inserted by accessing the database through the command line
+  * `ContentServer` can successfully communicate the location and attributes of a specific file download, both in the case of HTTP downloads and the case of torrent downloads
 
 ----
 
 ==9. Appendices==
 
-===Database Schemas===
+===9.1 Project Status===
+The project is on schedule, with the design phase completed and several prototypes already having been implemented.  The following is an updated Gantt chart for project progress:
+
+===9.2 Database Schemas===
 
 The following is an entity relationship diagram depicting the database:
 http://nmt-cs326-g5.googlecode.com/files/db_er.jpeg
 
-===9.1 Project Status===
+===9.3 System Resource Documentation===
+
+WxWidgets -
+http://www.wxwidgets.org/
+
+CMake -
+http://www.cmake.org/
+
+Bittorrent specifications -
+http://wiki.theory.org/BitTorrentSpecification#Identification
+
+BEncoding C implementation -
+http://funzix.svn.sourceforge.net/viewvc/funzix/trunk/bencode/bencode.c?view=markup
+
+Libtorrent -
+http://www.rasterbar.com/products/libtorrent/
+
+cURL file transfer tool -
+http://curl.haxx.se/
+
+Apache HTTP server -
+http://www.apache.org/
+
+MySQL Relational Database system -
+http://www.mysql.com/
