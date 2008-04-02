@@ -288,7 +288,7 @@ This subsystem implements the graphical user interface via the wxWidgets librari
 
 *5.1.2 Web Browser*
 
-The Web Browser subsystem is handled entirely by the viewWebContent() method.  This method handles the transfer of web content from the ContentManager class (see the Content Manager subsystem) and is primarily responsible for displaying web content via the in-house browser and passing along download requests to other subsystems via methods like initiateDownload().
+The Web Browser subsystem is handled entirely by the viewWebContent() method.  This method handles the transfer of web content from the `ContentManager` class (see the Content Manager subsystem) and is primarily responsible for displaying web content via the in-house browser and passing along download requests to other subsystems via methods like initiateDownload().
 
 *5.1.3 wxWidgets*
 
@@ -305,11 +305,11 @@ The subsystem's internal associations and remote connection to the content serve
 
 http://nmt-cs326-g5.googlecode.com/files/ssinteraction_transfermanager.jpeg
 
-The primary object in this subsystem is the TransferManager interface, which all file transfer classes must realize in order to be compatible with the system.  This allows for a large amount extensibility and generality of 'file transfer' within the system, as new classes which implemented file transfer over different protocols could easily be created.
+The primary object in this subsystem is the `TransferManager` interface, which all file transfer classes must realize in order to be compatible with the system.  This allows for a large amount extensibility and generality of 'file transfer' within the system, as new classes which implemented file transfer over different protocols could easily be created.
 
-The next most important objects are the HTTPTransferManager and the TorrentTransferManager classes, which will be discussed in sections 5.2.1 and 5.2.2, respectively.
+The next most important objects are the HTTPTransferManager and the `TorrentTransferManager` classes, which will be discussed in sections 5.2.1 and 5.2.2, respectively.
 
-The subsystem also defines the Download interface, which all file handling classes must realize in a similar manner to the TransferManager interface in order to handle local file transactions.  This section of the subsystem is the link the the Local File Storage subsystem in the Model section of the subsystem architecture.  The Download interface implements methods which are useful for reporting information about a file _transfer_, such as the current download speed or percentage completion.
+The subsystem also defines the Download interface, which all file handling classes must realize in a similar manner to the `TransferManager` interface in order to handle local file transactions.  This section of the subsystem is the link the the Local File Storage subsystem in the Model section of the subsystem architecture.  The Download interface implements methods which are useful for reporting information about a file _transfer_, such as the current download speed or percentage completion.
 
 In addition, all classes which implement the Download interface also aggregate the File class, which is a concrete object which has many attributes common to all files.
 
@@ -322,7 +322,7 @@ Pictured below, the HTTP Transfer Manager subsystem is comprised primarily of tw
 
 http://nmt-cs326-g5.googlecode.com/files/class_httptransfer.JPG
 
-The HTTPTransferManager implements one additional method: downloadFile().  This method is responsible for contacting the content server (the request is handled by the server-side Content Manager subsystem) and requesting a file.  The methods of the TransferManager interface are implemented in a manner that utilizes HTTP.
+The HTTPTransferManager implements one additional method: downloadFile().  This method is responsible for contacting the content server (the request is handled by the server-side Content Manager subsystem) and requesting a file.  The methods of the `TransferManager` interface are implemented in a manner that utilizes HTTP.
 
 The HTTPDownload class is a simple class which necessarily implements the Download interface. It implements one additional method, getFileName() which retrieves the name of the file associated with the object.
 
