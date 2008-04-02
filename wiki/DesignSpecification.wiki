@@ -322,7 +322,9 @@ Pictured below, the Torrent Transfer Manager subsystem is likewise comprised of 
 
 http://nmt-cs326-g5.googlecode.com/files/class_torrenttransfer.JPG
 
-The TorrentTransferManager implements two additional methods: downloadTorrent() and connectToTracker().  The downloadTorrent() method works similarly to the HTTPTransferManager's downloadFile() method, except it targets a torrent file on the content server.  Upon completion of the torrent file transfer, the class utilizes the connectToTracker() method to connect to the torrent file's designated tracker(s).
+The TorrentTransferManager implements two additional methods: downloadTorrent() and connectToTracker().  The downloadTorrent() method works similarly to the HTTPTransferManager's downloadFile() method, except it targets a torrent file on the content server.  Upon completion of the torrent file transfer, the class utilizes the connectToTracker() method to connect to the torrent file's designated tracker(s).  The TorrentTransferManager implements the Transfer Manager interface in such a way to manage the peer to peer connections of the BitTorrent protocol, most likely using libtorrent.
+
+The TorrentFile class realizes the Download interface, but also has many additional attributes.  These include an array of File objects (as a torrent download often contains several files), an address to the tracker (trackerLocation), as well as an updating list of peer addresses (peerLocations).
 
 ===5.3 Database Manager===
 
