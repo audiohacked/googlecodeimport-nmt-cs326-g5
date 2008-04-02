@@ -84,8 +84,6 @@ http://nmt-cs326-g5.googlecode.com/files/DeploymentDiagram.jpeg
 
 ==3. Architectural Design==
 
-Briefly overview your architectural design. Discuss alternatives examined. Indicate why the architecture discussed in section 3.1 & 3.2 was chosen and why the alternatives were eliminated. 
-
 Our project is utilizing the Model-View-Controller (MVC) architecture to effectively reduce complexity and separate application entities (files, database storage) from business logic (file transfer) and boundary entities (user interface).  
 
 Other architectures were considered, including the Client-Server model and Peer-To-Peer model, but these architectures only encompass part of the functionality of application.  We have, however, adhered to many of the guiding principles behind these architectures while structuring our application under MVC.
@@ -109,8 +107,6 @@ http://nmt-cs326-g5.googlecode.com/files/deployment_diagram_v2.JPG
 The deployment model for the application is fairly traditional; client-side systems are mapped to the client executable, server systems (Content Manager) are mapped to a server side applet, and the database subsystem is mapped to a mySQL database.  One content server supports many clients, and one database instance is tied to one server.  
 
 ==4. Use Case Realization Design==
-
-For each use case a sequence diagram depicting important interactions among subsystems, interfaces, & architecturally significant design classes as well as class diagrams depicting relationships among interaction participants. E.g., one sequence diagram and one class diagram per use case.
 
 Specific use case descriptions and sequence diagrams:
 
@@ -279,11 +275,6 @@ See activity diagram for *`ExTransferError`*.
 
 
 ==5. Subsystem Design==
-
-Subsections 5.1, 5.2, … present the design of each subsystem depicted in the system architecture - one subsection per subsystem. Nested subsystems should be sub-subsections. E.g., section "5.1.1 Subsystem A.1" would present a nested subsystem of subsystem A.
-5.1	Subsystem A
-Each subsystem design should include a description of subsystem interfaces, a class diagram of subsystem design classes and interfaces, sequence diagrams that depict the internal interactions that support subsystem interfaces, and any nested subsystems.
-5.2	Subsystem B …
 
 ===5.1 User Interface===
 This set of subsystems is comprised entirely of one class, the 'GUI' class.  This class is pictured below:
