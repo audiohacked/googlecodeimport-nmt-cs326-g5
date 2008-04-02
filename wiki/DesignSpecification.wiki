@@ -210,6 +210,8 @@ _Use case name_  *`RemoveFile`*
 
 http://nmt-cs326-g5.googlecode.com/files/act_removefile.jpeg
 
+http://nmt-cs326-g5.googlecode.com/files/removeFileClassDiagram.png
+
 ----
 
 _Use case name_  *`SetClientPreferences`*
