@@ -304,13 +304,18 @@ http://nmt-cs326-g5.googlecode.com/files/class_transfermanager.JPG
 
 The primary object in this subsystem is the TransferManager interface, which all file transfer classes must realize in order to be compatible with the system.  This allows for a large amount extensibility and generality of 'file transfer' within the system, as new classes which implemented file transfer over different protocols could easily be created.
 
-The next most important objects are the HttpTransferManager and the TorrentTransferManager classes, which will be discussed in sections 5.2.1 and 5.2.2, respectively.
+The next most important objects are the HTTPTransferManager and the TorrentTransferManager classes, which will be discussed in sections 5.2.1 and 5.2.2, respectively.
 
+The subsystem also defines the Download interface, which all file handling classes must realize in a similar manner to the TransferManager interface in order to handle local file transactions.  This section of the subsystem is the link the the Local File Storage subsystem in the Model section of the subsystem architecture.  The Download interface implements methods which are useful for reporting information about a file _transfer_, such as the current download speed or percentage completion.
+
+In addition, all classes which implement the Download interface also aggregate the File class, which is a concrete object which has many attributes common to all files.
 
 
 *5.2.1 HTTP Transfer Manager*
 
-The HTTP Transfer Manager subsystem will take care of transfer http files and doing any http calls, such as HEAD and GET, that are required.  It will also have ways to report statistics on file transfers that are currently in the system.
+Pictured above (section 5.2), the HTTP Transfer Manager subsystem is comprised of two classes: the HTTPTransferManager class and the HTTPDownload class.
+
+The HTTP Transfer Manager subsystem handles the transfer of files over the HTTP as well as any standard HTTP requests, such as HEAD and GET, that are required.   
 
 *5.2.2 Torrent Transfer Manager*
 
