@@ -330,13 +330,13 @@ The HTTPDownload class is a simple class which necessarily implements the Downlo
 
 The Torrent Transfer Manager is responsible for managing the torrent transfers.  It will communicate with the tracker, the seeds, and the peers to efficiently transfer the torrents. This subsystem will also download and seed the torrent upon completion of the download.  
 
-Pictured below, the Torrent Transfer Manager subsystem is likewise comprised of primarily of two classes: the TorrentTransferManager class and the TorrentDownload class.
+Pictured below, the Torrent Transfer Manager subsystem is likewise comprised of primarily of two classes: the `TorrentTransferManager` class and the `TorrentDownload` class.
 
 http://nmt-cs326-g5.googlecode.com/files/class_torrenttransfer.JPG
 
-The TorrentTransferManager implements two additional methods: downloadTorrent() and connectToTracker().  The downloadTorrent() method works similarly to the HTTPTransferManager's downloadFile() method, except it targets a torrent file on the content server.  Upon completion of the torrent file transfer, the class utilizes the connectToTracker() method to connect to the torrent file's designated tracker(s).  The TorrentTransferManager implements the Transfer Manager interface in such a way to manage the peer to peer connections of the BitTorrent protocol, most likely using libtorrent.
+The `TorrentTransferManager` implements two additional methods: downloadTorrent() and connectToTracker().  The downloadTorrent() method works similarly to the HTTPTransferManager's downloadFile() method, except it targets a torrent file on the content server.  Upon completion of the torrent file transfer, the class utilizes the connectToTracker() method to connect to the torrent file's designated tracker(s).  The `TorrentTransferManager` implements the Transfer Manager interface in such a way to manage the peer to peer connections of the `BitTorrent` protocol, most likely using libtorrent.
 
-The TorrentFile class realizes the Download interface, but also has many additional attributes.  These include an array of File objects (as a torrent download often contains several files), an address to the tracker (trackerLocation), as well as an updating list of peer addresses (peerLocations).
+The `TorrentFile` class realizes the Download interface, but also has many additional attributes.  These include an array of File objects (as a torrent download often contains several files), an address to the tracker (trackerLocation), as well as an updating list of peer addresses (peerLocations).
 
 ===5.3 Database Manager===
 The Database Manager subsystem is a subsystem common to both the client and server applications, though each instance performs somewhat differently in the context of these different systems.  This system is responsible for connecting to a mySQL database as well as handling high-level (i.e., retrieving the top 10 downloads) and, internally, simple transactions (inserting a new record, for example) with the database.  
@@ -349,7 +349,7 @@ Pictured below, the Database Manager subsystem is implemented via a single class
 
 http://nmt-cs326-g5.googlecode.com/files/class_db.JPG
 
-The DBManager implements several important methods, the first of which are the dbConnect() and dbDisconnect() methods.  These methods connect to and disconnect from the database according to the connectionString and databaseType attributes.
+The `DBManager` implements several important methods, the first of which are the dbConnect() and dbDisconnect() methods.  These methods connect to and disconnect from the database according to the connectionString and databaseType attributes.
 
 The dbSelect(), dbInsert(), dbDelete(), and dbEdit() methods implement the simple SQL transactions (SELECT, INSERT, DELETE, and UPDATE), respectively.  These methods are private, as the DBManager's purpose is to provide a high-level black-box interface to the application's database functionality.  
 
@@ -362,11 +362,11 @@ The Content Manager's internal associations, as well as remote associations to t
 
 http://nmt-cs326-g5.googlecode.com/files/ssinteraction_cm_v2.JPG
 
-The Content Manager is implemented via a single class, ContentManager, pictured below:
+The Content Manager is implemented via a single class, `ContentManager`, pictured below:
 
 http://nmt-cs326-g5.googlecode.com/files/class_cm.JPG
 
-The ContentManager implements several methods to handle various requests from clients.  The connect() and disconnect() methods handle the connection and handshaking process between server and client, as well as authentication (via the getUserPermissions() method).  The browseContentSite() method retrieves a web page and sends it to the requesting client (who requested it via the Web Browser subsystem).  
+The `ContentManager` implements several methods to handle various requests from clients.  The connect() and disconnect() methods handle the connection and handshaking process between server and client, as well as authentication (via the getUserPermissions() method).  The browseContentSite() method retrieves a web page and sends it to the requesting client (who requested it via the Web Browser subsystem).  
 
 The getFileLocation() method is used for file transfer requests (as all requests for file transfer to the content server occur over HTTP, this method is blind to the type of file requested apart from basic security considerations).  The setServerPreferences() method is used to set various server and community options (like whether or not basic users are allowed to upload content, creating a toggle between an open and closed file distribution community), and can only be used by Content Distributors, who are authenticated by the methods previously discussed.
 
