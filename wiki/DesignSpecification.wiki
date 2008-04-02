@@ -188,7 +188,7 @@ _Use case name_  *`BrowseContentSite`*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_browsecontent.jpeg
 
-http://nmt-cs326-g5.googlecode.com/files/browseContentSiteClassDiagram.png
+http://nmt-cs326-g5.googlecode.com/files/browseContentSiteClassDiagram2.png
 
 ----
 
