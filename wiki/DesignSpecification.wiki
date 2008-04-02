@@ -341,7 +341,7 @@ The Database Manager subsystem is a subsystem common to both the client and serv
 
 The subsystem's internal associations are depicted here:
 
-http://nmt-cs326-g5.googlecode.com/files/ssinteraction_db.jpeg
+http://nmt-cs326-g5.googlecode.com/files/ssinteraction_db_2.JPG
 
 Pictured below, the Database Manager subsystem is implemented via a single class:
 
