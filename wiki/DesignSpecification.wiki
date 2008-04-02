@@ -41,6 +41,8 @@ _Supportability_
 _Implementation_
   * The client will be implemented in C++, utilizing the gtkWidgets library for cross-platform code.
 
+----
+
 ==2. Customer Requirements==
 *Use-Case Diagram - Entire System*
 
@@ -81,6 +83,7 @@ http://nmt-cs326-g5.googlecode.com/files/UseCase_Tracker.jpeg
 
 http://nmt-cs326-g5.googlecode.com/files/DeploymentDiagram.jpeg
 
+----
 
 ==3. Architectural Design==
 
@@ -105,6 +108,8 @@ The lowest level of the architecture is the model layer, and is comprised of onl
 http://nmt-cs326-g5.googlecode.com/files/deployment_diagram_v2.JPG
 
 The deployment model for the application is fairly traditional; client-side systems are mapped to the client executable, server systems (Content Manager) are mapped to a server side applet, and the database subsystem is mapped to a mySQL database.  One content server supports many clients, and one database instance is tied to one server.  
+
+----
 
 ==4. Use Case Realization Design==
 
@@ -260,6 +265,7 @@ http://nmt-cs326-g5.googlecode.com/files/abortFileTransferClassDiagram.png
 
 A Basic User selects a download within the GUI and presses the cancel button. The GUI then communicates with the proper transfer manager (depending on the type of transfer), which then stops the download, deletes the file, and notifies the GUI, which in turn notifies the user.
 
+----
 
 ==5. Subsystem Design==
 
@@ -364,16 +370,23 @@ The getFileLocation() method is used for file transfer requests (as all requests
 
 Finally, the reportCompletedDownload() method uses the Database Manager subsystem to report a completed file transfer and update the file's statistics (download count, etc). 
 
+----
 
 ==6. Human Interfaces==
 
 Mockup designs for each user interface.
 
+----
+
 ==7. System/Data Dependencies & Requirements==
 
 These are drawn primarily from supplementary requirements.
 
+----
+
 ==8. Testing Plan==
+
+----
 
 ==9. Appendices==
 
