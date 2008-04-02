@@ -301,9 +301,12 @@ In addition, all classes which implement the Download interface also aggregate t
 
 *5.2.1 HTTP Transfer Manager*
 
-Pictured above (section 5.2), the HTTP Transfer Manager subsystem is comprised of two classes: the HTTPTransferManager class and the HTTPDownload class.
+The HTTP Transfer Manager subsystem handles the transfer of files over the HTTP as well as any standard HTTP requests, such as HEAD and GET, that are required.
 
-The HTTP Transfer Manager subsystem handles the transfer of files over the HTTP as well as any standard HTTP requests, such as HEAD and GET, that are required.   
+Pictured below, the HTTP Transfer Manager subsystem is comprised of two classes: the HTTPTransferManager class and the HTTPDownload class.
+
+http://nmt-cs326-g5.googlecode.com/files/class_httptransfer.JPG
+
 
 *5.2.2 Torrent Transfer Manager*
 
