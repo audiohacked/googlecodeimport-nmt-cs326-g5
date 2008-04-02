@@ -46,6 +46,8 @@ _Implementation_
 ==2. Customer Requirements==
 *Use-Case Diagram - Entire System*
 
+_Note: This diagram was left unmodified from the Requirements Analysis for the purpose of readability, but the Server and Database packages should be grouped under a larger 'Server Functionality' package, and the Exception and Core packages under a 'Client Functionality' package._
+
 http://nmt-cs326-g5.googlecode.com/files/usecasev2_2.jpeg
 
 *Actor Descriptions and Use-Cases by Actor*
