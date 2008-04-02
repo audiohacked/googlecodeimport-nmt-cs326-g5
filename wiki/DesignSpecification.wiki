@@ -319,6 +319,8 @@ Pictured below, the Torrent Transfer Manager subsystem is likewise comprised of 
 
 http://nmt-cs326-g5.googlecode.com/files/class_torrenttransfer.JPG
 
+The TorrentTransferManager implements two additional methods: downloadTorrent() and connectToTracker().  The downloadTorrent() method works similarly to the HTTPTransferManager's downloadFile() method, except it targets a torrent file on the content server.  Upon completion of the torrent file transfer, the class utilizes the connectToTracker() method to connect to the torrent file's designated tracker(s).
+
 ===5.3 Database Manager===
 
 ===5.4 Content Manager===
