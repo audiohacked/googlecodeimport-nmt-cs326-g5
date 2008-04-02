@@ -185,6 +185,8 @@ _Use case name_  *`GetFileStatistics`*
 http://nmt-cs326-g5.googlecode.com/files/seq_getfilestatistics.jpg
 
 http://nmt-cs326-g5.googlecode.com/files/GetFileStatisticsClassdiagram.png
+
+The Content Manager requests file statistics through the DBManger, which has the actual connection to the database. The DBManager responds with either the data or an error code.
 ----
 
 _Use case name_  *`ReportTransferProgress`*
