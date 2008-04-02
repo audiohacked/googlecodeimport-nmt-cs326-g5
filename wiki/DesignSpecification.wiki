@@ -473,7 +473,7 @@ The project is on schedule, with the design phase completed and several prototyp
 
 http://nmt-cs326-g5.googlecode.com/files/ganttchart_3.JPG
 
-===9.2 Database Schemas===
+===9.2 Database Schema===
 
 The following is an entity relationship diagram depicting the database:
 http://nmt-cs326-g5.googlecode.com/files/db_er.jpeg
