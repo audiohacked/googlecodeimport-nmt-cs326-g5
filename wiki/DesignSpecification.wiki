@@ -151,6 +151,7 @@ _Use Case Name_  *`UploadFile`*
 
 http://nmt-cs326-g5.googlecode.com/files/act_upload.jpeg
 
+http://nmt-cs326-g5.googlecode.com/files/UploadFileClassDiagram.png
 ----
 
 _Use Case Name_  *`DesignateFileSponsoredStatus`*
