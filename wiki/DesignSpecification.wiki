@@ -9,12 +9,12 @@
 
 The program will provide a cross-platform content distribution and publishing service. It will use a client-server model where the server will use and provide service through standard programs/services like Apache and MySQL. The customer can choose to use the server to distribute published files or allow users to upload their own content that can be sponsored/featured on the server.
 
-The motivation for this project is the lack of a general-purpose, platform-independent content distribution service in the market.  Many content distribution services, such as Valve's Steam platform for game distribution, Apple's iTunes service for music distribution, or Netflix's online movie watching software, have some form of platform-dependency (whether it be a an operating system or browser) and/or are content-specific; this is to say that they allow the distribution of only certain forms of digital content.
+The motivation for this project is the lack of a general-purpose, platform-independent content distribution service on the market.  Many content distribution services, such as Valve's Steam platform for game distribution, Apple's iTunes service for music distribution, or Netflix's online movie watching software, have some form of platform-dependency (whether it be a an operating system or browser) and/or are content-specific; that is to say that they allow the distribution of only certain forms of digital content.
 
 
 ===1.1 Scope and Objectives===
 
-The scope of the project is to build a base platform for customers to create a digital community and publishing system while also supporting at least Linux, Windows, and Mac user alike. The main function of the system is to provide an end-user a way to obtain any digital content, such as movies, music, and other entertainment. The system has to be fast, native-looking, and easily changeable/upgradeable. To insure the user's client is up to date, it will include an self updater. To facilitate downloading, the client will use bittorrent and http/ftp. Finally, the client can also be configured to include Community Portal and/or a web browser.
+The scope of the project is to build a base platform for customers to create a digital community and publishing system while also supporting at least Linux, Windows, and Mac users alike. The main function of the system is to provide an end-user a way to obtain any digital content, such as movies, music, and other entertainment. The system has to be fast, native-looking, and easily changeable/upgradeable. To insure the user's client is up to date, it will include an self updater. To facilitate downloading, the client will use bittorrent and http/ftp. Finally, the client can also be configured to include Community Portal and/or a web browser.
 
 ===1.2 Supplementary Requirements===
 
