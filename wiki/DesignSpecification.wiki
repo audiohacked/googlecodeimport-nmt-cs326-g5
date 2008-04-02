@@ -155,6 +155,8 @@ http://nmt-cs326-g5.googlecode.com/files/seq_reportfileupload.jpeg
 
 http://nmt-cs326-g5.googlecode.com/files/ReportFileUploadClassDiagram.png
 
+The ContentManager checks to be sure it has an open connection to the DBManager, which manages the actual connection to the database. If the connection is ready, the ContentManager communicates it's request to the DBManager, and then DBManager signals it is ready for the data. ContentManager then communicates the report of the file upload, including the attributes and location of the file, which is then inserted into the database. DBManager then reports to ContentManager its success or failure.
+
 ----
 
 _Use Case Name_  *`UploadFile`*
