@@ -169,6 +169,7 @@ _Use case name_  *`GetFileStatistics`*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_getfilestatistics.jpg
 
+http://nmt-cs326-g5.googlecode.com/files/GetFileStatisticsClassdiagram.png
 ----
 
 _Use case name_  *`ReportTransferProgress`*
