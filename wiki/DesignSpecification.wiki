@@ -172,6 +172,8 @@ _Use case name_  *`ReportTransferProgress`*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_reporttransferprogress2.JPG
 
+http://nmt-cs326-g5.googlecode.com/files/ReportTransferProgressClassD.png
+
 ----
 
 _Use case name_  *`BrowseContentSite`*
