@@ -200,7 +200,11 @@ _Use case name_  *`BrowseContentSite`*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_browsecontent.jpeg
 
+This use case covers the in-client web browsing of the centralized content server.  Essentially, a user requests a particular web page; the GUI relays the request to the ContentManager class, which then returns the requested data to the client, which is then rendered by the GUI.
+
 http://nmt-cs326-g5.googlecode.com/files/browseContentSiteClassDiagram2.png
+
+This interaction involves two classes; the GUI and the ContentManager.  The multiplicity of this relationship merely indicates that one ContentManager can service multiple GUI's (client applications).
 
 ----
 
