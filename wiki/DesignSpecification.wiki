@@ -358,6 +358,12 @@ The Content Manager is implemented via a single class, ContentManager, pictured 
 
 http://nmt-cs326-g5.googlecode.com/files/class_cm.JPG
 
+The ContentManager implements several methods to handle various requests from clients.  The connect() and disconnect() methods handle the connection and handshaking process between server and client, as well as authentication (via the getUserPermissions() method).  The browseContentSite() method retrieves a web page and sends it to the requesting client (who requested it via the Web Browser subsystem).  
+
+The getFileLocation() method is used for file transfer requests (as all requests for file transfer to the content server occur over HTTP, this method is blind to the type of file requested apart from basic security considerations).  The setServerPreferences() method is used to set various server and community options (like whether or not basic users are allowed to upload content, creating a toggle between an open and closed file distribution community), and can only be used by Content Distributors, who are authenticated by the methods previously discussed.
+
+Finally, the reportCompletedDownload() method uses the Database Manager subsystem to report a completed file transfer and update the file's statistics (download count, etc). 
+
 
 ==6. Human Interfaces==
 
