@@ -197,6 +197,7 @@ http://nmt-cs326-g5.googlecode.com/files/seq_reporttransferprogress2.JPG
 
 http://nmt-cs326-g5.googlecode.com/files/ReportTransferProgressClassD.png
 
+The GUI requests the progress of a transfer from a specific Transfer Manager. The Transfer Manager returns the progress (an integer from 0-100) or an error message.
 ----
 
 _Use case name_  *`BrowseContentSite`*
@@ -220,6 +221,8 @@ _Use case name_  *`RemoveFile`*
 http://nmt-cs326-g5.googlecode.com/files/seq_removefile.jpg
 
 http://nmt-cs326-g5.googlecode.com/files/removeFileClassDiagram2.png
+
+An authenticated user makes a request to the Content Manager through the GUI to remove a download from the server. The Content Manger communicates with the DBManager and confirms that the user is allowed to delete files from the server. The Content Manger then sends the request to the DBManager to delete the file information, and, if successful, deletes the actual file. If unsucessful, an error message is returned to the GUI and displayed to the user.
 
 ----
 
