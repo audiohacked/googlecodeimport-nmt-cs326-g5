@@ -305,9 +305,15 @@ The wxWidgets subsystem represents the wxWidgets library, which the application 
 
 ===5.2 Transfer Manager===
 
+The Transfer Manager subsystem is responsible for allowing access to the Torrent Transfer Manager and HTTP Transfer Manager easily.  
+
 *5.2.1 HTTP Transfer Manager*
 
+The HTTP Transfer Manager subsystem will take care of transfer http files and doing any http calls, such as HEAD and GET, that are required.  It will also have ways to report statistics on file transfers that are currently in the system.
+
 *5.2.2 Torrent Transfer Manager*
+
+The Torrent Transfer Manager is responsible for managing the torrent transfers.  It will communicate with the tracker, the seeds, and the peers to efficiently transfer the torrents. This subsystem will also download and seed the torrent, as well as report statistics on the current torrent transfers.
 
 ===5.3 Database Manager===
 
