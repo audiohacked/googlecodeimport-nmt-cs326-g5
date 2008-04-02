@@ -166,6 +166,9 @@ _Use Case Name_  *`UploadFile`*
 http://nmt-cs326-g5.googlecode.com/files/seq_uploadfile.jpg
 
 http://nmt-cs326-g5.googlecode.com/files/UploadFileClassDiagram.png
+
+The authenticated user communicates a request to the content manager to upload a file. The content manager checks with the database if the user is allowed to upload files. If the user is properly authorized, they select the file type and location, and upload the file to the server. The user is prompted by the GUI for information pertaining to the file, and the content manager receives the file and information, and inserts the proper data into the database through the DBManager.
+
 ----
 
 _Use Case Name_  *`DesignateFileSponsoredStatus`*
