@@ -124,6 +124,8 @@ http://nmt-cs326-g5.googlecode.com/files/downloadFileClassDiagram.png
 
 _Use Case Name_        *`DownloadTorrentFile`*
 
+http://nmt-cs326-g5.googlecode.com/files/seq_downloadtorrentfile.jpg
+
 http://nmt-cs326-g5.googlecode.com/files/downloadTorrentFileClassDiagram.png
 
 ----
@@ -163,6 +165,9 @@ See the authentication/designation section of the *`UploadFile`* activity diagra
 ----
 
 _Use case name_  *`GetFileStatistics`*
+
+
+http://nmt-cs326-g5.googlecode.com/files/seq_getfilestatistics.jpg
 
 ----
 
