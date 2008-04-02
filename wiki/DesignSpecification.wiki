@@ -118,15 +118,11 @@ _Use Case Name_      *`DownloadFile`* _(Also applies to *'DownloadHTTPFile'*)_
 
 http://nmt-cs326-g5.googlecode.com/files/seq_abstractdownload.jpeg
 
-*Class Interaction Diagram*
-
 http://nmt-cs326-g5.googlecode.com/files/downloadFileClassDiagram.png
 
 ----
 
 _Use Case Name_        *`DownloadTorrentFile`*
-
-*Class Interaction Diagram*
 
 http://nmt-cs326-g5.googlecode.com/files/downloadTorrentFileClassDiagram.png
 
@@ -138,6 +134,7 @@ _Use Case Name_      *`ReportFileDownload`*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_reportfiledownload.jpeg
 
+http://nmt-cs326-g5.googlecode.com/files/reportFileDownloadClassDiagram.png
 ----
 
 _Use Case Name_  *`ReportFileUpload`*
