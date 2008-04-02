@@ -246,6 +246,8 @@ http://nmt-cs326-g5.googlecode.com/files/seq_setserverpreferences.jpeg
 
 http://nmt-cs326-g5.googlecode.com/files/SetServerPreferencesClassDiagram.png
 
+An authenticated Content Distributor selects the option to set the server preferences in the GUI. The GUI then communicates the request to the Content Manager. The Content Manager then contacts the DBManager to see if the user is in fact a Content Distributor and not a regular user. If the user is allowed to edit the server preferences, the Content Manager notifies the GUI and a modified Preference Dialog is initialized. The Content Distributor can then edit various settings and commit them to the Content Manager, or cancel the process.
+
 ----
 
 _Use Case Name_        *`AbortFileTransfer`*
