@@ -123,6 +123,8 @@ _Use Case Name_      *`DownloadFile`* _(Also applies to *'DownloadHTTPFile'*)_
 
 http://nmt-cs326-g5.googlecode.com/files/seq_abstractdownload.jpeg
 
+*Interaction Diagram*
+
 http://nmt-cs326-g5.googlecode.com/files/downloadFileClassDiagram.png
 
 This generic use case includes all more specific download use cases, which include HTTP and Torrent downloads, at this time. The Basic User selects the download in the GUI, which then communicates the request for the download to the proper TransferManager, which is specific to each type of transfer. The transfer manager then initiates a connection with the server to be downloaded from, using information from the ContentManager server.
@@ -132,6 +134,8 @@ This generic use case includes all more specific download use cases, which inclu
 _Use Case Name_        *`DownloadTorrentFile`*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_downloadtorrentfile.jpg
+
+*Interaction Diagram*
 
 http://nmt-cs326-g5.googlecode.com/files/downloadTorrentFileClassDiagram.png
 
@@ -146,6 +150,8 @@ _Use Case Name_      *`ReportFileDownload`*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_reportfiledownload.jpeg
 
+*Interaction Diagram*
+
 http://nmt-cs326-g5.googlecode.com/files/reportFileDownloadClassDiagram.png
 
 The ContentManager checks to be sure it has an open connection to the DBManager, which manages the actual connection to the database. If the connection is ready, the ContentManager communicates it's request to the DBManager, and then DBManager signals it is ready for the data. ContentManager then communicates the report of the file download, which is then inserted into the database. DBManager then reports to ContentManager its success or failure.
@@ -158,6 +164,8 @@ _Use Case Name_  *`ReportFileUpload`*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_reportfileupload.jpeg
 
+*Interaction Diagram*
+
 http://nmt-cs326-g5.googlecode.com/files/ReportFileUploadClassDiagram.png
 
 The ContentManager checks to be sure it has an open connection to the DBManager, which manages the actual connection to the database. If the connection is ready, the ContentManager communicates it's request to the DBManager, and then DBManager signals it is ready for the data. ContentManager then communicates the report of the file upload, including the attributes and location of the file, which is then inserted into the database. DBManager then reports to ContentManager its success or failure.
@@ -166,9 +174,11 @@ The ContentManager checks to be sure it has an open connection to the DBManager,
 
 _Use Case Name_  *`UploadFile`*
 
-*Activity Diagram*
+*Sequence Diagram*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_uploadfile.jpg
+
+*Interaction Diagram*
 
 http://nmt-cs326-g5.googlecode.com/files/UploadFileClassDiagram.png
 
@@ -178,7 +188,11 @@ The authenticated user communicates a request to the content manager to upload a
 
 _Use Case Name_  *`DesignateFileSponsoredStatus`*
 
+*Sequence Diagram*
+
 http://nmt-cs326-g5.googlecode.com/files/seq_designatefilesponsoredstatus.jpg
+
+*Interaction Diagram*
 
 http://nmt-cs326-g5.googlecode.com/files/designateFileSponsoredStatusClassDiagram.png
 
@@ -188,8 +202,11 @@ An authenticated user uses the GUI to select a file that they want to designate 
 
 _Use case name_  *`GetFileStatistics`*
 
+*Sequence Diagram*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_getfilestatistics.jpg
+
+*Interaction Diagram*
 
 http://nmt-cs326-g5.googlecode.com/files/GetFileStatisticsClassdiagram.png
 
@@ -202,6 +219,8 @@ _Use case name_  *`ReportTransferProgress`*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_reporttransferprogress2.JPG
 
+*Interaction Diagram*
+
 http://nmt-cs326-g5.googlecode.com/files/ReportTransferProgressClassD.png
 
 The GUI requests the progress of a transfer from a specific Transfer Manager. The Transfer Manager returns the progress (an integer from 0-100) or an error message.
@@ -213,19 +232,23 @@ _Use case name_  *`BrowseContentSite`*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_browsecontent.jpeg
 
-This use case covers the in-client web browsing of the centralized content server.  Essentially, a user requests a particular web page; the GUI relays the request to the ContentManager class, which then returns the requested data to the client, which is then rendered by the GUI.
+*Interaction Diagram*
 
 http://nmt-cs326-g5.googlecode.com/files/browseContentSiteClassDiagram2.png
 
-This interaction involves two classes; the GUI and the ContentManager.  The multiplicity of this relationship merely indicates that one ContentManager can service multiple GUI's (client applications).
+This use case covers the in-client web browsing of the centralized content server.  Essentially, a user requests a particular web page; the GUI relays the request to the ContentManager class, which then returns the requested data to the client, which is then rendered by the GUI.
+
+The interaction diagram involves two classes; the GUI and the ContentManager.  The multiplicity of this relationship merely indicates that one ContentManager can service multiple GUI's (client applications).
 
 ----
 
 _Use case name_  *`RemoveFile`*
 
-*Activity Diagram*
+*Sequence Diagram*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_removefile.jpg
+
+*Interaction Diagram*
 
 http://nmt-cs326-g5.googlecode.com/files/removeFileClassDiagram2.png
 
@@ -239,6 +262,8 @@ _Use case name_  *`SetClientPreferences`*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_setclientpreferences.jpeg
 
+*Interaction Diagram*
+
 http://nmt-cs326-g5.googlecode.com/files/SetClientPreferencesClassDiagram.png
 
 A basic user selects a 'preferences' menu item in the GUI. The GUI then initializes the preference dialog, which reads the user's preferences from a local configuration file. The user can then change their preferences through the preference dialog, which can then be saved.
@@ -251,6 +276,8 @@ _Use case name_  *`SetServerPreferences`*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_setserverpreferences.jpeg
 
+*Interaction Diagram*
+
 http://nmt-cs326-g5.googlecode.com/files/SetServerPreferencesClassDiagram.png
 
 An authenticated Content Distributor selects the option to set the server preferences in the GUI. The GUI then communicates the request to the Content Manager. The Content Manager then contacts the DBManager to see if the user is in fact a Content Distributor and not a regular user. If the user is allowed to edit the server preferences, the Content Manager notifies the GUI and a modified Preference Dialog is initialized. The Content Distributor can then edit various settings and commit them to the Content Manager, or cancel the process.
@@ -262,6 +289,8 @@ _Use Case Name_        *`AbortFileTransfer`*
 *Activity Diagram*
 
 http://nmt-cs326-g5.googlecode.com/files/act_aborttransfer.jpeg
+
+*Interaction Diagram*
 
 http://nmt-cs326-g5.googlecode.com/files/abortFileTransferClassDiagram.png
 
