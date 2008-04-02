@@ -298,7 +298,15 @@ The wxWidgets subsystem represents the wxWidgets library, which the application 
 
 ===5.2 Transfer Manager===
 
-The Transfer Manager subsystem is responsible for allowing access to the Torrent Transfer Manager and HTTP Transfer Manager easily.  
+The Transfer Manager subsystem is comprised of several classes responsible for allowing access to the Torrent Transfer Manager and HTTP Transfer Manager easily.  The subsystem's classes are pictured below:
+
+http://nmt-cs326-g5.googlecode.com/files/class_transfermanager.JPG
+
+The primary object in this subsystem is the TransferManager interface, which all file transfer classes must realize in order to be compatible with the system.  This allows for a large amount extensibility and generality of 'file transfer' within the system, as new classes which implemented file transfer over different protocols could easily be created.
+
+The next most important objects are the HttpTransferManager and the TorrentTransferManager classes, which will be discussed in sections 5.2.1 and 5.2.2, respectively.
+
+
 
 *5.2.1 HTTP Transfer Manager*
 
