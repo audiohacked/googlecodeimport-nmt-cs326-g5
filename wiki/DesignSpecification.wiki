@@ -188,6 +188,8 @@ _Use case name_  *`BrowseContentSite`*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_browsecontent.jpeg
 
+http://nmt-cs326-g5.googlecode.com/files/browseContentSiteClassDiagram.png
+
 ----
 
 _Use case name_  *`RemoveFile`*
