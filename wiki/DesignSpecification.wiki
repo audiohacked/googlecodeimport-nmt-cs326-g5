@@ -344,6 +344,16 @@ The dbSelect(), dbInsert(), dbDelete(), and dbEdit() methods implement the simpl
 The reportFileDownload() and reportFileUpload()/addFiletoDB()/addTorrenttoDB() methods alter the database to increment a download count on a particular file or create a new record for newly added content.  The designateFileSponsoredStatus() is a method used by Content Distributors (Administrative users and sometimes normal users) to set the sponsored flag on a file's record, which will then promote the file to "sponsored" status.  
 
 ===5.4 Content Manager===
+The Content Manager subsystem is a server-side system which handles requests from zero to many client systems.  It also filters database requests from the client and passes them along to the Database Manager subsystem (this is to keep consistent with the MVC architecture) as well as making its own requests to the database.  
+
+The Content Manager's internal associations, as well as remote associations to the database and clients are depicted below:
+
+http://nmt-cs326-g5.googlecode.com/files/ssinteraction_cm_v2.JPG
+
+The Content Manager is implemented via a single class, ContentManager, pictured below:
+
+http://nmt-cs326-g5.googlecode.com/files/class_cm.JPG
+
 
 ==6. Human Interfaces==
 
