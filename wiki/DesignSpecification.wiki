@@ -102,6 +102,8 @@ The lowest level of the architecture is the model layer, and is comprised of onl
 
 ===3.2 Deployment Model===
 
+http://nmt-cs326-g5.googlecode.com/files/deployment_diagram_v1.jpeg
+
 This section should include a deployment diagram (and supporting discussion) that includes a mapping of subsystems to deployment.
 
 ==4. Use Case Realization Design==
