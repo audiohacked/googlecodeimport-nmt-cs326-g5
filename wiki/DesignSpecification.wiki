@@ -307,6 +307,9 @@ Pictured below, the HTTP Transfer Manager subsystem is comprised primarily of tw
 
 http://nmt-cs326-g5.googlecode.com/files/class_httptransfer.JPG
 
+The HTTPTransferManager implements one additional method: downloadFile().  This method is responsible for contacting the content server (the request is handled by the server-side Content Manager subsystem) and requesting a file.  The methods of the TransferManager interface are implemented in a manner that utilizes HTTP.
+
+The HTTPDownload class is a simple class which necessarily implements the Download interface. It implements one additional method, getFileName() which retrieves the name of the file associated with the object.
 
 *5.2.2 Torrent Transfer Manager*
 
