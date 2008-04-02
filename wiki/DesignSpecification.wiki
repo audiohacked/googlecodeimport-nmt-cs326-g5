@@ -468,7 +468,10 @@ These use cases will be tested by forcing each respective error to occur as well
 ==9. Appendices==
 
 ===9.1 Project Status===
-The project is on schedule, with the design phase completed and several prototypes already having been implemented.  The following is an updated Gantt chart for project progress:
+
+The project is on schedule, with the design phase completed and several prototypes already having been implemented. The following is an updated Gantt chart for project progress, reflecting the partial progress made on the implementation phases:
+
+http://nmt-cs326-g5.googlecode.com/files/ganttchart_3.JPG
 
 ===9.2 Database Schemas===
 
