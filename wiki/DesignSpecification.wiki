@@ -269,6 +269,8 @@ A Basic User selects a download within the GUI and presses the cancel button. Th
 
 ==5. Subsystem Design==
 
+_Note: Many of the internal interactions of these subsystems are described textually, though by referring to Section 4 (Use Case Realization), these interactions are often described graphically via the sequence diagram for the use case._ 
+
 ===5.1 User Interface===
 This set of subsystems is comprised entirely of one class, the 'GUI' class.  This class is pictured below:
 
