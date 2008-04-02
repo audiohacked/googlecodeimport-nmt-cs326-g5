@@ -218,6 +218,8 @@ _Use case name_  *`SetServerPreferences`*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_setserverpreferences.jpeg
 
+http://nmt-cs326-g5.googlecode.com/files/SetServerPreferencesClassDiagram.png
+
 ----
 
 _Use Case Name_        *`AbortFileTransfer`*
