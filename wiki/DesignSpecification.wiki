@@ -14,7 +14,7 @@ The motivation for this project is the lack of a general-purpose, platform-indep
 
 ===1.1 Scope and Objectives===
 
-The scope of the project is to build a base platform for customers to create a digital community and publishing system while also supporting at least Linux, Windows, and Mac users alike. The main function of the system is to provide an end-user a way to obtain any digital content, such as movies, music, and other entertainment. The system has to be fast, native-looking, and easily changeable/upgradeable. To insure the user's client is up to date, it will include an self updater. To facilitate downloading, the client will use bittorrent and http/ftp. Finally, the client can also be configured to include Community Portal and/or a web browser.
+The scope of the project is to build a base platform for customers to create a digital community and publishing system while also supporting at least Linux, Windows, and Mac users alike. The main function of the system is to provide an end-user a way to obtain any digital content, such as movies, music, and other entertainment. The system has to be fast, native-looking, and easily changeable/upgradeable. To insure the user's client is up to date, it will include an self updater. To facilitate downloading, the client will use BitTorrent and HTTP. Finally, the client can also be configured to include Community Portal and/or a web browser.
 
 ===1.2 Supplementary Requirements===
 
@@ -86,7 +86,9 @@ http://nmt-cs326-g5.googlecode.com/files/DeploymentDiagram.jpeg
 
 Briefly overview your architectural design. Discuss alternatives examined. Indicate why the architecture discussed in section 3.1 & 3.2 was chosen and why the alternatives were eliminated. 
 
-MVC is the architecture we chose because it most completely represents the intended goals of our project. Other architectures examined were client-server and peer to peer. While these architectures may represent parts of our design, they don't represent the whole. Client-server would be a poor choice in the case of a database driven application such as our own, where a central database server exists that must be secure.
+Our project is utilizing the Model-View-Controller (MVC) architecture to effectively reduce complexity and separate application entities (files, database storage) from business logic (file transfer) and boundary entities (user interface).  
+
+Other architectures were considered, including the Client-Server model and Peer-To-Peer model, but these architectures only encompass part of the functionality of application.  We have, however, adhered to many of the guiding principles behind these architectures while structuring our application under MVC.
 
 ===3.1 Subsystem Architecture===
 
