@@ -373,8 +373,17 @@ Finally, the reportCompletedDownload() method uses the Database Manager subsyste
 ----
 
 ==6. Human Interfaces==
+The following are two screenshots of a sample client, running first in Windows Vista, the second in Macintosh OS X.  
 
-Mockup designs for each user interface.
+Vista:
+http://nmt-cs326-g5.googlecode.com/files/winvista.png
+
+OS X:
+http://nmt-cs326-g5.googlecode.com/files/macosx.png
+
+The following is a screenshot of a client with the Web Browser subsystem implemented; the client is capable of an in-house web browsing via an internal Firefox implementation.
+
+http://nmt-cs326-g5.googlecode.com/files/Capture.PNG
 
 ----
 
