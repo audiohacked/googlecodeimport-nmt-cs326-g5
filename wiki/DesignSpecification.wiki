@@ -240,6 +240,8 @@ _Use Case Name_        *`AbortFileTransfer`*
 
 http://nmt-cs326-g5.googlecode.com/files/act_aborttransfer.jpeg
 
+http://nmt-cs326-g5.googlecode.com/files/abortFileTransferClassDiagram.png
+
 ----
 _Use case name_ *`ExTransferError`*
 
