@@ -249,29 +249,7 @@ http://nmt-cs326-g5.googlecode.com/files/act_aborttransfer.jpeg
 
 http://nmt-cs326-g5.googlecode.com/files/abortFileTransferClassDiagram.png
 
-----
-_Use case name_ *`ExTransferError`*
 
-*Activity Diagram*
-
-http://nmt-cs326-g5.googlecode.com/files/act_exception.jpeg
-
-----
-_Use case name_ *`ExFileNotFoundError`*
-
-*Activity Diagram*
-
-See activity diagram for *`ExTransferError`*.
-
-----
-
-_Use case name_ *`ExTorrentTransferError`*
-
-*Activity Diagram*
-
-See activity diagram for *`ExTransferError`*.
-
-----
 
 
 ==5. Subsystem Design==
