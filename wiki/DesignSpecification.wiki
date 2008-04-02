@@ -261,6 +261,10 @@ This set of subsystems is comprised entirely of one class, the 'GUI' class.  Thi
 
 http://nmt-cs326-g5.googlecode.com/files/class_gui_v2.JPG
 
+The subsystem's internal associations are depicted below:
+
+http://nmt-cs326-g5.googlecode.com/files/ssinteraction_ui_v1.jpeg
+
 The functionality of this class is described in terms of the next three subsystems of the User Interface.
 
 *5.1.1 GUI*
