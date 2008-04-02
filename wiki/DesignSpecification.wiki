@@ -480,7 +480,7 @@ http://nmt-cs326-g5.googlecode.com/files/db_er.jpeg
 
 ===9.3 System Resource Documentation===
 
-WxWidgets -
+`WxWidgets` -
 http://www.wxwidgets.org/
 
 CMake -
