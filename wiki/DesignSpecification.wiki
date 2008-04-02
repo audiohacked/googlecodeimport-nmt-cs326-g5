@@ -234,6 +234,8 @@ http://nmt-cs326-g5.googlecode.com/files/seq_setclientpreferences.jpeg
 
 http://nmt-cs326-g5.googlecode.com/files/SetClientPreferencesClassDiagram.png
 
+A basic user selects a 'preferences' menu item in the GUI. The GUI then initializes the preference dialog, which reads the user's preferences from a local configuration file. The user can then change their preferences through the preference dialog, which can then be saved.
+
 ----
 
 _Use case name_  *`SetServerPreferences`*
