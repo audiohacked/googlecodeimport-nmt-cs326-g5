@@ -303,14 +303,18 @@ In addition, all classes which implement the Download interface also aggregate t
 
 The HTTP Transfer Manager subsystem handles the transfer of files over the HTTP as well as any standard HTTP requests, such as HEAD and GET, that are required.
 
-Pictured below, the HTTP Transfer Manager subsystem is comprised of two classes: the HTTPTransferManager class and the HTTPDownload class.
+Pictured below, the HTTP Transfer Manager subsystem is comprised primarily of two classes: the HTTPTransferManager class and the HTTPDownload class.
 
 http://nmt-cs326-g5.googlecode.com/files/class_httptransfer.JPG
 
 
 *5.2.2 Torrent Transfer Manager*
 
-The Torrent Transfer Manager is responsible for managing the torrent transfers.  It will communicate with the tracker, the seeds, and the peers to efficiently transfer the torrents. This subsystem will also download and seed the torrent, as well as report statistics on the current torrent transfers.
+The Torrent Transfer Manager is responsible for managing the torrent transfers.  It will communicate with the tracker, the seeds, and the peers to efficiently transfer the torrents. This subsystem will also download and seed the torrent upon completion of the download.  
+
+Pictured below, the Torrent Trnasfer Manager subsystem is likewise comprised of primarily of two classes: the TorrentTransferManager class and the TorrentDownload class.
+
+http://nmt-cs326-g5.googlecode.com/files/class_torrenttransfer.JPG
 
 ===5.3 Database Manager===
 
