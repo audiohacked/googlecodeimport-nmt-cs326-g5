@@ -435,7 +435,7 @@ The client application requires a machine with an internet connection, and the M
 
 The system will be deployed in the configuration specified by the deployment diagram, though several variations on operating systems will be used in the client to insure cross-platform compatibility.  The machine used to host the server and database systems will be varied as well during the testing phase.
 
-The testing plan will encompass the use cases, as specified from the Requirements Analysis:
+The testing plan will encompass the use cases, as specified in the Requirements Analysis:
 
 *Download/Upload Use Cases*
 
