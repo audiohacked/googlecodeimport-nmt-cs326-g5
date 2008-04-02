@@ -130,6 +130,9 @@ http://nmt-cs326-g5.googlecode.com/files/seq_downloadtorrentfile.jpg
 
 http://nmt-cs326-g5.googlecode.com/files/downloadTorrentFileClassDiagram.png
 
+The user selects a file or set of files to download, which are associated with the torrent download type. The GUI then communicates the download request to the Torrent Transfer Manager, which then communicates with the ContentManager to get the proper information, as well as the torrent file. The Torrent Transfer Manager then interprets the torrent file and the location of the torrent tracker. The Torrent Transfer Manager then communicates with the torrent tracker and receives the location of peers with the desired download.
+
+
 ----
 
 _Use Case Name_      *`ReportFileDownload`*
