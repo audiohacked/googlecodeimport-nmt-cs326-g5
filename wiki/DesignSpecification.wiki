@@ -250,4 +250,9 @@ These are drawn primarily from supplementary requirements.
 
 ==9. Appendices==
 
+===Database Schemas===
+
+The following is an entity relationship diagram depicting the database:
+http://nmt-cs326-g5.googlecode.com/files/db_er.jpeg
+
 ===9.1 Project Status===
