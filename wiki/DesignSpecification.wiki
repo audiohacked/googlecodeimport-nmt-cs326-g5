@@ -286,6 +286,10 @@ The Transfer Manager subsystem is comprised of several classes responsible for a
 
 http://nmt-cs326-g5.googlecode.com/files/class_transfermanager.JPG
 
+The subsystem's internal associations and remote connection to the content server are depicted below:
+
+http://nmt-cs326-g5.googlecode.com/files/ssinteraction_transfermanager.jpeg
+
 The primary object in this subsystem is the TransferManager interface, which all file transfer classes must realize in order to be compatible with the system.  This allows for a large amount extensibility and generality of 'file transfer' within the system, as new classes which implemented file transfer over different protocols could easily be created.
 
 The next most important objects are the HTTPTransferManager and the TorrentTransferManager classes, which will be discussed in sections 5.2.1 and 5.2.2, respectively.
