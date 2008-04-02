@@ -177,6 +177,8 @@ http://nmt-cs326-g5.googlecode.com/files/seq_designatefilesponsoredstatus.jpg
 
 http://nmt-cs326-g5.googlecode.com/files/designateFileSponsoredStatusClassDiagram.png
 
+An authenticated user uses the GUI to select a file that they want to designate the sponsored status upon. The GUI then contacts the Content Manager, which then checks with DBManager to make sure the user is a Content Distributor. If the user is a Content Distributor, then the original request is carried out by the Content Manager, which sends the proper command to the DBManager.
+
 ----
 
 _Use case name_  *`GetFileStatistics`*
