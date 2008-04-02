@@ -172,9 +172,7 @@ _Use Case Name_  *`DesignateFileSponsoredStatus`*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_designatefilesponsoredstatus.jpg
 
-*Activity Diagram*
-
-See the authentication/designation section of the *`UploadFile`* activity diagram.
+http://nmt-cs326-g5.googlecode.com/files/designateFileSponsoredStatusClassDiagram.png
 
 ----
 
