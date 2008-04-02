@@ -258,7 +258,7 @@ http://nmt-cs326-g5.googlecode.com/files/act_aborttransfer.jpeg
 
 http://nmt-cs326-g5.googlecode.com/files/abortFileTransferClassDiagram.png
 
-
+A Basic User selects a download within the GUI and presses the cancel button. The GUI then communicates with the proper transfer manager (depending on the type of transfer), which then stops the download, deletes the file, and notifies the GUI, which in turn notifies the user.
 
 
 ==5. Subsystem Design==
