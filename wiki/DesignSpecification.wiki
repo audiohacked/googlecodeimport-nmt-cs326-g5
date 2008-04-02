@@ -327,6 +327,21 @@ The TorrentTransferManager implements two additional methods: downloadTorrent() 
 The TorrentFile class realizes the Download interface, but also has many additional attributes.  These include an array of File objects (as a torrent download often contains several files), an address to the tracker (trackerLocation), as well as an updating list of peer addresses (peerLocations).
 
 ===5.3 Database Manager===
+The Database Manager subsystem is a subsystem common to both the client and server applications, though each instance performs somewhat differently in the context of these different systems.  This system is responsible for connecting to a mySQL database as well as handling high-level (i.e., retrieving the top 10 downloads) and, internally, simple transactions (inserting a new record, for example) with the database.  
+
+The subsystem's internal associations are depicted here:
+
+http://nmt-cs326-g5.googlecode.com/files/ssinteraction_db.jpeg
+
+Pictured below, the Database Manager subsystem is implemented via a single class:
+
+http://nmt-cs326-g5.googlecode.com/files/class_db.JPG
+
+The DBManager implements several important methods, the first of which are the dbConnect() and dbDisconnect() methods.  These methods connect to and disconnect from the database according to the connectionString and databaseType attributes.
+
+The dbSelect(), dbInsert(), dbDelete(), and dbEdit() methods implement the simple SQL transactions (SELECT, INSERT, DELETE, and UPDATE), respectively.  These methods are private, as the DBManager's purpose is to provide a high-level black-box interface to the application's database functionality.  
+
+The reportFileDownload() and reportFileUpload()/addFiletoDB()/addTorrenttoDB() methods alter the database to increment a download count on a particular file or create a new record for newly added content.  The designateFileSponsoredStatus() is a method used by Content Distributors (Administrative users and sometimes normal users) to set the sponsored flag on a file's record, which will then promote the file to "sponsored" status.  
 
 ===5.4 Content Manager===
 
