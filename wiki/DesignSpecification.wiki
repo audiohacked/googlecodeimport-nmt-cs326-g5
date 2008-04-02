@@ -163,7 +163,7 @@ _Use Case Name_  *`UploadFile`*
 
 *Activity Diagram*
 
-http://nmt-cs326-g5.googlecode.com/files/act_upload.jpeg
+http://nmt-cs326-g5.googlecode.com/files/seq_uploadfile.jpg
 
 http://nmt-cs326-g5.googlecode.com/files/UploadFileClassDiagram.png
 ----
@@ -212,7 +212,7 @@ _Use case name_  *`RemoveFile`*
 
 *Activity Diagram*
 
-http://nmt-cs326-g5.googlecode.com/files/act_removefile.jpeg
+http://nmt-cs326-g5.googlecode.com/files/seq_removefile.jpg
 
 http://nmt-cs326-g5.googlecode.com/files/removeFileClassDiagram2.png
 
