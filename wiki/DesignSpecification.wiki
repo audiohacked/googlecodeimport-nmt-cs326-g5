@@ -145,6 +145,8 @@ _Use Case Name_  *`ReportFileUpload`*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_reportfileupload.jpeg
 
+http://nmt-cs326-g5.googlecode.com/files/ReportFileUploadClassDiagram.png
+
 ----
 
 _Use Case Name_  *`UploadFile`*
