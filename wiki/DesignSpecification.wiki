@@ -127,7 +127,7 @@ http://nmt-cs326-g5.googlecode.com/files/seq_abstractdownload.jpeg
 
 http://nmt-cs326-g5.googlecode.com/files/downloadFileClassDiagram.png
 
-This generic use case includes all more specific download use cases, which include HTTP and Torrent downloads, at this time. The Basic User selects the download in the GUI, which then communicates the request for the download to the proper `TransferManager`, which is specific to each type of transfer. The transfer manager then initiates a connection with the server to be downloaded from, using information from the `ContentManager` server.
+This generic use case includes all more specific download use cases, which include HTTP and Torrent downloads, at this time. The Basic User selects the download in the GUI (often through the in-house web browser), which then communicates the request for the download to the client's proper `TransferManager` object, which is specific to each type of transfer. The manager then initiates a connection with the server to be downloaded from, using information from the `ContentManager` object residing on the content server.
 
 ----
 
@@ -141,7 +141,7 @@ http://nmt-cs326-g5.googlecode.com/files/seq_downloadtorrentfile.jpg
 
 http://nmt-cs326-g5.googlecode.com/files/downloadTorrentFileClassDiagram.png
 
-The user selects a file or set of files to download, which are associated with the torrent download type. The GUI then communicates the download request to the Torrent Transfer Manager, which then communicates with the `ContentManager` to get the proper information, as well as the torrent file. The Torrent Transfer Manager then interprets the torrent file and the location of the torrent tracker. The Torrent Transfer Manager then communicates with the torrent tracker and receives the location of peers with the desired download.
+The user selects a file or set of files to download, which are associated with the torrent download type. The GUI then communicates the download request to the Torrent Transfer Manager, which then communicates with the `ContentManager` object to retrieve the torrent file. The Torrent Transfer Manager then interprets the torrent file and the location of the torrent tracker. The Torrent Transfer Manager then communicates with the torrent tracker and receives the location of peers with the desired download.
 
 
 ----
@@ -156,7 +156,7 @@ http://nmt-cs326-g5.googlecode.com/files/seq_reportfiledownload.jpeg
 
 http://nmt-cs326-g5.googlecode.com/files/reportFileDownloadClassDiagram.png
 
-The `ContentManager` checks to be sure it has an open connection to the `DBManager`, which manages the actual connection to the database. If the connection is ready, the `ContentManager` communicates it's request to the `DBManager`, and then `DBManager` signals it is ready for the data. `ContentManager` then communicates the report of the file download, which is then inserted into the database. `DBManager` then reports to `ContentManager` with success or failure.
+The `ContentManager` checks to be sure it has an open connection to the `DBManager`, which manages the actual connection to the database. If the connection is ready, the `ContentManager` communicates its request to the `DBManager`, and then `DBManager` signals it is ready for the data. `ContentManager` then communicates the report of the file download, which is then inserted into the database. `DBManager` then reports to `ContentManager` with success or failure.
 
 ----
 
@@ -170,7 +170,7 @@ http://nmt-cs326-g5.googlecode.com/files/seq_reportfileupload.jpeg
 
 http://nmt-cs326-g5.googlecode.com/files/ReportFileUploadClassDiagram.png
 
-The `ContentManager` checks to be sure it has an open connection to the `DBManager`, which manages the actual connection to the database. If the connection is ready, the `ContentManager` communicates it's request to the `DBManager`, and then `DBManager` signals it is ready for the data. `ContentManager` then communicates the report of the file upload, including the attributes and location of the file, which is then inserted into the database. `DBManager` then reports to `ContentManager` its success or failure.
+The `ContentManager` checks to be sure it has an open connection to the `DBManager`, which manages the actual connection to the database. If the connection is ready, the `ContentManager` communicates its request to the `DBManager`, and then `DBManager` signals it is ready for the data. `ContentManager` then communicates the report of the file upload, including the attributes and location of the file, which is then inserted into the database. `DBManager` then reports to `ContentManager` with success or failure.
 
 ----
 
@@ -184,7 +184,7 @@ http://nmt-cs326-g5.googlecode.com/files/seq_uploadfile.jpg
 
 http://nmt-cs326-g5.googlecode.com/files/UploadFileClassDiagram.png
 
-The authenticated user communicates a request to the content manager to upload a file. The content manager checks with the database if the user is allowed to upload files. If the user is properly authorized, they select the file type and location, and upload the file to the server. The user is prompted by the GUI for information pertaining to the file, and the content manager receives the file and information, and inserts the proper data into the database through the `DBManager`.
+The authenticated user communicates a request to the `ContentManager` to upload a file. The `ContentManager` checks with the database if the user is allowed to upload files. If the user is properly authorized, they select the file type and location, and upload the file to the server. The user is prompted by the GUI for information pertaining to the file, and the content manager receives the file and other relevant information, and inserts the proper data into the database through the `DBManager`.
 
 ----
 
@@ -282,7 +282,7 @@ http://nmt-cs326-g5.googlecode.com/files/seq_setserverpreferences.jpeg
 
 http://nmt-cs326-g5.googlecode.com/files/SetServerPreferencesClassDiagram.png
 
-An authenticated Content Distributor selects the option to set the server preferences in the GUI. The GUI then communicates the request to the Content Manager. The Content Manager then contacts the `DBManager` to see if the user is in fact a Content Distributor and not a regular user. If the user is allowed to edit the server preferences, the Content Manager notifies the GUI and a modified Preference Dialog is initialized. The Content Distributor can then edit various settings and commit them to the Content Manager, or cancel the process.
+An authenticated Content Distributor selects the option to set the server preferences in the GUI. The GUI then communicates the request to the `ContentManager`. The `ContentManager` then contacts the `DBManager` to see if the user is in fact a Content Distributor. If the user is allowed to edit the server preferences, the `ContentManager` notifies the GUI and a modified Preference Dialog is initialized. The Content Distributor can then edit various settings and commit them to the `ContentManager`, or cancel the process.
 
 ----
 
