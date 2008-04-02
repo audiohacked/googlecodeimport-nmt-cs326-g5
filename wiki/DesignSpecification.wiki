@@ -206,6 +206,8 @@ _Use case name_  *`SetClientPreferences`*
 
 http://nmt-cs326-g5.googlecode.com/files/seq_setclientpreferences.jpeg
 
+http://nmt-cs326-g5.googlecode.com/files/SetClientPreferencesClassDiagram.png
+
 ----
 
 _Use case name_  *`SetServerPreferences`*
