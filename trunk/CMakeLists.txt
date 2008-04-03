@@ -56,8 +56,8 @@ IF(wxWidgets_FOUND)
 		SET(SRCS ${SRCS} ${CMAKE_SOURCE_DIR}/contrib/wxSean.rc)
 		LINK_DIRECTORIES(
 			${LINK_DIRECTORIES}
-			"C:\\wxMozilla-0.5.7\\mozilla\\lib"
-			"C:\\wxMozilla-0.5.7\\build\\Bakefiles\\DLL\ Release\ Monolithic\ WX_PYTHON_0"
+			"C:\\wxMozilla\\mozilla\\lib"
+			"C:\\wxMozilla\\build\\msw\\DLL\ Release\ Monolithic\ WX_PYTHON_0"
 		)
 		LINK_LIBRARIES(
 			embed_base_s.lib
