@@ -1,0 +1,17 @@
+#summary Discuss imminent modifications to the design spec.
+
+= Modifications =
+
+OK, this page is to discuss additions/changes to primarily Section 5 of the Design Spec.  
+
+Will add significantly in a few hours to this page -> by tonight, we can delegate redesign of class diagrams for the resubmission tomorrow evening.
+
+Pictures:
+
+GUI additions:
+
+http://nmt-cs326-g5.googlecode.com/files/DSC00780.JPG
+
+TM additions:
+
+http://nmt-cs326-g5.googlecode.com/files/DSC00781.JPG
