@@ -38,8 +38,11 @@ _Supportability_
 
 *FURPS+ Additional Non-functional Requirements (Constraints)*
 
+_Portability_
+  * The application should be portable to many different operating systems, including Linux, Mac OS, and Microsoft Windows.
+
 _Implementation_
-  * The client will be implemented in C++, utilizing the gtkWidgets library for cross-platform code.
+  * The client will be implemented in C++, utilizing the gtkWidgets library as well as the libtorrent library for cross-platform code.
 
 ----
 
