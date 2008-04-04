@@ -518,6 +518,56 @@ Users table:
 || passwd || string || the encrypted password of the user ||
 || userLevel || int || the permission level of the user ||
 
+Database schema:
+--
+-- Table structure for table `downloads`
+--
+
+CREATE TABLE `downloads` (
+  `fid` int(11) NOT NULL,
+  `dateOfDownload` date default NULL
+)
+
+--
+-- Table structure for table `files`
+--
+
+CREATE TABLE `files` (
+  `fid` int(11) NOT NULL,
+  `name` varchar(255) default NULL,
+  `location` varchar(255) default NULL,
+  `type` char(10) default NULL,
+  `active` bit(1) default NULL,
+  `sponsoredStatus` bit(1) default NULL,
+  `downloadCount` int(11) default NULL,
+  PRIMARY KEY  (`fid`)
+)
+
+--
+-- Table structure for table `uploads`
+--
+
+CREATE TABLE `uploads` (
+  `dateOfUpload` date default NULL,
+  `fid` int(11) NOT NULL,
+  PRIMARY KEY  (`fid`)
+)
+
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `uid` int(11) NOT NULL,
+  `fname` char(25) default NULL,
+  `lname` char(25) default NULL,
+  `passwd` varchar(30) default NULL,
+  `userLevel` char(1) default NULL,
+  PRIMARY KEY  (`uid`)
+)
+
+
 ===9.3 System Resource Documentation===
 
 `WxWidgets` -
