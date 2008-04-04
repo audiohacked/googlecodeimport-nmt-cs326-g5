@@ -34,7 +34,7 @@ http://nmt-cs326-g5.googlecode.com/files/GUIClassDiagramV1.jpg
 
 Alternate Version: 
 
-http://nmt-cs326-g5.googlecode.com/files/Class%20Diagram%20-%20UI.jpeg
+http://nmt-cs326-g5.googlecode.com/files/Class%20Diagram%20-%20UI%20v2.jpeg
 
 Pictures:
 
