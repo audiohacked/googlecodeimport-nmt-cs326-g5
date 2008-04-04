@@ -331,7 +331,7 @@ Attributes:
 || gui_notebook || Notebook || manages a wxNotebook object ||
 || gui_webBrowser || WebBrowser || a container for the web browser portion of the GUI, which allows the user to browse the content on the server ||
 || gui_Panel || Panel || provides an interface to attributes of the overall window ||
-|| gui_prefDialog || PreferenceDialog || instantiates the preference dialog ||
+|| gui_prefDialog || PreferenceDialog || handle to custom preferences dialog ||
 
 Methods:
 || *Name* || *Description* ||
@@ -345,7 +345,7 @@ Methods:
 
 *5.1.2 Web Browser*
 
-The Web Browser subsystem is handled entirely by the requestWebContent() method.  This method handles the transfer of web content from the `ContentManager` class (see the Content Manager subsystem). The renderWebContent() method is primarily responsible for displaying web content via the in-house browser and passing along download requests to other subsystems via methods like initiateDownload().
+The Web Browser subsystem is handled by the `WebBrowser` class.  The primary operation contained in this class is the requestWebContent() method; this method handles the transfer of web content from the `ContentManager` class (see the Content Manager subsystem). The renderWebContent() method is primarily responsible for displaying web content via the in-house browser and passing along download requests to other subsystems via methods like initiateDownload().  This class subclasses the wxMozilla class, which implements Mozilla web functionality within the wxWidgets library.
 
 _Class: WebBrowser_
 Attributes:
@@ -364,6 +364,8 @@ Methods:
 The wxWidgets subsystem represents the wxWidgets library, which the application makes heavy use of in order to create a cross-platform client which maintains the "look and feel" of a native application.  The GUI class is essentially a wrapper class which loosely  follows an adapter and bridge pattern with the wxWidgets library, though this interaction is not depicted because the class structure of the library is very complex and non-essential to this application's design.
 
 Many of the aggregated classes (like Menu, Window, Panel, etc.) of the master GUI classes are wrappers to wxWidget classes.  All these classes implement the Window interface (which in turn generalizes the wxWindow class) in order to reduce system coupling.  
+
+The following is a brief overview of the most important classes used from the wxWidgets library:
 
 _Classes/interfaces:_
 || *Name* || *Description* ||
@@ -387,14 +389,15 @@ The subsystem's internal associations and remote connection to the content serve
 
 http://nmt-cs326-g5.googlecode.com/files/ssinteraction_transfermanager.jpeg
 
-The primary object in this subsystem is the `TransferManager` interface, which all file transfer classes must realize in order to be compatible with the system.  This allows for a large amount extensibility and generality of 'file transfer' within the system, as new classes which implemented file transfer over different protocols could easily be created.
+The primary object in this subsystem is the `TransferManager` interface, which all file transfer classes must realize in order to be compatible with the system.  In addition to reducing coupling, this allows for a large amount extensibility and generality of 'file transfer' within the system, as new classes which implemented file transfer over different protocols could easily be created.
 
 The next most important objects are the HTTPTransferManager and the `TorrentTransferManager` classes, which will be discussed in sections 5.2.1 and 5.2.2, respectively.
 
 The subsystem also defines the Download interface, which all file handling classes must realize in a similar manner to the `TransferManager` interface in order to handle local file transactions.  This section of the subsystem is the link the the Local File Storage subsystem in the Model section of the subsystem architecture.  The Download interface implements methods which are useful for reporting information about a file _transfer_, such as the current download speed or percentage completion.
 
-In addition, all classes which implement the Download interface also aggregate the File class, which is a concrete object which has many attributes common to all files.
+In addition, all classes which implement the Transfer interface also aggregate the File class, which is a concrete object which has many attributes common to all files.
 
+_Interface: TransferManager_
 Attributes:
 || *Name* || *Type* || *Description* ||
 || activeTransfers || Transfer || contains the transfers that are actively downloading or uploading data ||
@@ -414,12 +417,13 @@ Methods:
 
 The HTTP Transfer Manager subsystem handles the transfer of files over the HTTP as well as any standard HTTP requests, such as HEAD and GET, that are required.
 
-Pictured above, the HTTP Transfer Manager subsystem is comprised primarily of two classes: the HTTPTransferManager class and the HTTPDownload class.
+Pictured above, the HTTP Transfer Manager subsystem is comprised primarily of two classes: the HTTPTransferManager class and the HTTPTransfer class.
 
-The HTTPTransferManager implements one additional method: downloadFile().  This method is responsible for contacting the content server (the request is handled by the server-side Content Manager subsystem) and requesting a file.  The methods of the `TransferManager` interface are implemented in a manner that utilizes HTTP.
+The HTTPTransferManager implements two additional methods: downloadFile() and uploadFile().  These methods are responsible for contacting the content server (the request is handled by the server-side Content Manager subsystem) and requesting or receiving a file.  The methods of the HTTPTransferManager interface are implemented in a manner that utilizes HTTP via the libcurl library, an open-source API for HTTP/S.  The sole interface to this library is the transferHandle attribute.
 
-The HTTPDownload class is a simple class which necessarily implements the Download interface. It implements one additional method, getFileName() which retrieves the name of the file associated with the object.
+The HTTPTransfer class is a simple class which necessarily implements the Download interface. It implements one additional method, getFileName() which retrieves the name of the file associated with the object.
 
+_Class: HTTPTransferManager_
 Attributes:
 || *Name* || *Type* || *Description* ||
 || contentServerIP || Transfer || keeps track of the location of the content server ||
@@ -434,23 +438,29 @@ Methods:
 
 The Torrent Transfer Manager is responsible for managing the torrent transfers.  It will communicate with the tracker, the seeds, and the peers to efficiently transfer the torrents. This subsystem will also download and seed the torrent upon completion of the download.  
 
-Pictured above, the Torrent Transfer Manager subsystem is likewise comprised of primarily of two classes: the `TorrentTransferManager` class and the `TorrentDownload` class.
+Pictured above, the Torrent Transfer Manager subsystem is likewise comprised of primarily of two classes: the `TorrentTransferManager` class and the `TorrentTransfer` class.
 
-The `TorrentTransferManager` implements two additional methods: downloadTorrent() and connectToTracker().  The downloadTorrent() method works similarly to the HTTPTransferManager's downloadFile() method, except it targets a torrent file on the content server.  Upon completion of the torrent file transfer, the class utilizes the connectToTracker() method to connect to the torrent file's designated tracker(s).  The `TorrentTransferManager` implements the Transfer Manager interface in such a way to manage the peer to peer connections of the `BitTorrent` protocol, most likely using libtorrent.
+The `TorrentTransferManager` implements two additional methods: downloadTorrent() and connectToTracker().  The downloadTorrent() method works similarly to the HTTPTransferManager's downloadFile() method, except it targets a torrent file on the content server.  Upon completion of the torrent file transfer, the class utilizes the connectToTracker() method to connect to the torrent file's designated tracker(s).  The `TorrentTransferManager` implements the Transfer Manager interface in such a way to manage the peer to peer connections of the `BitTorrent` protocol, using the libtorrent library.
 
-The `TorrentFile` class realizes the Download interface, but also has many additional attributes.  These include an array of File objects (as a torrent download often contains several files), an address to the tracker (trackerLocation), as well as an updating list of peer addresses (peerLocations).
+The libtorrent library implements the BitTorrent protocol, and provides several useful objects which facilitate the transfer of file data in a torrent swarm.  The primary object is a session, which is aggregated by the `TorrentTransferManager`.  Individual torrent information objects, which store critical torrent information, such as peer and tracker IP addresses, are aggregated by the `TorrentTransfer` class.
 
+The `TorrentTransfer` class realizes the Transfer interface, but also has many additional attributes.  These include an array of File objects (as a torrent download often contains several files), a handle to the associated libtorrent torrent object (torrentHandle), as well as a handle to the torrent's information (torrent_info).
+
+_Class: TorrentTransferManager_
 Attributes:
 || *Name* || *Type* || *Description* ||
-|| activeTrackers || Tracker || contains the trackers which relay the information on other clients downloading the same file ||
-|| transferHandle || curlHandle || provides an interface to libcurl ||
+|| FingerPrint || fingerprint || imprinting attribute for client ||
+|| transferHandle || curlHandle || provides an interface to libcurl for HTTP transfer of the .torrent files||
 || torrentSession || Session || provides a handle to torrent sessions ||
+|| sessionSettings || session_settings || provides a handle to modify global torrent session settings ||
 
 Methods:
 || *Name* || *Description* ||
 || connectToPeers || connects to other clients downloading or seeding the specific transfer||
 || downloadTorrent || initializes a torrent download ||
 || uploadTorrent || initializes a torrent upload ||
+|| setTransferSpeed || changes maximum upload and download speeds ||
+|| getSessionStatus || allows the retrieval of session information ||
 
 ===5.3 Database Manager===
 The Database Manager subsystem is a subsystem common to both the client and server applications, though each instance performs somewhat differently in the context of these different systems.  This system is responsible for connecting to a MySQL database as well as handling high-level (i.e., retrieving the top 10 downloads) and, internally, simple transactions (inserting a new record, for example) with the database.  
