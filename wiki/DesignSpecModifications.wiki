@@ -11,8 +11,8 @@ Currently, the UI system breakdown consists only of the GUI class:
 
 http://nmt-cs326-g5.googlecode.com/files/class_gui_v2.JPG
 
-The GUI class will become an aggregated attribute of a larger UI class, encompassing objects like the main GUI, preference dialogues, and the web browser.
-This UI class will have generic methods like invoke() and destroy().
+The GUI class will encompass objects like the main GUI, preference dialogues, and the web browser.
+This GUI class will have generic methods like invoke() and destroy().
 
 The GUI class (after reviewing the code) will subclass the wxFrame class.  
 We can expand the GUI class by adding wxWidget objects as attributes:
