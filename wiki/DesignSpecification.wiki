@@ -105,7 +105,7 @@ http://nmt-cs326-g5.googlecode.com/files/subsystem_architecture_v1.jpeg
 
 This diagram is divided into three distinct layers; model, view, and controller.  Following the MVC architecture and philosophy, subsystems performing boundary actions are in the view layer.  These subsystems consist of the User Interface (composed of the GUI and in-house web browser subsystems) and the Server subsystem.  The User Interface handles virtually every interaction with the user, the Server subsystem represents the centralized content server with which the client interacts.
 
-The controller layer consists of subsystems which perform the vast majority of business logic for the application.  This layer contains the wxWidgets, Transfer Manager, Database Manager, and Content Manager subsystems.  The wxWidgets system represents the wxWidgets API, which allows our application to be platform-independent and is responsible for rendering the client and implementing the web browser.  The TransferManager is an abstract subsystem, realized by two subsystems, the HTTP Transfer Manager and the Torrent Transfer Manager, which handle and implement the code to perform transfers over their respective protocols between clients and the centralized content server, as well as between clients (in the case of a torrent transfer) and a tracker.  The Database Manager subsystem is responsible for handling requests from both client and server concerning the centralized database, as well as connecting to and performing transactions with that database.  Finally, the Content Manager subsystem is a server-side subsystem which manages requests for files from clients.  The Content Manager also provides the necessary functionality to perform user authentication and administrative actions for users who are "Content Distributors".  
+The controller layer consists of subsystems which perform the vast majority of business logic for the application.  This layer contains the wxWidgets, Transfer Manager, Database Manager, and Content Manager subsystems.  The wxWidgets system represents the wxWidgets API, which allows our application to be platform-independent and is responsible for rendering the client and implementing the web browser.  The Transfer Manager is an abstract subsystem, realized by two subsystems, the HTTP Transfer Manager and the Torrent Transfer Manager, which handle and implement the code to perform transfers over their respective protocols between clients and the centralized content server, as well as between clients (in the case of a torrent transfer) and a tracker.  The Database Manager subsystem is responsible for handling requests from both client and server concerning the centralized database, as well as connecting to and performing transactions with that database.  Finally, the Content Manager subsystem is a server-side subsystem which manages requests for files from clients.  The Content Manager also provides the necessary functionality to perform user authentication and administrative actions for users who are "Content Distributors".  
 
 The lowest level of the architecture is the model layer, and is comprised of only three subsystems; an OS-specific GUI Library, the Local File System, and a mySQL Database.   The OS-specific GUI Library is a dynamic system, controlled by the wxWidgets subsystem to perform rendering actions on a specific operating system.  The internal class hierarchy related to these subsystems follows a bridge design pattern for separating the implementation of GUI concepts (windows, menus, dialogs, etc.) from an OS-specific implementation of those concepts.  The second subsystem, the Local File System, is also a generic subsystem which is largely implemented by system API's.  This subsystem is responsible for storing files which are downloaded to clients and uploaded by clients to the content server.  Finally, the third subsystem, the mySQL Database, consists of the actual relational schema and physical tables of application data in the mySQL DBMS.  This subsystem is controlled exclusively by the Database Manager subsystem.
 
@@ -454,7 +454,7 @@ _Class: `TorrentTransferManager`_
 
 Attributes:
 || *Name* || *Type* || *Description* ||
-|| FingerPrint || fingerprint || imprinting attribute for client ||
+|| `FingerPrint` || fingerprint || imprinting attribute for client ||
 || transferHandle || curlHandle || provides an interface to libcurl for HTTP transfer of the .torrent files||
 || torrentSession || Session || provides a handle to torrent sessions ||
 || sessionSettings || session_settings || provides a handle to modify global torrent session settings ||
@@ -524,12 +524,12 @@ The getFileLocation() method is used for file transfer requests (as all requests
 
 Finally, the reportCompletedTransfer() method uses the Database Manager subsystem to report a completed file transfer (via the private reportDownload() and reportUpload() methods) and update the file's statistics (download count, etc). 
 
-_Class: ContentManager_
+_Class: `ContentManager`_
 
 Attributes:
 || *Name* || *Type* || *Description* ||
 || location || String || the network location of the content manager ||
-|| transferManager || TransferManager || manages the various transfers back and forth; see transfer subsystem ||
+|| transferManager || `TransferManager` || manages the various transfers back and forth; see transfer subsystem ||
 
 Methods:
 || *Name* || *Description* ||
@@ -544,8 +544,8 @@ Methods:
 || reportCompletedTransfer || let the DBManager know of a completed transfer ||
 || reportDownload || communicate a completed download to the DBManager ||
 || reportUpload || communicate a completed upload to the DBManager ||
-|| invoke || instantiate the ContentManager ||
-|| destroy || destroy the ContentManager instance ||
+|| invoke || instantiate the `ContentManager` ||
+|| destroy || destroy the `ContentManager` instance ||
 
 ----
 
