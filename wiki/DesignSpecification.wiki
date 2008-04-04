@@ -505,6 +505,19 @@ Files table:
 || sponsoredStatus || a boolean value that defines whether the file is sponsored by a Content Distributor ||
 || downloadCount || the number of times a file has been downloaded, corresponding to the number of records in the Download table associated with this files fid ||
 
+Uploads table:
+|| field || description ||
+|| dateOfUpload || when the file was uploaded ||
+|| fid || the id of the file ||
+
+Users table:
+|| field || description ||
+|| uid || the identification number of the user ||
+|| fname || first name ||
+|| lname || last name ||
+|| passwd || the encrypted password of the user ||
+|| userLevel || the permission level of the user ||
+
 ===9.3 System Resource Documentation===
 
 `WxWidgets` -
