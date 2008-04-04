@@ -474,7 +474,7 @@ http://nmt-cs326-g5.googlecode.com/files/ssinteraction_cm_v2.JPG
 
 The Content Manager is implemented via a single class, `ContentManager`, pictured below:
 
-http://nmt-cs326-g5.googlecode.com/files/class_cm.JPG
+http://nmt-cs326-g5.googlecode.com/files/Class%20Diagram%20-%20Content%20Manager%20%282%29.jpeg
 
 The `ContentManager` implements several methods to handle various requests from clients.  The connect() and disconnect() methods handle the connection and handshaking process between server and client, as well as authentication (via the getUserPermissions() method).  The browseContentSite() method retrieves a web page and sends it to the requesting client (who requested it via the Web Browser subsystem).  
 
