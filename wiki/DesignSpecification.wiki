@@ -326,11 +326,11 @@ This subsystem implements the graphical user interface via the wxWidgets librari
 
 Attributes:
 || *Name* || *Type* || *Description* ||
-|| Menu || gui_menus || a container for a wxMenu object, which displays menus ||
-|| Notebook || gui_notebook || manages a wxNotebook object ||
-|| WebBrowser || gui_webBrowser || a container for the web browser portion of the GUI, which allows the user to browse the content on the server ||
-|| Panel || gui_Panel || provides an interface to attributes of the overall window ||
-|| PreferenceDialog || gui_prefDialog || instantiates the preference dialog ||
+|| gui_menus || Menu || a container for a wxMenu object, which displays menus ||
+|| gui_notebook || Notebook || manages a wxNotebook object ||
+|| gui_webBrowser || WebBrowser || a container for the web browser portion of the GUI, which allows the user to browse the content on the server ||
+|| gui_Panel || Panel || provides an interface to attributes of the overall window ||
+|| gui_prefDialog || PreferenceDialog || instantiates the preference dialog ||
 
 Methods:
 || *Name* || *Description* ||
