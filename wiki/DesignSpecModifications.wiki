@@ -36,6 +36,10 @@ Alternate Version:
 
 http://nmt-cs326-g5.googlecode.com/files/Class%20Diagram%20-%20UI%20v4.jpeg
 
+Transfer Manager:
+
+http://nmt-cs326-g5.googlecode.com/files/Class%20Diagram%20-%20Transfer%20Manager.jpeg
+
 Pictures:
 
 GUI additions:
