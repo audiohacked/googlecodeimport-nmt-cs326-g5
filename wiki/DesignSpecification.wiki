@@ -344,7 +344,7 @@ Methods:
 
 *5.1.2 Web Browser*
 
-The Web Browser subsystem is handled entirely by the viewWebContent() method.  This method handles the transfer of web content from the `ContentManager` class (see the Content Manager subsystem) and is primarily responsible for displaying web content via the in-house browser and passing along download requests to other subsystems via methods like initiateDownload().
+The Web Browser subsystem is handled entirely by the requestWebContent() method.  This method handles the transfer of web content from the `ContentManager` class (see the Content Manager subsystem). The renderWebContent() method is primarily responsible for displaying web content via the in-house browser and passing along download requests to other subsystems via methods like initiateDownload().
 
 Attributes:
 || *Name* || *Type* || *Description* ||
