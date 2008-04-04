@@ -325,6 +325,7 @@ The functionality of this class is described in terms of the next three subsyste
 This subsystem implements the graphical user interface via the wxWidgets libraries.  When the GUI class is invoked (via the invoke() method), it establishes all the necessary wxWidgets components and events to manage the graphical user interface.  In addition, methods like openPreferenceDialog() and initiateUpload() handle common boundary actions between users and the client.
 
 _Class: GUI_
+
 Attributes:
 || *Name* || *Type* || *Description* ||
 || gui_menus || Menu || a container for a wxMenu object, which displays menus ||
@@ -347,7 +348,8 @@ Methods:
 
 The Web Browser subsystem is handled by the `WebBrowser` class.  The primary operation contained in this class is the requestWebContent() method; this method handles the transfer of web content from the `ContentManager` class (see the Content Manager subsystem). The renderWebContent() method is primarily responsible for displaying web content via the in-house browser and passing along download requests to other subsystems via methods like initiateDownload().  This class subclasses the wxMozilla class, which implements Mozilla web functionality within the wxWidgets library.
 
-_Class: WebBrowser_
+_Class: `WebBrowser`_
+
 Attributes:
 || *Name* || *Type* || *Description* ||
 || contentServerIP || String || Represents the location of the Remote Content Server control object ||
@@ -397,7 +399,8 @@ The subsystem also defines the Download interface, which all file handling class
 
 In addition, all classes which implement the Transfer interface also aggregate the File class, which is a concrete object which has many attributes common to all files.
 
-_Interface: TransferManager_
+_Interface: `TransferManager`_
+
 Attributes:
 || *Name* || *Type* || *Description* ||
 || activeTransfers || Transfer || contains the transfers that are actively downloading or uploading data ||
@@ -424,6 +427,7 @@ The HTTPTransferManager implements two additional methods: downloadFile() and up
 The HTTPTransfer class is a simple class which necessarily implements the Download interface. It implements one additional method, getFileName() which retrieves the name of the file associated with the object.
 
 _Class: HTTPTransferManager_
+
 Attributes:
 || *Name* || *Type* || *Description* ||
 || contentServerIP || Transfer || keeps track of the location of the content server ||
@@ -442,11 +446,12 @@ Pictured above, the Torrent Transfer Manager subsystem is likewise comprised of 
 
 The `TorrentTransferManager` implements two additional methods: downloadTorrent() and connectToTracker().  The downloadTorrent() method works similarly to the HTTPTransferManager's downloadFile() method, except it targets a torrent file on the content server.  Upon completion of the torrent file transfer, the class utilizes the connectToTracker() method to connect to the torrent file's designated tracker(s).  The `TorrentTransferManager` implements the Transfer Manager interface in such a way to manage the peer to peer connections of the `BitTorrent` protocol, using the libtorrent library.
 
-The libtorrent library implements the BitTorrent protocol, and provides several useful objects which facilitate the transfer of file data in a torrent swarm.  The primary object is a session, which is aggregated by the `TorrentTransferManager`.  Individual torrent information objects, which store critical torrent information, such as peer and tracker IP addresses, are aggregated by the `TorrentTransfer` class.
+The libtorrent library implements the `BitTorrent` protocol, and provides several useful objects which facilitate the transfer of file data in a torrent swarm.  The primary object is a session, which is aggregated by the `TorrentTransferManager`.  Individual torrent information objects, which store critical torrent information, such as peer and tracker IP addresses, are aggregated by the `TorrentTransfer` class.
 
 The `TorrentTransfer` class realizes the Transfer interface, but also has many additional attributes.  These include an array of File objects (as a torrent download often contains several files), a handle to the associated libtorrent torrent object (torrentHandle), as well as a handle to the torrent's information (torrent_info).
 
-_Class: TorrentTransferManager_
+_Class: `TorrentTransferManager`_
+
 Attributes:
 || *Name* || *Type* || *Description* ||
 || FingerPrint || fingerprint || imprinting attribute for client ||
