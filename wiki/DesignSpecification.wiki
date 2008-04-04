@@ -320,9 +320,17 @@ http://nmt-cs326-g5.googlecode.com/files/ssinteraction_ui_v1.jpeg
 
 The functionality of this class is described in terms of the next three subsystems of the User Interface.
 
-*5.1.1 User Interface Subsystem*
+*5.1.1 GUI*
 
-This subsystem implements the graphical user interface via the wxWidgets libraries.  When the GUI class is invoked (via the invoke() method), it establishes all the necessary wxWidgets components and events to manage the graphical user interface.  In addition, methods like openPreferenceDialog() and initiateUpload() handle common boundary actions between users and the client.  
+This subsystem implements the graphical user interface via the wxWidgets libraries.  When the GUI class is invoked (via the invoke() method), it establishes all the necessary wxWidgets components and events to manage the graphical user interface.  In addition, methods like openPreferenceDialog() and initiateUpload() handle common boundary actions between users and the client.
+
+Attributes:
+|| *Name* || *Type* || *Description* ||
+|| Menu || gui_menus || a container for a wxMenu object, which displays menus ||
+|| Notebook || gui_notebook || ||
+|| WebBrowser || gui_webBrowser || a container for the web browser portion of the GUI, which allows the user to browse the content on the server ||
+|| Panel || gui_Panel || provides an interface to attributes of the overall window ||
+|| PreferenceDialog || gui_prefDialog || instantiates the preference dialog ||
 
 *5.1.2 Web Browser*
 
