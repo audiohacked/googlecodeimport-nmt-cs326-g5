@@ -44,7 +44,7 @@ _Portability_
 *FURPS+ Additional Non-functional Requirements (Constraints)*
 
 _Implementation_
-  * The client will be implemented in C++, utilizing the gtkWidgets library as well as the libtorrent library for cross-platform code.
+  * The client will be implemented in C++, utilizing the wxWidgets library as well as the libtorrent library for cross-platform code.
 
 ----
 
@@ -259,7 +259,7 @@ http://nmt-cs326-g5.googlecode.com/files/seq_removefile.jpg
 
 http://nmt-cs326-g5.googlecode.com/files/removeFileClassDiagram2.png
 
-An authenticated user makes a request to the Content Manager through the GUI to remove a download from the server. The Content Manger communicates with the `DBManager` and confirms that the user is allowed to delete files from the server. The Content Manager then sends the request to the `DBManager` to delete the file information, and, if successful, deletes the actual file. If unsucessful, an error message is returned to the GUI and displayed to the user.
+An authenticated user makes a request to the Content Manager through the GUI to remove a download from the server. The Content Manger communicates with the `DBManager` and confirms that the user is allowed to delete files from the server. The Content Manager then sends the request to the `DBManager` to delete the file information, and, if successful, deletes the actual file. If unsuccessful, an error message is returned to the GUI and displayed to the user.
 
 ----
 
@@ -449,7 +449,7 @@ Methods:
 || uploadTorrent || initializes a torrent upload ||
 
 ===5.3 Database Manager===
-The Database Manager subsystem is a subsystem common to both the client and server applications, though each instance performs somewhat differently in the context of these different systems.  This system is responsible for connecting to a mySQL database as well as handling high-level (i.e., retrieving the top 10 downloads) and, internally, simple transactions (inserting a new record, for example) with the database.  
+The Database Manager subsystem is a subsystem common to both the client and server applications, though each instance performs somewhat differently in the context of these different systems.  This system is responsible for connecting to a MySQL database as well as handling high-level (i.e., retrieving the top 10 downloads) and, internally, simple transactions (inserting a new record, for example) with the database.  
 
 The subsystem's internal associations are depicted here:
 
@@ -577,7 +577,7 @@ These use cases will be tested by forcing each respective error to occur as well
   * Successfully complete an HTTP download
   * Successfully complete a torrent download
   * Downloads will be verified using a checksum, thereby verifying that the files downloaded are identical to the files on the server
-  * `BasicUser` can successfully change preferences using the proper dialogue
+  * `BasicUser` can successfully change preferences using the proper dialog
   * `ContentServer` can communicate with the `DBManager`, verified by doing database inserts,selects,deletes and edits
   * `DBManager` can successfully communicate with the actual database, verified by doing database inserts, selects, deletes and edits, and verifying the actual data inserted by accessing the database through the command line
   * `ContentServer` can successfully communicate the location and attributes of a specific file download, both in the case of HTTP downloads and the case of torrent downloads
