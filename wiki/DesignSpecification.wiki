@@ -423,9 +423,9 @@ The subsystem's internal associations are depicted here:
 
 http://nmt-cs326-g5.googlecode.com/files/ssinteraction_db_2.JPG
 
-Pictured below, the Database Manager subsystem is implemented via a single class:
+Pictured below, the Database Manager subsystem is implemented as follows:
 
-http://nmt-cs326-g5.googlecode.com/files/class_db.JPG
+http://nmt-cs326-g5.googlecode.com/files/Class%20Diagram%20-%20Database%20Manager.jpeg
 
 The `DBManager` implements several important methods, the first of which are the dbConnect() and dbDisconnect() methods.  These methods connect to and disconnect from the database according to the connectionString and databaseType attributes.
 
