@@ -332,6 +332,16 @@ Attributes:
 || Panel || gui_Panel || provides an interface to attributes of the overall window ||
 || PreferenceDialog || gui_prefDialog || instantiates the preference dialog ||
 
+Methods:
+|| *Name* || *Description* ||
+|| openPreferenceDialog || instantiates a preference dialog and displays it to the user ||
+|| initiateDownload || communicates a download request to the transfer manager subsystem ||
+|| cancelDownload || communicates a download cancellation request to the transfer manager ||
+|| initiateUpload || communicates an upload request to the transfer manager ||
+|| cancelUpload || communicates an upload cancellation request to the transfer manager ||
+|| exit || exit the program ||
+|| authenticate || communicates an authentication request to the Content Manager Subsystem ||
+
 *5.1.2 Web Browser*
 
 The Web Browser subsystem is handled entirely by the viewWebContent() method.  This method handles the transfer of web content from the `ContentManager` class (see the Content Manager subsystem) and is primarily responsible for displaying web content via the in-house browser and passing along download requests to other subsystems via methods like initiateDownload().
