@@ -525,6 +525,7 @@ The getFileLocation() method is used for file transfer requests (as all requests
 Finally, the reportCompletedTransfer() method uses the Database Manager subsystem to report a completed file transfer (via the private reportDownload() and reportUpload() methods) and update the file's statistics (download count, etc). 
 
 _Class: ContentManager_
+
 Attributes:
 || *Name* || *Type* || *Description* ||
 || location || String || the network location of the content manager ||
