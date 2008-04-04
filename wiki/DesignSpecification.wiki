@@ -416,6 +416,16 @@ The HTTPTransferManager implements one additional method: downloadFile().  This 
 
 The HTTPDownload class is a simple class which necessarily implements the Download interface. It implements one additional method, getFileName() which retrieves the name of the file associated with the object.
 
+Attributes:
+|| *Name* || *Type* || *Description* ||
+|| contentServerIP || Transfer || keeps track of the location of the content server ||
+|| transferHandle || curlHandle || provides access to libcurl, which handles HTTP transfers ||
+
+Methods:
+|| *Name* || *Description* ||
+|| downloadFile || downloads a file from a specific location ||
+|| uploadFile || uploads a file to the content server ||
+
 *5.2.2 Torrent Transfer Manager*
 
 The Torrent Transfer Manager is responsible for managing the torrent transfers.  It will communicate with the tracker, the seeds, and the peers to efficiently transfer the torrents. This subsystem will also download and seed the torrent upon completion of the download.  
@@ -425,6 +435,18 @@ Pictured above, the Torrent Transfer Manager subsystem is likewise comprised of 
 The `TorrentTransferManager` implements two additional methods: downloadTorrent() and connectToTracker().  The downloadTorrent() method works similarly to the HTTPTransferManager's downloadFile() method, except it targets a torrent file on the content server.  Upon completion of the torrent file transfer, the class utilizes the connectToTracker() method to connect to the torrent file's designated tracker(s).  The `TorrentTransferManager` implements the Transfer Manager interface in such a way to manage the peer to peer connections of the `BitTorrent` protocol, most likely using libtorrent.
 
 The `TorrentFile` class realizes the Download interface, but also has many additional attributes.  These include an array of File objects (as a torrent download often contains several files), an address to the tracker (trackerLocation), as well as an updating list of peer addresses (peerLocations).
+
+Attributes:
+|| *Name* || *Type* || *Description* ||
+|| activeTrackers || Tracker || contains the trackers which relay the information on other clients downloading the same file ||
+|| transferHandle || curlHandle || provides an interface to libcurl ||
+|| torrentSession || Session || provides a handle to torrent sessions ||
+
+Methods:
+|| *Name* || *Description* ||
+|| connectToPeers || connects to other clients downloading or seeding the specific transfer||
+|| downloadTorrent || initializes a torrent download ||
+|| uploadTorrent || initializes a torrent upload ||
 
 ===5.3 Database Manager===
 The Database Manager subsystem is a subsystem common to both the client and server applications, though each instance performs somewhat differently in the context of these different systems.  This system is responsible for connecting to a mySQL database as well as handling high-level (i.e., retrieving the top 10 downloads) and, internally, simple transactions (inserting a new record, for example) with the database.  
