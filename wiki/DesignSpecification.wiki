@@ -330,9 +330,9 @@ Attributes:
 || *Name* || *Type* || *Description* ||
 || gui_menus || Menu || a container for a wxMenu object, which displays menus ||
 || gui_notebook || Notebook || manages a wxNotebook object ||
-|| gui_webBrowser || WebBrowser || a container for the web browser portion of the GUI, which allows the user to browse the content on the server ||
+|| gui_webBrowser || `WebBrowser` || a container for the web browser portion of the GUI, which allows the user to browse the content on the server ||
 || gui_Panel || Panel || provides an interface to attributes of the overall window ||
-|| gui_prefDialog || PreferenceDialog || handle to custom preferences dialog ||
+|| gui_prefDialog || `PreferenceDialog` || handle to custom preferences dialog ||
 
 Methods:
 || *Name* || *Description* ||
