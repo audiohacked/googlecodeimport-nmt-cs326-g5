@@ -480,9 +480,11 @@ http://nmt-cs326-g5.googlecode.com/files/Class%20Diagram%20-%20Database%20Manage
 
 The `DBManager` implements several important methods, the first of which are the dbConnect() and dbDisconnect() methods.  These methods connect to and disconnect from the database according to the connectionString and databaseType attributes.
 
-The dbSelect(), dbInsert(), dbDelete(), and dbEdit() methods implement the simple SQL transactions (SELECT, INSERT, DELETE, and UPDATE), respectively.  These methods are private, as the DBManager's purpose is to provide a high-level black-box interface to the application's database functionality.  
+The dbSelect(), dbInsert(), dbDelete(), and dbUpdate() methods implement the simple SQL transactions (SELECT, INSERT, DELETE, and UPDATE), respectively.  These methods are private, as the DBManager's purpose is to provide a high-level black-box interface to the application's database functionality.  
 
 The reportFileDownload() and reportFileUpload()/addFiletoDB()/addTorrenttoDB() methods alter the database to increment a download count on a particular file or create a new record for newly added content.  The designateFileSponsoredStatus() is a method used by Content Distributors (Administrative users and sometimes normal users) to set the sponsored flag on a file's record, which will then promote the file to "sponsored" status.  
+
+_Class: DBManager_
 
 Attributes:
 || *Name* || *Type* || *Description* ||
@@ -520,8 +522,9 @@ The `ContentManager` implements several methods to handle various requests from 
 
 The getFileLocation() method is used for file transfer requests (as all requests for file transfer to the content server occur over HTTP, this method is blind to the type of file requested apart from basic security considerations).  The setServerPreferences() method is used to set various server and community options (like whether or not basic users are allowed to upload content, creating a toggle between an open and closed file distribution community), and can only be used by Content Distributors, who are authenticated by the methods previously discussed.
 
-Finally, the reportCompletedDownload() method uses the Database Manager subsystem to report a completed file transfer and update the file's statistics (download count, etc). 
+Finally, the reportCompletedTransfer() method uses the Database Manager subsystem to report a completed file transfer (via the private reportDownload() and reportUpload() methods) and update the file's statistics (download count, etc). 
 
+_Class: ContentManager_
 Attributes:
 || *Name* || *Type* || *Description* ||
 || location || String || the network location of the content manager ||
