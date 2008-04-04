@@ -346,6 +346,17 @@ Methods:
 
 The Web Browser subsystem is handled entirely by the viewWebContent() method.  This method handles the transfer of web content from the `ContentManager` class (see the Content Manager subsystem) and is primarily responsible for displaying web content via the in-house browser and passing along download requests to other subsystems via methods like initiateDownload().
 
+Attributes:
+|| *Name* || *Type* || *Description* ||
+|| contentServerIP || String || Represents the location of the Remote Content Server control object ||
+
+Methods:
+|| *Name* || *Description* ||
+|| requestWebContent || communicates a request through the Remote Content Server control object for html type content related to downloads ||
+|| renderWebContent || displays content to the user ||
+|| connect || connects to the Remote Content Server control object ||
+|| disconnect || disconnects from the Remote Content Server control object ||
+
 *5.1.3 wxWidgets*
 
 The wxWidgets subsystem represents the wxWidgets library, which the application makes heavy use of in order to create a cross-platform client which maintains the "look and feel" of a native application.  The GUI class is essentially a wrapper class which loosely  follows an adapter and bridge pattern with the wxWidgets library, though this interaction is not depicted because the class structure of the library is very complex and non-essential to this application's design.
