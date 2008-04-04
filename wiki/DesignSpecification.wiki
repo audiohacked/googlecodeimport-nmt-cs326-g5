@@ -484,9 +484,24 @@ http://nmt-cs326-g5.googlecode.com/files/db_er.jpeg
 
 || Table Name || Description ||
 || downloads || keeps track of specific downloads ||
+|| files || keeps track of files located on the server, and what type of download they are ||
 || uploads || keeps track of uploads and where they came from ||
 || users || keeps track of the two different types of users ||
-|| files || keeps track of files located on the server ||
+
+====Fields:====
+Download table:
+|| field || description ||
+|| fid || the identification number of the file ||
+|| dateOfDownload || when the file was downloaded ||
+|| uid || corresponds to the user that downloaded the file ||
+
+Files table:
+|| field || description ||
+|| fid || the identification number of the file ||
+|| name || the name of the file ||
+|| location || where the file is on the server, represented by a string ||
+|| type || the type of file ||
+|| active || 
 
 ===9.3 System Resource Documentation===
 
