@@ -310,7 +310,7 @@ A Basic User selects a download within the GUI and presses the cancel button. Th
 _Note: Many of the internal interactions of these subsystems are described textually, though by referring to Section 4 (Use Case Realization), these interactions are often described graphically via the sequence diagram for the use case._ 
 
 ===5.1 User Interface===
-This set of subsystems is comprised entirely of one class, the 'GUI' class.  This class is pictured below:
+This set of subsystems is comprised a series of classes, pictured below:
 
 http://nmt-cs326-g5.googlecode.com/files/Class%20Diagram%20-%20UI%20%28v2%29.jpeg
 
@@ -396,9 +396,7 @@ In addition, all classes which implement the Download interface also aggregate t
 
 The HTTP Transfer Manager subsystem handles the transfer of files over the HTTP as well as any standard HTTP requests, such as HEAD and GET, that are required.
 
-Pictured below, the HTTP Transfer Manager subsystem is comprised primarily of two classes: the HTTPTransferManager class and the HTTPDownload class.
-
-http://nmt-cs326-g5.googlecode.com/files/class_httptransfer.JPG
+Pictured above, the HTTP Transfer Manager subsystem is comprised primarily of two classes: the HTTPTransferManager class and the HTTPDownload class.
 
 The HTTPTransferManager implements one additional method: downloadFile().  This method is responsible for contacting the content server (the request is handled by the server-side Content Manager subsystem) and requesting a file.  The methods of the `TransferManager` interface are implemented in a manner that utilizes HTTP.
 
@@ -408,9 +406,7 @@ The HTTPDownload class is a simple class which necessarily implements the Downlo
 
 The Torrent Transfer Manager is responsible for managing the torrent transfers.  It will communicate with the tracker, the seeds, and the peers to efficiently transfer the torrents. This subsystem will also download and seed the torrent upon completion of the download.  
 
-Pictured below, the Torrent Transfer Manager subsystem is likewise comprised of primarily of two classes: the `TorrentTransferManager` class and the `TorrentDownload` class.
-
-http://nmt-cs326-g5.googlecode.com/files/class_torrenttransfer.JPG
+Pictured above, the Torrent Transfer Manager subsystem is likewise comprised of primarily of two classes: the `TorrentTransferManager` class and the `TorrentDownload` class.
 
 The `TorrentTransferManager` implements two additional methods: downloadTorrent() and connectToTracker().  The downloadTorrent() method works similarly to the HTTPTransferManager's downloadFile() method, except it targets a torrent file on the content server.  Upon completion of the torrent file transfer, the class utilizes the connectToTracker() method to connect to the torrent file's designated tracker(s).  The `TorrentTransferManager` implements the Transfer Manager interface in such a way to manage the peer to peer connections of the `BitTorrent` protocol, most likely using libtorrent.
 
