@@ -361,6 +361,17 @@ Methods:
 
 The wxWidgets subsystem represents the wxWidgets library, which the application makes heavy use of in order to create a cross-platform client which maintains the "look and feel" of a native application.  The GUI class is essentially a wrapper class which loosely  follows an adapter and bridge pattern with the wxWidgets library, though this interaction is not depicted because the class structure of the library is very complex and non-essential to this application's design.
 
+Classes/interfaces:
+|| *Name* || *Description* ||
+|| wxMenu || "A menu is a popup (or pull down) list of items, one of which may be selected before the menu goes away (clicking elsewhere dismisses the menu). Menus may be used to construct either menu bars or popup menus." ||
+|| wxWindow || "wxWindow is the base class for all windows and represents any visible object on screen. All controls, top level windows and so on are windows. Sizers and device contexts are not, however, as they don't appear on screen themselves." ||
+|| wxMozilla || "wxMozilla is a project to develop a wxWindows component for embedding the Mozilla browser into any wxWindows application. The wxMozilla classes use Mozilla's XPCOM (Cross Platrom COM) interface to embed a HTML browser or editor within the application." ||
+|| wxPanel || "A panel is a window on which controls are placed. It is usually placed within a frame. It contains minimal extra functionality over and above its parent class wxWindow; its main purpose is to be similar in appearance and functionality to a dialog, but with the flexibility of having any window as a parent." ||
+|| wxButton || "A button is a control that contains a text string, and is one of the most common elements of a GUI. It may be placed on a dialog box or panel, or indeed almost any other window." ||
+|| wxDialog || "A dialog box is a window with a title bar and sometimes a system menu, which can be moved around the screen. It can contain controls and other windows and is usually used to allow the user to make some choice or to answer a question." ||
+|| wxNotebook || "This class represents a notebook control, which manages multiple windows with associated tabs." ||
+
+All quotes taken from docs.wxwidgets.org
 
 ===5.2 Transfer Manager===
 
