@@ -324,6 +324,7 @@ The functionality of this class is described in terms of the next three subsyste
 
 This subsystem implements the graphical user interface via the wxWidgets libraries.  When the GUI class is invoked (via the invoke() method), it establishes all the necessary wxWidgets components and events to manage the graphical user interface.  In addition, methods like openPreferenceDialog() and initiateUpload() handle common boundary actions between users and the client.
 
+_Class: GUI_
 Attributes:
 || *Name* || *Type* || *Description* ||
 || gui_menus || Menu || a container for a wxMenu object, which displays menus ||
@@ -346,6 +347,7 @@ Methods:
 
 The Web Browser subsystem is handled entirely by the requestWebContent() method.  This method handles the transfer of web content from the `ContentManager` class (see the Content Manager subsystem). The renderWebContent() method is primarily responsible for displaying web content via the in-house browser and passing along download requests to other subsystems via methods like initiateDownload().
 
+_Class: WebBrowser_
 Attributes:
 || *Name* || *Type* || *Description* ||
 || contentServerIP || String || Represents the location of the Remote Content Server control object ||
@@ -361,7 +363,9 @@ Methods:
 
 The wxWidgets subsystem represents the wxWidgets library, which the application makes heavy use of in order to create a cross-platform client which maintains the "look and feel" of a native application.  The GUI class is essentially a wrapper class which loosely  follows an adapter and bridge pattern with the wxWidgets library, though this interaction is not depicted because the class structure of the library is very complex and non-essential to this application's design.
 
-Classes/interfaces:
+Many of the aggregated classes (like Menu, Window, Panel, etc.) of the master GUI classes are wrappers to wxWidget classes.  All these classes implement the Window interface (which in turn generalizes the wxWindow class) in order to reduce system coupling.  
+
+_Classes/interfaces:_
 || *Name* || *Description* ||
 || wxMenu || "A menu is a popup (or pull down) list of items, one of which may be selected before the menu goes away (clicking elsewhere dismisses the menu). Menus may be used to construct either menu bars or popup menus." ||
 || wxWindow || "wxWindow is the base class for all windows and represents any visible object on screen. All controls, top level windows and so on are windows. Sizers and device contexts are not, however, as they don't appear on screen themselves." ||
