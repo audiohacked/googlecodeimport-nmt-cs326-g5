@@ -465,6 +465,27 @@ The dbSelect(), dbInsert(), dbDelete(), and dbEdit() methods implement the simpl
 
 The reportFileDownload() and reportFileUpload()/addFiletoDB()/addTorrenttoDB() methods alter the database to increment a download count on a particular file or create a new record for newly added content.  The designateFileSponsoredStatus() is a method used by Content Distributors (Administrative users and sometimes normal users) to set the sponsored flag on a file's record, which will then promote the file to "sponsored" status.  
 
+Attributes:
+|| *Name* || *Type* || *Description* ||
+|| connectionString || String || the string that is passed to the database driver to connect to the database ||
+|| databaseType || String || the brand of database (mysql, oracle, etc.) ||
+|| dbHandle || wxDB || the actual connection to the database ||
+
+Methods:
+|| *Name* || *Description* ||
+|| dbSelect || private method used to get records from the database using SELECT statements ||
+|| dbInsert || private method used to put records into the database using an INSERT statement ||
+|| dbDelete || private method used to remove records from the database using the DELETE statement ||
+|| dbUpdate || private method used to edit records already in the database ||
+|| dbConnect || private method, uses the connectionString and database driver to connect to the database||
+|| dbDisconnect || private method, closes the connection to the database ||
+|| reportFileDownload || public method used by clients to report a completed download ||
+|| reportFileUpload || public method used by clients to report a completed upload ||
+|| designateFileSponsoredStatus || public method used to update a file record and change it's sponsored status field ||
+|| getFileStatistics || public method used to get a specific file's record from the database ||
+|| invoke || instantiates the DBManager ||
+|| destroy || destroys the DBManager ||
+
 ===5.4 Content Manager===
 The Content Manager subsystem is a server-side system which handles requests from zero to many client systems.  It also filters database requests from the client and passes them along to the Database Manager subsystem (this is to keep consistent with the MVC architecture) as well as making its own requests to the database.  
 
