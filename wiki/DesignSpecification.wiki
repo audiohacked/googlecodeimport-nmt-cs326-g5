@@ -501,7 +501,9 @@ Files table:
 || name || the name of the file ||
 || location || where the file is on the server, represented by a string ||
 || type || the type of file ||
-|| active || 
+|| active || a boolean value that defines whether the file is visible to regular users ||
+|| sponsoredStatus || a boolean value that defines whether the file is sponsored by a Content Distributor ||
+|| downloadCount || the number of times a file has been downloaded, corresponding to the number of records in the Download table associated with this files fid ||
 
 ===9.3 System Resource Documentation===
 
