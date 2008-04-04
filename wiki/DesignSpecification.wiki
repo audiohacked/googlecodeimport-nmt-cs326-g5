@@ -503,6 +503,27 @@ The getFileLocation() method is used for file transfer requests (as all requests
 
 Finally, the reportCompletedDownload() method uses the Database Manager subsystem to report a completed file transfer and update the file's statistics (download count, etc). 
 
+Attributes:
+|| *Name* || *Type* || *Description* ||
+|| location || String || the network location of the content manager ||
+|| transferManager || TransferManager || manages the various transfers back and forth; see transfer subsystem ||
+
+Methods:
+|| *Name* || *Description* ||
+|| sendFile || initiate a transfer to a client ||
+|| getFileLocation || query the database as to the whereabouts of a specific file ||
+|| authenticateUser || query the database to confirm a user exists ||
+|| getUserPermissions || query the database as to a user's credentials ||
+|| attachToServer || connect to a server ||
+|| detachFromServer || break a connection with a server ||
+|| sendWebPage || deliver web content to a GUI ||
+|| setServerPreferences || allows a user with the correct permissions to change how a server behaves ||
+|| reportCompletedTransfer || let the DBManager know of a completed transfer ||
+|| reportDownload || communicate a completed download to the DBManager ||
+|| reportUpload || communicate a completed upload to the DBManager ||
+|| invoke || instantiate the ContentManager ||
+|| destroy || destroy the ContentManager instance ||
+
 ----
 
 ==6. Human Interfaces==
