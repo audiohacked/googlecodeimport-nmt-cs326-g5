@@ -391,6 +391,20 @@ The subsystem also defines the Download interface, which all file handling class
 
 In addition, all classes which implement the Download interface also aggregate the File class, which is a concrete object which has many attributes common to all files.
 
+Attributes:
+|| *Name* || *Type* || *Description* ||
+|| activeTransfers || Transfer || contains the transfers that are actively downloading or uploading data ||
+|| inactiveTransfers || Transfer || contains transfers that are not actively downloading or uploading data ||
+
+Methods:
+|| *Name* || *Description* ||
+|| startTransfer || initiates a transfer ||
+|| cancelTransfer || stops a transfer in progress and deletes all files and objects associated with the transfer ||
+|| pauseTransfer || temporarily suspends a transfer in progress ||
+|| finishTransfer || notifies the Remote Content Server that the transfer has completed ||
+|| invoke || initializes the transfer manager ||
+|| destroy || destroys the transfer manager instance when exiting the program ||
+
 
 *5.2.1 HTTP Transfer Manager*
 
