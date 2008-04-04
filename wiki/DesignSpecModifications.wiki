@@ -32,9 +32,9 @@ Version 1 of the GUI Class Diagram: Gimme some feedback!
 
 http://nmt-cs326-g5.googlecode.com/files/GUIClassDiagramV1.jpg
 
-Alternate Version: (relations to transfer/content manager, as well as several methods and attributes of the various classes are not shown):
+Alternate Version: 
 
-http://nmt-cs326-g5.googlecode.com/files/Class%20Diagram%20-%20GUI%20%28sample%29.jpeg
+http://nmt-cs326-g5.googlecode.com/files/Class%20Diagram%20-%20UI.jpeg
 
 Pictures:
 
