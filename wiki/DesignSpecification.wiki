@@ -320,7 +320,7 @@ http://nmt-cs326-g5.googlecode.com/files/ssinteraction_ui_v1.jpeg
 
 The functionality of this class is described in terms of the next three subsystems of the User Interface.
 
-*5.1.1 GUI*
+*5.1.1 User Interface Subsystem*
 
 This subsystem implements the graphical user interface via the wxWidgets libraries.  When the GUI class is invoked (via the invoke() method), it establishes all the necessary wxWidgets components and events to manage the graphical user interface.  In addition, methods like openPreferenceDialog() and initiateUpload() handle common boundary actions between users and the client.  
 
