@@ -490,33 +490,33 @@ http://nmt-cs326-g5.googlecode.com/files/db_er.jpeg
 
 ====Fields:====
 Download table:
-|| *field* || *description* ||
-|| fid || the identification number of the file ||
-|| dateOfDownload || when the file was downloaded ||
-|| uid || corresponds to the user that downloaded the file ||
+|| *field* || *type* || *description* ||
+|| fid || int || the identification number of the file ||
+|| dateOfDownload || date || when the file was downloaded ||
+|| uid || int || corresponds to the user that downloaded the file ||
 
 Files table:
-|| *field* || *description* ||
-|| fid || the identification number of the file ||
-|| name || the name of the file ||
-|| location || where the file is on the server, represented by a string ||
-|| type || the type of file ||
-|| active || a boolean value that defines whether the file is visible to regular users ||
-|| sponsoredStatus || a boolean value that defines whether the file is sponsored by a Content Distributor ||
-|| downloadCount || the number of times a file has been downloaded, corresponding to the number of records in the Download table associated with this files fid ||
+|| *field* || *type* || *description* ||
+|| fid || int || the identification number of the file ||
+|| name || string || the name of the file ||
+|| location || string || where the file is on the server, represented by a string ||
+|| type || string || the type of file ||
+|| active || bit || a boolean value that defines whether the file is visible to regular users ||
+|| sponsoredStatus || bit || a boolean value that defines whether the file is sponsored by a Content Distributor ||
+|| downloadCount || int || the number of times a file has been downloaded, corresponding to the number of records in the Download table associated with this files fid ||
 
 Uploads table:
-|| *field* || *description* ||
-|| dateOfUpload || when the file was uploaded ||
-|| fid || the id of the file ||
+|| *field* || *type* || *description* ||
+|| dateOfUpload || date || when the file was uploaded ||
+|| fid || int || the id of the file ||
 
 Users table:
-|| *field* || *description* ||
-|| uid || the identification number of the user ||
-|| fname || first name ||
-|| lname || last name ||
-|| passwd || the encrypted password of the user ||
-|| userLevel || the permission level of the user ||
+|| *field* || *type* || *description* ||
+|| uid || int || the identification number of the user ||
+|| fname || string || first name ||
+|| lname || string || last name ||
+|| passwd || string || the encrypted password of the user ||
+|| userLevel || int || the permission level of the user ||
 
 ===9.3 System Resource Documentation===
 
