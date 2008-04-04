@@ -482,7 +482,7 @@ http://nmt-cs326-g5.googlecode.com/files/ganttchart_3.JPG
 The following is an entity relationship diagram depicting the database:
 http://nmt-cs326-g5.googlecode.com/files/db_er.jpeg
 
-|| Table Name || Description ||
+|| *Table Name* || *Description* ||
 || downloads || keeps track of specific downloads ||
 || files || keeps track of files located on the server, and what type of download they are ||
 || uploads || keeps track of uploads and where they came from ||
@@ -490,13 +490,13 @@ http://nmt-cs326-g5.googlecode.com/files/db_er.jpeg
 
 ====Fields:====
 Download table:
-|| field || description ||
+|| *field* || *description* ||
 || fid || the identification number of the file ||
 || dateOfDownload || when the file was downloaded ||
 || uid || corresponds to the user that downloaded the file ||
 
 Files table:
-|| field || description ||
+|| *field* || *description* ||
 || fid || the identification number of the file ||
 || name || the name of the file ||
 || location || where the file is on the server, represented by a string ||
@@ -506,12 +506,12 @@ Files table:
 || downloadCount || the number of times a file has been downloaded, corresponding to the number of records in the Download table associated with this files fid ||
 
 Uploads table:
-|| field || description ||
+|| *field* || *description* ||
 || dateOfUpload || when the file was uploaded ||
 || fid || the id of the file ||
 
 Users table:
-|| field || description ||
+|| *field* || *description* ||
 || uid || the identification number of the user ||
 || fname || first name ||
 || lname || last name ||
