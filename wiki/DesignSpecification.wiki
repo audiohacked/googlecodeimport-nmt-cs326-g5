@@ -805,7 +805,7 @@ All quotes taken from docs.wxwidgets.org
 
 The Transfer Manager subsystem is comprised of several classes responsible for allowing access to the Torrent Transfer Manager and HTTP Transfer Manager easily.  The subsystem's classes are pictured below:
 
-http://nmt-cs326-g5.googlecode.com/files/Class%20Diagram%20-%20Transfer%20Manager%20%28v3%29.jpeg
+http://nmt-cs326-g5.googlecode.com/files/Class%20Diagram%20-%20Transfer%20Manager.jpeg
 
 The subsystem's internal associations and remote connection to the content server are depicted below:
 
