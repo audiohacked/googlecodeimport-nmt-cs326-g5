@@ -85,10 +85,430 @@ http://nmt-cs326-g5.googlecode.com/files/UseCase_ContentServer.jpeg
 
 http://nmt-cs326-g5.googlecode.com/files/UseCase_Tracker.jpeg
 
+----
+*Use Case Descriptions*
 
-*Deployment Diagram*
+Specific use case descriptions and sequence diagrams:
 
-http://nmt-cs326-g5.googlecode.com/files/DeploymentDiagram.jpeg
+_Use Case Name_      *`DownloadFile`* _(Also applies to *'DownloadHTTPFile'*)_
+
+_Participating Actors:_
+
+Initiated by `BasicUser`
+
+Communicates with `ContentServer`
+
+_Flow of events:_
+
+1. `BasicUser` chooses a file to download in file browser
+
+2. `Client` software queries server to status of file
+
+        3. `ContentServer` responds with status of file
+
+4. `Client` downloads file if available, using the appropriate protocol
+
+_Entry Condition_
+    * The user initiates a download
+
+_Exit Condition_
+    * The download completes successfully
+    * The download is canceled by the user
+    * There is a download error and the download cannot continue
+
+_Quality Requirements_
+    * The `ContentServer` and `Client` must communicate within a certain amount of time.
+
+----
+
+_Use Case Name_        *`DownloadTorrentFile`*
+
+_Participating Actors:_
+
+        Initiated by `BasicUser`
+
+        Communicates with `ContentServer`, `DBServer`, `Tracker`
+
+_Flow of events:_
+
+1. `BasicUser` selects file in file browser portion of program
+
+2. `BasicUser` selects download
+
+3. Client sends out a request to the `ContentServer` for the .torrent file
+
+          4. `ContentServer` queries `DBServer` as to the status of the file
+
+          5. `DBServer` returns status of .torrent file to `ContentServer`
+
+          6. `ContentServer` returns status of .torrent file to `BasicUser`
+
+7. If .torrent file is available, `Client` downloads it from `ContentServer`
+
+8. `Client` performs checksum on .torrent file to make sure it was transferred successfully
+
+9. `Client` queries `Tracker` for list of other clients with file or files defined 
+by .torrent file
+
+           10. `Tracker` returns list of clients if it exists, error if not
+
+           11. `Tracker` adds client to list of clients downloading file
+
+12. `Client` queries other clients to find out who had what pieces of file or files
+
+           13. Other clients reply and specify what data is available for download
+
+14. `Client` downloads files piece by piece
+
+_Entry Condition_
+    * `BasicUser` selects a download package in the interface that includes a torrent file
+
+_Exit Condition_
+    * Download completes, all files reside on local hard drive. OR
+    * Download is cancelled by user. OR
+    * There is a fatal download error
+
+_Quality Requirements_
+    * All servers will respond within a certain amount of time, determined by server settings.
+
+----
+
+_Use Case Name_      *`ReportFileDownload`*
+
+_Participating Actors_  
+
+Participated in by `BasicUser`
+
+Communicates with `ContentServer`
+
+Communicates with `DBManager`
+
+_Flow of Events:_
+
+     1. `Client` completes a `BasicUser` initiated sponsored file download, opens connection with `ContentServer`.
+
+2. `ContentServer` attempts to open a connection to `DBManager`, if it is not already open, and notifies the `Client` to send data
+
+     3. `Client` sends file download statistics concerning the recent file transfer (completion time, average speed, incrementing the total number of downloads recorded, etc.) to `ContentServer`.
+
+4. `ContentServer` sends an update/insert command to the `DBManager`
+
+5. `DBManager` performs the queries and commits changes to database.
+
+6. `DBManager` notifies `ContentServer` of completion, `ContentServer` notifies `Client`
+
+     7. `Client` closes connection to `ContentServer`. 
+
+_Entry Condition_
+  * The user completes a download
+
+_Exit Condition_
+  * The database is updated
+  * The database does not respond
+
+_Quality Requirements_
+  * The operation must complete within 30 seconds
+
+----
+
+_Use Case Name_  *`ReportFileUpload`*
+
+_Participating Actors_  
+Participated in by `BasicUser`
+Communicates with `ContentServer`
+Communicates with `DBManager`
+
+_Flow of Events:_
+
+     1. `Client` completes a `BasicUser` initiated sponsored file upload, opens connection with `ContentServer`.
+
+2. `ContentServer` attempts to open a database connection, if it is not already open, and notifies the `Client` to send data
+
+     3. `Client` sends file upload statistics concerning the recent file transfer (size of file, type of file, description of file, a human readable name of the file, etc.) to `ContentServer`.
+
+4. `ContentServer` sends an update/insert command to the `DBManager`
+
+5. `DBManager` performs the queries and commits changes to database.
+
+6. `DBManager` notifies `ContentServer` of completion, `ContentServer` notifies `Client`
+
+     7. `Client` closes connection to `ContentServer`. 
+
+_Entry Condition_
+  * The user completes a sponsored file upload
+
+_Exit Condition_
+  * The database is updated
+  * The database does not respond
+
+_Quality Requirements_
+  * The operation must complete within 30 seconds
+
+----
+
+_Use Case Name_  *`UploadFile`*
+
+_Participating Actors_  
+Communicates with `ContentServer`
+Initiated by `BasicUser` or `ContentDistributor`
+
+_Flow of Events:_
+
+  1. `BasicUser` or `ContentDistributor` selects a file to upload.
+
+
+  2. `Client` opens connection (if necessary) with the `ContentServer`.
+
+  3. `Client` transfers file or files to `ContentServer` over HTTP.
+
+        4. `ContentServer` connects to `DBManager` if not already connected
+
+  5. `ContentServer` dynamically updates appropriate pages to reflect new content.
+
+_Entry Condition_
+  * `BasicUser` or `ContentDistributor` who initiated the upload has upload privileges
+
+_Exit Condition_
+  * The database is updated
+  * The database does not respond
+
+_Quality Requirements_
+  * A connection must be maintained between the `Client` and the `ContentServer` at all times
+
+----
+
+_Use Case Name_  *`DesignateFileSponsoredStatus`*
+
+_Participating Actors_  
+Communicates with `ContentServer`
+Initiated by `ContentDistributor`
+
+_Flow of Events:_
+
+1. `ContentDistributor` selects a file which is to have it's sponsored status modified.
+
+2. `Client` opens connection with `ContentServer`, queries the sponsored status of the selected file.
+
+       3. `ContentServer` connects with and queries `DBManager`
+
+4. `ContentDistributor` is given the option to modify this status.
+
+       5. If changed, the new status is committed to the database by `ContentServer`.
+
+6. Client closes connection to `ContentServer`.
+
+_Entry Condition_
+  * `ContentDistributor` who initiated the operation has administrator privileges
+
+_Exit Condition_
+  * The database is updated
+  * The database does not respond
+  * `ContentDistributor` cancels request
+
+_Quality Requirements_
+  * A connection must be maintained between the `Client` and the `ContentServer` at all times
+
+----
+
+_Use case name_  *`GetFileStatistics`*
+
+_Participating Actors_
+
+Initiated by `BasicUser` or `ContentServer`
+
+Communicates with `ContentServer`, `Database`
+
+  # `BasicUser` queries `ContentServer` or `ContentServer` opens a connection with `DBManager` and queries statistics (number of downloads per day, month, year, or total, popularity rating, sponsored status, etc.) about a given file.
+  # `DBManager` completes the requested query and serves data to user or server.
+  # Connection between `BasicUser`/`ContentServer` is closed.
+
+----
+
+_Use case name_  *`ReportTransferProgress`*
+
+_Participating Actors_
+
+initiated by `BasicUser`
+
+_Flow of Events_
+
+  # `BasicUser` selects a file (or merely is transferring a file) for which transfer information (% completed, number of bytes downloaded, transfer speed, etc.) is desired.
+  # `Client` calculates transfer information and displays it to the user (often continuously).
+
+----
+
+_Use case name_  *`BrowseContentSite`*
+
+_Participating Actors_
+
+ Initiated by `Basic User`
+
+ Communicates with `ContentServer`
+
+*Flow of Events*
+
+  1. `BasicUser` requests a page via the in-house browser from the `ContentServer`.
+ 
+        2. `ContentServer` receives request and serves page to client.
+
+  3. `Client` renders page in browser.
+
+----
+
+_Use case name_  *`RemoveFile`*
+
+_Participating Actors_
+Initiated by `BasicUser`
+Communicates with `ContentServer`, `DBManager`
+
+  1. `BasicUser` selects a file for deletion.
+
+  2. `Client` sends delete request to content server.
+
+         3. `ContentServer` removes file and any related information, opens a connection to the `DBManager` and sends a corresponding delete (this may actually be an archival rather than a physical deletion) query for the file's database entries.
+
+         4. `DBManager` completes query, `ContentServer` reports success to `Client`.
+
+  5. `Client` reports success to user.
+
+_Entry condition_
+  * `BasicUser` has rights over the file for deletion or is a `ContentDistributor`.
+
+_Exit condition_
+  * File is successfully deleted by `ContentServer`
+  * File's information is successfully deleted from database by `DBManager`
+  * There is a fatal error and the operation cannot continue
+
+_Quality requirements_
+  * The user interface must provide an "are you sure" dialogue to the user
+
+----
+
+_Use case name_  *`SetClientPreferences`*
+
+_Participating actors_ 
+
+Initiated by `BasicUser`
+
+_Flow of Events_
+
+  # `BasicUser` selects to edit their preferences from a drop-down menu.
+  # `Client` opens a preferences dialog.
+  # `BasicUser` changes their preferences.
+  # `Client` commits preferences to memory and applies any immediately relevant changes.
+  # `Client` closes preferences dialog.
+
+----
+
+_Use case name_  *`SetServerPreferences`*
+
+_Participating Actors:_ 
+
+Initiated by `ContentDistributor`
+
+Communicates with `ContentServer`
+
+_Flow of Events_
+
+  # `ContentDistributor` edits server preferences via configuration file.
+  # `ContentServer` reads and implements changed preferences.
+
+
+----
+
+_Use Case Name_        *`AbortFileTransfer`*
+
+_Participating Actors_ 
+
+Initiated by `BasicUser`
+
+_Flow of events_
+
+1. `BasicUser` clicks the cancel button in the interface
+
+          2. `Client` responds with a message asking the user if they are sure
+
+3. If `BasicUser` clicks yes, the client software deletes the partially downloaded file
+
+4. The `Client` software then removes the download from the list of downloads
+
+_Entry Condition_    
+  * The `BasicUser` is downloading a file or files.
+
+_Exit Condition_     
+  * The `Client` successfully deletes the partially downloaded files and removes the downloads from the list of active downloads. OR
+  * The `BasicUser` clicks "no" in the confirmation dialogue box, thereby cancelling the cancellation.
+_Quality Requirements_    
+  * The dialogue box only appears for 10 seconds, before the cancellation is automatically cancelled.
+
+
+----
+_Use case name_ *`ExTransferError`*
+
+_Participating Actors:_ `ContentServer` and/or `Tracker`, `BasicUser`
+
+_Flow of events_
+
+  1.   Serving actor (`ContentServer` or `Tracker`) reports an error and logs it.
+
+  2.   Serving actor attempts to resolve error while determining the error type.
+
+  3.   If the error type is determined, its appropriate use case is invoked.
+
+  4.   Error is reported to `Basic User`
+
+_Entry conditions_
+
+  * A transfer error has occurred.
+
+_Exit conditions_
+
+  * The error is logged, reported, and resolved if possible.
+
+----
+_Use case name_ *`ExFileNotFoundError`*
+
+_Participating Actors:_ `ContentServer`, `BasicUser`
+
+_Flow of events_
+
+  1.   `ContentServer` reports error.
+
+  2.   Error reported to `BasicUser`.
+
+_Entry conditions_
+
+  * `BasicUser` has requested a file that the server could not locate
+
+----
+
+_Use case name_ *`ExTorrentTransferError`*
+
+_Participating Actors:_ `Tracker`, `BasicUser`
+
+_Flow of events_
+
+  1.   `Client` detects an error with a torrent transfer.
+
+  2.   `Client` reports error to `BasicUser`.
+
+  3.   `Client` asks `BasicUser` to either retry download or to delete torrent file and/or downloaded files.
+
+  4.   `Client` deletes files as necessary.
+
+_Entry conditions_
+
+  * `BasicUser` is downloading torrent and an error occurs.
+
+_Exit conditions_
+
+  * Data is deleted
+  * `BasicUser` selects retry download
+
+_Quality requirements_
+
+  * `Client` must only delete files pertaining to the affected download
+  * Minor issues (particularly temporary connection issues) must be dealt with automatically
 
 ----
 
