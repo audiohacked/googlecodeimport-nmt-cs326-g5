@@ -14,8 +14,10 @@
   * use wxMozilla
    * fix SSL/HTTPS problems/bugs
 
-= Webserver Todo = 
+= Webserver Todo =
+ * PHP?, XHTML 1.0 Strict, CSS 2.1 (minimum requirement), and Javascript (if need be)
  * Database implemented in MySQL
+  * maybe piggyback the support forums, and/or use PHP code to implement
  * Website Design for "Shopping Mall"
   * maybe use off-the-shelf commerce
   * maybe design our own, using standards CSS 2.1, XHTML, Javascript (or whatever firefox 2.0 supports)
