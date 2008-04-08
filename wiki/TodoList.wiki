@@ -4,6 +4,7 @@
 = GUI Todo =
  * Implement wxListCtrl for Content Manager
   * Implement Download Progress in wxListCtrl using wxProgressBar class
+   * use wxGauge or wxSlider
 
 = Network-Client Todo =
  * Implement Libtorrent download class
