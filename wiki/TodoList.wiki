@@ -3,7 +3,7 @@
 
 = GUI Todo =
  * Implement wxListCtrl for Content Manager
-  * Implement Download Progress in wxListCtrl using wxGuage class
+  * Implement Download Progress in wxListCtrl using wxGauge class
 
 = Network-Client Todo =
  * Implement Libtorrent download class
