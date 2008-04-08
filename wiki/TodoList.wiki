@@ -1,0 +1,24 @@
+#summary A list of Todo items for project's source code
+#labels Featured
+
+= GUI Todo =
+ * Implement wxListCtrl for Content Manager
+  * Implement Download Progress in wxListCtrl using wxProgressBar class
+
+= Network-Client Todo =
+ * Implement Libtorrent download class
+  * unknown
+ * Implement HTTP download
+  * unknown
+ * Fully Implement Mozilla into Application
+  * use wxMozilla
+  * fix SSL/HTTPS problems/bugs
+
+= Webserver Todo = 
+ * Database implemented in MySQL
+ * Website Design for "Shopping Mall"
+ * Webpage Design for Community Portal
+ * Support Forums
+
+= Like/MayBe Todo =
+ * Add Jabber-based Instant Messenger & Group Chat
