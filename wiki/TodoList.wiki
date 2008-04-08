@@ -8,8 +8,8 @@
 = Network-Client Todo =
  * Implement Libtorrent download class
   * unknown
- * Implement HTTP download
-  * unknown
+ * Implement HTTP/HTTPS download
+  * use [http://sourceforge.net/projects/wxcurl wxCurl]
  * Fully Implement Mozilla into Application
   * use wxMozilla
    * fix SSL/HTTPS problems/bugs
