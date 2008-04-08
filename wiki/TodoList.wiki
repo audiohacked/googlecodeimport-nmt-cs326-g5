@@ -2,8 +2,8 @@
 #labels Featured
 
 = GUI Todo =
- * Implement wxListCtrl for Content Manager
-  * Implement Download Progress in wxListCtrl using wxGauge class
+ * Implement [http://docs.wxwidgets.org/2.6.3/wx_wxlistctrl.html wxListCtrl] for Content Manager
+  * Implement Download Progress in wxListCtrl using [http://docs.wxwidgets.org/2.8.6/wx_wxgauge.html wxGauge] class
 
 = Network-Client Todo =
  * Implement Libtorrent download class
@@ -12,7 +12,7 @@
   * unknown
  * Fully Implement Mozilla into Application
   * use wxMozilla
-  * fix SSL/HTTPS problems/bugs
+   * fix SSL/HTTPS problems/bugs
 
 = Webserver Todo = 
  * Database implemented in MySQL
