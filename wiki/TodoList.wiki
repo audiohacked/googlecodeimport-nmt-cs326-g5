@@ -22,3 +22,4 @@
 
 = Like/Maybe Todo =
  * Add Jabber-based Instant Messenger & Group Chat
+ * [http://wiki.wxwidgets.org/Auto_update Auto Update]
