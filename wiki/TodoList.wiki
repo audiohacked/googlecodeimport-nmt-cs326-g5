@@ -20,5 +20,5 @@
  * Webpage Design for Community Portal
  * Support Forums
 
-= Like/MayBe Todo =
+= Like/Maybe Todo =
  * Add Jabber-based Instant Messenger & Group Chat
