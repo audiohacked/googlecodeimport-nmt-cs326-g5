@@ -17,8 +17,14 @@
 = Webserver Todo = 
  * Database implemented in MySQL
  * Website Design for "Shopping Mall"
+  * maybe use off-the-shelf commerce
+  * maybe design our own, using standards CSS 2.1, XHTML, Javascript (or whatever firefox 2.0 supports)
+  * No Flash
  * Webpage Design for Community Portal
+  * maybe piggyback the Support Forums
+  * same ideas as "Shopping Mall"
  * Support Forums
+  * use phpBB3 or Phorum
 
 = Like/Maybe Todo =
  * Add Jabber-based Instant Messenger & Group Chat
