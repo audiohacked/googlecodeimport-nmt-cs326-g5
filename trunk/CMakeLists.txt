@@ -15,17 +15,17 @@ CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake
 	${CMAKE_BINARY_DIR}/config.h)
 
 SET(SRCS 
-	main.cpp
-	menu.cpp
-	browser.cpp
+	AppMain.cpp
+	AppMenu.cpp
+	BrowserEmbed.cpp
 )
 
 SET(HDRS
 	enum.h
 	events.h
-	main.h
-	menu.h
-	browser.h
+	AppMain.h
+	AppMenu.h
+	BrowserEmbed.h
 )
 
 
