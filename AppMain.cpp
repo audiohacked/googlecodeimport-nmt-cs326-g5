@@ -71,10 +71,10 @@ sAppPanel::sAppPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 		wxNB_FIXEDWIDTH);
 
 	
-	wxButton *News = new wxButton(this, -1, "News");
-	wxButton *Settings = new wxButton(this, -1, "Settings");
-	wxButton *Support = new wxButton(this, -1, "Support");
-	wxButton *InstaMessenger = new wxButton(this, -1, "InstaMessenger");
+	wxButton *News = new wxButton(this, -1, wxT("News"));
+	wxButton *Settings = new wxButton(this, -1, wxT("Settings"));
+	wxButton *Support = new wxButton(this, -1, wxT("Support"));
+	wxButton *InstaMessenger = new wxButton(this, -1, wxT("InstaMessenger"));
 	
 
 	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
