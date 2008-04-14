@@ -46,7 +46,6 @@ IF(wxWidgets_FOUND)
 		${CMAKE_BINARY_DIR}
 		${wxWidgets_INCLUDE_DIRS}
 		${WXMOZ_INCLUDE_DIR}
-		${CMAKE_SOURCE_DIR}/includes
 	)
 	LINK_DIRECTORIES(
 		${WXMOZ_LINK_DIR}
@@ -54,6 +53,10 @@ IF(wxWidgets_FOUND)
 	IF(WIN32)
 		SET(GUI_TYPE WIN32)
 		SET(SRCS ${SRCS} ${CMAKE_SOURCE_DIR}/contrib/wxSean.rc)
+		INCULDE_DIRECTORIES(
+			${INCLUDE_DIRECTORIES}
+			${CMAKE_SOURCE_DIR}/contrib/includes
+		)
 		LINK_DIRECTORIES(
 			${LINK_DIRECTORIES}
 			"C:\\wxMozilla\\mozilla\\lib"
