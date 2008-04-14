@@ -5,6 +5,8 @@
  * Implement [http://docs.wxwidgets.org/2.6.3/wx_wxlistctrl.html wxListCtrl] for Content Manager
   * Implement Download Progress in wxListCtrl using [http://docs.wxwidgets.org/2.8.6/wx_wxgauge.html wxGauge] class
  * Log-on dialog before main window showing.
+ * Map browser buttons
+
 
 = Network-Client Todo =
  * Implement Libtorrent download class
