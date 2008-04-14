@@ -1,5 +1,5 @@
-#ifndef __BROWSER_H
-#define __BROWSER_H
+#ifndef __BROWSER_EMBED_H
+#define __BROWSER_EMBED_H
 	#include <wx/wxprec.h>
 	#ifndef WX_PRECOMP
 		#include <wx/wx.h>

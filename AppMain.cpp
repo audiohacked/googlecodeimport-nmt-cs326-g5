@@ -1,6 +1,6 @@
-#include "main.h"
-#include "menu.h"
-#include "browser.h"
+#include "AppMain.h"
+#include "AppMenu.h"
+#include "BrowserEmbed.h"
 #include "events.h"
 
 IMPLEMENT_APP(sApp)

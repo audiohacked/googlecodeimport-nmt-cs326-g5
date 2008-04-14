@@ -1,4 +1,4 @@
-#include "browser.h"
+#include "BrowserEmbed.h"
 
 sAppBrowser::sAppBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size) :
 	wxPanel(parent, id, pos, size)

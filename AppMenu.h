@@ -1,5 +1,5 @@
-#ifndef __MENU_H
-#define __MENU_H
+#ifndef __APP_MENU_H
+#define __APP_MENU_H
 
 	#include <wx/wxprec.h>
 

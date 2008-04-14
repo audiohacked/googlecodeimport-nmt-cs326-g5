@@ -1,5 +1,5 @@
-#ifndef __MAIN_H
-#define __MAIN_H
+#ifndef __APP_MAIN_H
+#define __APP_MAIN_H
 	#include <wx/wxprec.h>
 	#ifndef WX_PRECOMP
 		#include <wx/wx.h>
