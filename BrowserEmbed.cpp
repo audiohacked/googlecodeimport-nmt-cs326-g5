@@ -9,11 +9,11 @@ sAppBrowser::sAppBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, co
 	
 	wxButton *back, *forward, *refresh, *stop, *home;
 	
-	back = new wxButton(this, -1, "Back");
-	forward = new wxButton(this, -1, "Forward");
-	refresh = new wxButton(this, -1, "Refresh");
-	stop = new wxButton(this, -1, "Stop");
-	home = new wxButton(this, -1, "Home");
+	back = new wxButton(this, -1, wxT("Back"));
+	forward = new wxButton(this, -1, wxT("Forward"));
+	refresh = new wxButton(this, -1, wxT("Refresh"));
+	stop = new wxButton(this, -1, wxT("Stop"));
+	home = new wxButton(this, -1, wxT("Home"));
 	
 	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 	wxBoxSizer *browser_buttons_sizer = new wxBoxSizer(wxHORIZONTAL);
