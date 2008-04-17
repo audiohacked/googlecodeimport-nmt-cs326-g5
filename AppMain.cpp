@@ -47,14 +47,14 @@ sAppTabbed::sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	#ifdef BUILTIN_BROWSER
 		sAppBrowser *Home = new sAppBrowser(this, -1, wxDefaultPosition,
 			wxDefaultSize);
-		Home->browser->LoadURL(wxT("http://www.google.com/"));
+		Home->browser->LoadURL(wxT("http://www.nmt.edu/~snelson/"));
 		AddPage(Home, _T("Browser"));
 	#endif
 	
 	#ifdef COMMUNITY_PORTAL
-		wxMozillaBrowser *Community = new wxMozillaBrowser(this, -1, 
+		sAppBrowser *Community = new sAppBrowser(this, -1, 
 			wxDefaultPosition, wxDefaultSize);
-		Community->LoadURL(wxT("http://www.nmt.edu/"));
+		Community->browser->LoadURL(wxT("http://www.nmt.edu/"));
 		AddPage(Community, _T("Community"));
 	#endif
 	/*
