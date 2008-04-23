@@ -19,14 +19,14 @@
 			sAppBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size);
 			wxMozillaBrowser *browser;
 			wxString home;
-			void sAppBrowser::GotoHomepage(void);
+			void GotoHomepage(void);
 			
 		private:
-			void sAppBrowser::OnPrev(wxCommandEvent& event);
-			void sAppBrowser::OnNext(wxCommandEvent& event);
-			void sAppBrowser::OnStop(wxCommandEvent& event);
-			void sAppBrowser::OnRefresh(wxCommandEvent& event);
-			void sAppBrowser::OnHome(wxCommandEvent& event);
+			void OnPrev(wxCommandEvent& event);
+			void OnNext(wxCommandEvent& event);
+			void OnStop(wxCommandEvent& event);
+			void OnRefresh(wxCommandEvent& event);
+			void OnHome(wxCommandEvent& event);
 			
 			DECLARE_EVENT_TABLE()
 			
