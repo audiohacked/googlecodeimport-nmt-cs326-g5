@@ -6,7 +6,7 @@
 	#endif
 	
 	
-	#include <wxmozilla/wxMozilla.h>
+	#include <contrib/includes/wxmozilla/wxMozilla.h>
 /*
 	#include <wx/filesys.h>
 	#include <wx/fs_inet.h>
