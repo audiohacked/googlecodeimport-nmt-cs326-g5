@@ -5,7 +5,6 @@
 		#include <wx/wx.h>
 	#endif
 	
-	
 	#include <contrib/includes/wxmozilla/wxMozilla.h>
 /*
 	#include <wx/filesys.h>
@@ -19,6 +18,18 @@
 		public:
 			sAppBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size);
 			wxMozillaBrowser *browser;
+			wxString home;
+			void sAppBrowser::GotoHomepage(void);
+			
+		private:
+			void sAppBrowser::OnPrev(wxCommandEvent& event);
+			void sAppBrowser::OnNext(wxCommandEvent& event);
+			void sAppBrowser::OnStop(wxCommandEvent& event);
+			void sAppBrowser::OnRefresh(wxCommandEvent& event);
+			void sAppBrowser::OnHome(wxCommandEvent& event);
+			
+			DECLARE_EVENT_TABLE()
+			
 	};
 
 	/*

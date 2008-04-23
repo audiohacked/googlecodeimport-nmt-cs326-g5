@@ -1,7 +1,21 @@
 #include "AppMain.h"
 #include "AppMenu.h"
 #include "BrowserEmbed.h"
-#include "events.h"
+
+#include "enum.h" // needed for the MENU_Quit and etc.
+
+/* we have here is the event table used for event handling
+	I still have no idea how this works
+	*/
+BEGIN_EVENT_TABLE( sAppFrame, wxFrame )
+	EVT_MENU(MENU_Quit, 
+		sAppFrame::OnExit) /* when we click Quit in the 
+							menu system this event closes				
+							the window and cleans up */
+	EVT_MENU(MENU_About,
+	 	sAppFrame::AboutBox) /* when we click Help->About_This_App 
+								this event opens the about box */
+END_EVENT_TABLE()
 
 IMPLEMENT_APP(sApp)
 
@@ -47,14 +61,16 @@ sAppTabbed::sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	#ifdef BUILTIN_BROWSER
 		sAppBrowser *Home = new sAppBrowser(this, -1, wxDefaultPosition,
 			wxDefaultSize);
-		Home->browser->LoadURL(wxT("http://www.nmt.edu/~snelson/"));
+		Home->home = wxT("http://www.nmt.edu/~snelson/");
+		Home->GotoHomepage();
 		AddPage(Home, _T("Browser"));
 	#endif
 	
 	#ifdef COMMUNITY_PORTAL
 		sAppBrowser *Community = new sAppBrowser(this, -1, 
 			wxDefaultPosition, wxDefaultSize);
-		Community->browser->LoadURL(wxT("http://www.nmt.edu/"));
+		Community->home = wxT("http://www.nmt.edu/");
+		Community->GotoHomepage();
 		AddPage(Community, _T("Community"));
 	#endif
 	/*
@@ -71,10 +87,10 @@ sAppPanel::sAppPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 		wxNB_FIXEDWIDTH);
 
 	
-	wxButton *News = new wxButton(this, -1, wxT("News"));
-	wxButton *Settings = new wxButton(this, -1, wxT("Settings"));
-	wxButton *Support = new wxButton(this, -1, wxT("Support"));
-	wxButton *InstaMessenger = new wxButton(this, -1, wxT("InstaMessenger"));
+	wxButton *News = new wxButton(this, TABB_News, wxT("News"));
+	wxButton *Settings = new wxButton(this, TABB_Settings, wxT("Settings"));
+	wxButton *Support = new wxButton(this, TABB_Support, wxT("Support"));
+	//wxButton *InstaMessenger = new wxButton(this, -1, wxT("InstaMessenger"));
 	
 
 	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
@@ -84,7 +100,7 @@ sAppPanel::sAppPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	button_sizer->Add(News, 0, wxALL, 10);
 	button_sizer->Add(Settings, 0, wxALL, 10);
 	button_sizer->Add(Support, 0, wxALL, 10);
-	button_sizer->Add(InstaMessenger, 0, wxALL, 10);
+	//button_sizer->Add(InstaMessenger, 0, wxALL, 10);
 	SetSizer(sizer);
 	sizer->SetSizeHints(this);
 }

@@ -21,5 +21,13 @@ enum
 	MENU_SystemInfo,
 	MENU_Privacy,
 	MENU_Legal,
-	MENU_About
+	MENU_About,
+	BROWSER_Next,
+	BROWSER_Prev,
+	BROWSER_Stop,
+	BROWSER_Refresh,
+	BROWSER_Home,
+	TABB_News,
+	TABB_Settings,
+	TABB_Support
 };
