@@ -13,6 +13,21 @@ BEGIN_EVENT_TABLE( sAppFrame, wxFrame )
 								this event opens the about box */
 END_EVENT_TABLE()
 
+BEGIN_EVENT_TABLE( sAppBrowser, wxPanel )
+	EVT_BUTTON(BROWSER_Next, sAppBrowser::OnNext)
+	EVT_BUTTON(BROWSER_Prev, sAppBrowser::OnPrev)
+	EVT_BUTTON(BROWSER_Stop, sAppBrowser::OnStop)
+	EVT_BUTTON(BROWSER_Refresh, sAppBrowser::OnRefresh)
+	EVT_BUTTON(BROWSER_Home, sAppBrowser::OnHome)
+END_EVENT_TABLE()
+
+/*BEGIN_EVENT_TABLE( sAppPanel, wxPanel )
+	EVT_BUTTON(TABB_News, sAppPanel::OnNewsButton)
+	EVT_BUTTON(TABB_Settings, sAppPanel::OnSettingsButton)
+	EVT_BUTTON(TABB_Support, sAppPanel::OnSupportButton)
+	//EVT_BUTTON(TABB_IM, sAppPanel::OnIMButton)
+END_EVENT_TABLE()*/
+
 //BEGIN_EVENT_TABLE( wxSeanMenu, wxMenuBar )
 	//EVT_MENU(MENU_Quit, wxSeanFrame::OnExit)
 	//EVT_MENU(MENU_About, wxSeanFrame::AboutBox)

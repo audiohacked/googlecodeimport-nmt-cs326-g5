@@ -22,7 +22,6 @@ SET(SRCS
 
 SET(HDRS
 	enum.h
-	events.h
 	AppMain.h
 	AppMenu.h
 	BrowserEmbed.h

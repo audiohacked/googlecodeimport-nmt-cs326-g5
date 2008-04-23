@@ -1,4 +1,13 @@
 #include "BrowserEmbed.h"
+#include "enum.h"
+
+BEGIN_EVENT_TABLE( sAppBrowser, wxPanel )
+	EVT_BUTTON(BROWSER_Next, sAppBrowser::OnNext)
+	EVT_BUTTON(BROWSER_Prev, sAppBrowser::OnPrev)
+	EVT_BUTTON(BROWSER_Stop, sAppBrowser::OnStop)
+	EVT_BUTTON(BROWSER_Refresh, sAppBrowser::OnRefresh)
+	EVT_BUTTON(BROWSER_Home, sAppBrowser::OnHome)
+END_EVENT_TABLE()
 
 sAppBrowser::sAppBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size) :
 	wxPanel(parent, id, pos, size)
@@ -18,11 +27,11 @@ sAppBrowser::sAppBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, co
 	
 	wxButton *back, *forward, *refresh, *stop, *home;
 	
-	back = new wxButton(this, -1, wxT("Back"));
-	forward = new wxButton(this, -1, wxT("Forward"));
-	refresh = new wxButton(this, -1, wxT("Refresh"));
-	stop = new wxButton(this, -1, wxT("Stop"));
-	home = new wxButton(this, -1, wxT("Home"));
+	back 	= new wxButton(this, BROWSER_Prev, 		wxT("Back"));
+	forward = new wxButton(this, BROWSER_Next, 		wxT("Forward"));
+	refresh = new wxButton(this, BROWSER_Refresh, 	wxT("Refresh"));
+	stop 	= new wxButton(this, BROWSER_Stop, 		wxT("Stop"));
+	home 	= new wxButton(this, BROWSER_Home, 		wxT("Home"));
 	
 	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 	wxBoxSizer *browser_buttons_sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -38,6 +47,50 @@ sAppBrowser::sAppBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, co
 	SetSizer(sizer);
 }
 
+void sAppBrowser::OnPrev(wxCommandEvent& event)
+{
+	printf("OnPrev..\n");
+	if (browser->CanGoBack())
+	{
+		browser->GoBack();		
+	}
+}
+void sAppBrowser::OnNext(wxCommandEvent& event)
+{
+	printf("OnNext..\n");
+	if ( browser->CanGoForward() )
+	{
+		browser->GoForward();
+	}
+}
+void sAppBrowser::OnStop(wxCommandEvent& event)
+{
+	printf("OnStop..\n");
+	if ( browser->IsBusy() )
+	{
+		browser->Stop();
+	}
+}
+void sAppBrowser::OnRefresh(wxCommandEvent& event)
+{
+	printf("OnRefresh..\n");
+	if ( !browser->IsBusy() )
+	{
+		browser->Refresh();
+	}
+}
+
+void sAppBrowser::OnHome(wxCommandEvent& event)
+{
+	printf("OnHome..\n");
+	browser->LoadURL(home);
+}
+
+void sAppBrowser::GotoHomepage(void)
+{
+	printf("GotoHomepage..\n");
+	browser->LoadURL(home);	
+}
 /*
 const wxString ddpsProtocolHandler::NewURI(const wxString spec, const wxString base)
 {
