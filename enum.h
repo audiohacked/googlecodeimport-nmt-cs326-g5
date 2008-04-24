@@ -29,5 +29,8 @@ enum
 	BROWSER_Home,
 	TABB_News,
 	TABB_Settings,
-	TABB_Support
+	TABB_Support,
+	TABPAGE_Browser,
+	TABPAGE_Community,
+	TABPAGE_Downloads
 };
