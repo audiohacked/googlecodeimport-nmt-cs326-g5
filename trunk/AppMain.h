@@ -5,10 +5,16 @@
 		#include <wx/wx.h>
 	#endif
 
+	#include <wx/utils.h>
+	#include <wx/choicebk.h>
+
 	#include <wx/notebook.h>
 	#include <wx/panel.h>
 	
 	#include "config.h"
+
+	#include "AppMenu.h"
+	#include "BrowserEmbed.h"
 
 	class sApp : public wxApp
 	{
@@ -19,8 +25,7 @@
 	class sAppFrame : public wxFrame
 	{
 		public:
-			sAppFrame(const wxString &title, const wxPoint &pos, 
-				const wxSize &size);
+			sAppFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
 			void OnExit( wxCommandEvent &event);
 			void AboutBox(wxCommandEvent &event);
 
@@ -30,14 +35,21 @@
 	class sAppTabbed : public wxNotebook
 	{
 		public:
-			sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
-				const wxSize &size, long style);
+			sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size, long style);
+			sAppBrowser *Home;
+			sAppBrowser *Community;
+
+			DECLARE_EVENT_TABLE()
 	};
 	
 	class sAppPanel : public wxPanel
 	{
 		public:
-			sAppPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
-				const wxSize &size, long style);
+			sAppPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size, long style);
+
+			void GotoNewsTab(wxCommandEvent& event);
+			sAppTabbed *tabs;
+
+			DECLARE_EVENT_TABLE()
 	};
 #endif
