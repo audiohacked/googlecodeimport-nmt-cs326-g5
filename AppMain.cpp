@@ -61,7 +61,7 @@ sAppTabbed::sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	#ifdef BUILTIN_BROWSER
 		sAppBrowser *Home = new sAppBrowser(this, -1, wxDefaultPosition,
 			wxDefaultSize);
-		Home->home = wxT("http://www.nmt.edu/~snelson/");
+		Home->home = wxT("http://coreyb.homelinux.org/contentmanager");
 		Home->GotoHomepage();
 		AddPage(Home, _T("Browser"));
 	#endif
@@ -69,7 +69,7 @@ sAppTabbed::sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	#ifdef COMMUNITY_PORTAL
 		sAppBrowser *Community = new sAppBrowser(this, -1, 
 			wxDefaultPosition, wxDefaultSize);
-		Community->home = wxT("http://www.nmt.edu/");
+		Community->home = wxT("http://coreyb.homelinux.org/contentmanager/community");
 		Community->GotoHomepage();
 		AddPage(Community, _T("Community"));
 	#endif
