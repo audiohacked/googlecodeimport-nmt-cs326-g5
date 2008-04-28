@@ -47,7 +47,7 @@ void sAppFrame::OnExit(wxCommandEvent &event)
 
 void sAppFrame::AboutBox(wxCommandEvent& WXUNUSED(event))
 {
-	#ifndef WIN32
+	#ifdef __MAC
 		wxAboutDialogInfo info;
 		info.SetName(_("wxSeanApp"));
 		info.SetVersion(_("1.0 Beta"));
@@ -74,6 +74,7 @@ sAppPanel::sAppPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	button_sizer->Add(News, 0, wxALL, 10);
 	button_sizer->Add(Settings, 0, wxALL, 10);
 	button_sizer->Add(Support, 0, wxALL, 10);
+	//Support = wxT("http://coreyb.homelinux.org/contentmanager/support");
 	//button_sizer->Add(InstaMessenger, 0, wxALL, 10);
 	SetSizer(sizer);
 	sizer->SetSizeHints(this);
