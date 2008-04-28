@@ -85,6 +85,10 @@ void sAppPanel::GotoNewsTab(wxCommandEvent& WXUNUSED(event))
 	#ifdef BUILTIN_BROWSER
 		if ( tabs )
 		{
+			if (tabs->Home->browser)
+			{
+				tabs->Home->GotoHomepage();
+			}
 			tabs->ChangeSelection(0);
 		}
 	#endif

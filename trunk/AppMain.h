@@ -47,7 +47,8 @@
 		public:
 			sAppPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size, long style);
 
-			void GotoNewsTab(wxCommandEvent& event);
+			void GotoNewsTab(wxCommandEvent&);
+			void GotoSupport(wxCommandEvent&);
 			sAppTabbed *tabs;
 
 			DECLARE_EVENT_TABLE()
