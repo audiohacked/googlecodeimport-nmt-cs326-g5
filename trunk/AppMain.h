@@ -49,6 +49,7 @@
 
 			void GotoNewsTab(wxCommandEvent&);
 			void GotoSupport(wxCommandEvent&);
+			void GotoSettings(wxCommandEvent&);
 			sAppTabbed *tabs;
 
 			DECLARE_EVENT_TABLE()
