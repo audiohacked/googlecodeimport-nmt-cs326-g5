@@ -81,4 +81,3 @@ void sAppBrowser::GotoHomepage(void)
 	printf("GotoHomepage..\n");
 	browser->LoadURL(home);	
 }
-

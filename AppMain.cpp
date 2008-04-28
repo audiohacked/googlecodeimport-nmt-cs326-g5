@@ -17,6 +17,8 @@ END_EVENT_TABLE()
 
 BEGIN_EVENT_TABLE( sAppPanel, wxPanel )
 	EVT_BUTTON(TABB_News, sAppPanel::GotoNewsTab)
+	EVT_BUTTON(TABB_Support, sAppPanel::GotoSupport)
+	EVT_BUTTON(TABB_Settings, sAppPanel::GotoSettings)
 END_EVENT_TABLE()
 
 IMPLEMENT_APP(sApp)
@@ -94,6 +96,34 @@ void sAppPanel::GotoNewsTab(wxCommandEvent& WXUNUSED(event))
 	#endif
 }
 
+void sAppPanel::GotoSupport(wxCommandEvent& WXUNUSED(event))
+{
+	#ifdef BUILTIN_BROWSER
+		if ( tabs )
+		{
+			if (tabs->Home->browser)
+			{
+				tabs->Home->browser->LoadURL(wxT("http://coreyb.homelinux.org/contentmanager/support/"));
+			}
+			tabs->ChangeSelection(0);
+		}
+	#endif
+}
+
+void sAppPanel::GotoSettings(wxCommandEvent& WXUNUSED(event))
+{
+	#ifdef BUILTIN_BROWSER
+		if ( tabs )
+		{
+			if (tabs->Home->browser)
+			{
+				tabs->Home->browser->LoadURL(wxT("http://coreyb.homelinux.org/contentmanager/support/"));
+			}
+			tabs->ChangeSelection(0);
+		}
+	#endif
+}
+
 sAppTabbed::sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	 const wxSize &size, long style) : wxNotebook(parent, id, pos, size, style)
 {
@@ -113,9 +143,9 @@ sAppTabbed::sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 		AddPage(Community, _T("Community"));
 	#endif
 
-	/*
-	wxPanel *Downloads = new sAppDownloadsPanel(this, -1, wxDefaultPosition, 
-		wxDefaultSize, wxTAB_TRAVERSAL|wxCLIP_CHILDREN|wxNO_BORDER);
-	AddPage(Games, _T("Downloads"));
-	*/
+	#ifdef DOWNLOAD_PANEL
+		wxPanel *Downloads = new sAppDownloadsPanel(this, -1, wxDefaultPosition, 
+			wxDefaultSize, wxTAB_TRAVERSAL|wxCLIP_CHILDREN|wxNO_BORDER);
+		AddPage(Games, _T("Downloads"));
+	#endif
 }
