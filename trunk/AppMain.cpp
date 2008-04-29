@@ -132,8 +132,8 @@ sAppTabbed::sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	 const wxSize &size, long style) : wxNotebook(parent, id, pos, size, style)
 {
 	#ifdef BUILTIN_BROWSER
-		Home = new sAppBrowser(this, TABPAGE_Browser, wxDefaultPosition,
-			wxDefaultSize);
+		Home = new sAppBrowser(this, TABPAGE_Browser, 
+			wxDefaultPosition, wxDefaultSize);
 		Home->home = wxT(HOMEPAGE);
 		Home->GotoHomepage();
 		AddPage(Home, _T("Browser"));
