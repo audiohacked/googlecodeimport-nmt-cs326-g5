@@ -8,6 +8,8 @@
 BEGIN_EVENT_TABLE( sAppFrame, wxFrame )
 	EVT_MENU(MENU_Quit, sAppFrame::OnExit) /* when we click Quit in the menu system this event closes	the window and cleans up */
 	EVT_MENU(MENU_About, sAppFrame::AboutBox) /* when we click Help->About_This_App this event opens the about box */
+	EVT_MENU(MENU_Support, sAppPanel::GotoSupport)
+	EVT_MENU(MENU_About, sAppPanel::GotoSettings)
 END_EVENT_TABLE()
 
 BEGIN_EVENT_TABLE( sAppTabbed, wxNotebook )
@@ -88,7 +90,7 @@ void sAppPanel::GotoNewsTab(wxCommandEvent& WXUNUSED(event))
 		{
 			if (tabs->Home->browser)
 			{
-				tabs->Home->browser->LoadURL(wxT("http://coreyb.homelinux.org/contentmanager/news/"));
+				tabs->Home->browser->LoadURL(wxT(HOMEPAGE));
 			}
 			tabs->ChangeSelection(0);
 		}
@@ -102,11 +104,14 @@ void sAppPanel::GotoSupport(wxCommandEvent& WXUNUSED(event))
 		{
 			if (tabs->Home->browser)
 			{
-				tabs->Home->browser->LoadURL(wxT("http://coreyb.homelinux.org/contentmanager/support/"));
+				tabs->Home->browser->LoadURL(wxT(SUPPORTPAGE));
 			}
 			tabs->ChangeSelection(0);
 		}
+	#else
+	
 	#endif
+	
 }
 
 void sAppPanel::GotoSettings(wxCommandEvent& WXUNUSED(event))
@@ -137,7 +142,7 @@ sAppTabbed::sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	#ifdef COMMUNITY_PORTAL
 		Community = new sAppBrowser(this, TABPAGE_Community, 
 			wxDefaultPosition, wxDefaultSize);
-		Community->home = wxT("http://coreyb.homelinux.org/contentmanager/community");
+		Community->home = wxT(COMMUNITYPAGE);
 		Community->GotoHomepage();
 		AddPage(Community, _T("Community"));
 	#endif
