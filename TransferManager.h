@@ -6,11 +6,17 @@
 		#include <wx/wx.h>
 	#endif
 	
+	#include <wx/listctrl.h>
+	
 	class TransferManager : public wxPanel
 	{
 		public:
-			TransferManager();
-			~TransferManager();
+			TransferManager(wxWindow* parent, wxWindowID id, 
+                    const wxPoint& pos, const wxSize& size, long style);
+			wxListCtrl *listDownloads;
+			AddTorrentDownload();
+			AddHttpDownload();
+
 	};
-	
+		
 #endif
