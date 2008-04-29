@@ -25,6 +25,7 @@ SET(SRCS
 	AppMenu.cpp
 	BrowserEmbed.cpp
 	TransferManager.cpp
+	SettingsDialog.cpp
 )
 
 SET(HDRS
@@ -33,6 +34,7 @@ SET(HDRS
 	AppMenu.h
 	BrowserEmbed.h
 	TransferManager.h
+	SettingsDialog.h
 )
 
 

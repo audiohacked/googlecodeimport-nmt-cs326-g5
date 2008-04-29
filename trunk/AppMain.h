@@ -16,6 +16,7 @@
 	#include "AppMenu.h"
 	#include "BrowserEmbed.h"
 	#include "TransferManager.h"
+	#include "SettingsDialog.h"
 
 	class sApp : public wxApp
 	{
@@ -29,6 +30,7 @@
 			sAppFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
 			void OnExit( wxCommandEvent &event);
 			void AboutBox(wxCommandEvent &event);
+			void SettingsDialog(wxCommandEvent &event);
 
 			DECLARE_EVENT_TABLE()
 	};
@@ -50,9 +52,9 @@
 
 			void GotoNewsTab(wxCommandEvent&);
 			void GotoSupport(wxCommandEvent&);
-			void GotoSettings(wxCommandEvent&);
 			sAppTabbed *tabs;
 
 			DECLARE_EVENT_TABLE()
 	};
+
 #endif

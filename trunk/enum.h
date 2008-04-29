@@ -32,5 +32,7 @@ enum
 	TABB_Support,
 	TABPAGE_Browser,
 	TABPAGE_Community,
-	TABPAGE_Downloads
+	TABPAGE_Downloads,
+	BUTTON_Accept,
+	BUTTON_Cancel
 };
