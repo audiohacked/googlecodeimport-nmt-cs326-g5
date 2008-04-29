@@ -7,12 +7,19 @@ SET(CMAKE_FIND_LIBRARY_PREFIXES "")
 SET(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
 SET(wxWidgets_USE_LIBS base core net)
 
+
 OPTION(COMMUNITY_PORTAL "Add Community Support" ON)
 OPTION(USER_UPLOAD "Add User Upload capabilities" ON)
 OPTION(BUILTIN_BROWSER "Add the Built-in Browser Support" ON)
+#OPTION(HOMEPAGE "define the application's homepage for built-in browser" "http://coreyb.homelinux.org/contentmanager")
+#OPTION(SUPPORTPAGE "define the application's support page" "http://coreyb.homelinux.org/contentmanager/support")
+#OPTION(COMMUNITYPAGE "define the application's community portal page" "http://coreyb.homelinux.org/contentmanager/community")
+SET(HOMEPAGE "http://coreyb.homelinux.org/contentmanager")
+SET(SUPPORTPAGE "http://coreyb.homelinux.org/contentmanager/support")
+SET(COMMUNITYPAGE "http://coreyb.homelinux.org/contentmanager/community" )
 
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake
-	${CMAKE_BINARY_DIR}/config.h)
+	${CMAKE_BINARY_DIR}/config.h ESCAPE_QUOTES)
 
 SET(SRCS 
 	AppMain.cpp
