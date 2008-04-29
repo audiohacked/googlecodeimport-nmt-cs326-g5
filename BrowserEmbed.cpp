@@ -66,7 +66,7 @@ void sAppBrowser::OnRefresh(wxCommandEvent& event)
 	printf("OnRefresh..\n");
 	if ( !browser->IsBusy() )
 	{
-		browser->Refresh();
+		browser->Reload();
 	}
 }
 
