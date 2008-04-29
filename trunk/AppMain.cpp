@@ -147,9 +147,9 @@ sAppTabbed::sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 		AddPage(Community, _T("Community"));
 	#endif
 
-	#ifdef DOWNLOAD_PANEL
-		wxPanel *Downloads = new sAppDownloadsPanel(this, -1, wxDefaultPosition, 
+	//#ifdef DOWNLOAD_PANEL
+		wxPanel *Downloads = new TransferManager(this, -1, wxDefaultPosition, 
 			wxDefaultSize, wxTAB_TRAVERSAL|wxCLIP_CHILDREN|wxNO_BORDER);
-		AddPage(Games, _T("Downloads"));
-	#endif
+		AddPage(Downloads, _T("Downloads"));
+	//#endif
 }

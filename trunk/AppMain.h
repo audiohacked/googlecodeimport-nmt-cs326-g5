@@ -15,6 +15,7 @@
 
 	#include "AppMenu.h"
 	#include "BrowserEmbed.h"
+	#include "TransferManager.h"
 
 	class sApp : public wxApp
 	{
