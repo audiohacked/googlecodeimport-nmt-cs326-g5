@@ -90,7 +90,11 @@ void sAppPanel::GotoNewsTab(wxCommandEvent& WXUNUSED(event))
 		{
 			if (tabs->Home->browser)
 			{
-				tabs->Home->browser->LoadURL(wxT(HOMEPAGE));
+				#ifdef NEWSPAGE
+				tabs->Home->browser->LoadURL(wxT(NEWSPAGE));
+				#else
+				tabs->Home->browser->LoadURL(wxT("coreyb.homelinux.org/contentmanager/news"));
+				#endif
 			}
 			tabs->ChangeSelection(0);
 		}
@@ -104,7 +108,11 @@ void sAppPanel::GotoSupport(wxCommandEvent& WXUNUSED(event))
 		{
 			if (tabs->Home->browser)
 			{
+				#ifdef SUPPORTPAGE
 				tabs->Home->browser->LoadURL(wxT(SUPPORTPAGE));
+				#else
+				tabs->Home->browser->LoadURL(wxT("coreyb.homelinux.org/contentmanager/support"));
+				#endif
 			}
 			tabs->ChangeSelection(0);
 		}
@@ -134,7 +142,11 @@ sAppTabbed::sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	#ifdef BUILTIN_BROWSER
 		Home = new sAppBrowser(this, TABPAGE_Browser, 
 			wxDefaultPosition, wxDefaultSize);
+		#ifdef HOMEPAGE
 		Home->home = wxT(HOMEPAGE);
+		#else
+		Home->home = wxT("coreyb.homelinux.org/contentmanager");
+		#endif
 		Home->GotoHomepage();
 		AddPage(Home, _T("Browser"));
 	#endif
@@ -142,7 +154,11 @@ sAppTabbed::sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	#ifdef COMMUNITY_PORTAL
 		Community = new sAppBrowser(this, TABPAGE_Community, 
 			wxDefaultPosition, wxDefaultSize);
+		#ifdef COMMUNITYPAGE
 		Community->home = wxT(COMMUNITYPAGE);
+		#else
+		Community->home = wxT("coreyb.homelinux.org/contentmanager/community");
+		#endif
 		Community->GotoHomepage();
 		AddPage(Community, _T("Community"));
 	#endif
