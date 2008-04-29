@@ -9,7 +9,7 @@ BEGIN_EVENT_TABLE( sAppFrame, wxFrame )
 	EVT_MENU(MENU_Quit, sAppFrame::OnExit) /* when we click Quit in the menu system this event closes	the window and cleans up */
 	EVT_MENU(MENU_About, sAppFrame::AboutBox) /* when we click Help->About_This_App this event opens the about box */
 	EVT_MENU(MENU_Support, sAppPanel::GotoSupport)
-	EVT_MENU(MENU_About, sAppPanel::GotoSettings)
+	EVT_MENU(MENU_Settings, sAppFrame::SettingsDialog)
 END_EVENT_TABLE()
 
 BEGIN_EVENT_TABLE( sAppTabbed, wxNotebook )
@@ -20,7 +20,7 @@ END_EVENT_TABLE()
 BEGIN_EVENT_TABLE( sAppPanel, wxPanel )
 	EVT_BUTTON(TABB_News, sAppPanel::GotoNewsTab)
 	EVT_BUTTON(TABB_Support, sAppPanel::GotoSupport)
-	EVT_BUTTON(TABB_Settings, sAppPanel::GotoSettings)
+	EVT_BUTTON(TABB_Settings, sAppFrame::SettingsDialog)
 END_EVENT_TABLE()
 
 IMPLEMENT_APP(sApp)
@@ -59,6 +59,13 @@ void sAppFrame::AboutBox(wxCommandEvent& WXUNUSED(event))
 		//info.SetCopyright(_("(C) 2008 Sean Nelson <snelson@nmt.edu>")):
 		//wxAboutBox(info);
 	#endif
+}
+
+//open the settings dialog
+void sAppFrame::SettingsDialog(wxCommandEvent& WXUNUSED(event))
+{
+	sSettingsFrame *settingsFrame = new sSettingsFrame(_T("sAppFrame"), wxPoint(50, 50), wxSize(800,600));
+	settingsFrame->Show(TRUE);
 }
 
 sAppPanel::sAppPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
@@ -120,20 +127,6 @@ void sAppPanel::GotoSupport(wxCommandEvent& WXUNUSED(event))
 	
 	#endif
 	
-}
-
-void sAppPanel::GotoSettings(wxCommandEvent& WXUNUSED(event))
-{
-	#ifdef BUILTIN_BROWSER
-		if ( tabs )
-		{
-			if (tabs->Home->browser)
-			{
-				tabs->Home->browser->LoadURL(wxT("http://coreyb.homelinux.org/contentmanager/support/"));
-			}
-			tabs->ChangeSelection(0);
-		}
-	#endif
 }
 
 sAppTabbed::sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
