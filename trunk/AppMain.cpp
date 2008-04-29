@@ -49,13 +49,13 @@ void sAppFrame::OnExit(wxCommandEvent &event)
 
 void sAppFrame::AboutBox(wxCommandEvent& WXUNUSED(event))
 {
-	#ifdef __MAC
-		wxAboutDialogInfo info;
-		info.SetName(_("wxSeanApp"));
-		info.SetVersion(_("1.0 Beta"));
-		info.SetDescription(_("This Program is a Digital Content Distribution and Publishing System."));
-		info.SetCopyright(_("(C) 2008 Sean Nelson <snelson@nmt.edu>")):
-		wxAboutBox(info);
+	#ifdef __WXMAC__
+		//wxAboutDialogInfo info;
+		//info.SetName(_("wxSeanApp"));
+		//info.SetVersion(_("1.0 Beta"));
+		//info.SetDescription(_("This Program is a Digital Content Distribution and Publishing System."));
+		//info.SetCopyright(_("(C) 2008 Sean Nelson <snelson@nmt.edu>")):
+		//wxAboutBox(info);
 	#endif
 }
 
@@ -129,7 +129,7 @@ sAppTabbed::sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	#ifdef BUILTIN_BROWSER
 		Home = new sAppBrowser(this, TABPAGE_Browser, wxDefaultPosition,
 			wxDefaultSize);
-		Home->home = wxT("http://coreyb.homelinux.org/contentmanager");
+		Home->home = wxT(HOMEPAGE);
 		Home->GotoHomepage();
 		AddPage(Home, _T("Browser"));
 	#endif

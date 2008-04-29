@@ -7,9 +7,9 @@
 
 	#cmakedefine USER_UPLOAD 1
 
-	#cmakedefine HOMEPAGE http://coreyb.homelinux.org/contentmanager
+	#cmakedefine HOMEPAGE "${HOMEPAGE}"
 
-	#cmakedefine SUPPORTPAGE http://coreyb.homelinux.org/contentmanager/support
+	#cmakedefine SUPPORTPAGE "${SUPPORTPAGE}"
 
-	#cmakedefine COMMUNITYPAGE http://coreyb.homelinux.org/contentmanager/community
+	#cmakedefine COMMUNITYPAGE "${COMMUNITYPAGE}"
 #endif
