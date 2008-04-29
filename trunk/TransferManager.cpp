@@ -21,12 +21,12 @@ const wxPoint& pos, const wxSize& size, long style) : wxPanel(parent, id, pos, s
 
 }
 
-TransferManager::AddTorrentDownload()
+void TransferManager::AddTorrentDownload()
 {
 	
 }
 
-TransferManager::AddHttpDownload()
+void TransferManager::AddHttpDownload()
 {
 
 }
