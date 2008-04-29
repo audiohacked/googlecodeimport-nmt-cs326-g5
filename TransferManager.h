@@ -14,9 +14,10 @@
 			TransferManager(wxWindow* parent, wxWindowID id, 
                     const wxPoint& pos, const wxSize& size, long style);
 			wxListCtrl *listDownloads;
-			AddTorrentDownload();
-			AddHttpDownload();
+			void AddTorrentDownload();
+			void AddHttpDownload();
 
 	};
 		
 #endif
+
