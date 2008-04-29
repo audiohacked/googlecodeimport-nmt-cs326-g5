@@ -12,4 +12,7 @@
 	#cmakedefine SUPPORTPAGE "${SUPPORTPAGE}"
 
 	#cmakedefine COMMUNITYPAGE "${COMMUNITYPAGE}"
+
+	#cmakedefine NEWSPAGE "${NEWSPAGE}"
+	
 #endif
