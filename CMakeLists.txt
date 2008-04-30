@@ -66,13 +66,17 @@ IF(wxWidgets_FOUND)
 		INCLUDE_DIRECTORIES(
 			${INCLUDE_DIRECTORIES}
 			${CMAKE_SOURCE_DIR}/contrib/includes
+			${CMAKE_SOURCE_DIR}/contrib/includes/libtorrent
+			"C:\\boost_1_35_0"
 		)
 		LINK_DIRECTORIES(
 			${LINK_DIRECTORIES}
 			"C:\\wxMozilla\\mozilla\\lib"
 			"C:\\wxMozilla\\build\\msw\\DLL\ Release\ Monolithic\ WX_PYTHON_0"
+			${CMAKE_SOURCE_DIR}/contrib/libs/libtorrent
 		)
 		LINK_LIBRARIES(
+			libtorrent.lib
 			embed_base_s.lib
 			xpcom.lib
 			xul.lib
