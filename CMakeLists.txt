@@ -87,8 +87,17 @@ IF(wxWidgets_FOUND)
 			nspr4.lib
 			plc4.lib
 			plds4.lib
-			wxmsw28_core.lib
 			wxbase28.lib
+			wxbase28_net.lib
+			wxbase28_xml.lib
+			wxmsw28_adv.lib
+			wxmsw28_aui.lib
+			wxmsw28_core.lib
+			wxmsw28_html.lib
+			wxmsw28_media.lib
+			wxmsw28_qa.lib
+			wxmsw28_richtext.lib
+			wxmsw28_xrc.lib
 			wxtiff.lib
 			wxjpeg.lib
 			wxpng.lib
