@@ -8,8 +8,8 @@
 	
 	#include <wx/listctrl.h>
 
-	#include "TorrentManager.h"
-	#include "HttpManager.h"
+	//#include "TorrentManager.h"
+	//#include "HttpManager.h"
 	
 	class TransferManager : public wxPanel
 	{
@@ -18,12 +18,16 @@
                     const wxPoint& pos, const wxSize& size, long style);
 
 			wxListCtrl *listDownloads;
-			TorrentTransferManager *torrentDownloads;
-			HttpTransferManager *httpDownloads;
 			
-			void AddTorrentDownload(big_number const& TorrentHash);
-			void AddHttpDownload();
-
+			#ifdef __TORRENT_MANAGER_H
+				TorrentTransferManager *torrentDownloads;
+				void AddTorrentDownload(big_number const& TorrentHash);
+			#endif
+			
+			#ifdef __HTTP_MANAGER_H
+				HttpTransferManager *httpDownloads;
+				void AddHttpDownload();
+			#endif
 	};
 		
 #endif
