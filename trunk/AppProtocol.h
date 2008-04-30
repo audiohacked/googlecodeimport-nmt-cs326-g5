@@ -1,10 +1,13 @@
 #ifndef __DDPS_PROTOCOL_H
 #define __DDPS_PROTOCOL_H
 
-	//#include <wxmozilla/wxMozillaProtocolHandler.h>
+	#include <wx/wxprec.h>
+	#ifndef WX_PRECOMP
+		#include <wx/wx.h>
+	#endif
 
-	#ifdef __WX_MOZILLA_PROTOCOLS_H__
-	
+	#include <wxmozilla/wxMozillaProtocolHandler.h>
+
 	#include <wx/filesys.h>
 	#include <wx/fs_inet.h>
 	#include <wx/fs_zip.h>
@@ -24,5 +27,4 @@
 			wxFileSystem mFileSystem;
 
 	};
-	#endif
 #endif
