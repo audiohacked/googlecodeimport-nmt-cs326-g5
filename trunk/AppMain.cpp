@@ -30,7 +30,7 @@ IMPLEMENT_APP(sApp)
 
 bool sApp::OnInit()
 {
-	#ifdef __WX_MOZILLA_PROTOCOLS_H__
+	#ifdef __DDPS_PROTOCOL_H
 	wxFileSystem::AddHandler(new wxInternetFSHandler());
 	wxFileSystem::AddHandler(new wxZipFSHandler());
 	wxFileSystem::AddHandler(new wxMemoryFSHandler());
@@ -171,9 +171,9 @@ sAppTabbed::sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 		AddPage(Community, _T("Community"));
 	#endif
 
-	//#ifdef DOWNLOAD_PANEL
+	#ifdef __TRANSFER_MANAGER_H
 		wxPanel *Downloads = new TransferManager(this, -1, wxDefaultPosition, 
 			wxDefaultSize, wxTAB_TRAVERSAL|wxCLIP_CHILDREN|wxNO_BORDER);
 		AddPage(Downloads, _T("Downloads"));
-	//#endif
+	#endif
 }
