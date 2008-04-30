@@ -57,25 +57,21 @@
 			DECLARE_EVENT_TABLE()
 	};
 
+	//#include <wxmozilla/wxMozillaProtocolHandler.h>
+
+	#ifdef __WX_MOZILLA_PROTOCOLS_H__
+	
 	#include <wx/filesys.h>
 	#include <wx/fs_inet.h>
 	#include <wx/fs_zip.h>
 	#include <wx/fs_mem.h>
-
-	#include <wxmozilla/wxMozillaProtocolHandler.h>
+	
 	class ddpsProtocolHandler : public wxFSProtocolHandler
 	{
 		public:
-			ddpsProtocolHandler(const wxString scheme) : wxFSProtocolHandler(scheme)
-			{}
+			ddpsProtocolHandler(const wxString scheme) : wxFSProtocolHandler(scheme){}
 			
-			~ddpsProtocolHandler()
-			{}
-			
-			static wxProtocolHandler* Create(const wxString scheme)
-			{
-				return new ddpsProtocolHandler(scheme);
-			}
+			~ddpsProtocolHandler(){}
 			
 			const wxString NewURI(const wxString spec, const wxString base)
 			{
@@ -108,9 +104,15 @@
 				return wxFSProtocolHandler::OpenChannel(after);
 			}
 
+			static wxProtocolHandler* Create(const wxString scheme)
+			{
+				return new ddpsProtocolHandler(scheme);
+			}
+
 		protected:
 			wxFileSystem mFileSystem;
 
 	};
+	#endif
 
 #endif
