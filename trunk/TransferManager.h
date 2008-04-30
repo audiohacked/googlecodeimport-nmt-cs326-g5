@@ -7,14 +7,21 @@
 	#endif
 	
 	#include <wx/listctrl.h>
+
+	#include "TorrentManager.h"
+	#include "HttpManager.h"
 	
 	class TransferManager : public wxPanel
 	{
 		public:
 			TransferManager(wxWindow* parent, wxWindowID id, 
                     const wxPoint& pos, const wxSize& size, long style);
+
 			wxListCtrl *listDownloads;
-			void AddTorrentDownload();
+			TorrentTransferManager *torrentDownloads;
+			HttpTransferManager *httpDownloads;
+			
+			void AddTorrentDownload(big_number const& TorrentHash);
 			void AddHttpDownload();
 
 	};

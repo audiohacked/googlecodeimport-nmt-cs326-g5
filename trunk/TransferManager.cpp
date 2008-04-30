@@ -4,6 +4,8 @@ TransferManager::TransferManager(wxWindow* parent, wxWindowID id,
 const wxPoint& pos, const wxSize& size, long style) : wxPanel(parent, id, pos, size, style)
 {
      listDownloads = new wxListCtrl(this, -1, wxDefaultPosition, wxDefaultSize, style=wxLC_REPORT);
+	 torrentDownloads = new TorrentTransferManager();
+	 //httpDownloads = new HttpTransferManager();
      
      listDownloads->InsertColumn(0, wxT("Name"));
      listDownloads->InsertColumn(1, wxT("Size"));
@@ -21,9 +23,12 @@ const wxPoint& pos, const wxSize& size, long style) : wxPanel(parent, id, pos, s
 
 }
 
-void TransferManager::AddTorrentDownload()
+void TransferManager::AddTorrentDownload(big_number const& TorrentHash)
 {
-	
+	if (torrentDownloads->AddTorrent(TorrentHash))
+	{
+		// now add torrent info to list control
+	}
 }
 
 void TransferManager::AddHttpDownload()
