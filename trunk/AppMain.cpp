@@ -30,7 +30,18 @@ IMPLEMENT_APP(sApp)
 
 bool sApp::OnInit()
 {
+	wxFileSystem::AddHandler(new wxInternetFSHandler());
+	wxFileSystem::AddHandler(new wxZipFSHandler());
+	wxFileSystem::AddHandler(new wxMemoryFSHandler());
+
 	sAppFrame *frame = new sAppFrame(_T("sAppFrame"), wxPoint(50, 50), wxSize(800,600));
+
+	const wxUId id = {(wxUint32)0x8a2bcf71,(wxUint16)0x3f5b,(wxUint16)0x4559,
+		{(wxUint8)0x89, (wxUint8)0x0f,(wxUint8)0xf3,(wxUint8)0xc2,(wxUint8)0xe9,(wxUint8)0x8e,
+		(wxUint8)0xa7,(wxUint8)0x01}};
+	
+	wxRegisterProtocolHandler(wxT("The DDPS protocol handler"), wxT("ddps"), id, &(ddpsProtocolHandler::Create));
+		
 	frame->Show(TRUE);
 	SetTopWindow(frame);
 	return TRUE;

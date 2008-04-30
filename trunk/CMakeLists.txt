@@ -61,22 +61,25 @@ IF(wxWidgets_FOUND)
 	)
 	IF(WIN32)
 		SET(GUI_TYPE WIN32)
-		SET(SRCS ${SRCS} ${CMAKE_SOURCE_DIR}/contrib/wxSean.rc)
+		SET(SRCS ${SRCS} ${CMAKE_SOURCE_DIR}/contrib/ddps.rc)
 		
 		INCLUDE_DIRECTORIES(
 			${INCLUDE_DIRECTORIES}
 			${CMAKE_SOURCE_DIR}/contrib/includes
-			${CMAKE_SOURCE_DIR}/contrib/includes/libtorrent
+			"C:\\libtorrent-0.13\\zlib"
+			"C:\\libtorrent-0.13\\include"
+			"C:\\libtorrent-0.13\\include\\libtorrent"
 			"C:\\boost_1_35_0"
+			"C:\\wxMozilla"
 		)
 		LINK_DIRECTORIES(
 			${LINK_DIRECTORIES}
 			"C:\\wxMozilla\\mozilla\\lib"
 			"C:\\wxMozilla\\build\\msw\\DLL\ Release\ Monolithic\ WX_PYTHON_0"
-			${CMAKE_SOURCE_DIR}/contrib/libs/libtorrent
+			"C:\\libtorrent-0.13\\bin\\msvc-7.1\\release\\boost-source\\character-set-unicode\\threading-multi\\upnp-logging-on"
 		)
 		LINK_LIBRARIES(
-			libtorrent.lib
+			#libtorrent.lib
 			embed_base_s.lib
 			xpcom.lib
 			xul.lib
@@ -98,13 +101,13 @@ IF(wxWidgets_FOUND)
 	ELSE(WIN32)
 		IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 			SET(MACOSX_BUNDLE_INFO_STRING "")
-			SET(MACOSX_BUNDLE_ICON_FILE "${CMAKE_SOURCE_DIR}/contrib/wxSean.icns")
+			SET(MACOSX_BUNDLE_ICON_FILE "${CMAKE_SOURCE_DIR}/contrib/ddps.icns")
 			SET(MACOSX_BUNDLE_GUI_IDENTIFIER "")
 			SET(MACOSX_BUNDLE_LONG_VERSION_STRING "")
 			SET(MACOSX_BUNDLE_BUNDLE_NAME "${PROJECT_NAME}")
 			SET(MACOSX_BUNDLE_SHORT_VERSION_STRING "")
 			SET(MACOSX_BUNDLE_BUNDLE_VERSION "${sAPP_VERSION}")
-			SET(MACOSX_BUNDLE_COPYRIGHT "Copyright 2008 Sean Nelson")
+			SET(MACOSX_BUNDLE_COPYRIGHT "Copyright 2008 Sean Nelson, Corey Brown, Joshua Barron, Adam Troemne")
 			#SET_SOURCE_FILES_PROPERTIES(apple1_aux1 PROPERTIES MACOSX_PACKAGE_LOCATION MacOSX)
 			#SET_SOURCE_FILES_PROPERTIES(apple1_res1 PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
 			SET(GUI_TYPE MACOSX_BUNDLE)
