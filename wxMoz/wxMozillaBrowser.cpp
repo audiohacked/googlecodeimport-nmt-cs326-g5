@@ -269,11 +269,11 @@ void wxMozillaShutdown(){
         NS_ShutdownXPCOM(nsnull);
         XPCOMGlueShutdown();
 #else
-        #if WXMOZ_FIREFOX_VERSION >= 15 || WXMOZ_SEAMONKEY_VERSION >= 10 || WXMOZ_XUL_VERSION >= 18
+        //#if WXMOZ_FIREFOX_VERSION >= 15 || WXMOZ_SEAMONKEY_VERSION >= 10 || WXMOZ_XUL_VERSION >= 18
         NS_ShutdownXPCOM(nsnull);
-        #else
-		NS_TermEmbedding();
-        #endif
+        //#else
+	//	NS_TermEmbedding();
+        //#endif
 #endif
         #ifdef __WXGTK__
              gdk_input_remove(io_id);
@@ -325,11 +325,11 @@ bool wxMozillaBrowser::EnsureEmbedding()
         XPCOMGlueStartup((greLocation+_T("xpcom.dll")).mb_str(wxConvFile));
         NS_InitXPCOM2(nsnull, greDir, nsnull); 
 #else
-        #if WXMOZ_FIREFOX_VERSION >= 15 || WXMOZ_SEAMONKEY_VERSION >= 10 || WXMOZ_XUL_VERSION >= 18
+        //#if WXMOZ_FIREFOX_VERSION >= 15 || WXMOZ_SEAMONKEY_VERSION >= 10 || WXMOZ_XUL_VERSION >= 18
         rv = NS_InitXPCOM3(nsnull, greDir, nsnull, nsnull, nsnull);
-        #else
-        rv = NS_InitEmbedding(greDir, nsnull);
-        #endif
+        //#else
+        //rv = NS_InitEmbedding(greDir, nsnull);
+        //#endif
         if (NS_FAILED(rv))
         {
             wxLogError(wxT("InitEmbedding Failed!"));
