@@ -3,7 +3,7 @@
 #include "enum.h"
 
 /* constructor for our menu bar, it returns our menu bar object */
-sAppMenu::sAppMenu() : wxMenuBar()
+DDPSMenu::DDPSMenu() : wxMenuBar()
 {
 	wxMenu *FileMenu = new wxMenu(); // create the file menu
 	wxMenu *ViewMenu = new wxMenu(); // create the view menu
@@ -18,7 +18,7 @@ sAppMenu::sAppMenu() : wxMenuBar()
 	FileMenu->Append(MENU_Logout, _T("Logout..."), _T("Logout/Login or Change user.."));
 	FileMenu->Append(MENU_Update, _T("Check for app updates"), _T("Check online for latest version of App"));
 	FileMenu->AppendSeparator(); // add a horizontal separator
-	FileMenu->Append(MENU_Settings, _T("Settings"), _T("Configure GassApp Settings"));
+	FileMenu->Append(MENU_Settings, _T("Settings"), _T("Configure DDPS Settings"));
 	FileMenu->AppendSeparator();
 	FileMenu->Append(MENU_Quit, _T("E&xit\tCtrl-Q"), _T("Exit demo"));
 
@@ -35,7 +35,7 @@ sAppMenu::sAppMenu() : wxMenuBar()
 
 	GamesMenu->Append(MENU_Activate, _T("Activate a product..."));
 	GamesMenu->Append(MENU_Invite, _T("Invite a Guest..."));
-	GamesMenu->Append(MENU_Add, _T("Add a non-Gass game to My Games list..."));
+	GamesMenu->Append(MENU_Add, _T("Add a non-s game to My Games list..."));
 
 	HelpMenu->Append(MENU_Support, _T("Support"), _T("Technical support"));
 	HelpMenu->Append(MENU_SystemInfo, _T("System information"));
@@ -43,7 +43,7 @@ sAppMenu::sAppMenu() : wxMenuBar()
 	HelpMenu->Append(MENU_Privacy, _T("Privacy policy"));
 	HelpMenu->Append(MENU_Legal, _T("Legal information"));
 	HelpMenu->AppendSeparator();
-	HelpMenu->Append(MENU_About, _T("&About"), _T("About GassApp"));
+	HelpMenu->Append(MENU_About, _T("&About"), _T("About DDPS"));
 
 	/* now we actually append the menus to the menubar */
 	Append(FileMenu, _T("&File"));

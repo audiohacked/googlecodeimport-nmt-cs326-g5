@@ -18,10 +18,10 @@
 #include <wx/textfile.h>
 #include <wx/strconv.h>
 
-class sSettingsFrame : public wxFrame
+class SettingsFrame : public wxFrame
 {
 	public:
-		sSettingsFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
+		SettingsFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
 		void OnAccept( wxCommandEvent &event);
 		void OnCancel(wxCommandEvent &event);
 		void SaveSettings();
@@ -29,10 +29,10 @@ class sSettingsFrame : public wxFrame
 		DECLARE_EVENT_TABLE()
 };
 
-class sSettingsPanel : public wxPanel
+class SettingsPanel : public wxPanel
 {
 	public:
-		sSettingsPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size, long style);
+		SettingsPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size, long style);
 
 		DECLARE_EVENT_TABLE()
 };

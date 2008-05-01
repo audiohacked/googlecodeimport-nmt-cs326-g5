@@ -3,29 +3,29 @@
 /* we have here is the event table used for event handling
 	I still have no idea how this works
 	*/
-BEGIN_EVENT_TABLE( sAppFrame, wxFrame )
+BEGIN_EVENT_TABLE( DDPSFrame, wxFrame )
 	EVT_MENU(MENU_Quit, 
-		sAppFrame::OnExit) /* when we click Quit in the 
+		DDPSFrame::OnExit) /* when we click Quit in the 
 							menu system this event closes				
 							the window and cleans up */
 	EVT_MENU(MENU_About,
-	 	sAppFrame::AboutBox) /* when we click Help->About_This_App 
+	 	DDPSFrame::AboutBox) /* when we click Help->About_This_App 
 								this event opens the about box */
 END_EVENT_TABLE()
 
-BEGIN_EVENT_TABLE( sAppBrowser, wxPanel )
-	EVT_BUTTON(BROWSER_Next, sAppBrowser::OnNext)
-	EVT_BUTTON(BROWSER_Prev, sAppBrowser::OnPrev)
-	EVT_BUTTON(BROWSER_Stop, sAppBrowser::OnStop)
-	EVT_BUTTON(BROWSER_Refresh, sAppBrowser::OnRefresh)
-	EVT_BUTTON(BROWSER_Home, sAppBrowser::OnHome)
+BEGIN_EVENT_TABLE( DDPSBrowser, wxPanel )
+	EVT_BUTTON(BROWSER_Next, DDPSBrowser::OnNext)
+	EVT_BUTTON(BROWSER_Prev, DDPSBrowser::OnPrev)
+	EVT_BUTTON(BROWSER_Stop, DDPSBrowser::OnStop)
+	EVT_BUTTON(BROWSER_Refresh, DDPSBrowser::OnRefresh)
+	EVT_BUTTON(BROWSER_Home, DDPSBrowser::OnHome)
 END_EVENT_TABLE()
 
-/*BEGIN_EVENT_TABLE( sAppPanel, wxPanel )
-	EVT_BUTTON(TABB_News, sAppPanel::OnNewsButton)
-	EVT_BUTTON(TABB_Settings, sAppPanel::OnSettingsButton)
-	EVT_BUTTON(TABB_Support, sAppPanel::OnSupportButton)
-	//EVT_BUTTON(TABB_IM, sAppPanel::OnIMButton)
+/*BEGIN_EVENT_TABLE( DDPSPanel, wxPanel )
+	EVT_BUTTON(TABB_News, DDPSPanel::OnNewsButton)
+	EVT_BUTTON(TABB_Settings, DDPSPanel::OnSettingsButton)
+	EVT_BUTTON(TABB_Support, DDPSPanel::OnSupportButton)
+	//EVT_BUTTON(TABB_IM, DDPSPanel::OnIMButton)
 END_EVENT_TABLE()*/
 
 //BEGIN_EVENT_TABLE( wxSeanMenu, wxMenuBar )

@@ -12,10 +12,10 @@
 
 	#include <wxmozilla/wxMozillaBrowser.h>
 
-	class sAppBrowser : public wxPanel
+	class DDPSBrowser : public wxPanel
 	{
 		public:
-			sAppBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size);
+			DDPSBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size);
 			wxMozillaBrowser *browser;
 			wxString home;
 			void GotoHomepage(void);
