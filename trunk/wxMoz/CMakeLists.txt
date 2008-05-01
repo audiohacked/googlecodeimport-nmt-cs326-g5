@@ -1,12 +1,15 @@
 PROJECT(wxMoz)
 
 SET(wxWidgets_USE_LIBS base core net)
+
 FIND_PACKAGE(wxWidgets)
+FIND_PACKAGE(GTK)
 
 INCLUDE( ${CMAKE_ROOT}/Modules/UsePkgConfig.cmake )
 PKGCONFIG(xulrunner-xpcom XPCOM_INCLUDE_DIR XPCOM_LINK_DIR XPCOM_LINK_FLAGS XPCOM_CFLAGS)
+PKGCONFIG(firefox-xpcom XPCOM_INCLUDE_DIR XPCOM_LINK_DIR XPCOM_LINK_FLAGS XPCOM_CFLAGS)
 
-ADD_DEFINITIONS( -DMOZILLA_INTERNAL_API -DMOZILLA_HOME='"/opt/local/lib/xulrunner-1.8.1.14"' )
+ADD_DEFINITIONS( -DMOZILLA_INTERNAL_API -DMOZILLA_HOME='"${XPCOM_LINK_DIR}"' )
 
 SET(wxMoz_SRCS
 	cstmdlg.cpp
@@ -34,12 +37,13 @@ SET(wxMoz_HDRS
 	wxMozillaDialogs.h
 	#wxMozillaWindow.h
 )
-
+IF(GTK_FOUND)
 IF(wxWidgets_FOUND)
 	SET(CMAKE_CXX_FLAGS ${XPCOM_CFLAGS})
 	INCLUDE(${wxWidgets_USE_FILE})
 	INCLUDE_DIRECTORIES(
 		${wxWidgets_INCLUDE_DIRS}
+		${GTK_INCLUDE_DIR}
 		${XPCOM_INCLUDE_DIR}		
 		${XPCOM_INCLUDE_DIR}/unix
 		${XPCOM_INCLUDE_DIR}/dom
@@ -68,6 +72,7 @@ IF(wxWidgets_FOUND)
 		${XPCOM_INCLUDE_DIR}/profdirserviceprovider
 		${XPCOM_INCLUDE_DIR}/xpcom
 		${XPCOM_INCLUDE_DIR}/nspr
+		${XPCOM_INCLUDE_DIR}/profile
 		${XPCOM_INCLUDE_DIR}/string
 	)
 
@@ -83,8 +88,12 @@ IF(wxWidgets_FOUND)
 	)
 	
 	ADD_LIBRARY(wxMoz ${wxMoz_SRCS} ${wxMoz_HDRS})
-	TARGET_LINK_LIBRARIES(wxMoz ${XPCOM_LINK_FLAGS} ${wxWidgets_LIBRARIES})
+	TARGET_LINK_LIBRARIES(wxMoz ${XPCOM_LINK_FLAGS}
+		${wxWidgets_LIBRARIES} ${GTK_LIBRARIES})
 
-ELSE(wxWidgets_FOUND)
-	MESSAGE("wxWidgets not found!")
-ENDIF(wxWidgets_FOUND)
+	ELSE(wxWidgets_FOUND)
+		MESSAGE("wxWidgets not found!")
+	ENDIF(wxWidgets_FOUND)
+ELSE(GTK_FOUND)
+	MESSAGE("GTK not found!")
+ENDIF(GTK_FOUND)
