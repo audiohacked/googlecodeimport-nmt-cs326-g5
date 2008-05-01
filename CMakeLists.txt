@@ -15,10 +15,10 @@ OPTION(COMMUNITY_PORTAL "Add Community Support" ON)
 OPTION(USER_UPLOAD "Add User Upload capabilities" ON)
 OPTION(BUILTIN_BROWSER "Add the Built-in Browser Support" ON)
 
-SET(NEWSPAGE http://coreyb.homelinux.org/contentmanager/news CACHE STRING DOCSTRING)
-SET(HOMEPAGE http://coreyb.homelinux.org/contentmanager CACHE STRING DOCSTRING)
-SET(SUPPORTPAGE http://coreyb.homelinux.org/contentmanager/support CACHE STRING DOCSTRING)
-SET(COMMUNITYPAGE http://coreyb.homelinux.org/contentmanager/community CACHE STRING DOCSTRING)
+SET(NEWSPAGE http://coreyb.homelinux.org/contentmanager/news CACHE STRING "Set the URL for Newspage")
+SET(HOMEPAGE http://coreyb.homelinux.org/contentmanager CACHE STRING "Set the URL for Homepage")
+SET(SUPPORTPAGE http://coreyb.homelinux.org/contentmanager/support CACHE STRING "Set the URL for Supportpage")
+SET(COMMUNITYPAGE http://coreyb.homelinux.org/contentmanager/community CACHE STRING "Set the URL for Community Portal")
 
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake
 	${CMAKE_BINARY_DIR}/config.h ESCAPE_QUOTES)
