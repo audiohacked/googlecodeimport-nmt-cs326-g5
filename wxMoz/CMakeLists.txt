@@ -6,7 +6,6 @@ FIND_PACKAGE(wxWidgets)
 FIND_PACKAGE(GTK)
 
 SET(MOZ_USE FF CACHE STRING "Select browser base code: FF, XUL, MOZ")
-SET(USE_WXMOZ shipped CACHE SRING "Select system or shipped wxMozilla library")
 
 INCLUDE( ${CMAKE_ROOT}/Modules/UsePkgConfig.cmake )
 
