@@ -10,7 +10,7 @@
 BEGIN_EVENT_TABLE( sAppFrame, wxFrame )
 	EVT_MENU(MENU_Quit, sAppFrame::OnExit) /* when we click Quit in the menu system this event closes	the window and cleans up */
 	EVT_MENU(MENU_About, sAppFrame::AboutBox) /* when we click Help->About_This_App this event opens the about box */
-	EVT_MENU(MENU_Support, sAppPanel::GotoSupport)
+	EVT_MENU(MENU_Support, sAppFrame::GoToSupportPanel)
 	EVT_MENU(MENU_Settings, sAppFrame::SettingsDialog) // open the settings dialog when file->settings is clicked
 END_EVENT_TABLE()
 
@@ -56,7 +56,7 @@ sAppFrame::sAppFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 	SetStatusText(wxT("Ready!"), 0);
 	sAppMenu *menu = new sAppMenu();
 	SetMenuBar(menu);
-	sAppPanel *panel = new sAppPanel(this, -1, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL|wxNO_BORDER);
+	panel = new sAppPanel(this, -1, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL|wxNO_BORDER);
 	panel->SetFocus();
 }
 
@@ -75,6 +75,11 @@ void sAppFrame::AboutBox(wxCommandEvent& WXUNUSED(event))
 		//info.SetCopyright(_("(C) 2008 Sean Nelson <snelson@nmt.edu>")):
 		//wxAboutBox(info);
 	#endif
+}
+
+void sAppFrame::GoToSupportPanel(wxCommandEvent& event)
+{
+	panel->GotoSupport(event);
 }
 
 //open the settings dialog

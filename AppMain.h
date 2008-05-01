@@ -25,17 +25,6 @@
 			virtual bool OnInit();
 	};
 
-	class sAppFrame : public wxFrame
-	{
-		public:
-			sAppFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
-			void OnExit( wxCommandEvent &event);
-			void AboutBox(wxCommandEvent &event);
-			void SettingsDialog(wxCommandEvent &event);
-
-			DECLARE_EVENT_TABLE()
-	};
-	
 	class sAppTabbed : public wxNotebook
 	{
 		public:
@@ -55,6 +44,19 @@
 			void GotoSupport(wxCommandEvent&);
 			sAppTabbed *tabs;
 
+			DECLARE_EVENT_TABLE()
+	};
+	class sAppFrame : public wxFrame
+	{
+		public:
+			sAppFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
+
+			void OnExit( wxCommandEvent &event);
+			void AboutBox(wxCommandEvent &event);
+			void SettingsDialog(wxCommandEvent &event);
+			void GoToSupportPanel(wxCommandEvent &event);
+
+			sAppPanel *panel;
 			DECLARE_EVENT_TABLE()
 	};
 
