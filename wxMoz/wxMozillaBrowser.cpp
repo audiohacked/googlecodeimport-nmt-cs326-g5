@@ -764,7 +764,7 @@ void wxMozillaBrowser::OnMouseEvent(wxMouseEvent &pEvent)
     Rect clientrect = { GetPosition().x, GetPosition().y, GetPosition().x + GetSize().x, GetPosition().y + GetSize().y };
     
     EventRecord osEvent;
-    ConvertEventRefToEventRecord(wxTheApp->MacGetCurrentEvent(), &osEvent);
+    ConvertEventRefToEventRecord((OpaqueEventRef*)wxTheApp->MacGetCurrentEvent(), &osEvent);
     PRBool handled = PR_FALSE;
     if (m_Mozilla->mEventSink)
         m_Mozilla->mEventSink->DispatchEvent(&osEvent, &handled);
