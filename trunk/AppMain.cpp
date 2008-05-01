@@ -7,28 +7,28 @@
 	*/
 	
 // Event Table for frame - used for menu
-BEGIN_EVENT_TABLE( sAppFrame, wxFrame )
-	EVT_MENU(MENU_Quit, sAppFrame::OnExit) /* when we click Quit in the menu system this event closes	the window and cleans up */
-	EVT_MENU(MENU_About, sAppFrame::AboutBox) /* when we click Help->About_This_App this event opens the about box */
-	EVT_MENU(MENU_Support, sAppFrame::GoToSupportPanel)
-	EVT_MENU(MENU_Settings, sAppFrame::SettingsDialog) // open the settings dialog when file->settings is clicked
+BEGIN_EVENT_TABLE( DDPSFrame, wxFrame )
+	EVT_MENU(MENU_Quit, DDPSFrame::OnExit) /* when we click Quit in the menu system this event closes	the window and cleans up */
+	EVT_MENU(MENU_About, DDPSFrame::AboutBox) /* when we click Help->About_This_App this event opens the about box */
+	EVT_MENU(MENU_Support, DDPSFrame::GoToSupportPanel)
+	EVT_MENU(MENU_Settings, DDPSFrame::SettingsDialog) // open the settings dialog when file->settings is clicked
 END_EVENT_TABLE()
 
-BEGIN_EVENT_TABLE( sAppTabbed, wxNotebook )
-	//EVT_NOTEBOOK_PAGE_CHANGED(wxID_ANY, sAppTabbed::OnNotebook)
-	//EVT_NOTEBOOK_PAGE_CHANGING(wxID_ANY, sAppTabbed::OnNotebook)
+BEGIN_EVENT_TABLE( DDPSTabbed, wxNotebook )
+	//EVT_NOTEBOOK_PAGE_CHANGED(wxID_ANY, DDPSTabbed::OnNotebook)
+	//EVT_NOTEBOOK_PAGE_CHANGING(wxID_ANY, DDPSTabbed::OnNotebook)
 END_EVENT_TABLE()
 
-// Event table for sAppPanel buttons at the bottom of the program
-BEGIN_EVENT_TABLE( sAppPanel, wxPanel )
-	EVT_BUTTON(TABB_News, sAppPanel::GotoNewsTab)
-	EVT_BUTTON(TABB_Support, sAppPanel::GotoSupport)
-	EVT_BUTTON(TABB_Settings, sAppFrame::SettingsDialog)
+// Event table for DDPSPanel buttons at the bottom of the program
+BEGIN_EVENT_TABLE( DDPSPanel, wxPanel )
+	EVT_BUTTON(TABB_News, DDPSPanel::GotoNewsTab)
+	EVT_BUTTON(TABB_Support, DDPSPanel::GotoSupport)
+	EVT_BUTTON(TABB_Settings, DDPSFrame::SettingsDialog)
 END_EVENT_TABLE()
 
-IMPLEMENT_APP(sApp)
+IMPLEMENT_APP(DDPS)
 
-bool sApp::OnInit()
+bool DDPS::OnInit()
 {
 	#ifdef __DDPS_PROTOCOL_H
 		wxFileSystem::AddHandler(new wxInternetFSHandler());
@@ -43,29 +43,29 @@ bool sApp::OnInit()
 		wxRegisterProtocolHandler(wxT("The DDPS protocol handler"), wxT("ddps"), id, &(ddpsProtocolHandler::Create));
 	#endif
 	
-	sAppFrame *frame = new sAppFrame(_T("sAppFrame"), wxPoint(50, 50), wxSize(800,600));
+	DDPSFrame *frame = new DDPSFrame(_T("DDPSFrame"), wxPoint(50, 50), wxSize(800,600));
 	frame->Show(TRUE);
 	SetTopWindow(frame);
 	return TRUE;
 }
 
-sAppFrame::sAppFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
+DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
 : wxFrame((wxFrame*) NULL, -1, title, pos, size)
 {
 	CreateStatusBar(2);
 	SetStatusText(wxT("Ready!"), 0);
-	sAppMenu *menu = new sAppMenu();
+	DDPSMenu *menu = new DDPSMenu();
 	SetMenuBar(menu);
-	panel = new sAppPanel(this, -1, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL|wxNO_BORDER);
+	panel = new DDPSPanel(this, -1, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL|wxNO_BORDER);
 	panel->SetFocus();
 }
 
-void sAppFrame::OnExit(wxCommandEvent &event)
+void DDPSFrame::OnExit(wxCommandEvent &event)
 {
 	Close(TRUE);
 }
 
-void sAppFrame::AboutBox(wxCommandEvent& WXUNUSED(event))
+void DDPSFrame::AboutBox(wxCommandEvent& WXUNUSED(event))
 {
 	#ifdef __WXMAC__
 		//wxAboutDialogInfo info;
@@ -77,22 +77,22 @@ void sAppFrame::AboutBox(wxCommandEvent& WXUNUSED(event))
 	#endif
 }
 
-void sAppFrame::GoToSupportPanel(wxCommandEvent& event)
+void DDPSFrame::GoToSupportPanel(wxCommandEvent& event)
 {
 	panel->GotoSupport(event);
 }
 
 //open the settings dialog
-void sAppFrame::SettingsDialog(wxCommandEvent& WXUNUSED(event))
+void DDPSFrame::SettingsDialog(wxCommandEvent& WXUNUSED(event))
 {
-	sSettingsFrame *settingsFrame = new sSettingsFrame(_T("Settings"), wxPoint(50, 50), wxSize(400,300));
+	SettingsFrame *settingsFrame = new SettingsFrame(_T("Settings"), wxPoint(50, 50), wxSize(400,300));
 	settingsFrame->Show(TRUE);
 }
 
-sAppPanel::sAppPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
+DDPSPanel::DDPSPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	const wxSize &size, long style) : wxPanel(parent, id, pos, size, style)
 {
-	tabs = new sAppTabbed(this, -1, wxDefaultPosition, wxDefaultSize, wxNB_FIXEDWIDTH);
+	tabs = new DDPSTabbed(this, -1, wxDefaultPosition, wxDefaultSize, wxNB_FIXEDWIDTH);
 	
 	wxButton *News = new wxButton(this, TABB_News, wxT("News"));
 	wxButton *Settings = new wxButton(this, TABB_Settings, wxT("Settings"));
@@ -111,7 +111,7 @@ sAppPanel::sAppPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	sizer->SetSizeHints(this);
 }
 
-void sAppPanel::GotoNewsTab(wxCommandEvent& WXUNUSED(event))
+void DDPSPanel::GotoNewsTab(wxCommandEvent& WXUNUSED(event))
 {
 	#ifdef BUILTIN_BROWSER
 		if ( tabs )
@@ -129,7 +129,7 @@ void sAppPanel::GotoNewsTab(wxCommandEvent& WXUNUSED(event))
 	#endif
 }
 
-void sAppPanel::GotoSupport(wxCommandEvent& WXUNUSED(event))
+void DDPSPanel::GotoSupport(wxCommandEvent& WXUNUSED(event))
 {
 	#ifdef BUILTIN_BROWSER
 		if ( tabs )
@@ -150,11 +150,11 @@ void sAppPanel::GotoSupport(wxCommandEvent& WXUNUSED(event))
 	
 }
 
-sAppTabbed::sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
+DDPSTabbed::DDPSTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	 const wxSize &size, long style) : wxNotebook(parent, id, pos, size, style)
 {
 	#ifdef BUILTIN_BROWSER
-		Home = new sAppBrowser(this, TABPAGE_Browser, 
+		Home = new DDPSBrowser(this, TABPAGE_Browser, 
 			wxDefaultPosition, wxDefaultSize);
 		#ifdef HOMEPAGE
 		Home->home = wxT(HOMEPAGE);
@@ -166,7 +166,7 @@ sAppTabbed::sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	#endif
 	
 	#ifdef COMMUNITY_PORTAL
-		Community = new sAppBrowser(this, TABPAGE_Community, 
+		Community = new DDPSBrowser(this, TABPAGE_Community, 
 			wxDefaultPosition, wxDefaultSize);
 		#ifdef COMMUNITYPAGE
 		Community->home = wxT(COMMUNITYPAGE);

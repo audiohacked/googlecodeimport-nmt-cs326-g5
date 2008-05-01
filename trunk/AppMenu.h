@@ -8,11 +8,11 @@
 	#endif
 
 	/* class of our menu system */
-	class sAppMenu : public wxMenuBar
+	class DDPSMenu : public wxMenuBar
 	{
 		public:
 			/* constructor for our menu */
-			sAppMenu();
+			DDPSMenu();
 	};
 
 #endif

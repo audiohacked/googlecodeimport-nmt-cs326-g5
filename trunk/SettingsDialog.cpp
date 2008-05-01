@@ -4,31 +4,31 @@
 #define FILENAME "config.ini"
 #define BUFFER "This is the config file"
 
-BEGIN_EVENT_TABLE( sSettingsFrame, wxFrame )
-	EVT_BUTTON(BUTTON_Accept, sSettingsFrame::OnAccept)
-	EVT_BUTTON(BUTTON_Cancel, sSettingsFrame::OnCancel)
+BEGIN_EVENT_TABLE( SettingsFrame, wxFrame )
+	EVT_BUTTON(BUTTON_Accept, SettingsFrame::OnAccept)
+	EVT_BUTTON(BUTTON_Cancel, SettingsFrame::OnCancel)
 END_EVENT_TABLE()
 
-BEGIN_EVENT_TABLE( sSettingsPanel, wxPanel )
-	//EVT_BUTTON(BUTTON_Accept, sSettingsFrame::OnAccept)
-	//EVT_BUTTON(BUTTON_Cancel, sSettingsFrame::OnCancel)
+BEGIN_EVENT_TABLE( SettingsPanel, wxPanel )
+	//EVT_BUTTON(BUTTON_Accept, SettingsFrame::OnAccept)
+	//EVT_BUTTON(BUTTON_Cancel, SettingsFrame::OnCancel)
 END_EVENT_TABLE()
 
-//constructor for thsAppFramee settings frame
-sSettingsFrame::sSettingsFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
+//constructor for thDDPSFramee settings frame
+SettingsFrame::SettingsFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
 : wxFrame((wxFrame*) NULL, -1, title, pos, size)
 {
-	sSettingsPanel *panel = new sSettingsPanel(this, -1, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL|wxNO_BORDER);
+	SettingsPanel *panel = new SettingsPanel(this, -1, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL|wxNO_BORDER);
 	panel->SetFocus();
 }
 
-void sSettingsFrame::OnAccept(wxCommandEvent& WXUNUSED(event))
+void SettingsFrame::OnAccept(wxCommandEvent& WXUNUSED(event))
 {
 	SaveSettings();
 	Close(true);
 }
 
-void sSettingsFrame::SaveSettings()
+void SettingsFrame::SaveSettings()
 {
     wxTextFile file;
     if (!file.Create(wxT(FILENAME)))
@@ -45,13 +45,13 @@ void sSettingsFrame::SaveSettings()
     file.Write();
 }
 
-void sSettingsFrame::OnCancel(wxCommandEvent& WXUNUSED(event))
+void SettingsFrame::OnCancel(wxCommandEvent& WXUNUSED(event))
 {
 	Close(true);
 }
 
 //constructor for the setting panel
-sSettingsPanel::sSettingsPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
+SettingsPanel::SettingsPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	const wxSize &size, long style) : wxPanel(parent, id, pos, size, style)
 {
 	

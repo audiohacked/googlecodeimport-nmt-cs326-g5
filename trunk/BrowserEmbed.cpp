@@ -1,15 +1,15 @@
 #include "BrowserEmbed.h"
 #include "enum.h"
 
-BEGIN_EVENT_TABLE( sAppBrowser, wxPanel )
-	EVT_BUTTON(BROWSER_Next, sAppBrowser::OnNext)
-	EVT_BUTTON(BROWSER_Prev, sAppBrowser::OnPrev)
-	EVT_BUTTON(BROWSER_Stop, sAppBrowser::OnStop)
-	EVT_BUTTON(BROWSER_Refresh, sAppBrowser::OnRefresh)
-	EVT_BUTTON(BROWSER_Home, sAppBrowser::OnHome)
+BEGIN_EVENT_TABLE( DDPSBrowser, wxPanel )
+	EVT_BUTTON(BROWSER_Next, DDPSBrowser::OnNext)
+	EVT_BUTTON(BROWSER_Prev, DDPSBrowser::OnPrev)
+	EVT_BUTTON(BROWSER_Stop, DDPSBrowser::OnStop)
+	EVT_BUTTON(BROWSER_Refresh, DDPSBrowser::OnRefresh)
+	EVT_BUTTON(BROWSER_Home, DDPSBrowser::OnHome)
 END_EVENT_TABLE()
 
-sAppBrowser::sAppBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size) :
+DDPSBrowser::DDPSBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size) :
 	wxPanel(parent, id, pos, size)
 {
 
@@ -37,7 +37,7 @@ sAppBrowser::sAppBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, co
 	SetSizer(sizer);
 }
 
-void sAppBrowser::OnPrev(wxCommandEvent& event)
+void DDPSBrowser::OnPrev(wxCommandEvent& event)
 {
 	printf("OnPrev..\n");
 	if (browser->CanGoBack())
@@ -45,7 +45,7 @@ void sAppBrowser::OnPrev(wxCommandEvent& event)
 		browser->GoBack();		
 	}
 }
-void sAppBrowser::OnNext(wxCommandEvent& event)
+void DDPSBrowser::OnNext(wxCommandEvent& event)
 {
 	printf("OnNext..\n");
 	if ( browser->CanGoForward() )
@@ -53,7 +53,7 @@ void sAppBrowser::OnNext(wxCommandEvent& event)
 		browser->GoForward();
 	}
 }
-void sAppBrowser::OnStop(wxCommandEvent& event)
+void DDPSBrowser::OnStop(wxCommandEvent& event)
 {
 	printf("OnStop..\n");
 	if ( browser->IsBusy() )
@@ -61,7 +61,7 @@ void sAppBrowser::OnStop(wxCommandEvent& event)
 		browser->Stop();
 	}
 }
-void sAppBrowser::OnRefresh(wxCommandEvent& event)
+void DDPSBrowser::OnRefresh(wxCommandEvent& event)
 {
 	printf("OnRefresh..\n");
 	if ( !browser->IsBusy() )
@@ -70,13 +70,13 @@ void sAppBrowser::OnRefresh(wxCommandEvent& event)
 	}
 }
 
-void sAppBrowser::OnHome(wxCommandEvent& event)
+void DDPSBrowser::OnHome(wxCommandEvent& event)
 {
 	printf("OnHome..\n");
 	browser->LoadURL(home);
 }
 
-void sAppBrowser::GotoHomepage(void)
+void DDPSBrowser::GotoHomepage(void)
 {
 	printf("GotoHomepage..\n");
 	browser->LoadURL(home);	

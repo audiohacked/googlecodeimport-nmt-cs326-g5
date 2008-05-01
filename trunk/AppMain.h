@@ -19,44 +19,44 @@
 	#include "TransferManager.h"
 	#include "SettingsDialog.h"
 
-	class sApp : public wxApp
+	class DDPS : public wxApp
 	{
 		public:
 			virtual bool OnInit();
 	};
 
-	class sAppTabbed : public wxNotebook
+	class DDPSTabbed : public wxNotebook
 	{
 		public:
-			sAppTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size, long style);
-			sAppBrowser *Home;
-			sAppBrowser *Community;
+			DDPSTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size, long style);
+			DDPSBrowser *Home;
+			DDPSBrowser *Community;
 
 			DECLARE_EVENT_TABLE()
 	};
 	
-	class sAppPanel : public wxPanel
+	class DDPSPanel : public wxPanel
 	{
 		public:
-			sAppPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size, long style);
+			DDPSPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size, long style);
 
 			void GotoNewsTab(wxCommandEvent&);
 			void GotoSupport(wxCommandEvent&);
-			sAppTabbed *tabs;
+			DDPSTabbed *tabs;
 
 			DECLARE_EVENT_TABLE()
 	};
-	class sAppFrame : public wxFrame
+	class DDPSFrame : public wxFrame
 	{
 		public:
-			sAppFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
+			DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
 
 			void OnExit( wxCommandEvent &event);
 			void AboutBox(wxCommandEvent &event);
 			void SettingsDialog(wxCommandEvent &event);
 			void GoToSupportPanel(wxCommandEvent &event);
 
-			sAppPanel *panel;
+			DDPSPanel *panel;
 			DECLARE_EVENT_TABLE()
 	};
 
