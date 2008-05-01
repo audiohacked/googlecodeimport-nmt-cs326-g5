@@ -54,7 +54,7 @@ class wxMozillaBrowserChrome:
 	public nsIWebProgressListener,
 	public nsIEmbeddingSiteWindow,
 	public nsIInterfaceRequestor,
-	public nsSupportsWeakReference,
+	//public nsSupportsWeakReference,
 	public nsIContextMenuListener2,
 	public nsIWindowCreator,
 	public nsIDOMMouseListener,
