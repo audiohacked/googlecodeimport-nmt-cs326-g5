@@ -2,10 +2,10 @@
 #labels Featured
 
 = GUI Todo =
- * Implement [http://docs.wxwidgets.org/2.6.3/wx_wxlistctrl.html wxListCtrl] for Content Manager
+ * Implement [http://docs.wxwidgets.org/2.6.3/wx_wxlistctrl.html wxListCtrl] for Content Manager -- Partly Implemented
   * Implement Download Progress in wxListCtrl using [http://docs.wxwidgets.org/2.8.6/wx_wxgauge.html wxGauge] class
- * Log-on dialog before main window showing.
- * Map browser buttons
+ * Log-on dialog before main window showing. -- DONE
+ * Map browser buttons -- DONE
 
 
 = Network-Client Todo =
