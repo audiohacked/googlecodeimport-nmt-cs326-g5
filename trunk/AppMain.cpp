@@ -83,8 +83,8 @@ void DDPSFrame::AboutBox(wxCommandEvent& WXUNUSED(event))
 		wxAboutDialogInfo info;
 		info.SetName(wxT("DDPS"));
 		info.SetVersion(wxT("1.0 Beta"));
-		info.SetDescription(wxT("This Program is a Digital Content Distribution and Publishing System."));
-		info.SetCopyright(wxT("(C) 2008 Sean Nelson <snelson@nmt.edu>"));
+		info.SetDescription(wxT("This Program is a Digital Content Distribution and Publishing System. Written Spring 2008 for CS326: Software Engineering."));
+		info.SetCopyright(wxT("(C) 2008 Sean Nelson <snelson@nmt.edu>, Josha Barron <jbarron@nmt.edu>, Corey Brown <coreyb42@gmail.com>, Adam Troemne <atroemne@nmt.edu>"));
 	#ifdef __WXGTK__
 		//wxGenericAboutBox(info);
 	#else
