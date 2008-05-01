@@ -10,11 +10,14 @@
 
 	#include <wx/notebook.h>
 	#include <wx/panel.h>
+	#include <wx/aboutdlg.h>
+	//#include <wx/dialog.h>
 	
 	#include "config.h"
 
 	#include "AppMenu.h"
 	//#include "AppProtocol.h"
+	#include "AppLogin.h"
 	#include "BrowserEmbed.h"
 	#include "TransferManager.h"
 	#include "SettingsDialog.h"
