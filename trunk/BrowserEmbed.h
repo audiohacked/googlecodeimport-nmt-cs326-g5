@@ -10,7 +10,7 @@
 	#include <wx/fs_zip.h>
 	#include <wx/fs_mem.h>
 
-	#include <wxmozilla/wxMozillaBrowser.h>
+	#include <wxMoz/wxMozillaBrowser.h>
 
 	class DDPSBrowser : public wxPanel
 	{
