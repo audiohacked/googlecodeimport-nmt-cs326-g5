@@ -6,8 +6,6 @@ FIND_PACKAGE(wxWidgets)
 FIND_PACKAGE(GTK)
 
 INCLUDE( ${CMAKE_ROOT}/Modules/UsePkgConfig.cmake )
-PKGCONFIG(xulrunner-xpcom XPCOM_INCLUDE_DIR XPCOM_LINK_DIR XPCOM_LINK_FLAGS XPCOM_CFLAGS)
-PKGCONFIG(firefox-xpcom XPCOM_INCLUDE_DIR XPCOM_LINK_DIR XPCOM_LINK_FLAGS XPCOM_CFLAGS)
 
 ADD_DEFINITIONS( -DMOZILLA_INTERNAL_API -DMOZILLA_HOME='"${XPCOM_LINK_DIR}"' )
 
@@ -20,7 +18,7 @@ SET(wxMoz_SRCS
 	wxMozillaSettings.cpp
 	wxMozillaBrowser.cpp		
 	wxMozillaEvents.cpp		
-	#wxMozillaWindow.cpp
+	wxMozillaWindow.cpp
 )
 
 SET(wxMoz_HDRS
@@ -35,11 +33,15 @@ SET(wxMoz_HDRS
 	wxMozillaSettings.h
 	wxMozillaBrowser.h
 	wxMozillaDialogs.h
-	#wxMozillaWindow.h
+	wxMozillaWindow.h
 )
-IF(GTK_FOUND)
+
+PKGCONFIG(xulrunner-xpcom XPCOM_INCLUDE_DIR XPCOM_LINK_DIR XPCOM_LINK_FLAGS XPCOM_CFLAGS)
+PKGCONFIG(firefox-xpcom XPCOM_INCLUDE_DIR XPCOM_LINK_DIR XPCOM_LINK_FLAGS XPCOM_CFLAGS)
+PKGCONFIG(gtk+-2.0 GTK_INCLUDE_DIR GTK_LINK_DIR GTK_LINK_FLAGS GTK_CFLAGS)
+
 IF(wxWidgets_FOUND)
-	SET(CMAKE_CXX_FLAGS ${XPCOM_CFLAGS})
+	SET(CMAKE_CXX_FLAGS "${XPCOM_CFLAGS} ${GTK_CFLAGS}")
 	INCLUDE(${wxWidgets_USE_FILE})
 	INCLUDE_DIRECTORIES(
 		${wxWidgets_INCLUDE_DIRS}
@@ -81,6 +83,7 @@ IF(wxWidgets_FOUND)
 	)
 	
 	LINK_LIBRARIES(
+		gtkembedmoz
 		xpcom
 		nspr4
 		plds4
@@ -89,11 +92,8 @@ IF(wxWidgets_FOUND)
 	
 	ADD_LIBRARY(wxMoz ${wxMoz_SRCS} ${wxMoz_HDRS})
 	TARGET_LINK_LIBRARIES(wxMoz ${XPCOM_LINK_FLAGS}
-		${wxWidgets_LIBRARIES} ${GTK_LIBRARIES})
+		${wxWidgets_LIBRARIES} ${GTK_LINK_FLAGS})
 
 	ELSE(wxWidgets_FOUND)
 		MESSAGE("wxWidgets not found!")
 	ENDIF(wxWidgets_FOUND)
-ELSE(GTK_FOUND)
-	MESSAGE("GTK not found!")
-ENDIF(GTK_FOUND)
