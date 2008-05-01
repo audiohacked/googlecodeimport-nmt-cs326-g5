@@ -1,8 +1,5 @@
 PROJECT( DDPS )
 
-SUBDIRS(wxMoz)
-INCLUDE_DIRECTORIES(wxMoz)
-
 CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
 
 SET(DDPS_VERSION "1.0")
@@ -19,8 +16,6 @@ SET(NEWSPAGE http://coreyb.homelinux.org/contentmanager/news CACHE STRING "Set t
 SET(HOMEPAGE http://coreyb.homelinux.org/contentmanager CACHE STRING "Set the URL for Homepage")
 SET(SUPPORTPAGE http://coreyb.homelinux.org/contentmanager/support CACHE STRING "Set the URL for Supportpage")
 SET(COMMUNITYPAGE http://coreyb.homelinux.org/contentmanager/community CACHE STRING "Set the URL for Community Portal")
-
-SET(USE_WXMOZ shipped CACHE SRING "Select system or shipped wxMozilla library")
 
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake
 	${CMAKE_BINARY_DIR}/config.h ESCAPE_QUOTES)
@@ -46,8 +41,23 @@ SET(HDRS
 
 FIND_PACKAGE(wxWidgets)
 
-#INCLUDE( ${CMAKE_ROOT}/Modules/UsePkgConfig.cmake )
-#PKGCONFIG(wxmozilla WXMOZ_INCLUDE_DIR WXMOZ_LINK_DIR WXMOZ_LINK_FLAGS WXMOZ_CFLAGS)
+SET(USE_WXMOZ shipped CACHE SRING "Select system or shipped wxMozilla library")
+IF(${USE_WXMOZ} MATCHES "shipped")
+	SUBDIRS(wxMoz)
+	INCLUDE_DIRECTORIES(wxMoz)
+	SET(wxMoz_LIB wxMoz)
+ELSE(${USE_WXMOZ} MATCHES "shipped")
+	INCLUDE( ${CMAKE_ROOT}/Modules/UsePkgConfig.cmake )
+	PKGCONFIG(wxmozilla WXMOZ_INCLUDE_DIR WXMOZ_LINK_DIR WXMOZ_LINK_FLAGS WXMOZ_CFLAGS)
+	INCLUDE_DIRECTORIES(
+		${WXMOZ_INCLUDE_DIR}
+	)
+	LINK_DIRECTORIES(
+		${WXMOZ_LINK_DIR}
+	)
+	SET(wxMoz_LIB "")
+ENDIF(${USE_WXMOZ} MATCHES "shipped")
+
 SET(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} ${WXMOZ_LINK_FLAGS})
  
 IF(wxWidgets_FOUND)
@@ -57,15 +67,11 @@ IF(wxWidgets_FOUND)
 	)
 
 	INCLUDE_DIRECTORIES(
-		wxMoz
+		${INCLUDE_DIRECTORIES}
 		${CMAKE_SOURCE_DIR}
 		${CMAKE_BINARY_DIR}
 		${wxWidgets_INCLUDE_DIRS}
-		#${WXMOZ_INCLUDE_DIR}
 	)
-	#LINK_DIRECTORIES(
-	#	${WXMOZ_LINK_DIR}
-	#)
 	IF(WIN32)
 		SET(GUI_TYPE WIN32)
 		SET(SRCS ${SRCS} ${CMAKE_SOURCE_DIR}/contrib/ddps.rc)
@@ -131,7 +137,7 @@ IF(wxWidgets_FOUND)
 	ENDIF(WIN32)
 
 	ADD_EXECUTABLE(DDPS ${GUI_TYPE} ${SRCS} ${HDRS})
-	TARGET_LINK_LIBRARIES(DDPS wxMoz ${wxWidgets_LIBRARIES})
+	TARGET_LINK_LIBRARIES(DDPS ${wxMoz_LIB} ${wxWidgets_LIBRARIES})
  
 ELSE(wxWidgets_FOUND)
 	MESSAGE("wxWidgets not found!")
