@@ -80,14 +80,16 @@ void DDPSFrame::OnExit(wxCommandEvent& WXUNUSED(event))
 
 void DDPSFrame::AboutBox(wxCommandEvent& WXUNUSED(event))
 {
-	//#ifdef __WXMAC__
 		wxAboutDialogInfo info;
 		info.SetName(wxT("DDPS"));
 		info.SetVersion(wxT("1.0 Beta"));
 		info.SetDescription(wxT("This Program is a Digital Content Distribution and Publishing System."));
 		info.SetCopyright(wxT("(C) 2008 Sean Nelson <snelson@nmt.edu>"));
+	#ifdef __WXGTK__
+		//wxGenericAboutBox(info);
+	#else
 		wxAboutBox(info);
-	//#endif
+	#endif
 }
 
 void DDPSFrame::GoToSupportPanel(wxCommandEvent& event)
