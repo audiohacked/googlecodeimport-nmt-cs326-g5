@@ -29,9 +29,9 @@ DDPSMenu::DDPSMenu() : wxMenuBar()
 	ViewMenu->Append(MENU_Bandwidth, _T("Bandwidth monitor"), _T("View Bandwidth Usage/Speed"));
 	ViewMenu->AppendSeparator();
 	ViewMenu->Append(MENU_Home, _T("Home"), _T("Go to Homepage"));
-	ViewMenu->Append(MENU_Games, _T("My Games"), _T("View Games"));
-	ViewMenu->Append(MENU_Media, _T("My Media"), _T("View Media"));
-	ViewMenu->Append(MENU_Tools, _T("Tools"), _T("View Tools"));
+	ViewMenu->Append(MENU_Community, _T("Community Portal"), _T("View Profile"));
+	ViewMenu->Append(MENU_Downloads, _T("Downloads"), _T("View Downloads Manager"));
+	//ViewMenu->Append(MENU_Tools, _T("Tools"), _T("View Tools"));
 
 	GamesMenu->Append(MENU_Activate, _T("Activate a product..."));
 	GamesMenu->Append(MENU_Invite, _T("Invite a Guest..."));

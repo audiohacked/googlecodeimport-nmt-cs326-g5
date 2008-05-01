@@ -42,6 +42,9 @@
 
 			void GotoNewsTab(wxCommandEvent&);
 			void GotoSupport(wxCommandEvent&);
+			void GotoHomepage(wxCommandEvent& event);
+			void GotoCommunity(wxCommandEvent& event);
+			void GotoDownloads(wxCommandEvent& event);
 			DDPSTabbed *tabs;
 
 			DECLARE_EVENT_TABLE()
@@ -55,6 +58,9 @@
 			void AboutBox(wxCommandEvent &event);
 			void SettingsDialog(wxCommandEvent &event);
 			void GoToSupportPanel(wxCommandEvent &event);
+			void GotoHomepage(wxCommandEvent& event);
+			void GotoCommunity(wxCommandEvent& event);
+			void GotoDownloads(wxCommandEvent& event);
 
 			DDPSPanel *panel;
 			DECLARE_EVENT_TABLE()
