@@ -28,6 +28,7 @@ CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake
 SET(SRCS 
 	AppMain.cpp
 	AppMenu.cpp
+	AppLogin.cpp
 	BrowserEmbed.cpp
 	TransferManager.cpp
 	SettingsDialog.cpp
@@ -37,6 +38,7 @@ SET(HDRS
 	enum.h
 	AppMain.h
 	AppMenu.h
+	AppLogin.h
 	BrowserEmbed.h
 	TransferManager.h
 	SettingsDialog.h

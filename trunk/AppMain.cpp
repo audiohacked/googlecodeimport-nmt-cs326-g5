@@ -48,7 +48,9 @@ bool DDPS::OnInit()
 	#endif
 	
 	DDPSFrame *frame = new DDPSFrame(_T("DDPSFrame"), wxPoint(50, 50), wxSize(800,600));
+
 	frame->Show(TRUE);
+
 	SetTopWindow(frame);
 	return TRUE;
 }
@@ -61,24 +63,31 @@ DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 	DDPSMenu *menu = new DDPSMenu();
 	SetMenuBar(menu);
 	panel = new DDPSPanel(this, -1, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL|wxNO_BORDER);
-	panel->SetFocus();
+	
+	AppLoginDialog loginDlg(this, -1, wxT("User Login"), wxDefaultPosition, wxDefaultSize);
+	if(loginDlg.ShowModal() == wxID_OK)
+	{
+		panel->SetFocus();
+	} else {
+		Close(TRUE);
+	}
 }
 
-void DDPSFrame::OnExit(wxCommandEvent &event)
+void DDPSFrame::OnExit(wxCommandEvent& WXUNUSED(event))
 {
 	Close(TRUE);
 }
 
 void DDPSFrame::AboutBox(wxCommandEvent& WXUNUSED(event))
 {
-	#ifdef __WXMAC__
-		//wxAboutDialogInfo info;
-		//info.SetName(_("wxSeanApp"));
-		//info.SetVersion(_("1.0 Beta"));
-		//info.SetDescription(_("This Program is a Digital Content Distribution and Publishing System."));
-		//info.SetCopyright(_("(C) 2008 Sean Nelson <snelson@nmt.edu>")):
-		//wxAboutBox(info);
-	#endif
+	//#ifdef __WXMAC__
+		wxAboutDialogInfo info;
+		info.SetName(wxT("DDPS"));
+		info.SetVersion(wxT("1.0 Beta"));
+		info.SetDescription(wxT("This Program is a Digital Content Distribution and Publishing System."));
+		info.SetCopyright(wxT("(C) 2008 Sean Nelson <snelson@nmt.edu>"));
+		wxAboutBox(info);
+	//#endif
 }
 
 void DDPSFrame::GoToSupportPanel(wxCommandEvent& event)

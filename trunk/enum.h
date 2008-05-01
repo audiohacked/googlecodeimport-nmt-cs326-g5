@@ -34,5 +34,7 @@ enum
 	TABPAGE_Community,
 	TABPAGE_Downloads,
 	BUTTON_Accept,
-	BUTTON_Cancel
+	BUTTON_Cancel,
+	TEXT_Username,
+	TEXT_Password
 };
