@@ -12,6 +12,10 @@ BEGIN_EVENT_TABLE( DDPSFrame, wxFrame )
 	EVT_MENU(MENU_About, DDPSFrame::AboutBox) /* when we click Help->About_This_App this event opens the about box */
 	EVT_MENU(MENU_Support, DDPSFrame::GoToSupportPanel)
 	EVT_MENU(MENU_Settings, DDPSFrame::SettingsDialog) // open the settings dialog when file->settings is clicked
+	EVT_MENU(MENU_Home, DDPSFrame::GotoHomepage)
+	EVT_MENU(MENU_Community, DDPSFrame::GotoCommunity)
+	EVT_MENU(MENU_Downloads, DDPSFrame::GotoDownloads)
+
 END_EVENT_TABLE()
 
 BEGIN_EVENT_TABLE( DDPSTabbed, wxNotebook )
@@ -82,6 +86,21 @@ void DDPSFrame::GoToSupportPanel(wxCommandEvent& event)
 	panel->GotoSupport(event);
 }
 
+void DDPSFrame::GotoHomepage(wxCommandEvent& event)
+{
+	panel->GotoHomepage(event);
+}
+
+void DDPSFrame::GotoCommunity(wxCommandEvent& event)
+{
+	panel->GotoCommunity(event);
+}
+
+void DDPSFrame::GotoDownloads(wxCommandEvent& event)
+{
+	panel->GotoDownloads(event);
+}
+
 //open the settings dialog
 void DDPSFrame::SettingsDialog(wxCommandEvent& WXUNUSED(event))
 {
@@ -148,6 +167,33 @@ void DDPSPanel::GotoSupport(wxCommandEvent& WXUNUSED(event))
 	
 	#endif
 	
+}
+
+void DDPSPanel::GotoHomepage(wxCommandEvent& event)
+{
+	#ifdef BUILTIN_BROWSER
+		tabs->ChangeSelection(0);
+	#endif
+}
+
+void DDPSPanel::GotoCommunity(wxCommandEvent& event)
+{
+	#ifdef BUILTIN_BROWSER
+		tabs->ChangeSelection(1);
+	#elif COMMUNITY_PORTAL
+		tabs->ChangeSelection(0);
+	#endif
+}
+
+void DDPSPanel::GotoDownloads(wxCommandEvent& event)
+{
+	#ifdef BUILTIN_BROWSER
+		tabs->ChangeSelection(2);
+	#elif COMMUNITY_PORTAL
+		tabs->ChangeSelection(1);
+	#else
+		tabs->ChangeSelection(0);
+	#endif
 }
 
 DDPSTabbed::DDPSTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
