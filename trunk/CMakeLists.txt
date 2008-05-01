@@ -20,6 +20,8 @@ SET(HOMEPAGE http://coreyb.homelinux.org/contentmanager CACHE STRING "Set the UR
 SET(SUPPORTPAGE http://coreyb.homelinux.org/contentmanager/support CACHE STRING "Set the URL for Supportpage")
 SET(COMMUNITYPAGE http://coreyb.homelinux.org/contentmanager/community CACHE STRING "Set the URL for Community Portal")
 
+SET(USE_WXMOZ shipped CACHE SRING "Select system or shipped wxMozilla library")
+
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake
 	${CMAKE_BINARY_DIR}/config.h ESCAPE_QUOTES)
 
