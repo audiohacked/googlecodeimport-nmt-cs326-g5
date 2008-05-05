@@ -9,11 +9,15 @@ BEGIN_EVENT_TABLE( DDPSBrowser, wxPanel )
 	EVT_BUTTON(BROWSER_Home, DDPSBrowser::OnHome)
 END_EVENT_TABLE()
 
-DDPSBrowser::DDPSBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size) :
-	wxPanel(parent, id, pos, size)
+DDPSBrowser::DDPSBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size) 
+: wxPanel(parent, id, pos, size)
 {
 
+	#ifndef __WXMAC__
 	browser = new wxMozillaBrowser(this, -1, wxDefaultPosition, wxDefaultSize, wxBORDER);
+	#else
+	browser = new wxWebKitCtrl(this, -1, home, wxDefaultPosition, wxDefaultSize, wxBORDER);
+	#endif
 	
 	wxButton *back, *forward, *refresh, *stop, *home;
 	
@@ -56,18 +60,26 @@ void DDPSBrowser::OnNext(wxCommandEvent& event)
 void DDPSBrowser::OnStop(wxCommandEvent& event)
 {
 	printf("OnStop..\n");
+	#ifndef __WXMAC__
 	if ( browser->IsBusy() )
 	{
 		browser->Stop();
 	}
+	#else
+	browser->Stop();
+	#endif
 }
 void DDPSBrowser::OnRefresh(wxCommandEvent& event)
 {
 	printf("OnRefresh..\n");
+	#ifndef __WXMAC__
 	if ( !browser->IsBusy() )
 	{
 		browser->Reload();
 	}
+	#else
+	browser->Reload();
+	#endif
 }
 
 void DDPSBrowser::OnHome(wxCommandEvent& event)
