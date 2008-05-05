@@ -10,13 +10,21 @@
 	#include <wx/fs_zip.h>
 	#include <wx/fs_mem.h>
 
-	#include <wxMoz/wxMozillaBrowser.h>
+	#ifndef __WXMAC__
+		#include <wxMoz/wxMozillaBrowser.h>
+	#else
+		#include <wx/html/webkit.h>
+	#endif
 
 	class DDPSBrowser : public wxPanel
 	{
 		public:
 			DDPSBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size);
-			wxMozillaBrowser *browser;
+			#ifndef __WXMAC__
+				wxMozillaBrowser *browser;
+			#else
+				wxWebKitCtrl *browser;
+			#endif
 			wxString home;
 			void GotoHomepage(void);
 			
