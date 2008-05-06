@@ -1,0 +1,9 @@
+How to Register a Protocol for Mozilla:
+http://kb.mozillazine.org/Register_protocol
+
+Linux and Mac
+
+    * Type about:config into the address bar and press Enter.
+    * Right-click -> New -> Boolean -> Name: network.protocol-handler.external.foo -> Value -> true (Replacing foo with the protocol you're specifying)
+    * Right-click -> New -> String -> Name: network.protocol-handler.app.foo -> Value -> /path/to/app (Replacing foo with the protocol you're specifying and /path/to/app with the path to the application you want to run.
+    * Ensure network.protocol-handler.expose-all is set to true. 

@@ -7,6 +7,8 @@ BEGIN_EVENT_TABLE( DDPSBrowser, wxPanel )
 	EVT_BUTTON(BROWSER_Stop, DDPSBrowser::OnStop)
 	EVT_BUTTON(BROWSER_Refresh, DDPSBrowser::OnRefresh)
 	EVT_BUTTON(BROWSER_Home, DDPSBrowser::OnHome)
+	
+	EVT_MOZILLA_BEFORE_LOAD(DDPSBrowser::BeforeLoad)
 END_EVENT_TABLE()
 
 DDPSBrowser::DDPSBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size) 
@@ -39,6 +41,17 @@ DDPSBrowser::DDPSBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, co
 	sizer->Add(browser_buttons_sizer, 0,  wxALIGN_TOP, 5);
 	sizer->Add(browser, 1, wxEXPAND|wxALL, 5);
 	SetSizer(sizer);
+}
+
+void DDPSBrowser::BeforeLoad(wxMozillaBeforeLoadEvent &myEvent)
+{
+	wxURL url(myEvent.GetURL());
+	if ((url.GetServer() == "ddps")||(url.GetScheme() == "ddps"))
+	{
+		wxMessageDialog mydialog(this, url.GetPath(), _T("DDPS Protocol Intercepted"), wxYES |wxNO);
+		if (mydialog.ShowModal() == wxID_NO)
+			browser->Stop();
+	}
 }
 
 void DDPSBrowser::OnPrev(wxCommandEvent& event)
