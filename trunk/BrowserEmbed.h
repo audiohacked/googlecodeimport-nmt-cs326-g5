@@ -34,7 +34,7 @@
 			void OnStop(wxCommandEvent& event);
 			void OnRefresh(wxCommandEvent& event);
 			void OnHome(wxCommandEvent& event);
-			
+			void BeforeLoad(wxMozillaBeforeLoadEvent &myEvent);
 			DECLARE_EVENT_TABLE()
 			
 	};
