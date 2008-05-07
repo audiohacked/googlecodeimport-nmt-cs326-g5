@@ -115,8 +115,9 @@ void DDPSFrame::GotoDownloads(wxCommandEvent& event)
 //open the settings dialog
 void DDPSFrame::SettingsDialog(wxCommandEvent& WXUNUSED(event))
 {
-	SettingsFrame *settingsFrame = new SettingsFrame(_T("Settings"), wxPoint(50, 50), wxSize(400,300));
-	settingsFrame->Show(TRUE);
+	SettingsFrame settingsFrame(this, -1, wxT("Settings"),wxDefaultPosition, wxDefaultSize);
+	settingsFrame.ShowModal();
+	//settingsFrame->Show(TRUE);
 }
 
 DDPSPanel::DDPSPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
