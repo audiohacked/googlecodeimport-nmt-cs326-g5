@@ -58,7 +58,7 @@
 
 			TorrentTransferManager();
 			~TorrentTransferManager();
-			bool AddTorrent(big_number const& hash);
+			torrent_handle AddTorrent(big_number const& hash);
 			bool startTransfer();
 			bool cancelTransfer();
 			bool pauseTransfer();

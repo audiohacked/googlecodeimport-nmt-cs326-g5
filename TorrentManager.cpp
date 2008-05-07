@@ -38,12 +38,12 @@ TorrentTransferManager::~TorrentTransferManager()
 	torrentSession.~session();
 }
 
-bool TorrentTransferManager::AddTorrent(big_number const& hash)
-{
-	torrent_handle h = torrentSession.add_torrent(torrent_info(hash), "./torrent-downloads");	
+torrent_handle TorrentTransferManager::AddTorrent(big_number const& hash)
+{	torrent_info tInfo = torrent_info(hash);
+	torrent_handle h = torrentSession.add_torrent(tInfo, "./torrent-downloads");	
 	handles.insert(std::make_pair(std::string(), h));
 	h.set_max_connections(60);
 	h.set_max_uploads(-1);
 	h.set_ratio(2.0f);
-	return TRUE;
+	return h;
 }

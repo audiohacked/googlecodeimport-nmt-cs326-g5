@@ -33,6 +33,7 @@
 			DDPSTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size, long style);
 			DDPSBrowser *Home;
 			DDPSBrowser *Community;
+			wxWindow *wParent;
 
 			DECLARE_EVENT_TABLE()
 	};
@@ -48,6 +49,8 @@
 			void GotoCommunity(wxCommandEvent& event);
 			void GotoDownloads(wxCommandEvent& event);
 			DDPSTabbed *tabs;
+			wxWindow *wParent;
+			
 
 			DECLARE_EVENT_TABLE()
 	};
@@ -67,6 +70,8 @@
 
 			DDPSMenu *menu;
 			DDPSPanel *panel;
+			wxWindow *wParent;
+			
 			DECLARE_EVENT_TABLE()
 	};
 
