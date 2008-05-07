@@ -7,16 +7,22 @@
 #endif
 
 #include <wx/filesys.h>
-//#include <wx/fs_inet.h>
-//#include <wx/fs_zip.h>
 #include <wx/fs_mem.h>
 #include <wx/utils.h>
 #include <wx/choicebk.h>
-//#include <wx/notebook.h>
 #include <wx/panel.h>
 #include <wx/ffile.h>
 #include <wx/textfile.h>
 #include <wx/strconv.h>
+
+class SettingsPanel : public wxPanel
+{
+	public:
+		SettingsPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size, long style);
+		wxTextCtrl *downloadLocation;
+
+		DECLARE_EVENT_TABLE()
+};
 
 class SettingsFrame : public wxFrame
 {
@@ -26,14 +32,7 @@ class SettingsFrame : public wxFrame
 		void OnCancel(wxCommandEvent &event);
 		void SaveSettings();
 		
-		DECLARE_EVENT_TABLE()
-};
-
-class SettingsPanel : public wxPanel
-{
-	public:
-		SettingsPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size, long style);
-
+		SettingsPanel *panel;
 		DECLARE_EVENT_TABLE()
 };
 
