@@ -3,7 +3,7 @@
  * 
  * Developers:
  *  Jeremiah Cornelius McCarthy <jeremiah@whoop-ass.ca>
- *  Kevin Ollivier <kevino@tulane.edu>
+ *  Kevin Ollivier <kevino@tulane.edu>	NS_INTERFACE_MAP_ENTRY(nsIWindowCreator)
  *  Dave Fancella <david.fancella@attbi.com>
  */
 #include "wx/wxprec.h"

@@ -17,3 +17,4 @@ class nsIFactory;
 extern nsresult NS_NewPromptServiceFactory(nsIFactory** aFactory);
 
 #endif
+

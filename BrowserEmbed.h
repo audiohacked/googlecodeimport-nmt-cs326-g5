@@ -9,9 +9,11 @@
 	#include <wx/fs_inet.h>
 	#include <wx/fs_zip.h>
 	#include <wx/fs_mem.h>
+	#include <wx/url.h>
 
 	#ifndef __WXMAC__
 		#include <wxMoz/wxMozillaBrowser.h>
+		#include <wxMoz/wxMozillaEvents.h>
 	#else
 		#include <wx/html/webkit.h>
 	#endif
