@@ -51,22 +51,22 @@ void DDPSBrowser::BeforeLoad(wxMozillaBeforeLoadEvent &myEvent)
 	wxString nextURL = url.GetServer();
 	if ((url.GetServer() == wxString::FromAscii("ddps"))||(url.GetScheme() == wxString::FromAscii("ddps")))
 	{
-		if ((url.GetPath().Find("browser") != -1)||(url.GetServer() == wxString::FromAscii("browser"))
+		if ((url.GetPath().Find(wxString::FromAscii("browser")) != -1)||(url.GetServer() == wxString::FromAscii("browser")))
 		{
 		} 
-		else if ((url.GetPath().Find("torrentDownload") != -1)||(url.GetServer() == wxString::FromAscii("torrentDownload"))
+		else if ((url.GetPath().Find(wxString::FromAscii("torrentDownload")) != -1)||(url.GetServer() == wxString::FromAscii("torrentDownload")))
 		{
 			// must find the last slash and get the rest of the string
-			wParent->Downloads->AddTorrentDownload(hash);
+			//wParent->Downloads->AddTorrentDownload();
 			if ( browser->IsBusy() )
 			{
 				browser->Stop();
 			}
 		}
-		else if ((url.GetPath().Find("httpDownload") != -1)||(url.GetServer() == wxString::FromAscii("httpDownload"))
+		else if ((url.GetPath().Find(wxString::FromAscii("httpDownload")) != -1)||(url.GetServer() == wxString::FromAscii("httpDownload")))
 		{
 			// must find the slash after the httpDownload and get the rest of the string
-			wParent->Downloads->AddHttpDownload(url);
+			//wParent->Downloads->AddHttpDownload();
 			if ( browser->IsBusy() )
 			{
 				browser->Stop();

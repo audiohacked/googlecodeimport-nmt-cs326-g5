@@ -17,23 +17,18 @@ class wxMozillaSettingsData
 public:
     ~wxMozillaSettingsData();
 
-#ifndef __WXMAC__
-//There seems to be some extra library needed on OS X - until then skip OS X.
     nsCOMPtr<nsProfileDirServiceProvider> m_profileDirServiceProvider;
-#endif
     nsCOMPtr<nsIPrefService> m_prefService;
     nsCOMPtr<nsIPrefBranch> m_prefBranch;
 };
 
 wxMozillaSettingsData::~wxMozillaSettingsData()
 {
-#ifndef __WXMAC__
     if (m_profileDirServiceProvider)
     {
         m_profileDirServiceProvider->Shutdown();
         m_profileDirServiceProvider = nsnull;
     }
-#endif
 }
 
 
@@ -55,11 +50,10 @@ void wxMozillaSettings::SetMozillaPath(const wxString &path)
 
 bool wxMozillaSettings::SetProfilePath(const wxString &path)
 {
-//TODO: figure out what needs added on OS X to get this to compile!
-#ifndef __WXMAC__
     wxFileName fn(path);
     fn.MakeAbsolute();
     ms_profilePath = fn.GetFullPath();
+    //ms_profilePath = fn.GetCwd();
 
     // If Mozilla wasn't loaded yet, postpone setting profile path:
     if (!wxMozillaBrowser::IsEmbeddingInitialized())
@@ -102,7 +96,6 @@ bool wxMozillaSettings::SetProfilePath(const wxString &path)
     if (NS_FAILED(rv))
         return FALSE;
     return TRUE;
-#endif
 }
 
 static NS_DEFINE_CID(kPrefServiceCID, NS_PREFSERVICE_CID);
