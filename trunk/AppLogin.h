@@ -19,6 +19,9 @@
 	              long style = wxDEFAULT_DIALOG_STYLE); //wxDIALOG_NO_PARENT
 			wxTextCtrl * dialogText;
 			wxString GetText();
+			void Cancel(wxCommandEvent& event);
+		
+		DECLARE_EVENT_TABLE()
 
 	};
 #endif //__APP_LOGIN_DLG_H

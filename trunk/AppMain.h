@@ -63,6 +63,7 @@
 			void GotoHomepage(wxCommandEvent& event);
 			void GotoCommunity(wxCommandEvent& event);
 			void GotoDownloads(wxCommandEvent& event);
+			void Logout(wxCommandEvent& event);
 
 			DDPSPanel *panel;
 			DECLARE_EVENT_TABLE()
