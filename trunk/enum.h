@@ -39,5 +39,6 @@ enum
 	TEXT_Password,
 	TEXT_DownloadLocation,
 	TEXT_DownloadSpeed,
-	TEXT_NumPeers
+	TEXT_NumPeers,
+	TEXT_UploadSpeed
 };

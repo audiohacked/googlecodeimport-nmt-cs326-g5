@@ -31,6 +31,11 @@ SettingsFrame::SettingsFrame(wxWindow * parent, wxWindowID id, const wxString & 
     	wxSP_ARROW_KEYS, 0, 120, 25 );
 	wxStaticText* downloadSpeedLabel = new wxStaticText ( this, wxID_STATIC,
     	wxT("&Max Download Speed:"), wxDefaultPosition, wxDefaultSize, 0 );
+	wxSpinCtrl* uploadSpeed = new wxSpinCtrl ( this, TEXT_UploadSpeed,
+    	wxEmptyString, wxDefaultPosition, wxSize(60, -1),
+    	wxSP_ARROW_KEYS, 0, 120, 25 );
+	wxStaticText* uploadSpeedLabel = new wxStaticText ( this, wxID_STATIC,
+    	wxT("&Max Upload Speed:"), wxDefaultPosition, wxDefaultSize, 0 );
 	
 	//number of peers label and control
 	wxSpinCtrl* numPeers = new wxSpinCtrl ( this, TEXT_NumPeers,
@@ -50,6 +55,8 @@ SettingsFrame::SettingsFrame(wxWindow * parent, wxWindowID id, const wxString & 
 	top_sizer->Add(downloadLocation, 1, wxEXPAND|wxALL, 5);
 	top_sizer->Add(downloadSpeedLabel, 0,wxALIGN_CENTER_VERTICAL|wxALL, 5); 
 	top_sizer->Add(downloadSpeed, 1, wxEXPAND|wxALL, 5);
+	top_sizer->Add(uploadSpeedLabel, 0,wxALIGN_CENTER_VERTICAL|wxALL, 5); 
+	top_sizer->Add(uploadSpeed, 1, wxEXPAND|wxALL, 5);
 	top_sizer->Add(numPeersLabel, 0,wxALIGN_CENTER_VERTICAL|wxALL, 5); 
 	top_sizer->Add(numPeers, 1, wxEXPAND|wxALL, 5);
 	
@@ -63,6 +70,7 @@ void SettingsFrame::SaveSettings(wxCommandEvent& WXUNUSED(event))
     wxString tmpString;
     wxTextCtrl* downloadLoc = (wxTextCtrl*) FindWindow(TEXT_DownloadLocation);
     wxSpinCtrl* downloadSpd = (wxSpinCtrl*) FindWindow(TEXT_DownloadSpeed); 
+    wxSpinCtrl* uploadSpd = (wxSpinCtrl*) FindWindow(TEXT_UploadSpeed); 
     wxSpinCtrl* numPeers = (wxSpinCtrl*) FindWindow(TEXT_NumPeers); 
 
     if (!file.Create(wxT(FILENAME)))
@@ -87,6 +95,10 @@ void SettingsFrame::SaveSettings(wxCommandEvent& WXUNUSED(event))
 	
 	tmpString = wxString::FromAscii("DL_Speed:");
 	tmpString << downloadSpd->GetValue();
+	file.AddLine(tmpString);
+	
+	tmpString = wxString::FromAscii("UL_Speed:");
+	tmpString << uploadSpd->GetValue();
 	file.AddLine(tmpString);
 
 	tmpString = wxString::FromAscii("NUM_Peers:");
