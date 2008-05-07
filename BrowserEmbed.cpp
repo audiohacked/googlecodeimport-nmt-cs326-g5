@@ -49,10 +49,16 @@ void DDPSBrowser::BeforeLoad(wxMozillaBeforeLoadEvent &myEvent)
 {
 	wxURL url(myEvent.GetURL());
 	wxString nextURL = url.GetServer();
+	
+	
 	if ((url.GetServer() == wxString::FromAscii("ddps"))||(url.GetScheme() == wxString::FromAscii("ddps")))
 	{
+		wxMessageDialog mydialog(this, myEvent.GetURL(), _T("DDPS Protocol Intercepted"), wxYES|wxNO);
+		mydialog.ShowModal();
+		
 		if ((url.GetPath().Find(wxString::FromAscii("browser")) != -1)||(url.GetServer() == wxString::FromAscii("browser")))
 		{
+			//browser->LoadURL(url.GetPath());
 		} 
 		else if ((url.GetPath().Find(wxString::FromAscii("torrentDownload")) != -1)||(url.GetServer() == wxString::FromAscii("torrentDownload")))
 		{
