@@ -46,7 +46,7 @@ DDPSBrowser::DDPSBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, co
 void DDPSBrowser::BeforeLoad(wxMozillaBeforeLoadEvent &myEvent)
 {
 	wxURL url(myEvent.GetURL());
-	if ((url.GetServer() == "ddps")||(url.GetScheme() == "ddps"))
+	if ((url.GetServer() == wxString::FromAscii("ddps"))||(url.GetScheme() == wxString::FromAscii("ddps")))
 	{
 		wxMessageDialog mydialog(this, url.GetPath(), _T("DDPS Protocol Intercepted"), wxYES |wxNO);
 		if (mydialog.ShowModal() == wxID_NO)

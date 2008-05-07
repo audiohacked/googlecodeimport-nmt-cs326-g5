@@ -812,10 +812,13 @@ void wxMozillaBrowser::OnLocationChange()
 #ifdef __WXMAC__
     ::SetOrigin(0, 0);
 #endif
+
 	wxMozillaLinkChangedEvent thisEvent = wxMozillaLinkChangedEvent(this);
+        wxMessageBox(this->GetURL());
 	thisEvent.SetCanGoBack(this->CanGoBack());
 	thisEvent.SetCanGoForward(this->CanGoForward());
 	thisEvent.SetNewURL(this->GetURL());
+        wxMessageBox(this->GetURL());
 	GetEventHandler()->ProcessEvent(thisEvent);
 }
 
@@ -835,6 +838,7 @@ bool wxMozillaBrowser::IsBusy()
 bool wxMozillaBrowser::LoadURL(const wxString &location)
 {
 	if (m_Mozilla->mWebNav){
+            
         nsresult rv;
         nsString mCurrentURI = wxString_to_nsString(location, wxConvISO8859_1);
 		rv = m_Mozilla->mWebNav->LoadURI(mCurrentURI.get(), nsIWebNavigation::LOAD_FLAGS_NONE, NULL, NULL, NULL);
