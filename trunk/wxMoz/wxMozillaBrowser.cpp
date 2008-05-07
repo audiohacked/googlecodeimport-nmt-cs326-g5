@@ -357,8 +357,8 @@ bool wxMozillaBrowser::EnsureEmbedding()
 
         // If profile path was set before initializing embedding, set it now: 
         wxString profilePath = wxMozillaSettings::GetProfilePath();
-        if (!profilePath.empty())
-            wxMozillaSettings::SetProfilePath(profilePath);
+        //if (!profilePath.empty())
+            wxMozillaSettings::SetProfilePath(wxFileName::GetCwd());
     }
     return true;
 }
