@@ -36,7 +36,9 @@
 			void OnStop(wxCommandEvent& event);
 			void OnRefresh(wxCommandEvent& event);
 			void OnHome(wxCommandEvent& event);
+			#ifndef __WXMAC__
 			void BeforeLoad(wxMozillaBeforeLoadEvent &myEvent);
+			#endif
 			DECLARE_EVENT_TABLE()
 			
 	};

@@ -252,24 +252,6 @@ void wxMozillaWindow::OpenNewWindow(wxCommandEvent &myEvent)
 
 }
 
-void wxMozillaWindow::OnLoadComplete(wxMozillaLoadCompleteEvent &WXUNUSED(myEvent)){
-        printf("Handling OnLoadComplete...\n");
-	if (hasStatusbar)
-		statusBar->SetStatusText(wxEmptyString);
-}
-
-void wxMozillaWindow::BeforeLoad(wxMozillaBeforeLoadEvent &myEvent){
-	//doesn't seem to work... even though GetURL() does return http://cnn.com...
-	if (myEvent.GetURL().Find(_T("microsoft.com/windows/ie")) != -1)
-	{
-		//what I really would like to do is myEvent.Cancel()
-		//when OnStartURIOpen is called...
-		wxMessageDialog mydialog(this, _T("Are you really, really sure you want to visit this site?!"), _T("What do you need to go here for?"), wxYES | wxNO);
-		if (mydialog.ShowModal() == wxID_NO)
-			Mozilla->Stop();
-	}
-}
-
 #if wxUSE_FINDREPLDLG
 void wxMozillaWindow::ShowFindDlg(wxCommandEvent &WXUNUSED(myEvent))
 {
@@ -337,6 +319,24 @@ void wxMozillaWindow::DoFind(wxFindDialogEvent &myEvent)
 		wxMessageDialog(this, _("The text could not be found."), _("Text Not Found")).ShowModal();
 }
 #endif //wxUSE_FINDREPLDLG
+
+void wxMozillaWindow::OnLoadComplete(wxMozillaLoadCompleteEvent &WXUNUSED(myEvent)){
+        printf("Handling OnLoadComplete...\n");
+	if (hasStatusbar)
+		statusBar->SetStatusText(wxEmptyString);
+}
+
+void wxMozillaWindow::BeforeLoad(wxMozillaBeforeLoadEvent &myEvent){
+	//doesn't seem to work... even though GetURL() does return http://cnn.com...
+	if (myEvent.GetURL().Find(_T("microsoft.com/windows/ie")) != -1)
+	{
+		//what I really would like to do is myEvent.Cancel()
+		//when OnStartURIOpen is called...
+		wxMessageDialog mydialog(this, _T("Are you really, really sure you want to visit this site?!"), _T("What do you need to go here for?"), wxYES | wxNO);
+		if (mydialog.ShowModal() == wxID_NO)
+			Mozilla->Stop();
+	}
+}
 
 void wxMozillaWindow::UpdateURL(wxMozillaLinkChangedEvent &myEvent)
 {

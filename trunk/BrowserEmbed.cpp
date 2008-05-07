@@ -7,8 +7,9 @@ BEGIN_EVENT_TABLE( DDPSBrowser, wxPanel )
 	EVT_BUTTON(BROWSER_Stop, DDPSBrowser::OnStop)
 	EVT_BUTTON(BROWSER_Refresh, DDPSBrowser::OnRefresh)
 	EVT_BUTTON(BROWSER_Home, DDPSBrowser::OnHome)
-	
+	#ifndef __WXMAC__
 	EVT_MOZILLA_BEFORE_LOAD(DDPSBrowser::BeforeLoad)
+	#endif
 END_EVENT_TABLE()
 
 DDPSBrowser::DDPSBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size) 
@@ -43,6 +44,7 @@ DDPSBrowser::DDPSBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, co
 	SetSizer(sizer);
 }
 
+#ifndef __WXMAC__
 void DDPSBrowser::BeforeLoad(wxMozillaBeforeLoadEvent &myEvent)
 {
 	wxURL url(myEvent.GetURL());
@@ -54,7 +56,7 @@ void DDPSBrowser::BeforeLoad(wxMozillaBeforeLoadEvent &myEvent)
 			browser->Stop();
 	}
 }
-
+#endif
 void DDPSBrowser::OnPrev(wxCommandEvent& event)
 {
 	printf("OnPrev..\n");

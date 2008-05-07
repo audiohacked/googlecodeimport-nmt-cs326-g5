@@ -65,6 +65,7 @@
 			void GotoDownloads(wxCommandEvent& event);
 			void Logout(wxCommandEvent& event);
 
+			DDPSMenu *menu;
 			DDPSPanel *panel;
 			DECLARE_EVENT_TABLE()
 	};
