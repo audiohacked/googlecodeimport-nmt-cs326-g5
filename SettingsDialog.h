@@ -15,25 +15,27 @@
 #include <wx/textfile.h>
 #include <wx/strconv.h>
 
-class SettingsPanel : public wxPanel
-{
+class SettingsFrame : public wxDialog
+{	
 	public:
-		SettingsPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size, long style);
+		SettingsFrame(wxWindow * parent, wxWindowID id, const wxString & title,
+	              const wxPoint & pos = wxDefaultPosition,
+	              const wxSize & size = wxDefaultSize,
+	              long style = wxDEFAULT_DIALOG_STYLE);
 		wxTextCtrl *downloadLocation;
+		void OnAccept( wxCommandEvent &event);
+		void OnCancel(wxCommandEvent &event);
+		void SaveSettings(wxCommandEvent& event);
 
 		DECLARE_EVENT_TABLE()
 };
 
-class SettingsFrame : public wxFrame
+/*class SettingsFrame : public wxFrame
 {
 	public:
 		SettingsFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
-		void OnAccept( wxCommandEvent &event);
-		void OnCancel(wxCommandEvent &event);
-		void SaveSettings();
-		
 		SettingsPanel *panel;
 		DECLARE_EVENT_TABLE()
-};
+};*/
 
 #endif
