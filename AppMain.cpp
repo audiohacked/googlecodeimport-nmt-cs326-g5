@@ -15,7 +15,7 @@ BEGIN_EVENT_TABLE( DDPSFrame, wxFrame )
 	EVT_MENU(MENU_Home, DDPSFrame::GotoHomepage)
 	EVT_MENU(MENU_Community, DDPSFrame::GotoCommunity)
 	EVT_MENU(MENU_Downloads, DDPSFrame::GotoDownloads)
-
+	EVT_MENU(MENU_Logout, DDPSFrame::Logout)
 END_EVENT_TABLE()
 
 BEGIN_EVENT_TABLE( DDPSTabbed, wxNotebook )
@@ -86,7 +86,7 @@ void DDPSFrame::AboutBox(wxCommandEvent& WXUNUSED(event))
 		info.SetDescription(wxT("This Program is a Digital Content Distribution and Publishing System. Written Spring 2008 for CS326: Software Engineering."));
 		info.SetCopyright(wxT("(C) 2008 Sean Nelson <snelson@nmt.edu>, Josha Barron <jbarron@nmt.edu>, Corey Brown <coreyb42@gmail.com>, Adam Troemne <atroemne@nmt.edu>"));
 	#ifdef __WXGTK__
-		//wxGenericAboutBox(info);
+		//wxAboutBox(info);
 	#else
 		wxAboutBox(info);
 	#endif
@@ -110,6 +110,17 @@ void DDPSFrame::GotoCommunity(wxCommandEvent& event)
 void DDPSFrame::GotoDownloads(wxCommandEvent& event)
 {
 	panel->GotoDownloads(event);
+}
+
+void DDPSFrame::Logout(wxCommandEvent& event)
+{
+	AppLoginDialog loginDlg(this, -1, wxT("User Login"), wxDefaultPosition, wxDefaultSize);
+	if(loginDlg.ShowModal() == wxID_OK)
+	{
+		panel->SetFocus();
+	} else {
+		Close(TRUE);
+	}
 }
 
 //open the settings dialog

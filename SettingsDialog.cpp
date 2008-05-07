@@ -25,7 +25,7 @@ SettingsFrame::SettingsFrame(wxWindow * parent, wxWindowID id, const wxString & 
 	wxStaticText* downloadLocationLabel = new wxStaticText ( this, wxID_STATIC,
     	wxT("&Download Location:"), wxDefaultPosition, wxDefaultSize, 0 );
 
-	//download speed label and control
+	//download/upload speed label and control
 	wxSpinCtrl* downloadSpeed = new wxSpinCtrl ( this, TEXT_DownloadSpeed,
     	wxEmptyString, wxDefaultPosition, wxSize(60, -1),
     	wxSP_ARROW_KEYS, 0, 120, 25 );
@@ -49,8 +49,10 @@ SettingsFrame::SettingsFrame(wxWindow * parent, wxWindowID id, const wxString & 
 	wxBoxSizer *top_sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->Add(top_sizer, 0, wxALIGN_TOP, 5);
 	sizer->Add(button_sizer, 0, wxALIGN_BOTTOM, 5);
+	
 	button_sizer->Add(Ok_Button, 0, wxALL, 10);
 	button_sizer->Add(Cancel_Button, 0, wxALL, 10);
+	
 	top_sizer->Add(downloadLocationLabel, 0,wxALIGN_CENTER_VERTICAL|wxALL, 5); 
 	top_sizer->Add(downloadLocation, 1, wxEXPAND|wxALL, 5);
 	top_sizer->Add(downloadSpeedLabel, 0,wxALIGN_CENTER_VERTICAL|wxALL, 5); 

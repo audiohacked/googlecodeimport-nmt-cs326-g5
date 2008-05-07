@@ -2,6 +2,10 @@
 
 #include "enum.h" // needed for the MENU_Quit and etc.
 
+BEGIN_EVENT_TABLE( AppLoginDialog, wxDialog )
+	EVT_BUTTON(wxID_CANCEL, AppLoginDialog::Cancel)
+END_EVENT_TABLE()
+
 AppLoginDialog::AppLoginDialog( wxWindow * parent, wxWindowID id, const wxString & title,
                            const wxPoint & pos, const wxSize & size, long style ) 
 : wxDialog(parent, id, title, pos, size)
@@ -26,4 +30,14 @@ AppLoginDialog::AppLoginDialog( wxWindow * parent, wxWindowID id, const wxString
 	SetSizer(sizer);
 	sizer->SetSizeHints(this);
 
+}
+
+void AppLoginDialog::Cancel(wxCommandEvent& event)
+{
+	int answer = wxMessageBox(wxString::FromAscii("Quit program?"), 
+							wxString::FromAscii("Confirm"),
+                            wxYES_NO, this);
+  	if (answer == wxYES)
+    	EndModal(0);
+	
 }
