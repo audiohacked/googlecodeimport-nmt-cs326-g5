@@ -15,7 +15,7 @@ END_EVENT_TABLE()
 DDPSBrowser::DDPSBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size) 
 : wxPanel(parent, id, pos, size)
 {
-
+	wParent = parent;
 	#ifndef __WXMAC__
 	browser = new wxMozillaBrowser(this, -1, wxDefaultPosition, wxDefaultSize, wxBORDER);
 	#else
@@ -51,9 +51,36 @@ void DDPSBrowser::BeforeLoad(wxMozillaBeforeLoadEvent &myEvent)
 	wxString nextURL = url.GetServer();
 	if ((url.GetServer() == wxString::FromAscii("ddps"))||(url.GetScheme() == wxString::FromAscii("ddps")))
 	{
-		wxMessageDialog mydialog(this, url.GetPath(), _T("DDPS Protocol Intercepted"), wxYES |wxNO);
-		if (mydialog.ShowModal() == wxID_NO)
-			browser->Stop();
+		if ((url.GetPath().Find("browser") != -1)||(url.GetServer() == wxString::FromAscii("browser"))
+		{
+		} 
+		else if ((url.GetPath().Find("torrentDownload") != -1)||(url.GetServer() == wxString::FromAscii("torrentDownload"))
+		{
+			// must find the last slash and get the rest of the string
+			wParent->Downloads->AddTorrentDownload(hash);
+			if ( browser->IsBusy() )
+			{
+				browser->Stop();
+			}
+		}
+		else if ((url.GetPath().Find("httpDownload") != -1)||(url.GetServer() == wxString::FromAscii("httpDownload"))
+		{
+			// must find the slash after the httpDownload and get the rest of the string
+			wParent->Downloads->AddHttpDownload(url);
+			if ( browser->IsBusy() )
+			{
+				browser->Stop();
+			}
+		}
+		else
+		{
+			wxMessageDialog mydialog(this, url.GetPath(), _T("DDPS Protocol Intercepted"), wxYES |wxNO);
+			if (mydialog.ShowModal() == wxID_NO)
+				if ( browser->IsBusy() )
+				{
+					browser->Stop();
+				}
+		}
 	}
 }
 #endif

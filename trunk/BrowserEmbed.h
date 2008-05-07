@@ -22,13 +22,14 @@
 	{
 		public:
 			DDPSBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size);
+			void GotoHomepage(void);
 			#ifndef __WXMAC__
 				wxMozillaBrowser *browser;
 			#else
 				wxWebKitCtrl *browser;
 			#endif
 			wxString home;
-			void GotoHomepage(void);
+			wxWindow *wParent;
 			
 		private:
 			void OnPrev(wxCommandEvent& event);
@@ -39,8 +40,8 @@
 			#ifndef __WXMAC__
 			void BeforeLoad(wxMozillaBeforeLoadEvent &myEvent);
 			#endif
-			DECLARE_EVENT_TABLE()
-			
+
+			DECLARE_EVENT_TABLE()			
 	};
 
 #endif

@@ -31,9 +31,17 @@ const wxPoint& pos, const wxSize& size, long style) : wxPanel(parent, id, pos, s
 #ifdef __TORRENT_MANAGER_H
 void TransferManager::AddTorrentDownload(big_number const& TorrentHash)
 {
-	if (torrentDownloads->AddTorrent(TorrentHash))
+	if (tor = torrentDownloads->AddTorrent(TorrentHash))
 	{
 		// now add torrent info to list control
+		long index = listDownloads->InsertItem();
+		listDownloads->SetItem(index, 0, wxString(tor.name())); // name
+		listDownloads->SetItem(index, 1, wxString(tor.get_torrent_info().total_size())); // size
+		listDownloads->SetItem(index, 2, wxString(tor.status().total_done)); // progress
+		listDownloads->SetItem(index, 3, wxString(tor.status().state)); // status
+		listDownloads->SetItem(index, 4, wxString(tor.status().download_rate)); // Down Speed
+		listDownloads->SetItem(index, 5, wxString(tor.status().upload_rate)); // Up Speed
+		listDownloads->SetItem(index, 6, wxString("unknown")); // ETA
 	}
 }
 #endif
