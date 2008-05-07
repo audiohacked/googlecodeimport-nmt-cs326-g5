@@ -37,5 +37,7 @@ enum
 	BUTTON_Cancel,
 	TEXT_Username,
 	TEXT_Password,
-	TEXT_DownloadLocation
+	TEXT_DownloadLocation,
+	TEXT_DownloadSpeed,
+	TEXT_NumPeers
 };

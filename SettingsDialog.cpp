@@ -1,35 +1,58 @@
 #include "SettingsDialog.h"
 #include "enum.h"
+#include <stdlib.h>
 
 #define FILENAME "config.ini"
 #define BUFFER "This is the config file"
 
 BEGIN_EVENT_TABLE( SettingsFrame, wxDialog )
-	//EVT_BUTTON(wxID_OK, SettingsFrame::OnAccept)
-	//EVT_BUTTON(wxID_CANCEL, SettingsFrame::OnCancel)
 	EVT_BUTTON(wxID_OK, SettingsFrame::SaveSettings)
-	//EVT_BUTTON(wxID_CANCEL, SettingsFrame::OnCancel)
 END_EVENT_TABLE()
 
-//BEGIN_EVENT_TABLE( SettingsPanel, wxPanel )
-//END_EVENT_TABLE()
 
 //constructor for thDDPSFramee settings frame
 SettingsFrame::SettingsFrame(wxWindow * parent, wxWindowID id, const wxString & title,
                            const wxPoint & pos, const wxSize & size, long style ) 
 : wxDialog(parent, id, title, pos, size)
 {
+	//define ok and cancel buttons
 	wxButton *Ok_Button = new wxButton(this, wxID_OK, wxT("Accept"), wxDefaultPosition, wxDefaultSize);
 	wxButton *Cancel_Button = new wxButton(this, wxID_CANCEL, wxT("Cancel"), wxDefaultPosition, wxDefaultSize);
+
+	//define download directory label and control
 	wxTextCtrl *downloadLocation = new wxTextCtrl(this, 
 		TEXT_DownloadLocation, wxT(""), wxDefaultPosition, wxDefaultSize);
+	wxStaticText* downloadLocationLabel = new wxStaticText ( this, wxID_STATIC,
+    	wxT("&Download Location:"), wxDefaultPosition, wxDefaultSize, 0 );
+
+	//download speed label and control
+	wxSpinCtrl* downloadSpeed = new wxSpinCtrl ( this, TEXT_DownloadSpeed,
+    	wxEmptyString, wxDefaultPosition, wxSize(60, -1),
+    	wxSP_ARROW_KEYS, 0, 120, 25 );
+	wxStaticText* downloadSpeedLabel = new wxStaticText ( this, wxID_STATIC,
+    	wxT("&Max Download Speed:"), wxDefaultPosition, wxDefaultSize, 0 );
+	
+	//number of peers label and control
+	wxSpinCtrl* numPeers = new wxSpinCtrl ( this, TEXT_NumPeers,
+    	wxEmptyString, wxDefaultPosition, wxSize(60, -1),
+    	wxSP_ARROW_KEYS, 0, 120, 25 );
+	wxStaticText* numPeersLabel = new wxStaticText ( this, wxID_STATIC,
+    	wxT("&Max Number of Peers:"), wxDefaultPosition, wxDefaultSize, 0 );	
 
 	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 	wxBoxSizer *button_sizer = new wxBoxSizer(wxHORIZONTAL);
-	sizer->Add(downloadLocation, 1, wxEXPAND|wxALL, 5);
+	wxBoxSizer *top_sizer = new wxBoxSizer(wxVERTICAL);
+	sizer->Add(top_sizer, 0, wxALIGN_TOP, 5);
 	sizer->Add(button_sizer, 0, wxALIGN_BOTTOM, 5);
 	button_sizer->Add(Ok_Button, 0, wxALL, 10);
 	button_sizer->Add(Cancel_Button, 0, wxALL, 10);
+	top_sizer->Add(downloadLocationLabel, 0,wxALIGN_CENTER_VERTICAL|wxALL, 5); 
+	top_sizer->Add(downloadLocation, 1, wxEXPAND|wxALL, 5);
+	top_sizer->Add(downloadSpeedLabel, 0,wxALIGN_CENTER_VERTICAL|wxALL, 5); 
+	top_sizer->Add(downloadSpeed, 1, wxEXPAND|wxALL, 5);
+	top_sizer->Add(numPeersLabel, 0,wxALIGN_CENTER_VERTICAL|wxALL, 5); 
+	top_sizer->Add(numPeers, 1, wxEXPAND|wxALL, 5);
+	
 	SetSizer(sizer);
 	sizer->SetSizeHints(this);
 }
@@ -37,8 +60,10 @@ SettingsFrame::SettingsFrame(wxWindow * parent, wxWindowID id, const wxString & 
 void SettingsFrame::SaveSettings(wxCommandEvent& WXUNUSED(event))
 {
     wxTextFile file;
-    wxString downloadLocationS;
-    wxTextCtrl* downloadLoc = (wxTextCtrl*) FindWindow(TEXT_DownloadLocation); 
+    wxString tmpString;
+    wxTextCtrl* downloadLoc = (wxTextCtrl*) FindWindow(TEXT_DownloadLocation);
+    wxSpinCtrl* downloadSpd = (wxSpinCtrl*) FindWindow(TEXT_DownloadSpeed); 
+    wxSpinCtrl* numPeers = (wxSpinCtrl*) FindWindow(TEXT_NumPeers); 
 
     if (!file.Create(wxT(FILENAME)))
     {
@@ -54,9 +79,20 @@ void SettingsFrame::SaveSettings(wxCommandEvent& WXUNUSED(event))
     
     if(!downloadLoc->IsEmpty())
     {
-    	//downloadLocation = panel->downloadLocation->GetValue();
-    	file.AddLine(downloadLoc->GetValue());
+    	tmpString = wxString::FromAscii("DL_Loc:");
+    	tmpString << downloadLoc->GetValue();
+    	file.AddLine(tmpString);
 	}
+	
+	
+	tmpString = wxString::FromAscii("DL_Speed:");
+	tmpString << downloadSpd->GetValue();
+	file.AddLine(tmpString);
+
+	tmpString = wxString::FromAscii("NUM_Peers:");
+	tmpString << numPeers->GetValue();
+	file.AddLine(tmpString);
+	
     file.Write();
     EndModal(0);
 }

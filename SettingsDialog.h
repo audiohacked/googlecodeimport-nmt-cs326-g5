@@ -14,6 +14,7 @@
 #include <wx/ffile.h>
 #include <wx/textfile.h>
 #include <wx/strconv.h>
+#include <wx/spinctrl.h>
 
 class SettingsFrame : public wxDialog
 {	
@@ -23,19 +24,15 @@ class SettingsFrame : public wxDialog
 	              const wxSize & size = wxDefaultSize,
 	              long style = wxDEFAULT_DIALOG_STYLE);
 		wxTextCtrl *downloadLocation;
+		wxStaticText* downloadLocationLabel;
+		wxSpinCtrl *downloadSpeed;
+		wxStaticText* downloadSpeedLabel;
+		
 		void OnAccept( wxCommandEvent &event);
 		void OnCancel(wxCommandEvent &event);
 		void SaveSettings(wxCommandEvent& event);
 
 		DECLARE_EVENT_TABLE()
 };
-
-/*class SettingsFrame : public wxFrame
-{
-	public:
-		SettingsFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
-		SettingsPanel *panel;
-		DECLARE_EVENT_TABLE()
-};*/
 
 #endif
