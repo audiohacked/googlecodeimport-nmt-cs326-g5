@@ -92,8 +92,15 @@ void AppLoginDialog::CheckLogin(wxCommandEvent& event)
 
 	if (answer == true)
 	{
-		//wxMessageBox(wxString::FromAscii("Login Success!"), wxString::FromAscii("Login Outcome?"), wxOK, this);
-		event.Skip();
+		int cancelLogin = wxMessageBox(wxString::FromAscii("Logging in!"), wxString::FromAscii("Login Outcome?"), wxOK|wxCANCEL, this);
+		if (cancelLogin == wxCANCEL)
+		{
+			EndModal(0);
+		}
+		else
+		{
+			event.Skip();
+		}
 	}
 	else if (answer == false)
 	{
