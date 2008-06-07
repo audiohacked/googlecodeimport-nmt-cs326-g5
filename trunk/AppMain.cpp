@@ -67,8 +67,12 @@ DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 	AppLoginDialog loginDlg(this, -1, wxT("User Login"), wxDefaultPosition, wxDefaultSize);
 	if(loginDlg.ShowModal() == wxID_OK)
 	{
+		LoginUsername = loginDlg.username->GetValue();
+		//SetStatusText(LoginUsername, 0);
 		panel->SetFocus();
-	} else {
+	}
+	else
+	{
 		Close(TRUE);
 	}
 }
