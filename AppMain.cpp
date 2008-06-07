@@ -56,9 +56,9 @@ bool DDPS::OnInit()
 }
 
 DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
-: wxFrame((wxFrame*) NULL, -1, title, pos, size)
+: wxFrame((wxFrame*) NULL, WINDOW_Frame, title, pos, size, wxDEFAULT_FRAME_STYLE, wxT("DDPS"))
 {
-	CreateStatusBar(2);
+	CreateStatusBar(3);
 	SetStatusText(wxT("Ready!"), 0);
 	DDPSMenu *menu = new DDPSMenu();
 	SetMenuBar(menu);
@@ -67,8 +67,13 @@ DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 	AppLoginDialog loginDlg(this, -1, wxT("User Login"), wxDefaultPosition, wxDefaultSize);
 	if(loginDlg.ShowModal() == wxID_OK)
 	{
-		LoginUsername = loginDlg.username->GetValue();
-		//SetStatusText(LoginUsername, 0);
+		DDPS &myApp = ::wxGetApp();
+		myApp.myLoginData.Username = loginDlg.username->GetValue();
+		myApp.myLoginData.Password = loginDlg.password->GetValue();
+
+		SetStatusText(myApp.myLoginData.Username, 1);
+		SetStatusText(myApp.myLoginData.Password, 2);
+		
 		panel->SetFocus();
 	}
 	else
@@ -128,7 +133,7 @@ void DDPSFrame::Logout(wxCommandEvent& event)
 }
 
 //open the settings dialog
-void DDPSFrame::SettingsDialog(wxCommandEvent& WXUNUSED(event))
+void DDPSFrame::SettingsDialog(wxCommandEvent& event)
 {
 	SettingsFrame settingsFrame(this, -1, wxT("Settings"),wxDefaultPosition, wxSize(800,600));
 	settingsFrame.ShowModal();

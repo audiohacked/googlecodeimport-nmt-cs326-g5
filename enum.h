@@ -40,5 +40,8 @@ enum
 	TEXT_DownloadLocation,
 	TEXT_DownloadSpeed,
 	TEXT_NumPeers,
-	TEXT_UploadSpeed
+	TEXT_UploadSpeed,
+	BUTTON_CreateAccount,
+	BUTTON_FetchPassword,
+	WINDOW_Frame
 };

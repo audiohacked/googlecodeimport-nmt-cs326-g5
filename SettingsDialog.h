@@ -27,6 +27,7 @@ class SettingsFrame : public wxDialog
 		wxStaticText* downloadLocationLabel;
 		wxSpinCtrl *downloadSpeed;
 		wxStaticText* downloadSpeedLabel;
+		wxWindow *wParent;
 		
 		void OnAccept( wxCommandEvent &event);
 		void OnCancel(wxCommandEvent &event);

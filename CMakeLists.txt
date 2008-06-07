@@ -31,6 +31,7 @@ SET(SRCS
 
 SET(HDRS
 	enum.h
+	common.h
 	AppMain.h
 	AppMenu.h
 	AppLogin.h
