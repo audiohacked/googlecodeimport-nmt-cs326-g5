@@ -71,6 +71,7 @@
 			DDPSMenu *menu;
 			DDPSPanel *panel;
 			wxWindow *wParent;
+			wxString LoginUsername;
 			
 			DECLARE_EVENT_TABLE()
 	};

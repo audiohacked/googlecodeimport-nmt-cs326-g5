@@ -4,6 +4,7 @@
 
 BEGIN_EVENT_TABLE( AppLoginDialog, wxDialog )
 	EVT_BUTTON(wxID_CANCEL, AppLoginDialog::Cancel)
+	EVT_BUTTON(wxID_OK, AppLoginDialog::CheckLogin)
 END_EVENT_TABLE()
 
 AppLoginDialog::AppLoginDialog( wxWindow * parent, wxWindowID id, const wxString & title,
@@ -11,8 +12,8 @@ AppLoginDialog::AppLoginDialog( wxWindow * parent, wxWindowID id, const wxString
 : wxDialog(parent, id, title, pos, size)
 {
 	
-	wxTextCtrl *username = new wxTextCtrl(this, TEXT_Username, wxT(""), wxDefaultPosition, wxDefaultSize);
-	wxTextCtrl *password = new wxTextCtrl(this, TEXT_Password, wxT(""), wxDefaultPosition, wxDefaultSize, wxTE_PASSWORD);
+	username = new wxTextCtrl(this, TEXT_Username, wxT(""), wxDefaultPosition, wxDefaultSize);
+	password = new wxTextCtrl(this, TEXT_Password, wxT(""), wxDefaultPosition, wxDefaultSize, wxTE_PASSWORD);
 
 	wxButton *Ok_Button = new wxButton(this, wxID_OK, wxT("Login"), wxDefaultPosition, wxDefaultSize);
 	wxButton *Cancel_Button = new wxButton(this, wxID_CANCEL, wxT("Cancel"), wxDefaultPosition, wxDefaultSize);
@@ -40,4 +41,40 @@ void AppLoginDialog::Cancel(wxCommandEvent& event)
   	if (answer == wxYES)
     	EndModal(0);
 	
+}
+
+void AppLoginDialog::CheckLogin(wxCommandEvent& event)
+{
+	int answer = 0;
+
+	// check for valid user login
+	if (username->GetValue() == wxString::FromAscii("ddps")) {
+		if (password->GetValue() == wxString::FromAscii("letmein")) {
+			answer = 1;
+		}
+		else
+		{
+			answer = 0;
+		}
+	}
+	else
+	{
+		answer = 0;
+	}
+
+
+	if (answer == 1)
+	{
+		//wxMessageBox(wxString::FromAscii("Login Success!"), wxString::FromAscii("Login Outcome?"), wxOK, this);
+		event.Skip();
+	}
+	else if (answer == 0)
+	{
+		wxMessageBox(wxString::FromAscii("Incorrect Login!"), wxString::FromAscii("Login Outcome?"), wxOK, this);
+	}
+	else
+	{
+		wxMessageBox(wxString::FromAscii("Error!"),wxString::FromAscii("Bad message"), wxOK, this);
+		EndModal(0);
+	}
 }

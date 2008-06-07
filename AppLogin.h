@@ -20,6 +20,10 @@
 			wxTextCtrl * dialogText;
 			wxString GetText();
 			void Cancel(wxCommandEvent& event);
+			void CheckLogin(wxCommandEvent& event);
+			wxTextCtrl *username;
+			wxTextCtrl *password;
+			
 		
 		DECLARE_EVENT_TABLE()
 
