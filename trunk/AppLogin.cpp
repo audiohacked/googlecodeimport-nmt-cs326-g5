@@ -3,31 +3,58 @@
 #include "enum.h" // needed for the MENU_Quit and etc.
 
 BEGIN_EVENT_TABLE( AppLoginDialog, wxDialog )
-	EVT_BUTTON(wxID_CANCEL, AppLoginDialog::Cancel)
+	//EVT_BUTTON(wxID_CANCEL, AppLoginDialog::Cancel)
 	EVT_BUTTON(wxID_OK, AppLoginDialog::CheckLogin)
 END_EVENT_TABLE()
 
 AppLoginDialog::AppLoginDialog( wxWindow * parent, wxWindowID id, const wxString & title,
                            const wxPoint & pos, const wxSize & size, long style ) 
-: wxDialog(parent, id, title, pos, size)
+: wxDialog(parent, id, title, pos, size, style)
 {
-	
-	username = new wxTextCtrl(this, TEXT_Username, wxT(""), wxDefaultPosition, wxDefaultSize);
-	password = new wxTextCtrl(this, TEXT_Password, wxT(""), wxDefaultPosition, wxDefaultSize, wxTE_PASSWORD);
+	wxStaticText *usernameText = new wxStaticText(this, -1, wxT("Account name"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT);
+	username = new wxTextCtrl(this, TEXT_Username, wxT(""), wxDefaultPosition, wxSize(200,20));
+	wxStaticText *passwordText = new wxStaticText(this, -1, wxT("Password"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT);
+	password = new wxTextCtrl(this, TEXT_Password, wxT(""), wxDefaultPosition, wxSize(200,20), wxTE_PASSWORD);
 
+	wxCheckBox *rememberPassword = new wxCheckBox(this, -1, wxT("Remember my password"), wxDefaultPosition, wxDefaultSize);
 	wxButton *Ok_Button = new wxButton(this, wxID_OK, wxT("Login"), wxDefaultPosition, wxDefaultSize);
 	wxButton *Cancel_Button = new wxButton(this, wxID_CANCEL, wxT("Cancel"), wxDefaultPosition, wxDefaultSize);
 
+	wxStaticLine *hlBreak = new wxStaticLine(this, -1, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL);
+
+	wxStaticText *createAccountText = new wxStaticText(this, -1, wxT("Don't have an account?"), wxDefaultPosition, wxDefaultSize);
+	wxButton *createAccount = new wxButton(this, BUTTON_CreateAccount, wxT("Create a new account..."), wxDefaultPosition, wxDefaultSize);
+	wxStaticText *fetchPasswordText = new wxStaticText(this, -1, wxT("Forgot your login info?"), wxDefaultPosition, wxDefaultSize);
+	wxButton *fetchPassword = new wxButton(this, BUTTON_FetchPassword, wxT("Fetch my lost account..."), wxDefaultPosition, wxDefaultSize);
+
+	// sizers and widget placement
 	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
+	wxBoxSizer *login = new wxBoxSizer(wxVERTICAL);
+	wxFlexGridSizer *loginInput = new wxFlexGridSizer(2);
 	wxBoxSizer *button_sizer = new wxBoxSizer(wxHORIZONTAL);
+	wxFlexGridSizer *loginOptions = new wxFlexGridSizer(2);
 
-	sizer->Add(username, 1, wxEXPAND|wxALL, 5);
-	sizer->Add(password, 1, wxEXPAND|wxALL, 5);
-	sizer->Add(button_sizer, 0, wxALIGN_BOTTOM, 5);
+	sizer->Add(login, 0, wxALIGN_CENTER_HORIZONTAL|wxALL|wxLEFT, 20);
+	sizer->Add(hlBreak, 0, wxALIGN_CENTER_HORIZONTAL|wxLEFT, 2);
+	sizer->Add(loginOptions, 0, wxALIGN_RIGHT|wxALL, 20);
 
-	button_sizer->Add(Ok_Button, 0, wxALL, 10);
-	button_sizer->Add(Cancel_Button, 0, wxALL, 10);
+	login->Add(loginInput, 0, wxALIGN_CENTER_HORIZONTAL, 10);
+	login->Add(rememberPassword, 0, wxALIGN_CENTER_HORIZONTAL, 10);
+	login->Add(button_sizer, 0, wxALIGN_CENTER_HORIZONTAL, 10);
 
+	loginInput->Add(usernameText, 0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5);
+	loginInput->Add(username, 0, wxALL, 5);
+	loginInput->Add(passwordText, 0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5);
+	loginInput->Add(password, 0, wxALL, 5);
+
+	button_sizer->Add(Ok_Button, 0, wxALL, 5);
+	button_sizer->Add(Cancel_Button, 0, wxALL, 5);
+
+	loginOptions->Add(createAccountText, 0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5);
+	loginOptions->Add(createAccount, 0, wxALL, 5);
+	loginOptions->Add(fetchPasswordText, 0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5);
+	loginOptions->Add(fetchPassword, 0, wxALL, 5);
+	
 	SetSizer(sizer);
 	sizer->SetSizeHints(this);
 
@@ -45,30 +72,30 @@ void AppLoginDialog::Cancel(wxCommandEvent& event)
 
 void AppLoginDialog::CheckLogin(wxCommandEvent& event)
 {
-	int answer = 0;
+	bool answer = false;
 
 	// check for valid user login
 	if (username->GetValue() == wxString::FromAscii("ddps")) {
 		if (password->GetValue() == wxString::FromAscii("letmein")) {
-			answer = 1;
+			answer = true;
 		}
 		else
 		{
-			answer = 0;
+			answer = false;
 		}
 	}
 	else
 	{
-		answer = 0;
+		answer = false;
 	}
 
 
-	if (answer == 1)
+	if (answer == true)
 	{
 		//wxMessageBox(wxString::FromAscii("Login Success!"), wxString::FromAscii("Login Outcome?"), wxOK, this);
 		event.Skip();
 	}
-	else if (answer == 0)
+	else if (answer == false)
 	{
 		wxMessageBox(wxString::FromAscii("Incorrect Login!"), wxString::FromAscii("Login Outcome?"), wxOK, this);
 	}

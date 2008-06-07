@@ -21,11 +21,7 @@
 	#include "TransferManager.h"
 	#include "SettingsDialog.h"
 
-	class DDPS : public wxApp
-	{
-		public:
-			virtual bool OnInit();
-	};
+	#include "common.h"
 
 	class DDPSTabbed : public wxNotebook
 	{
@@ -51,7 +47,6 @@
 			DDPSTabbed *tabs;
 			wxWindow *wParent;
 			
-
 			DECLARE_EVENT_TABLE()
 	};
 	class DDPSFrame : public wxFrame
@@ -72,7 +67,8 @@
 			DDPSPanel *panel;
 			wxWindow *wParent;
 			wxString LoginUsername;
-			
+			wxString LoginPassword;
+		
 			DECLARE_EVENT_TABLE()
 	};
 
