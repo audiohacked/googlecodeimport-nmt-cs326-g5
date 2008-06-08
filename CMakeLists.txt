@@ -12,10 +12,11 @@ OPTION(COMMUNITY_PORTAL "Add Community Support" ON)
 OPTION(USER_UPLOAD "Add User Upload capabilities" ON)
 OPTION(BUILTIN_BROWSER "Add the Built-in Browser Support" ON)
 
-SET(NEWSPAGE http://coreyb.homelinux.org/contentmanager/news CACHE STRING "Set the URL for Newspage")
-SET(HOMEPAGE http://coreyb.homelinux.org/contentmanager CACHE STRING "Set the URL for Homepage")
-SET(SUPPORTPAGE http://coreyb.homelinux.org/contentmanager/support CACHE STRING "Set the URL for Supportpage")
-SET(COMMUNITYPAGE http://coreyb.homelinux.org/contentmanager/community CACHE STRING "Set the URL for Community Portal")
+SET(NEWSPAGE http://ddps.seancrazy.net/contentmanager/news CACHE STRING "Set the URL for Newspage")
+SET(HOMEPAGE http://ddps.seancrazy.net/contentmanager CACHE STRING "Set the URL for Homepage")
+SET(SUPPORTPAGE http://ddps.seancrazy.net/contentmanager/support CACHE STRING "Set the URL for Supportpage")
+SET(COMMUNITYPAGE http://ddps.seancrazy.net/contentmanager/community CACHE STRING "Set the URL for Community Portal")
+SET(UPDATEURL updateddps.seancrazy.net CACHE STRING "Set the URL for AutoUpdate")
 
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake
 	${CMAKE_BINARY_DIR}/config.h ESCAPE_QUOTES)
