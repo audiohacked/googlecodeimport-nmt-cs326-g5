@@ -15,4 +15,6 @@
 
 	#cmakedefine NEWSPAGE "${NEWSPAGE}"
 	
+	#cmakedefine UPDATEURL "${UPDATEURL}"
+	
 #endif
