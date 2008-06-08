@@ -2,6 +2,8 @@
 
 #include "enum.h" // needed for the MENU_Quit and etc.
 
+#include <wx/log.h>
+
 /* we have here is the event table used for event handling
 	I still have no idea how this works
 	*/
@@ -47,12 +49,36 @@ bool DDPS::OnInit()
 		wxRegisterProtocolHandler(wxT("The DDPS protocol handler"), wxT("ddps"), id, &(ddpsProtocolHandler::Create));
 	#endif
 	
-	DDPSFrame *frame = new DDPSFrame(_T("DDPSFrame"), wxPoint(50, 50), wxSize(800,600));
+	myLogFile = fopen("log.txt", "a+");
+	wxLogStderr *LogFile = new wxLogStderr(myLogFile);
+	wxLog::SetActiveTarget(LogFile);
+	//wxLogWindow *LogWindow = new wxLogWindow(NULL, wxT("LoggingWindow"));
+	//wxLogChain *logChain = new wxLogChain(LogWindow);
 
+	#ifdef __WXMAC__
+	wxApp::s_macAboutMenuItemId = MENU_About;
+	#endif
+	
+	#ifdef __WXMAC__
+	//wxApp::s_macPreferencesMenuItemId = PreferencesID;
+	#endif
+	
+	#ifdef __WXMAC__
+	//wxApp::s_macHelpMenuTitleName = "Help";
+	#endif
+	
+	
+	DDPSFrame *frame = new DDPSFrame(_T("DDPSFrame"), wxPoint(50, 50), wxSize(800,600));
 	frame->Show(TRUE);
 
 	SetTopWindow(frame);
 	return TRUE;
+}
+
+int DDPS::OnExit()
+{
+	delete wxLog::SetActiveTarget(NULL);
+	fclose(myLogFile);
 }
 
 DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
@@ -73,6 +99,9 @@ DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 
 		SetStatusText(myApp.myLoginData.Username, 1);
 		SetStatusText(myApp.myLoginData.Password, 2);
+
+		::wxLogMessage(wxT("Welcome user: ") + myApp.myLoginData.Username);
+		//::wxLogMessage(wxT("Your password is: ") + myApp.myLoginData.Password);
 		
 		panel->SetFocus();
 	}
@@ -89,6 +118,8 @@ void DDPSFrame::OnExit(wxCommandEvent& WXUNUSED(event))
 
 void DDPSFrame::AboutBox(wxCommandEvent& WXUNUSED(event))
 {
+	DDPS &myApp = ::wxGetApp();
+	wxLogMessage(wxT("Aboutbox: ") + myApp.myLoginData.Username);
 		wxAboutDialogInfo info;
 		info.SetName(wxT("DDPS"));
 		info.SetVersion(wxT("1.0 Beta"));

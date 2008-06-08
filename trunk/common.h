@@ -14,7 +14,9 @@
 	{
 		public:
 			virtual bool OnInit();
+			virtual int OnExit();
 			LoginInfoData myLoginData;
+			FILE *myLogFile;
 		
 	};
 
