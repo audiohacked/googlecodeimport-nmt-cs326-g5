@@ -5,6 +5,10 @@
 		#include <wx/wx.h>
 	#endif
 
+	#include "ChatConnectionThread.h"
+	#include "ChatRoster.h"
+	#include "ChatMessage.h"
+
 	typedef struct {
 		wxString Username;
 		wxString Password;
@@ -15,9 +19,16 @@
 		public:
 			virtual bool OnInit();
 			virtual int OnExit();
+			void InitChat();
+
 			LoginInfoData myLoginData;
 			FILE *myLogFile;
-		
+
+			ChatConnThread *thread;
+			ChatWindowRoster *chat;
+			ChatRoster *rosterListener;
+			ChatMsgSess *cMsg;
+			//ChatAccount *cAccount;
 	};
 
 	DECLARE_APP(DDPS)
