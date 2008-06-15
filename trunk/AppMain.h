@@ -44,6 +44,7 @@
 			void GotoHomepage(wxCommandEvent& event);
 			void GotoCommunity(wxCommandEvent& event);
 			void GotoDownloads(wxCommandEvent& event);
+			void ChatRosterOpen(wxCommandEvent& event);
 			DDPSTabbed *tabs;
 			wxWindow *wParent;
 			

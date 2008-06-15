@@ -28,6 +28,15 @@ SET(SRCS
 	BrowserEmbed.cpp
 	TransferManager.cpp
 	SettingsDialog.cpp
+	
+	### Chat
+	ChatCommon.cpp
+	ChatConnection.cpp
+	ChatConnectionThread.cpp
+	ChatMessage.cpp
+	ChatRoster.cpp
+	ChatWindow.cpp
+	ChatRosterData.cpp
 )
 
 SET(HDRS
@@ -39,6 +48,15 @@ SET(HDRS
 	BrowserEmbed.h
 	TransferManager.h
 	SettingsDialog.h
+	
+	### Chat
+	ChatCommon.h
+	ChatConnection.h
+	ChatConnectionThread.h
+	ChatMessage.h
+	ChatRoster.h
+	ChatWindow.h
+	ChatRosterData.h
 )
 
 FIND_PACKAGE(wxWidgets)
@@ -142,8 +160,15 @@ IF(wxWidgets_FOUND)
 		ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	ENDIF(WIN32)
 
+	SUBDIRS(gloox/src)
+	INCLUDE_DIRECTORIES(
+		${INCLUDE_DIRECTORIES}
+		"gloox/src"
+		)
+	SET(gloox_LIB gloox)
+
 	ADD_EXECUTABLE(DDPS ${GUI_TYPE} ${SRCS} ${HDRS})
-	TARGET_LINK_LIBRARIES(DDPS ${wxMoz_LIB} ${wxWidgets_LIBRARIES})
+	TARGET_LINK_LIBRARIES(DDPS ${wxMoz_LIB} ${wxWidgets_LIBRARIES} ${gloox_LIB})
  
 ELSE(wxWidgets_FOUND)
 	MESSAGE("wxWidgets not found!")

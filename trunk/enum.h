@@ -43,5 +43,6 @@ enum
 	TEXT_UploadSpeed,
 	BUTTON_CreateAccount,
 	BUTTON_FetchPassword,
-	WINDOW_Frame
+	WINDOW_Frame,
+	BUTTON_Chat
 };

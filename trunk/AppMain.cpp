@@ -30,6 +30,7 @@ BEGIN_EVENT_TABLE( DDPSPanel, wxPanel )
 	EVT_BUTTON(TABB_News, DDPSPanel::GotoNewsTab)
 	EVT_BUTTON(TABB_Support, DDPSPanel::GotoSupport)
 	EVT_BUTTON(TABB_Settings, DDPSFrame::SettingsDialog)
+	EVT_BUTTON(BUTTON_Chat, DDPSPanel::ChatRosterOpen)
 END_EVENT_TABLE()
 
 IMPLEMENT_APP(DDPS)
@@ -67,10 +68,13 @@ bool DDPS::OnInit()
 	//wxApp::s_macHelpMenuTitleName = "Help";
 	#endif
 	
+	thread = new ChatConnThread();
+	InitChat();
+	thread->Run();
+	chat = new ChatWindowRoster(thread->server->FetchConnection());	
 	
 	DDPSFrame *frame = new DDPSFrame(_T("DDPSFrame"), wxPoint(50, 50), wxSize(800,600));
 	frame->Show(TRUE);
-
 	SetTopWindow(frame);
 	return TRUE;
 }
@@ -79,6 +83,37 @@ int DDPS::OnExit()
 {
 	delete wxLog::SetActiveTarget(NULL);
 	fclose(myLogFile);
+	
+	/*
+		if (win->IsShown())
+		{
+			win->Destroy();
+		}
+	*/
+
+		thread->server->FetchConnection()->rosterManager()->removeRosterListener();
+		delete rosterListener;
+
+		//thread->server->FetchConnection()->disposeMessageSession(cMsg->m_session);
+		//delete cMsg;
+
+		//thread->server->FetchConnection()->disconnect();
+
+		//delete thread->server;
+		//delete server;
+
+		//thread->Delete();
+		//delete thread;
+
+		wxApp::CleanUp();	
+	
+}
+
+void DDPS::InitChat()
+{
+	rosterListener = new ChatRoster( thread->server->FetchConnection() );
+	cMsg = new ChatMsgSess( thread->server->FetchConnection() );
+	//cAccount = new ChatAccount( thread->server->FetchConnection() );
 }
 
 DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
@@ -179,7 +214,7 @@ DDPSPanel::DDPSPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	wxButton *News = new wxButton(this, TABB_News, wxT("News"));
 	wxButton *Settings = new wxButton(this, TABB_Settings, wxT("Settings"));
 	wxButton *Support = new wxButton(this, TABB_Support, wxT("Support"));
-	//wxButton *InstaMessenger = new wxButton(this, -1, wxT("InstaMessenger"));
+	wxButton *InstaMessenger = new wxButton(this, BUTTON_Chat, wxT("InstaMessenger"));
 
 	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 	wxBoxSizer *button_sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -188,10 +223,24 @@ DDPSPanel::DDPSPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	button_sizer->Add(News, 0, wxALL, 10);
 	button_sizer->Add(Settings, 0, wxALL, 10);
 	button_sizer->Add(Support, 0, wxALL, 10);
-	//button_sizer->Add(InstaMessenger, 0, wxALL, 10);
+	button_sizer->Add(InstaMessenger, 0, wxALL, 10);
 	SetSizer(sizer);
 	sizer->SetSizeHints(this);
 }
+
+void DDPSPanel::ChatRosterOpen(wxCommandEvent& event)
+{
+	DDPS &myApp = ::wxGetApp();
+	if (myApp.chat->IsShown())
+	{
+		
+	}
+	else
+	{
+		myApp.chat->Show(TRUE);
+	}
+}
+
 
 void DDPSPanel::GotoNewsTab(wxCommandEvent& WXUNUSED(event))
 {
