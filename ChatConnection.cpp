@@ -7,8 +7,11 @@ ChatConn::ChatConn()
 	DDPS &myApp = ::wxGetApp();
 	std::string username = wx2glooxString(myApp.myLoginData.Username);
 	std::string password = wx2glooxString(myApp.myLoginData.Password);
+#ifdef CHAT_SERVER
+	JID jid( username+"@"+ CHAT_SERVER +"/DDPSChat" );
+#else
 	JID jid( username+"@localhost/DDPSChat" );
-
+#endif
 	conn = new Client(jid, password);
 
 	conn->setSASLMechanisms(SaslMechPlain);

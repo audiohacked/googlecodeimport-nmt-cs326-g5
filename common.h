@@ -5,9 +5,6 @@
 		#include <wx/wx.h>
 	#endif
 
-	#include "ChatConnectionThread.h"
-	#include "ChatRoster.h"
-	#include "ChatMessage.h"
 	#include "AppMain.h"
 
 	typedef struct {

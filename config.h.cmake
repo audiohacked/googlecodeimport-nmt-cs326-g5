@@ -6,6 +6,8 @@
 	#cmakedefine BUILTIN_BROWSER 1
 
 	#cmakedefine USER_UPLOAD 1
+	
+	#cmakedefine CHAT_ENABLED 1
 
 	#cmakedefine HOMEPAGE "${HOMEPAGE}"
 
@@ -16,5 +18,7 @@
 	#cmakedefine NEWSPAGE "${NEWSPAGE}"
 	
 	#cmakedefine UPDATEURL "${UPDATEURL}"
+	
+	#cmakedefine CHAT_SERVER "${CHAT_SERVER}"
 	
 #endif

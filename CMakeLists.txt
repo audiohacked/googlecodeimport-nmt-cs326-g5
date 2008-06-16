@@ -11,12 +11,14 @@ SET(wxWidgets_USE_LIBS base core net)
 OPTION(COMMUNITY_PORTAL "Add Community Support" ON)
 OPTION(USER_UPLOAD "Add User Upload capabilities" ON)
 OPTION(BUILTIN_BROWSER "Add the Built-in Browser Support" ON)
+OPTION(CHAT_ENABLED "Add the Built-in Chat Support" OFF)
 
 SET(NEWSPAGE http://ddps.seancrazy.net/contentmanager/news CACHE STRING "Set the URL for Newspage")
 SET(HOMEPAGE http://ddps.seancrazy.net/contentmanager CACHE STRING "Set the URL for Homepage")
 SET(SUPPORTPAGE http://ddps.seancrazy.net/contentmanager/support CACHE STRING "Set the URL for Supportpage")
 SET(COMMUNITYPAGE http://ddps.seancrazy.net/contentmanager/community CACHE STRING "Set the URL for Community Portal")
 SET(UPDATEURL updateddps.seancrazy.net CACHE STRING "Set the URL for AutoUpdate")
+SET(CHAT_SERVER ddpschat.seancrazy.net CACHE STRING "Set the host for the Chat Server")
 
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake
 	${CMAKE_BINARY_DIR}/config.h ESCAPE_QUOTES)
@@ -28,15 +30,6 @@ SET(SRCS
 	BrowserEmbed.cpp
 	TransferManager.cpp
 	SettingsDialog.cpp
-	
-	### Chat
-	ChatCommon.cpp
-	ChatConnection.cpp
-	ChatConnectionThread.cpp
-	ChatMessage.cpp
-	ChatRoster.cpp
-	ChatWindow.cpp
-	ChatRosterData.cpp
 )
 
 SET(HDRS
@@ -48,15 +41,6 @@ SET(HDRS
 	BrowserEmbed.h
 	TransferManager.h
 	SettingsDialog.h
-	
-	### Chat
-	ChatCommon.h
-	ChatConnection.h
-	ChatConnectionThread.h
-	ChatMessage.h
-	ChatRoster.h
-	ChatWindow.h
-	ChatRosterData.h
 )
 
 FIND_PACKAGE(wxWidgets)
@@ -160,12 +144,36 @@ IF(wxWidgets_FOUND)
 		ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	ENDIF(WIN32)
 
-	SUBDIRS(gloox/src)
-	INCLUDE_DIRECTORIES(
-		${INCLUDE_DIRECTORIES}
-		"gloox/src"
+	IF(${CHAT_ENABLED})
+		SET(SRCS ${SRCS}
+			### Chat
+			ChatCommon.cpp
+			ChatConnection.cpp
+			ChatConnectionThread.cpp
+			ChatMessage.cpp
+			ChatRoster.cpp
+			ChatWindow.cpp
+			ChatRosterData.cpp
 		)
-	SET(gloox_LIB gloox)
+		SET(HDRS ${HDRS}
+			ChatCommon.h
+			ChatConnection.h
+			ChatConnectionThread.h
+			ChatMessage.h
+			ChatRoster.h
+			ChatWindow.h
+			ChatRosterData.h	
+		)
+
+		SUBDIRS(gloox/src)
+
+		INCLUDE_DIRECTORIES(
+			${INCLUDE_DIRECTORIES}
+			"gloox/src"
+		)
+
+		SET(gloox_LIB gloox)
+	ENDIF(${CHAT_ENABLED})
 
 	ADD_EXECUTABLE(DDPS ${GUI_TYPE} ${SRCS} ${HDRS})
 	TARGET_LINK_LIBRARIES(DDPS ${wxMoz_LIB} ${wxWidgets_LIBRARIES} ${gloox_LIB})

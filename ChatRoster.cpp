@@ -128,15 +128,17 @@ wxFrame(NULL, -1, wxT("ChatRoster"), wxDefaultPosition, wxDefaultSize)
 
 ChatWindowRoster::~ChatWindowRoster()
 {
-	j->disconnect();
-	delete j;
-	panel->list->DeleteAllItems();
+	//j->disconnect();
+	//delete j;
+	//panel->list->DeleteAllItems();
 }
 
 ChatWindowRosterPanel::ChatWindowRosterPanel(wxWindow *parent, wxWindowID id, Client *conn)
 	: wxPanel(parent, id, wxDefaultPosition, wxDefaultSize)
 {
+	DDPS &myApp = ::wxGetApp();
 	j = conn;
+
 	list = new wxTreeCtrl(this, WINDOW_RosterList, wxDefaultPosition, wxDefaultSize,
 	 	wxTR_FULL_ROW_HIGHLIGHT|wxTR_NO_LINES|wxTR_HIDE_ROOT|wxTR_SINGLE);
 
@@ -152,6 +154,7 @@ ChatWindowRosterPanel::ChatWindowRosterPanel(wxWindow *parent, wxWindowID id, Cl
 	sizer->SetSizeHints(this);
 
 	listRoot = list->AddRoot(_T("Roster"));
+	//myApp.frame->rosterList = list;
 }
 
 void ChatWindowRosterPanel::AddContact(wxString contact, JID jid)
