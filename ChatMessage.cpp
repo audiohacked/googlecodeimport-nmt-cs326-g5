@@ -49,8 +49,8 @@ void ChatMsgSess::handleMessageSession( MessageSession *msgSes )
 void ChatMsgSess::handleMessage( const Message &msg, MessageSession *msgSes )
 {
 	DDPS &myApp = ::wxGetApp();
-	wxTreeItemId root=myApp.chat->panel->listRoot;
-	wxTreeCtrl *list = myApp.chat->panel->list;
+	wxTreeItemId root=myApp.frame->chat->panel->listRoot;
+	wxTreeCtrl *list = myApp.frame->chat->panel->list;
 	wxTreeItemId itemId;
 	
 	wxString who = gloox2wxString(msg.from().bare());

@@ -1,4 +1,5 @@
-#include "AppMain.h"
+#include "common.h"
+
 
 #include "enum.h" // needed for the MENU_Quit and etc.
 
@@ -67,15 +68,11 @@ bool DDPS::OnInit()
 	#ifdef __WXMAC__
 	//wxApp::s_macHelpMenuTitleName = "Help";
 	#endif
-	
-	thread = new ChatConnThread();
-	InitChat();
-	thread->Run();
-	chat = new ChatWindowRoster(thread->server->FetchConnection());	
-	
-	DDPSFrame *frame = new DDPSFrame(_T("DDPSFrame"), wxPoint(50, 50), wxSize(800,600));
+		
+	frame = new DDPSFrame(_T("DDPSFrame"), wxPoint(50, 50), wxSize(800,600));
 	frame->Show(TRUE);
 	SetTopWindow(frame);
+		
 	return TRUE;
 }
 
@@ -91,8 +88,8 @@ int DDPS::OnExit()
 		}
 	*/
 
-		thread->server->FetchConnection()->rosterManager()->removeRosterListener();
-		delete rosterListener;
+		//thread->server->FetchConnection()->rosterManager()->removeRosterListener();
+		//delete rosterListener;
 
 		//thread->server->FetchConnection()->disposeMessageSession(cMsg->m_session);
 		//delete cMsg;
@@ -105,11 +102,11 @@ int DDPS::OnExit()
 		//thread->Delete();
 		//delete thread;
 
-		wxApp::CleanUp();	
+		wxApp::CleanUp();
 	
 }
 
-void DDPS::InitChat()
+void DDPSFrame::InitChat()
 {
 	rosterListener = new ChatRoster( thread->server->FetchConnection() );
 	cMsg = new ChatMsgSess( thread->server->FetchConnection() );
@@ -138,6 +135,11 @@ DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 		::wxLogMessage(wxT("Welcome user: ") + myApp.myLoginData.Username);
 		//::wxLogMessage(wxT("Your password is: ") + myApp.myLoginData.Password);
 		
+		thread = new ChatConnThread();
+		InitChat();
+		thread->Run();
+		chat = new ChatWindowRoster(thread->server->FetchConnection());	
+
 		panel->SetFocus();
 	}
 	else
@@ -231,13 +233,13 @@ DDPSPanel::DDPSPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 void DDPSPanel::ChatRosterOpen(wxCommandEvent& event)
 {
 	DDPS &myApp = ::wxGetApp();
-	if (myApp.chat->IsShown())
+	if (myApp.frame->chat->IsShown())
 	{
 		
 	}
 	else
 	{
-		myApp.chat->Show(TRUE);
+		myApp.frame->chat->Show(TRUE);
 	}
 }
 

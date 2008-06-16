@@ -21,8 +21,6 @@
 	#include "TransferManager.h"
 	#include "SettingsDialog.h"
 
-	#include "common.h"
-
 	class DDPSTabbed : public wxNotebook
 	{
 		public:
@@ -50,6 +48,7 @@
 			
 			DECLARE_EVENT_TABLE()
 	};
+	
 	class DDPSFrame : public wxFrame
 	{
 		public:
@@ -63,12 +62,20 @@
 			void GotoCommunity(wxCommandEvent& event);
 			void GotoDownloads(wxCommandEvent& event);
 			void Logout(wxCommandEvent& event);
+			
+			void InitChat();
 
 			DDPSMenu *menu;
 			DDPSPanel *panel;
 			wxWindow *wParent;
 			wxString LoginUsername;
 			wxString LoginPassword;
+			
+			ChatConnThread *thread;
+			ChatWindowRoster *chat;
+			ChatRoster *rosterListener;
+			ChatMsgSess *cMsg;
+			//ChatAccount *cAccount;
 		
 			DECLARE_EVENT_TABLE()
 	};

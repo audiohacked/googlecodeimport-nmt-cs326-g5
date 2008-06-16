@@ -1,11 +1,15 @@
+#include "common.h"
 #include "ChatCommon.h"
 #include "ChatConnection.h"
 
 ChatConn::ChatConn()
 {
-	JID jid( "ddps@localhost/DDPSChat" );
+	DDPS &myApp = ::wxGetApp();
+	std::string username = wx2glooxString(myApp.myLoginData.Username);
+	std::string password = wx2glooxString(myApp.myLoginData.Password);
+	JID jid( username+"@localhost/DDPSChat" );
 
-	conn = new Client(jid, "letmein");
+	conn = new Client(jid, password);
 
 	conn->setSASLMechanisms(SaslMechPlain);
 
