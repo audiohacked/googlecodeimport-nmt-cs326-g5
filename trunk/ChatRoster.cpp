@@ -66,15 +66,15 @@ void ChatRoster::handleRoster( const Roster& roster )
 		wxLogMessage( wxT("add contact jid: ") + gloox2wxString((*it).second->jid()) );
 				
 		ChatContactItemData *newContact = new ChatContactItemData(contact, (*it).second->jid());
-		newContact->conn = myApp.thread->server->FetchConnection();
+		newContact->conn = myApp.frame->thread->server->FetchConnection();
 		
-		wxTreeItemId id = myApp.chat->panel->list->AppendItem(myApp.chat->panel->listRoot, itemName, -1, -1, newContact);
+		wxTreeItemId id = myApp.frame->chat->panel->list->AppendItem(myApp.frame->chat->panel->listRoot, itemName, -1, -1, newContact);
 		newContact->itemId = id;
 
-		newContact->chatSess = new ChatMsgSess(myApp.thread->server->FetchConnection());
+		newContact->chatSess = new ChatMsgSess(myApp.frame->thread->server->FetchConnection());
 		newContact->chatSess->m_session = newContact->chatSess->newSession( (*it).second->jid() );
 
-		newContact->win = new ChatWindowChat(myApp.chat->panel->list, id);
+		newContact->win = new ChatWindowChat(myApp.frame->chat->panel->list, id);
 		newContact->hasWin = true;
 	}
 }

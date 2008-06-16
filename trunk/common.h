@@ -8,6 +8,7 @@
 	#include "ChatConnectionThread.h"
 	#include "ChatRoster.h"
 	#include "ChatMessage.h"
+	#include "AppMain.h"
 
 	typedef struct {
 		wxString Username;
@@ -19,16 +20,11 @@
 		public:
 			virtual bool OnInit();
 			virtual int OnExit();
-			void InitChat();
 
 			LoginInfoData myLoginData;
 			FILE *myLogFile;
 
-			ChatConnThread *thread;
-			ChatWindowRoster *chat;
-			ChatRoster *rosterListener;
-			ChatMsgSess *cMsg;
-			//ChatAccount *cAccount;
+			DDPSFrame *frame;
 	};
 
 	DECLARE_APP(DDPS)
