@@ -3,6 +3,10 @@
 
 #include "enum.h" // needed for the MENU_Quit and etc.
 
+#ifdef CHAT_ENABLED
+	#include "ChatCommon.h"
+#endif
+
 #include <wx/log.h>
 
 /* we have here is the event table used for event handling
@@ -31,7 +35,9 @@ BEGIN_EVENT_TABLE( DDPSPanel, wxPanel )
 	EVT_BUTTON(TABB_News, DDPSPanel::GotoNewsTab)
 	EVT_BUTTON(TABB_Support, DDPSPanel::GotoSupport)
 	EVT_BUTTON(TABB_Settings, DDPSFrame::SettingsDialog)
+#ifdef CHAT_ENABLED
 	EVT_BUTTON(BUTTON_Chat, DDPSPanel::ChatRosterOpen)
+#endif
 END_EVENT_TABLE()
 
 IMPLEMENT_APP(DDPS)
@@ -81,37 +87,38 @@ int DDPS::OnExit()
 	delete wxLog::SetActiveTarget(NULL);
 	fclose(myLogFile);
 	
-	/*
-		if (win->IsShown())
-		{
-			win->Destroy();
-		}
-	*/
+/*
+	if (win->IsShown())
+	{
+		win->Destroy();
+	}
+*/
 
-		//thread->server->FetchConnection()->rosterManager()->removeRosterListener();
-		//delete rosterListener;
+	//thread->server->FetchConnection()->rosterManager()->removeRosterListener();
+	//delete rosterListener;
 
-		//thread->server->FetchConnection()->disposeMessageSession(cMsg->m_session);
-		//delete cMsg;
+	//thread->server->FetchConnection()->disposeMessageSession(cMsg->m_session);
+	//delete cMsg;
 
-		//thread->server->FetchConnection()->disconnect();
+	//thread->server->FetchConnection()->disconnect();
 
-		//delete thread->server;
-		//delete server;
+	//delete thread->server;
+	//delete server;
 
-		//thread->Delete();
-		//delete thread;
+	//thread->Delete();
+	//delete thread;
 
-		wxApp::CleanUp();
-	
+	wxApp::CleanUp();
 }
 
+#ifdef CHAT_ENABLED
 void DDPSFrame::InitChat()
 {
 	rosterListener = new ChatRoster( thread->server->FetchConnection() );
 	cMsg = new ChatMsgSess( thread->server->FetchConnection() );
 	//cAccount = new ChatAccount( thread->server->FetchConnection() );
 }
+#endif
 
 DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
 : wxFrame((wxFrame*) NULL, WINDOW_Frame, title, pos, size, wxDEFAULT_FRAME_STYLE, wxT("DDPS"))
@@ -134,11 +141,13 @@ DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 
 		::wxLogMessage(wxT("Welcome user: ") + myApp.myLoginData.Username);
 		//::wxLogMessage(wxT("Your password is: ") + myApp.myLoginData.Password);
-		
+
+#ifdef CHAT_ENABLED
 		thread = new ChatConnThread();
 		InitChat();
 		thread->Run();
-		chat = new ChatWindowRoster(thread->server->FetchConnection());	
+		chat = new ChatWindowRoster(thread->server->FetchConnection());
+#endif
 
 		panel->SetFocus();
 	}
@@ -216,8 +225,10 @@ DDPSPanel::DDPSPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	wxButton *News = new wxButton(this, TABB_News, wxT("News"));
 	wxButton *Settings = new wxButton(this, TABB_Settings, wxT("Settings"));
 	wxButton *Support = new wxButton(this, TABB_Support, wxT("Support"));
+#ifdef CHAT_ENABLED
 	wxButton *InstaMessenger = new wxButton(this, BUTTON_Chat, wxT("InstaMessenger"));
-
+#endif
+	
 	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 	wxBoxSizer *button_sizer = new wxBoxSizer(wxHORIZONTAL);
 	sizer->Add(tabs, 1, wxEXPAND|wxALL, 5);
@@ -225,11 +236,15 @@ DDPSPanel::DDPSPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	button_sizer->Add(News, 0, wxALL, 10);
 	button_sizer->Add(Settings, 0, wxALL, 10);
 	button_sizer->Add(Support, 0, wxALL, 10);
+#ifdef CHAT_ENABLED
 	button_sizer->Add(InstaMessenger, 0, wxALL, 10);
+#endif
+	
 	SetSizer(sizer);
 	sizer->SetSizeHints(this);
 }
 
+#ifdef CHAT_ENABLED
 void DDPSPanel::ChatRosterOpen(wxCommandEvent& event)
 {
 	DDPS &myApp = ::wxGetApp();
@@ -242,7 +257,7 @@ void DDPSPanel::ChatRosterOpen(wxCommandEvent& event)
 		myApp.frame->chat->Show(TRUE);
 	}
 }
-
+#endif
 
 void DDPSPanel::GotoNewsTab(wxCommandEvent& WXUNUSED(event))
 {

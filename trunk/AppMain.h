@@ -12,6 +12,7 @@
 	#include <wx/panel.h>
 	#include <wx/aboutdlg.h>
 	#include <wx/generic/aboutdlgg.h>
+	#include <wx/treectrl.h>
 	
 	#include "config.h"
 
@@ -20,6 +21,13 @@
 	#include "BrowserEmbed.h"
 	#include "TransferManager.h"
 	#include "SettingsDialog.h"
+	
+#ifdef CHAT_ENABLED
+	#include "ChatConnectionThread.h"
+	#include "ChatRoster.h"
+	#include "ChatMessage.h"
+#endif
+	
 
 	class DDPSTabbed : public wxNotebook
 	{
@@ -71,11 +79,15 @@
 			wxString LoginUsername;
 			wxString LoginPassword;
 			
+			wxTreeCtrl *rosterList;
+			
+#ifdef CHAT_ENABLED
 			ChatConnThread *thread;
 			ChatWindowRoster *chat;
 			ChatRoster *rosterListener;
 			ChatMsgSess *cMsg;
 			//ChatAccount *cAccount;
+#endif
 		
 			DECLARE_EVENT_TABLE()
 	};
