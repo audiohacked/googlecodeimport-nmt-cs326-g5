@@ -3,8 +3,9 @@
 #include "enum.h" // needed for the MENU_Quit and etc.
 
 BEGIN_EVENT_TABLE( AppLoginDialog, wxDialog )
-	//EVT_BUTTON(wxID_CANCEL, AppLoginDialog::Cancel)
+	EVT_BUTTON(wxID_CANCEL, AppLoginDialog::Cancel)
 	EVT_BUTTON(wxID_OK, AppLoginDialog::CheckLogin)
+	//EVT_TEXT_ENTER(TEXT_Password, AppLoginDialog::CheckLogin) // need: wxTE_PROCESS_ENTER
 END_EVENT_TABLE()
 
 AppLoginDialog::AppLoginDialog( wxWindow * parent, wxWindowID id, const wxString & title,
@@ -92,15 +93,15 @@ void AppLoginDialog::CheckLogin(wxCommandEvent& event)
 
 	if (answer == true)
 	{
-		int cancelLogin = wxMessageBox(wxString::FromAscii("Logging in!"), wxString::FromAscii("Login Outcome?"), wxOK|wxCANCEL, this);
-		if (cancelLogin == wxCANCEL)
-		{
-			EndModal(0);
-		}
-		else
-		{
+		//int cancelLogin = wxMessageBox(wxString::FromAscii("Logging in!"), wxString::FromAscii("Login Outcome?"), wxOK|wxCANCEL, this);
+		//if (cancelLogin == wxCANCEL)
+		//{
+		//	EndModal(0);
+		//}
+		//else
+		//{
 			event.Skip();
-		}
+		//}
 	}
 	else if (answer == false)
 	{

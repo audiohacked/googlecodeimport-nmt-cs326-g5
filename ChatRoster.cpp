@@ -167,13 +167,15 @@ void ChatWindowRosterPanel::NewChatWindow(wxTreeEvent &event)
 {
 	wxTreeItemId itemId = event.GetItem();
 	ChatContactItemData *item = (ChatContactItemData *) list->GetItemData(itemId);
+	item->win->Show();
+	
 	//if (!item->hasWin) {
 		//item->conn = j;
 		//item->chatSess = new ChatMsgSess(j);
 		//item->chatSess->m_session = item->chatSess->newSession( item->jid );
 		//item->chatSess->m_session = item->chatSess->newSession( item->jid );
 		//item->win = new ChatWindowChat(list, itemId);
-		item->win->Show();
+		//item->win->Show();
 		//item->hasWin = true;
 	//}
 }

@@ -136,8 +136,8 @@ DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 		myApp.myLoginData.Username = loginDlg.username->GetValue();
 		myApp.myLoginData.Password = loginDlg.password->GetValue();
 
-		SetStatusText(myApp.myLoginData.Username, 1);
-		SetStatusText(myApp.myLoginData.Password, 2);
+		//SetStatusText(myApp.myLoginData.Username, 1);
+		//SetStatusText(myApp.myLoginData.Password, 2);
 
 		::wxLogMessage(wxT("Welcome user: ") + myApp.myLoginData.Username);
 		//::wxLogMessage(wxT("Your password is: ") + myApp.myLoginData.Password);
@@ -157,8 +157,15 @@ DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 	}
 }
 
-void DDPSFrame::OnExit(wxCommandEvent& WXUNUSED(event))
+void DDPSFrame::OnExit(wxCommandEvent& event)
 {
+#ifdef CHAT_ENABLED
+	thread->server->FetchConnection()->rosterManager()->removeRosterListener();
+	thread->server->FetchConnection()->disposeMessageSession(cMsg->m_session);
+	chat->panel->list->DeleteAllItems();
+	thread->server->FetchConnection()->disconnect();
+	//thread->Delete();
+#endif
 	Close(TRUE);
 }
 
@@ -220,7 +227,7 @@ void DDPSFrame::SettingsDialog(wxCommandEvent& event)
 DDPSPanel::DDPSPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	const wxSize &size, long style) : wxPanel(parent, id, pos, size, style)
 {
-	tabs = new DDPSTabbed(this, -1, wxDefaultPosition, wxDefaultSize, wxNB_FIXEDWIDTH);
+	tabs = new DDPSTabbed(this, -1, wxDefaultPosition, wxSize(640,480), 0);
 	
 	wxButton *News = new wxButton(this, TABB_News, wxT("News"));
 	wxButton *Settings = new wxButton(this, TABB_Settings, wxT("Settings"));

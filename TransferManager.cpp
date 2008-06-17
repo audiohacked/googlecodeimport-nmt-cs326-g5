@@ -3,25 +3,32 @@
 TransferManager::TransferManager(wxWindow* parent, wxWindowID id,
 const wxPoint& pos, const wxSize& size, long style) : wxPanel(parent, id, pos, size, style)
 {
-	listDownloads = new wxListCtrl(this, -1, wxDefaultPosition, wxDefaultSize, style=wxLC_REPORT);
+	listDownloads = new wxListCtrl(this, -1, wxDefaultPosition, wxDefaultSize, style=wxLC_REPORT );
 
-	#ifdef __TORRENT_MANAGER_H
+#ifdef __TORRENT_MANAGER_H
 	torrentDownloads = new TorrentTransferManager();
-	#endif
+#endif
 
-	#ifdef __HTTP_MANAGER_H
+#ifdef __HTTP_MANAGER_H
 	httpDownloads = new HttpTransferManager();
-	#endif 
-	
-	listDownloads->InsertColumn(0, wxT("Name"));
-	listDownloads->InsertColumn(1, wxT("Size"));
-	listDownloads->InsertColumn(2, wxT("Progress"));
-	listDownloads->InsertColumn(3, wxT("Status"));
-	listDownloads->InsertColumn(4, wxT("Down Speed"));
-	listDownloads->InsertColumn(5, wxT("Up Speed"));
-	listDownloads->InsertColumn(6, wxT("ETA"));
-	//list->SetColumn(7, wxT("Downloaded"));
-	//list->SetColumn(8, wxT("Uploaded"));
+#endif 
+
+	//listDownloads->SetColumnWidth(-1, 40);
+	//listDownloads->SetColumnWidth(0, wxLIST_AUTOSIZE_USEHEADER);
+	listDownloads->InsertColumn(0, wxT("Name"), wxLIST_FORMAT_LEFT, 80);
+	listDownloads->InsertColumn(1, wxT("Size"), wxLIST_FORMAT_LEFT, 80);
+	listDownloads->InsertColumn(2, wxT("Progress"), wxLIST_FORMAT_LEFT, 80);
+	listDownloads->InsertColumn(3, wxT("Status"), wxLIST_FORMAT_LEFT, 80);
+	listDownloads->InsertColumn(4, wxT("Down Speed"), wxLIST_FORMAT_LEFT, 100);
+	listDownloads->InsertColumn(5, wxT("Up Speed"), wxLIST_FORMAT_LEFT, 80);
+	listDownloads->InsertColumn(6, wxT("ETA"), wxLIST_FORMAT_LEFT, 80);
+
+	//listDownloads->SetColumn(7, wxT("Downloaded"));
+	//listDownloads->SetColumnWidth(7, wxLIST_AUTOSIZE_USEHEADER);
+
+	//listDownloads->SetColumn(8, wxT("Uploaded"));
+	//listDownloads->SetColumnWidth(8, wxLIST_AUTOSIZE_USEHEADER);
+
 	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->Add(listDownloads, 1, wxEXPAND|wxALL, 5);
 	SetSizer(sizer);
