@@ -19,9 +19,9 @@ wxFrame(NULL, -1, wxT("ChatRoster"), wxDefaultPosition, wxDefaultSize)
 
 ChatWindowRoster::~ChatWindowRoster()
 {
-	j->disconnect();
-	delete j;
-	panel->list->DeleteAllItems();
+	//j->disconnect();
+	//delete j;
+	//panel->list->DeleteAllItems();
 }
 
 ChatWindowRosterPanel::ChatWindowRosterPanel(wxWindow *parent, wxWindowID id, Client *conn)

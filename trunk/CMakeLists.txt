@@ -144,7 +144,7 @@ IF(wxWidgets_FOUND)
 		ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	ENDIF(WIN32)
 
-	IF(${CHAT_ENABLED})
+	IF(${CHAT_ENABLED} MATCHES ON)
 		SET(SRCS ${SRCS}
 			### Chat
 			ChatCommon.cpp
@@ -173,7 +173,7 @@ IF(wxWidgets_FOUND)
 		)
 
 		SET(gloox_LIB gloox)
-	ENDIF(${CHAT_ENABLED})
+	ENDIF(${CHAT_ENABLED} MATCHES ON)
 
 	ADD_EXECUTABLE(DDPS ${GUI_TYPE} ${SRCS} ${HDRS})
 	TARGET_LINK_LIBRARIES(DDPS ${wxMoz_LIB} ${wxWidgets_LIBRARIES} ${gloox_LIB})
