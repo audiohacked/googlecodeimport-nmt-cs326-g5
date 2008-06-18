@@ -21,9 +21,9 @@ void ChatRegisterUser::onConnect()
 void ChatRegisterUser::handleRegistrationFields( const JID& from, int fields, std::string instructions )
 {
 	printf( "fields: %d\ninstructions: %s\n", fields, instructions.c_str() );
-	RegistrationFields vals;
-	vals.username = "ddps";
-	vals.password = "letmein";
+	RegistrationFields *vals;
+	vals->username = ;
+	vals->password = ;
 	m_reg->createAccount( fields, vals );
 }
 

@@ -55,11 +55,11 @@ SettingsFrame::SettingsFrame(wxWindow * parent, wxWindowID id, const wxString & 
 	button_sizer->Add(Ok_Button, 0, wxALL, 10);
 	button_sizer->Add(Cancel_Button, 0, wxALL, 10);
 	
-	DDPS &myApp = ::wxGetApp();
-	wxStaticText *UsernameLabel = new wxStaticText( this, wxID_STATIC, myApp.myLoginData.Username, wxDefaultPosition, wxDefaultSize, 0);
-	wxStaticText *PasswordLabel = new wxStaticText( this, wxID_STATIC, myApp.myLoginData.Password, wxDefaultPosition, wxDefaultSize, 0); 
-	top_sizer->Add(UsernameLabel, 0, wxALL, 5);
-	top_sizer->Add(PasswordLabel, 0, wxALL, 5);
+	//DDPS &myApp = ::wxGetApp();
+	//wxStaticText *UsernameLabel = new wxStaticText( this, wxID_STATIC, myApp.myLoginData->Username, wxDefaultPosition, wxDefaultSize, 0);
+	//wxStaticText *PasswordLabel = new wxStaticText( this, wxID_STATIC, myApp.myLoginData->Password, wxDefaultPosition, wxDefaultSize, 0); 
+	//top_sizer->Add(UsernameLabel, 0, wxALL, 5);
+	//top_sizer->Add(PasswordLabel, 0, wxALL, 5);
 	
 	top_sizer->Add(downloadLocationLabel, 0,wxALIGN_CENTER_VERTICAL|wxALL, 5); 
 	top_sizer->Add(downloadLocation, 1, wxEXPAND|wxALL, 5);

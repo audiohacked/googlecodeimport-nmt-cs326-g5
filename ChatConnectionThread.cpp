@@ -14,11 +14,4 @@ void *ChatConnThread::Entry()
 
 void ChatConnThread::OnExit()
 {
-	//server->FetchConnection()->rosterManager()->removeRosterListener();
-	//delete rosterListener;
-
-	//server->FetchConnection()->disposeMessageSession(server->FetchConnection()->cMsg->m_session);
-	//delete cMsg
-
-	//server->FetchConnection()->disconnect();
 }
