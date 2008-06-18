@@ -13,8 +13,7 @@ const wxPoint& pos, const wxSize& size, long style) : wxPanel(parent, id, pos, s
 	httpDownloads = new HttpTransferManager();
 #endif 
 
-	//listDownloads->SetColumnWidth(-1, 40);
-	//listDownloads->SetColumnWidth(0, wxLIST_AUTOSIZE_USEHEADER);
+	//listDownloads->SetColumnWidth(-1, wxLIST_AUTOSIZE_USEHEADER);
 	listDownloads->InsertColumn(0, wxT("Name"), wxLIST_FORMAT_LEFT, 80);
 	listDownloads->InsertColumn(1, wxT("Size"), wxLIST_FORMAT_LEFT, 80);
 	listDownloads->InsertColumn(2, wxT("Progress"), wxLIST_FORMAT_LEFT, 80);
@@ -23,11 +22,8 @@ const wxPoint& pos, const wxSize& size, long style) : wxPanel(parent, id, pos, s
 	listDownloads->InsertColumn(5, wxT("Up Speed"), wxLIST_FORMAT_LEFT, 80);
 	listDownloads->InsertColumn(6, wxT("ETA"), wxLIST_FORMAT_LEFT, 80);
 
-	//listDownloads->SetColumn(7, wxT("Downloaded"));
-	//listDownloads->SetColumnWidth(7, wxLIST_AUTOSIZE_USEHEADER);
-
-	//listDownloads->SetColumn(8, wxT("Uploaded"));
-	//listDownloads->SetColumnWidth(8, wxLIST_AUTOSIZE_USEHEADER);
+	//listDownloads->SetColumn(7, wxT("Downloaded"), wxLIST_FORMAT_LEFT, 100);
+	//listDownloads->SetColumn(8, wxT("Uploaded"), wxLIST_FORMAT_LEFT, 100);
 
 	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->Add(listDownloads, 1, wxEXPAND|wxALL, 5);

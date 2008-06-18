@@ -61,7 +61,6 @@
 	{
 		public:
 			DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
-
 			void OnExit( wxCommandEvent &event);
 			void AboutBox(wxCommandEvent &event);
 			void SettingsDialog(wxCommandEvent &event);
@@ -70,18 +69,13 @@
 			void GotoCommunity(wxCommandEvent& event);
 			void GotoDownloads(wxCommandEvent& event);
 			void Logout(wxCommandEvent& event);
-			
-			void InitChat();
-
 			DDPSMenu *menu;
 			DDPSPanel *panel;
 			wxWindow *wParent;
-			wxString LoginUsername;
-			wxString LoginPassword;
-			
 			wxTreeCtrl *rosterList;
 			
 #ifdef CHAT_ENABLED
+			void InitChat();
 			ChatConnThread *thread;
 			ChatWindowRoster *chat;
 			ChatRoster *rosterListener;
@@ -89,7 +83,7 @@
 			//ChatAccount *cAccount;
 #endif
 		
-			DECLARE_EVENT_TABLE()
+		DECLARE_EVENT_TABLE()
 	};
 
 #endif

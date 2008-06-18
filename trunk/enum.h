@@ -2,7 +2,8 @@
 	understand, if anyone figures it out; TELL ME! */
 enum
 {
-	TEXT_Main,
+	WINDOW_RosterList = wxID_HIGHEST + 1,
+	WINDOW_Frame,
 	MENU_Logout,
 	MENU_Update,
 	MENU_Settings,
@@ -33,16 +34,20 @@ enum
 	TABPAGE_Browser,
 	TABPAGE_Community,
 	TABPAGE_Downloads,
-	BUTTON_Accept,
-	BUTTON_Cancel,
+	TEXT_Main,
 	TEXT_Username,
 	TEXT_Password,
 	TEXT_DownloadLocation,
 	TEXT_DownloadSpeed,
 	TEXT_NumPeers,
 	TEXT_UploadSpeed,
+	TEXT_MsgText,
+	TEXT_ChatText,
 	BUTTON_CreateAccount,
 	BUTTON_FetchPassword,
-	WINDOW_Frame,
-	BUTTON_Chat
+	BUTTON_Chat,
+	BUTTON_Accept,
+	BUTTON_Cancel,
+	BUTTON_SendMsg
 };
+
