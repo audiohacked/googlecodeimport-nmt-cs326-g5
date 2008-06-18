@@ -5,6 +5,8 @@
 #include "ChatRosterData.h"
 #include "ChatRoster.h"
 
+#include "enum.h"
+
 BEGIN_EVENT_TABLE( ChatWindowRosterPanel, wxPanel )
 	EVT_TREE_ITEM_ACTIVATED(WINDOW_RosterList, ChatWindowRosterPanel::NewChatWindow)
 END_EVENT_TABLE()
