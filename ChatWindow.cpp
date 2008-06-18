@@ -2,6 +2,8 @@
 #include "ChatRosterData.h"
 #include "ChatWindow.h"
 
+#include "enum.h"
+
 BEGIN_EVENT_TABLE( ChatWindowChat, wxFrame )
 	EVT_CLOSE(ChatWindowChat::OnCloseWindow)
 END_EVENT_TABLE()

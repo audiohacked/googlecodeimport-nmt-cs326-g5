@@ -5,8 +5,8 @@
 ChatConn::ChatConn()
 {
 	DDPS &myApp = ::wxGetApp();
-	std::string username = wx2glooxString(myApp.myLoginData.Username);
-	std::string password = wx2glooxString(myApp.myLoginData.Password);
+	std::string username = wx2glooxString(myApp.myLoginData->Username);
+	std::string password = wx2glooxString(myApp.myLoginData->Password);
 #ifdef CHAT_SERVER
 	JID jid( username+"@"+ CHAT_SERVER +"/DDPSChat" );
 #else
