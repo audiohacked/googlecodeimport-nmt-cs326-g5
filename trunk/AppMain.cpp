@@ -133,14 +133,14 @@ DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 	if(loginDlg.ShowModal() == wxID_OK)
 	{
 		DDPS &myApp = ::wxGetApp();
-		myApp.myLoginData->Username = loginDlg.username->GetValue();
-		myApp.myLoginData->Password = loginDlg.password->GetValue();
+		myApp.LoginUsername = loginDlg.username->GetValue();
+		myApp.LoginPassword = loginDlg.password->GetValue();
 
 		//SetStatusText(myApp.myLoginData->Username, 1);
 		//SetStatusText(myApp.myLoginData->Password, 2);
 
-		::wxLogMessage(wxT("Welcome user: ") + myApp.myLoginData->Username);
-		//::wxLogMessage(wxT("Your password is: ") + myApp.myLoginData->Password);
+		::wxLogMessage(wxT("Welcome user: ") + myApp.LoginUsername);
+		//::wxLogMessage(wxT("Your password is: ") + myApp.LoginPassword);
 
 #ifdef CHAT_ENABLED
 		thread = new ChatConnThread();
@@ -172,7 +172,7 @@ void DDPSFrame::OnExit(wxCommandEvent& event)
 void DDPSFrame::AboutBox(wxCommandEvent& WXUNUSED(event))
 {
 	DDPS &myApp = ::wxGetApp();
-	wxLogMessage(wxT("Aboutbox: ") + myApp.myLoginData->Username);
+	wxLogMessage(wxT("Aboutbox: ") + myApp.LoginUsername);
 		wxAboutDialogInfo info;
 		info.SetName(wxT("DDPS"));
 		info.SetVersion(wxT("1.0 Beta"));

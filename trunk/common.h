@@ -7,18 +7,15 @@
 
 	#include "AppMain.h"
 
-	typedef struct {
-		wxString Username;
-		wxString Password;
-	} LoginInfoData;
-
 	class DDPS : public wxApp
 	{
 		public:
 			virtual bool OnInit();
 			virtual int OnExit();
 
-			LoginInfoData *myLoginData;
+			wxString LoginUsername;
+			wxString LoginPassword;
+		
 			FILE *myLogFile;
 
 			DDPSFrame *frame;

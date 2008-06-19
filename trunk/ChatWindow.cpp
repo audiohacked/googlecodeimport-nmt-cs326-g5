@@ -94,3 +94,4 @@ void ChatWindowChatPanel::TextChanged(wxCommandEvent &event)
 	// user is typing a message
 	//chatSes->m_messageEventFilter->raiseMessageEvent( MessageEventComposing );
 }
+

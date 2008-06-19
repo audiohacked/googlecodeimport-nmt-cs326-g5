@@ -14,3 +14,4 @@ ChatContactItemData::~ChatContactItemData()
 {
 	hasWin = false;
 }
+
