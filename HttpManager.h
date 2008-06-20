@@ -15,7 +15,7 @@
 		public:
 			HttpTransferManager();
 			~HttpTransferManager();
-			void AddDownload(wxString url);
+			int AddDownload(wxString url);
 			int GetTransferStyle() const;
 	};
 	

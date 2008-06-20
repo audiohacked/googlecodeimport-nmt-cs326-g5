@@ -1,5 +1,6 @@
 #include "TransferManager.h"
 #include "enum.h"
+#include "common.h"
 
 BEGIN_EVENT_TABLE( TransferManager, wxPanel )
 	EVT_CONTEXT_MENU(TransferManager::OnContextMenu)
@@ -62,7 +63,7 @@ int TransferManager::AddTorrentDownload(char const* tracker, char const* Torrent
 			listIndex++;
 			wxLogMessage(wxT("successful torrent add"));
 			wxLogMessage(wxT("torrent name: ") +  wxString(tor.name().c_str(), wxConvUTF8));
-			return wxMessageBox(wxT("Add Torrent Download"), wxT("Right-Click Add"), wxICON_INFORMATION);			
+			return wxMessageBox(wxT("Add Torrent Download"), wxT("Right-Click Add"), wxICON_INFORMATION);
 		}
 	} else {
 		wxLogMessage(wxT("unsuccessful torrent add: invalid torrent handle"));
@@ -74,8 +75,8 @@ int TransferManager::AddTorrentDownload(char const* tracker, char const* Torrent
 #ifdef __HTTP_MANAGER_H
 int TransferManager::AddHttpDownload(wxString downloadURL)
 {
-	httpDownloads->AddDownload(downloadURL);
-	return wxOK;
+	return httpDownloads->AddDownload(downloadURL);
+	//return wxMessageBox(wxT("AddHttpDownload"), wxT("Right-Click Add"), wxICON_INFORMATION);
 }
 #endif
 
@@ -104,7 +105,8 @@ void TransferManager::OnMenuAddTorrent(wxCommandEvent &event)
 void TransferManager::OnMenuAddHttpDownlaod(wxCommandEvent &event)
 {
 	//int answer = wxMessageBox(wxT("AddHttpDownload"), wxT("Right-Click Add"), wxICON_INFORMATION);
-	int answer = AddHttpDownload(wxT("http://bouncer.gentoo.org/fetch/gentoo-2008.0_beta2-minimal/x86/"));
+	int answer = AddHttpDownload(wxT("http://gentoo.osuosl.org/releases/x86/2008.0_beta2/installcd/install-x86-minimal-2008.0_beta2.iso"));
 	if(answer == wxOK)
 		event.Skip();
 }
+

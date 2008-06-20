@@ -2,12 +2,6 @@ PROJECT( DDPS )
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
 
-SET(DDPS_VERSION "1.0")
-SET(CMAKE_FIND_LIBRARY_PREFIXES "")
-SET(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
-SET(wxWidgets_USE_LIBS base core net)
-
-
 OPTION(COMMUNITY_PORTAL "Add Community Support" ON)
 OPTION(USER_UPLOAD "Add User Upload capabilities" ON)
 OPTION(BUILTIN_BROWSER "Add the Built-in Browser Support" ON)
@@ -19,6 +13,13 @@ SET(SUPPORTPAGE http://ddps.seancrazy.net/contentmanager/support CACHE STRING "S
 SET(COMMUNITYPAGE http://ddps.seancrazy.net/contentmanager/community CACHE STRING "Set the URL for Community Portal")
 SET(UPDATEURL updateddps.seancrazy.net CACHE STRING "Set the URL for AutoUpdate")
 SET(CHAT_SERVER ddpschat.seancrazy.net CACHE STRING "Set the host for the Chat Server")
+
+SET(DDPS_VERSION "1.0")
+SET(CMAKE_FIND_LIBRARY_PREFIXES "")
+SET(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
+SET(wxWidgets_USE_LIBS base core net)
+
+INCLUDE( ${CMAKE_ROOT}/Modules/UsePkgConfig.cmake )
 
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake
 	${CMAKE_BINARY_DIR}/config.h ESCAPE_QUOTES)
@@ -45,7 +46,6 @@ ELSE(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 		INCLUDE_DIRECTORIES(wxMoz)
 		SET(wxMoz_LIB wxMoz)
 	ELSE(${USE_WXMOZ} MATCHES "shipped")
-		INCLUDE( ${CMAKE_ROOT}/Modules/UsePkgConfig.cmake )
 		PKGCONFIG(wxmozilla WXMOZ_INCLUDE_DIR WXMOZ_LINK_DIR WXMOZ_LINK_FLAGS WXMOZ_CFLAGS)
 		INCLUDE_DIRECTORIES(
 			${WXMOZ_INCLUDE_DIR}
