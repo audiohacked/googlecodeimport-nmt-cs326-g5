@@ -24,12 +24,13 @@ CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake
 	${CMAKE_BINARY_DIR}/config.h ESCAPE_QUOTES)
 
 SET(SRCS 
+	AppLogin.cpp
 	AppMain.cpp
 	AppMenu.cpp
-	AppLogin.cpp
 	BrowserEmbed.cpp
-	TransferManager.cpp
 	SettingsDialog.cpp
+	TorrentManager.cpp
+	TransferManager.cpp
 )
 
 SET(HDRS
@@ -41,6 +42,7 @@ SET(HDRS
 	BrowserEmbed.h
 	TransferManager.h
 	SettingsDialog.h
+	TorrentManager.h
 )
 
 FIND_PACKAGE(wxWidgets)
@@ -67,8 +69,16 @@ ELSE(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
 SET(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} ${WXMOZ_LINK_FLAGS})
- 
+
 IF(wxWidgets_FOUND)
+
+	FIND_PACKAGE(Boost)
+	IF(${Boost_FOUND})
+		INCLUDE_DIRECTORIES(
+			${INCLUDE_DIRECTORIES}
+			${Boost_INCLUDE_DIRS})
+		LINK_DIRECTORIES(${LINK_DIRECTORIES} ${Boost_LIBRARY_DIRS})
+	ENDIF(${Boost_FOUND})
 
 	INCLUDE(
 		${wxWidgets_USE_FILE}
@@ -87,20 +97,9 @@ IF(wxWidgets_FOUND)
 		INCLUDE_DIRECTORIES(
 			${INCLUDE_DIRECTORIES}
 			${CMAKE_SOURCE_DIR}/contrib/includes
-			"C:\\libtorrent-0.13\\zlib"
-			"C:\\libtorrent-0.13\\include"
-			"C:\\libtorrent-0.13\\include\\libtorrent"
-			"C:\\boost_1_35_0"
-			"C:\\wxMozilla"
 		)
-		LINK_DIRECTORIES(
-			${LINK_DIRECTORIES}
-			"C:\\wxMozilla\\mozilla\\lib"
-			"C:\\wxMozilla\\build\\msw\\DLL\ Release\ Monolithic\ WX_PYTHON_0"
-			"C:\\libtorrent-0.13\\bin\\msvc-7.1\\release\\boost-source\\character-set-unicode\\threading-multi\\upnp-logging-on"
-		)
+
 		LINK_LIBRARIES(
-			#libtorrent.lib
 			embed_base_s.lib
 			xpcom.lib
 			xul.lib
@@ -175,8 +174,17 @@ IF(wxWidgets_FOUND)
 		SET(gloox_LIB gloox)
 	ENDIF(${CHAT_ENABLED} MATCHES ON)
 
-	ADD_EXECUTABLE(DDPS ${GUI_TYPE} ${SRCS} ${HDRS})
-	TARGET_LINK_LIBRARIES(DDPS ${wxMoz_LIB} ${wxWidgets_LIBRARIES} ${gloox_LIB})
+	SUBDIRS(libtorrent)
+	LINK_DIRECTORIES(
+		${LINK_DIRECTORIES}
+		/opt/local/lib
+	)
+	INCLUDE_DIRECTORIES(
+		${INCLUDE_DIRECTORIES}
+		libtorrent/include
+	)
+	ADD_EXECUTABLE(DDPS ${GUI_TYPE} ${SRCS})
+	TARGET_LINK_LIBRARIES(DDPS torrent ${wxMoz_LIB} ${wxWidgets_LIBRARIES} ${gloox_LIB})
  
 ELSE(wxWidgets_FOUND)
 	MESSAGE("wxWidgets not found!")

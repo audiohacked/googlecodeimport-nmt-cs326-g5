@@ -23,6 +23,8 @@ enum
 	MENU_Privacy,
 	MENU_Legal,
 	MENU_About,
+	MENU_TorrentDownload,
+	MENU_HTTPDownload,
 	BROWSER_Next,
 	BROWSER_Prev,
 	BROWSER_Stop,
