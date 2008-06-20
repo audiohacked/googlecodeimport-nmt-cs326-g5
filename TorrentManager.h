@@ -55,10 +55,11 @@
 			session_settings torrentSessionSettings;
 			session_status torrentSessionStatus;
 			handles_t handles;
+			add_torrent_params torrentAddData;
 
 			TorrentTransferManager();
 			~TorrentTransferManager();
-			torrent_handle AddTorrent(big_number const& hash);
+			torrent_handle AddTorrent(char const* tracker, big_number const& hash);
 			bool startTransfer();
 			bool cancelTransfer();
 			bool pauseTransfer();

@@ -1,0 +1,42 @@
+PROJECT(wxcurl)
+
+SET(wxWidgets_USE_LIBS base core net)
+SET(SRCS
+	src/base.cpp
+	src/dav.cpp
+	src/davtool.cpp
+	src/dialog.cpp
+	src/ftp.cpp
+	src/ftpparse.cpp
+	src/ftpparse.h
+	src/ftptool.cpp
+	src/http.cpp
+	src/panel.cpp
+	src/telnet.cpp
+	src/thread.cpp
+	src/utils.cpp)
+
+INCLUDE( ${CMAKE_ROOT}/Modules/UsePkgConfig.cmake )
+PKGCONFIG(libcurl CURL_INCLUDE_DIR CURL_LINK_DIR CURL_LINK_FLAGS CURL_CFLAGS)
+SET(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} ${CURL_LINK_FLAGS})
+INCLUDE_DIRECTORIES(
+	${INCLUDE_DIRECTORIES}
+	${CURL_INCLUDE_DIR}
+	wxCURL/include)
+LINK_DIRECTORIES(
+	${LINK_DIRECTORIES}
+	${CURL_LINK_DIR})
+
+FIND_PACKAGE(wxWidgets)
+
+IF(wxWidgets_FOUND)
+	INCLUDE(${wxWidgets_USE_FILE})
+	INCLUDE_DIRECTORIES(
+		${INCLUDE_DIRECTORIES}
+		${wxWidgets_INCLUDE_DIRS}
+		include)
+
+	ADD_LIBRARY(wxcurl SHARED ${SRCS})
+	TARGET_LINK_LIBRARIES(wxcurl curl ${wxWidgets_LIBRARIES})
+
+ENDIF(wxWidgets_FOUND)

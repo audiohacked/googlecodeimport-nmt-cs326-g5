@@ -6,11 +6,17 @@
 		#include <wx/wx.h>
 	#endif
 	
-	class HttpManager
+	#include <wx/wfstream.h>
+	
+	#include <wx/curl/dialog.h>
+	
+	class HttpTransferManager
 	{
 		public:
-			HttpManager();
-			~HttpManager();
+			HttpTransferManager();
+			~HttpTransferManager();
+			void AddDownload(wxString url);
+			int GetTransferStyle() const;
 	};
 	
 #endif

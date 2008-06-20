@@ -28,21 +28,10 @@ SET(SRCS
 	AppMain.cpp
 	AppMenu.cpp
 	BrowserEmbed.cpp
+	HttpManager.cpp
 	SettingsDialog.cpp
 	TorrentManager.cpp
 	TransferManager.cpp
-)
-
-SET(HDRS
-	enum.h
-	common.h
-	AppMain.h
-	AppMenu.h
-	AppLogin.h
-	BrowserEmbed.h
-	TransferManager.h
-	SettingsDialog.h
-	TorrentManager.h
 )
 
 FIND_PACKAGE(wxWidgets)
@@ -154,15 +143,6 @@ IF(wxWidgets_FOUND)
 			ChatWindow.cpp
 			ChatRosterData.cpp
 		)
-		SET(HDRS ${HDRS}
-			ChatCommon.h
-			ChatConnection.h
-			ChatConnectionThread.h
-			ChatMessage.h
-			ChatRoster.h
-			ChatWindow.h
-			ChatRosterData.h	
-		)
 
 		SUBDIRS(gloox/src)
 
@@ -182,9 +162,22 @@ IF(wxWidgets_FOUND)
 	INCLUDE_DIRECTORIES(
 		${INCLUDE_DIRECTORIES}
 		libtorrent/include
+		libtorrent/include/libtorrent
 	)
+	
+	SUBDIRS(wxCURL)
+	PKGCONFIG(libcurl CURL_INCLUDE_DIR CURL_LINK_DIR CURL_LINK_FLAGS CURL_CFLAGS)
+	SET(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} ${CURL_LINK_FLAGS})
+	INCLUDE_DIRECTORIES(
+		${INCLUDE_DIRECTORIES}
+		${CURL_INCLUDE_DIR}
+		wxCURL/include)
+	LINK_DIRECTORIES(
+		${LINK_DIRECTORIES}
+		${CURL_LINK_DIR})
+	
 	ADD_EXECUTABLE(DDPS ${GUI_TYPE} ${SRCS})
-	TARGET_LINK_LIBRARIES(DDPS torrent ${wxMoz_LIB} ${wxWidgets_LIBRARIES} ${gloox_LIB})
+	TARGET_LINK_LIBRARIES(DDPS torrent curl wxcurl ${wxMoz_LIB} ${wxWidgets_LIBRARIES} ${gloox_LIB})
  
 ELSE(wxWidgets_FOUND)
 	MESSAGE("wxWidgets not found!")

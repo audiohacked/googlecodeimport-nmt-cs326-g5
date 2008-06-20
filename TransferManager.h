@@ -9,7 +9,7 @@
 	#include <wx/listctrl.h>
 
 	#include "TorrentManager.h"
-	//#include "HttpManager.h"
+	#include "HttpManager.h"
 	
 	class TransferManager : public wxPanel
 	{
@@ -26,12 +26,12 @@
 			#ifdef __TORRENT_MANAGER_H
 				TorrentTransferManager *torrentDownloads;
 				torrent_handle tor;
-				void AddTorrentDownload(big_number const& TorrentHash);
+				int AddTorrentDownload(char const* tracker, char const* TorrentHash);
 			#endif
 			
 			#ifdef __HTTP_MANAGER_H
 				HttpTransferManager *httpDownloads;
-				void AddHttpDownload();
+				int AddHttpDownload(wxString downloadURL);
 			#endif
 
 			DECLARE_EVENT_TABLE()
