@@ -206,7 +206,7 @@ ENDIF(${UPNP_LOGGING} MATCHES ON)
 #BOOST: SYSTEM SOURCE
 SET(BOOST SYSTEM CACHE STRING "Boost library: SYSTEM or SOURCE")
 IF(${BOOST} MATCHES "SYSTEM")
-	SET(LIBLINK ${LIBLINK} filesystem thread)
+	SET(LIBLINK ${LIBLINK} boost_filesystem-mt boost_thread-mt boost_system-mt)
 ELSE()
 	SET(LIBLINK ${LIBLINK} 
 		/boost/thread//boost_thread
@@ -278,7 +278,7 @@ IF(WIN32)
 ENDIF(WIN32)
 
 IF(UNIX)
-	SET(SRCS ${SRCS} src/assert.cpp)
+	#SET(SRCS ${SRCS} src/assert.cpp)
 	SET(SRCS ${SRCS} src/file.cpp)
 	IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	ELSE(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
@@ -306,5 +306,5 @@ LINK_DIRECTORIES(
 )
 
 #LINK_LIBRARIES()
-ADD_LIBRARY(libtorrent STATIC ${SRCS})
+ADD_LIBRARY(libtorrent SHARED ${SRCS})
 TARGET_LINK_LIBRARIES(libtorrent ${LIBLINK})
