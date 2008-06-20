@@ -23,7 +23,7 @@ SettingsFrame::SettingsFrame(wxWindow * parent, wxWindowID id, const wxString & 
 	
 	//define download directory label and control
 	wxTextCtrl *downloadLocation = new wxTextCtrl(this, 
-		TEXT_DownloadLocation, wxT(""), wxDefaultPosition, wxDefaultSize);
+		TEXT_DownloadLocation, wxT("./download-files/"), wxDefaultPosition, wxDefaultSize);
 	wxStaticText* downloadLocationLabel = new wxStaticText ( this, wxID_STATIC,
     	wxT("&Download Location:"), wxDefaultPosition, wxDefaultSize, 0 );
 
