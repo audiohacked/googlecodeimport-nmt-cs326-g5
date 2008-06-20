@@ -40,29 +40,42 @@ const wxPoint& pos, const wxSize& size, long style) : wxPanel(parent, id, pos, s
 }
 
 #ifdef __TORRENT_MANAGER_H
-void TransferManager::AddTorrentDownload(big_number const& TorrentHash)
+int TransferManager::AddTorrentDownload(char const* tracker, char const* TorrentHash)
 {
-	tor = torrentDownloads->AddTorrent(TorrentHash);
+	tor = torrentDownloads->AddTorrent(tracker, big_number(TorrentHash));
 	if (tor.is_valid())
 	{
+		
 		// now add torrent info to list control
-		listDownloads->InsertItem(listIndex, wxString(tor.name().c_str(), wxConvUTF8));
-		listDownloads->SetItem(listIndex, 0, wxString(tor.name().c_str(), wxConvUTF8)); // name
-		listDownloads->SetItem(listIndex, 1, wxString::Format(wxT("%d"), tor.get_torrent_info().total_size())); // size
-		listDownloads->SetItem(listIndex, 2, wxString::Format(wxT("%d"), tor.status().total_done)); // progress
-		listDownloads->SetItem(listIndex, 3, wxString::Format(wxT("%d"), tor.status().state)); // status
-		listDownloads->SetItem(listIndex, 4, wxString::Format(wxT("%f"), tor.status().download_rate)); // Down Speed
-		listDownloads->SetItem(listIndex, 5, wxString::Format(wxT("%f"), tor.status().upload_rate)); // Up Speed
-		listDownloads->SetItem(listIndex, 6, wxT("unknown")); // ETA
-		listIndex++;
+		long index = listDownloads->InsertItem(listIndex, wxString(tor.name().c_str(), wxConvUTF8));
+		if (index == -1) {
+			wxLogMessage(wxT("unsuccessful torrent add: bad insert item"));
+			return wxCANCEL;			
+		} else {
+			listDownloads->SetItem(listIndex, 0, wxString(tor.name().c_str(), wxConvUTF8)); // name
+			//listDownloads->SetItem(listIndex, 1, wxString::Format(wxT("%d"), tor.get_torrent_info().total_size())); // size
+			listDownloads->SetItem(listIndex, 2, wxString::Format(wxT("%d"), tor.status().total_done)); // progress
+			listDownloads->SetItem(listIndex, 3, wxString::Format(wxT("%d"), tor.status().state)); // status
+			listDownloads->SetItem(listIndex, 4, wxString::Format(wxT("%f"), tor.status().download_rate)); // Down Speed
+			listDownloads->SetItem(listIndex, 5, wxString::Format(wxT("%f"), tor.status().upload_rate)); // Up Speed
+			listDownloads->SetItem(listIndex, 6, wxT("unknown")); // ETA
+			listIndex++;
+			wxLogMessage(wxT("successful torrent add"));
+			wxLogMessage(wxT("torrent name: ") +  wxString(tor.name().c_str(), wxConvUTF8));
+			return wxMessageBox(wxT("Add Torrent Download"), wxT("Right-Click Add"), wxICON_INFORMATION);			
+		}
+	} else {
+		wxLogMessage(wxT("unsuccessful torrent add: invalid torrent handle"));
+		return wxCANCEL;
 	}
 }
 #endif
 
 #ifdef __HTTP_MANAGER_H
-void TransferManager::AddHttpDownload()
+int TransferManager::AddHttpDownload(wxString downloadURL)
 {
-
+	httpDownloads->AddDownload(downloadURL);
+	return wxOK;
 }
 #endif
 
@@ -80,14 +93,18 @@ void TransferManager::OnContextMenu(wxContextMenuEvent &event)
 void TransferManager::OnMenuAddTorrent(wxCommandEvent &event)
 {
 //	int answer = wxMessageBox(wxT("AddTorrent"), wxT("Right-Click Add"), wxICON_INFORMATION);
-//	if(answer == wxOK)
-		AddTorrentDownload(big_number("de57802d9ae8a20abf0b151d1e931a65b5a0165b"));
+	int answer = AddTorrentDownload(
+		"http://torrents.gentoo.org/tracker.php/announce", 
+		"de57802d9ae8a20abf0b151d1e931a65b5a0165b"
+	);
+	if(answer == wxOK)
 		event.Skip();
 }
 
 void TransferManager::OnMenuAddHttpDownlaod(wxCommandEvent &event)
 {
-	int answer = wxMessageBox(wxT("AddHttpDownload"), wxT("Right-Click Add"), wxICON_INFORMATION);
+	//int answer = wxMessageBox(wxT("AddHttpDownload"), wxT("Right-Click Add"), wxICON_INFORMATION);
+	int answer = AddHttpDownload(wxT("http://bouncer.gentoo.org/fetch/gentoo-2008.0_beta2-minimal/x86/"));
 	if(answer == wxOK)
 		event.Skip();
 }
