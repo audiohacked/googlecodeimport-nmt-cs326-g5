@@ -22,9 +22,9 @@ TorrentTransferManager::TorrentTransferManager()
 	torrentSession.listen_on(std::make_pair(6881, 6889));
 	torrentSession.set_settings(torrentSessionSettings);
 	
-	torrentSession.add_dht_router(std::make_pair(std::string("router.bittorrent.com"), 6881));
-	torrentSession.add_dht_router(std::make_pair(std::string("router.utorrent.com"), 6881));
-	torrentSession.add_dht_router(std::make_pair(std::string("router.bitcomet.com"), 6881));
+	//torrentSession.add_dht_router(std::make_pair(std::string("router.bittorrent.com"), 6881));
+	//torrentSession.add_dht_router(std::make_pair(std::string("router.utorrent.com"), 6881));
+	//torrentSession.add_dht_router(std::make_pair(std::string("router.bitcomet.com"), 6881));
 	
 	torrentSessionStatus = torrentSession.status();
 }
@@ -39,7 +39,7 @@ TorrentTransferManager::~TorrentTransferManager()
 }
 
 torrent_handle TorrentTransferManager::AddTorrent(big_number const& hash)
-{	torrent_info tInfo = torrent_info(hash);
+{	torrent_info tInfo = torrent_info("test.torrent");
 	torrent_handle h = torrentSession.add_torrent(tInfo, "./torrent-downloads");	
 	handles.insert(std::make_pair(std::string(), h));
 	h.set_max_connections(60);

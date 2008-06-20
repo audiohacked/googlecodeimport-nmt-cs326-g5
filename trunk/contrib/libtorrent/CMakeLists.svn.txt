@@ -1,4 +1,4 @@
-PROJECT(libtorrent)
+PROJECT(torrent)
 
 SET(SRCS
 	src/alert.cpp
@@ -128,15 +128,16 @@ ENDIF(${POOL_ALLOCATORS} MATCHES OFF)
 
 
 #GEOIP: SHARED STATIC OFF
-SET(GEOIP "Shared" CACHE STRING "GeoIP support: Off, Static, Shared")
+SET(GEOIP "Static" CACHE STRING "GeoIP support: Off, Static, Shared")
 IF(${GEOIP} MATCHES "Off")
 	SET(MYDEF "${MYDEF} -DTORRENT_DISABLE_GEO_IP")
 ELSE()
 	IF(${GEOIP} MATCHES "Shared")
 		SET(LIBLINK ${LIBLINK} GeoIP)
-	ELSE(${GEOIP} MATCHES "Static")
-		SET(SRCS ${SRCS} src/GeoIP.c)
 	ENDIF(${GEOIP} MATCHES "Shared")
+	IF(${GEOIP} MATCHES "Static")
+		SET(SRCS ${SRCS} src/GeoIP.c)
+	ENDIF(${GEOIP} MATCHES "Static")
 ENDIF(${GEOIP} MATCHES "Off")
 
 
@@ -273,8 +274,8 @@ IF(${BOOST} MATCHES "SYSTEM")
 		INCLUDE_DIRECTORIES(
 			${INCLUDE_DIRECTORIES}
 			${Boost_INCLUDE_DIRS}
-			/opt/local/include/boost-1_35
-			/opt/local/include/boost
+			#/opt/local/include/boost-1_35
+			#/opt/local/include/boost
 		)
 		LINK_DIRECTORIES(${LINK_DIRECTORIES} ${Boost_LIBRARY_DIRS})
 	ENDIF(${Boost_FOUND})
@@ -343,5 +344,5 @@ LINK_DIRECTORIES(
 )
 
 #LINK_LIBRARIES()
-ADD_LIBRARY(libtorrent SHARED ${SRCS})
-TARGET_LINK_LIBRARIES(libtorrent ${LIBLINK})
+ADD_LIBRARY(torrent SHARED ${SRCS})
+TARGET_LINK_LIBRARIES(torrent ${LIBLINK})
