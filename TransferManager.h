@@ -7,6 +7,8 @@
 	#endif
 	
 	#include <wx/listctrl.h>
+	#include <wx/progdlg.h>
+	#include <wx/utils.h>
 
 	#include "TorrentManager.h"
 	#include "HttpManager.h"
@@ -22,11 +24,12 @@
 
 			wxListCtrl *listDownloads;
 			long int listIndex;
-			
+			wxArrayString state_str;
+						
 			#ifdef __TORRENT_MANAGER_H
 				TorrentTransferManager *torrentDownloads;
 				torrent_handle tor;
-				int AddTorrentDownload(char const* tracker, char const* TorrentHash);
+				int AddTorrentDownload(char const* name, char const* tracker, char const* TorrentHash);
 			#endif
 			
 			#ifdef __HTTP_MANAGER_H
