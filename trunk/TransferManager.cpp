@@ -22,6 +22,18 @@ const wxPoint& pos, const wxSize& size, long style) : wxPanel(parent, id, pos, s
 	httpDownloads = new HttpTransferManager();
 #endif 
 
+	try
+	{
+		state_str.Add(wxString( 	wxT("checking queue") 	));
+		state_str.Add(wxString( 	wxT("checking files") 	));
+		state_str.Add(wxString( 	wxT("connecting") 		));
+		state_str.Add(wxString( 	wxT("dl metadata") 		));
+		state_str.Add(wxString( 	wxT("downloading") 		));
+		state_str.Add(wxString( 	wxT("finished") 		));
+		state_str.Add(wxString( 	wxT("seeding") 			));
+		state_str.Add(wxString( 	wxT("allocating") 		)); 
+	} catch(std::exception&) {}
+
 	//listDownloads->SetColumnWidth(-1, wxLIST_AUTOSIZE_USEHEADER);
 	listDownloads->InsertColumn(0, wxT("Name"), wxLIST_FORMAT_LEFT, 80);
 	listDownloads->InsertColumn(1, wxT("Size"), wxLIST_FORMAT_LEFT, 80);
@@ -41,12 +53,9 @@ const wxPoint& pos, const wxSize& size, long style) : wxPanel(parent, id, pos, s
 }
 
 #ifdef __TORRENT_MANAGER_H
-int TransferManager::AddTorrentDownload(char const* tracker, char const* TorrentHash)
+int TransferManager::AddTorrentDownload(char const* name, char const* tracker, char const* TorrentHash)
 {
-	tor = torrentDownloads->AddTorrent(tracker, big_number(TorrentHash));
-	if (tor.is_valid())
-	{
-		
+		/*
 		// now add torrent info to list control
 		long index = listDownloads->InsertItem(listIndex, wxString(tor.name().c_str(), wxConvUTF8));
 		if (index == -1) {
@@ -54,9 +63,11 @@ int TransferManager::AddTorrentDownload(char const* tracker, char const* Torrent
 			return wxCANCEL;			
 		} else {
 			listDownloads->SetItem(listIndex, 0, wxString(tor.name().c_str(), wxConvUTF8)); // name
-			//listDownloads->SetItem(listIndex, 1, wxString::Format(wxT("%d"), tor.get_torrent_info().total_size())); // size
+			//try {
+			//	listDownloads->SetItem(listIndex, 1, wxString::Format(wxT("%d"), tor.get_torrent_info().total_size())); // size
+			//} catch(std::exception&) {}
 			listDownloads->SetItem(listIndex, 2, wxString::Format(wxT("%d"), tor.status().total_done)); // progress
-			listDownloads->SetItem(listIndex, 3, wxString::Format(wxT("%d"), tor.status().state)); // status
+			listDownloads->SetItem(listIndex, 3, state_str.Item(tor.status().state)); // status
 			listDownloads->SetItem(listIndex, 4, wxString::Format(wxT("%f"), tor.status().download_rate)); // Down Speed
 			listDownloads->SetItem(listIndex, 5, wxString::Format(wxT("%f"), tor.status().upload_rate)); // Up Speed
 			listDownloads->SetItem(listIndex, 6, wxT("unknown")); // ETA
@@ -64,11 +75,30 @@ int TransferManager::AddTorrentDownload(char const* tracker, char const* Torrent
 			wxLogMessage(wxT("successful torrent add"));
 			wxLogMessage(wxT("torrent name: ") +  wxString(tor.name().c_str(), wxConvUTF8));
 			return wxMessageBox(wxT("Add Torrent Download"), wxT("Right-Click Add"), wxICON_INFORMATION);
+		}*/
+	bool keepGoing = true;
+	bool skip = false;
+
+	wxProgressDialog dl(wxString::FromAscii(name), wxString::FromAscii(tracker), 100, this, 
+		wxPD_CAN_ABORT | wxPD_APP_MODAL | wxPD_ELAPSED_TIME
+		| wxPD_ESTIMATED_TIME | wxPD_REMAINING_TIME);
+	tor = torrentDownloads->AddTorrent(name, tracker, big_number(TorrentHash));
+	if (tor.is_valid())
+	{
+		while (keepGoing == true)
+		{
+			torrent_status s = tor.status();
+			keepGoing = dl.Update(s.progress * 100, state_str.Item(s.state), &skip);
+			wxMilliSleep(100);
+			if (keepGoing == false)
+			{	
+				torrentDownloads->se.remove_torrent(tor);
+				dl.Destroy();
+			}
 		}
-	} else {
-		wxLogMessage(wxT("unsuccessful torrent add: invalid torrent handle"));
-		return wxCANCEL;
+		return wxOK;
 	}
+	return wxOK;
 }
 #endif
 
@@ -76,7 +106,6 @@ int TransferManager::AddTorrentDownload(char const* tracker, char const* Torrent
 int TransferManager::AddHttpDownload(wxString downloadURL)
 {
 	return httpDownloads->AddDownload(downloadURL);
-	//return wxMessageBox(wxT("AddHttpDownload"), wxT("Right-Click Add"), wxICON_INFORMATION);
 }
 #endif
 
@@ -95,8 +124,9 @@ void TransferManager::OnMenuAddTorrent(wxCommandEvent &event)
 {
 //	int answer = wxMessageBox(wxT("AddTorrent"), wxT("Right-Click Add"), wxICON_INFORMATION);
 	int answer = AddTorrentDownload(
-		"http://torrents.gentoo.org/tracker.php/announce", 
-		"de57802d9ae8a20abf0b151d1e931a65b5a0165b"
+		"debian-businesscard-livecd",
+		"http://bttracker.acc.umu.se:6969/announce", 
+		"77312c34339ff9043e9bddd96724ab65d4520032"
 	);
 	if(answer == wxOK)
 		event.Skip();

@@ -5,7 +5,9 @@
 	#ifndef WX_PRECOMP
 		#include <wx/wx.h>
 	#endif
-/*
+
+	#include <libtorrent/config.hpp>
+
 	#include <boost/filesystem/operations.hpp>
 	#include <boost/filesystem/convenience.hpp>
 	#include <boost/filesystem/fstream.hpp>
@@ -14,16 +16,19 @@
 	#include <boost/program_options.hpp>
 	#include <boost/regex.hpp>
 
-*/
-	#include <libtorrent/config.hpp>
-	#include <libtorrent/fingerprint.hpp>
+	#include <libtorrent/extensions/metadata_transfer.hpp>
+	#include <libtorrent/extensions/ut_metadata.hpp>
+	#include <libtorrent/extensions/ut_pex.hpp>
+
 	#include <libtorrent/entry.hpp>
 	#include <libtorrent/bencode.hpp>
 	#include <libtorrent/session.hpp>
-	#include <libtorrent/extensions/metadata_transfer.hpp>
-	#include <libtorrent/extensions/ut_pex.hpp>
-	
-	#include <libtorrent/peer_id.hpp>
+
+	#include <libtorrent/identify_client.hpp>
+	#include <libtorrent/alert_types.hpp>
+	#include <libtorrent/ip_filter.hpp>
+	#include <libtorrent/magnet_uri.hpp>
+	#include <libtorrent/bitfield.hpp>
 	
 	/*
 		construct a session
@@ -39,27 +44,18 @@
 	using namespace libtorrent;
 
 	typedef std::multimap<std::string, libtorrent::torrent_handle> handles_t;
-
-	class TorrentTransferManager : public session
+	
+	class TorrentTransferManager
 	{
 		public:
-			//Transfer activeTransfers;
-			//Transfer inactiveTransfers;
-			//fingerprint FingerPrint;
-			/* Digital Distribution and Publishing System; 
-				bittorrent client id string; version 1.0.0.0 */
-			//fingerprint torrentClientFingerprint = fingerprint("DD", 1, 0, 0, 0);
-			//curlHandle transferHandle;
-			
-			session torrentSession;
-			session_settings torrentSessionSettings;
-			session_status torrentSessionStatus;
+			session se;
+			session_settings settings;
+			session_status status;
 			handles_t handles;
-			add_torrent_params torrentAddData;
 
 			TorrentTransferManager();
 			~TorrentTransferManager();
-			torrent_handle AddTorrent(char const* tracker, big_number const& hash);
+			torrent_handle AddTorrent(char const* name, char const* tracker, big_number const& hash);
 			bool startTransfer();
 			bool cancelTransfer();
 			bool pauseTransfer();
@@ -69,6 +65,27 @@
 			bool uploadTorrent();
 			bool setTransferSpeed();
 			int getSessionStatus();
+			
+			int listen_port;
+			float preferred_ratio;
+			int download_limit;
+			int upload_limit;
+			int torrent_upload_limit;
+			int torrent_download_limit;
+			int upload_slots_limit;
+			int half_open_limit;
+			std::string save_path_str;
+			std::string log_level;
+			std::string ip_filter_file;
+			std::string allocation_mode;
+			std::string bind_to_interface;
+			std::string proxy;
+			std::string proxy_login;
+			std::string proxy_type;
+			int poll_interval;
+			int wait_retry;
+			int bind_port_start;
+			int bind_port_end;
 	};
 	
 /*	class TorrentTransfer : public TorrentTransferManager, public entry

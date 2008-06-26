@@ -20,6 +20,9 @@
 
 			DDPSFrame *frame;
 	};
+	
+	std::string wxString_to_stdString( wxString str );
+	wxString stdString_to_wxString( std::string str );
 
 	DECLARE_APP(DDPS)
 	

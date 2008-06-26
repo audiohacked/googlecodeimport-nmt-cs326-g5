@@ -2,6 +2,8 @@ PROJECT( DDPS )
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
 
+SET(BUILD_SHARED_LIBS ON)
+
 OPTION(COMMUNITY_PORTAL "Add Community Support" ON)
 OPTION(USER_UPLOAD "Add User Upload capabilities" ON)
 OPTION(BUILTIN_BROWSER "Add the Built-in Browser Support" ON)
@@ -29,10 +31,12 @@ SET(SRCS
 	AppMain.cpp
 	AppMenu.cpp
 	BrowserEmbed.cpp
+	common.cpp
 	HttpManager.cpp
 	SettingsDialog.cpp
 	TorrentManager.cpp
 	TransferManager.cpp
+	TorrentBencode.cpp
 )
 
 FIND_PACKAGE(wxWidgets)
@@ -50,7 +54,7 @@ ELSE(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 		INCLUDE_DIRECTORIES(
 			${WXMOZ_INCLUDE_DIR}
 		)
-		LINK_DIRECTORIES(
+		LINK_DIRECTORIES(SHARED
 			${WXMOZ_LINK_DIR}
 		)
 		SET(wxMoz_LIB "")
@@ -66,7 +70,7 @@ IF(wxWidgets_FOUND)
 		INCLUDE_DIRECTORIES(
 			${INCLUDE_DIRECTORIES}
 			${Boost_INCLUDE_DIRS})
-		LINK_DIRECTORIES(${LINK_DIRECTORIES} ${Boost_LIBRARY_DIRS})
+		LINK_DIRECTORIES(SHARED ${LINK_DIRECTORIES} ${Boost_LIBRARY_DIRS})
 	ENDIF(${Boost_FOUND})
 
 	INCLUDE(
@@ -155,7 +159,7 @@ IF(wxWidgets_FOUND)
 	ENDIF(${CHAT_ENABLED} MATCHES ON)
 
 	SUBDIRS(libtorrent)
-	LINK_DIRECTORIES(
+	LINK_DIRECTORIES(SHARED
 		${LINK_DIRECTORIES}
 		/opt/local/lib
 	)
@@ -172,7 +176,7 @@ IF(wxWidgets_FOUND)
 		${INCLUDE_DIRECTORIES}
 		${CURL_INCLUDE_DIR}
 		wxCURL/include)
-	LINK_DIRECTORIES(
+	LINK_DIRECTORIES(SHARED
 		${LINK_DIRECTORIES}
 		${CURL_LINK_DIR})
 	
