@@ -82,7 +82,8 @@ int TransferManager::AddTorrentDownload(char const* name, char const* tracker, c
 	wxProgressDialog dl(wxString::FromAscii(name), wxString::FromAscii(tracker), 100, this, 
 		wxPD_CAN_ABORT | wxPD_APP_MODAL | wxPD_ELAPSED_TIME
 		| wxPD_ESTIMATED_TIME | wxPD_REMAINING_TIME);
-	tor = torrentDownloads->AddTorrent(name, tracker, big_number(TorrentHash));
+	sha1_hash tor_info_hash = boost::lexical_cast<sha1_hash>(TorrentHash);
+	tor = torrentDownloads->AddTorrent(name, tracker, tor_info_hash);
 	if (tor.is_valid())
 	{
 		while (keepGoing == true)
@@ -124,9 +125,9 @@ void TransferManager::OnMenuAddTorrent(wxCommandEvent &event)
 {
 //	int answer = wxMessageBox(wxT("AddTorrent"), wxT("Right-Click Add"), wxICON_INFORMATION);
 	int answer = AddTorrentDownload(
-		"debian-businesscard-livecd",
-		"http://bttracker.acc.umu.se:6969/announce", 
-		"77312c34339ff9043e9bddd96724ab65d4520032"
+		"knoppix dvd v5.3 English",
+		"http://torrent.unix-ag.uni-kl.de/announce", 
+		"396fcb0f80514a92306c2e8e00395fda8db36f9b"
 	);
 	if(answer == wxOK)
 		event.Skip();
