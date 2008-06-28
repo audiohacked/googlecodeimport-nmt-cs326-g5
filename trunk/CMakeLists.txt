@@ -35,6 +35,7 @@ SET(SRCS
 	HttpManager.cpp
 	SettingsDialog.cpp
 	TorrentManager.cpp
+	TorrentTimer.cpp
 	TransferManager.cpp
 	TorrentBencode.cpp
 )

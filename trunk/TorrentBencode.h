@@ -17,9 +17,7 @@
 	#include <libtorrent/config.hpp>
 	#include <libtorrent/entry.hpp>
 
-	using namespace libtorrent;
-
-	int wx_bdecode(wxFileInputStream &file, wxDataInputStream &data, entry &ret, int depth);
-	void wx_bencode(wxDataOutputStream &out_data, wxTextOutputStream &out_text, entry e);
+	int wx_bdecode(wxFileInputStream &file, wxDataInputStream &data, libtorrent::entry &ret, int depth);
+	void wx_bencode(wxDataOutputStream &out_data, wxTextOutputStream &out_text, libtorrent::entry e);
 
 #endif
