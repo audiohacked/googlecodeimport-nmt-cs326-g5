@@ -6,6 +6,8 @@
 		#include <wx/wx.h>
 	#endif
 
+	#include <wx/progdlg.h>
+
 	#include <libtorrent/config.hpp>
 
 	#include <boost/filesystem/operations.hpp>
@@ -30,6 +32,11 @@
 	#include <libtorrent/magnet_uri.hpp>
 	#include <libtorrent/bitfield.hpp>
 	
+	#include <string>
+	
+	#include "TorrentCommon.h"
+	#include "TorrentTimer.h"
+	
 	/*
 		construct a session
 		parse torrent files and add to session; or add torrent hashs to session
@@ -41,21 +48,20 @@
 		destruct session object
 
 	*/
-	using namespace libtorrent;
-
-	typedef std::multimap<std::string, libtorrent::torrent_handle> handles_t;
 	
 	class TorrentTransferManager
 	{
 		public:
-			session se;
-			session_settings settings;
-			session_status status;
+			libtorrent::session se;
+			libtorrent::session_settings settings;
+			libtorrent::session_status status;
 			handles_t handles;
+			TorrentManagerTimer *timer;
 
 			TorrentTransferManager();
 			~TorrentTransferManager();
-			torrent_handle AddTorrent(char const* name, char const* tracker, big_number const& hash);
+			libtorrent::torrent_handle AddTorrent(char const* name, 
+				char const* tracker, libtorrent::sha1_hash const& hash);
 			bool startTransfer();
 			bool cancelTransfer();
 			bool pauseTransfer();

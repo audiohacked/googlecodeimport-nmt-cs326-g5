@@ -3,7 +3,7 @@
 std::string read_until(wxFileInputStream &file, wxDataInputStream &data, char stop);
 void read_string(wxFileInputStream &file, wxDataInputStream &data, int len, std::string &ret);
 
-int wx_bdecode(wxFileInputStream &file, wxDataInputStream &data, entry &ret, int depth)
+int wx_bdecode(wxFileInputStream &file, wxDataInputStream &data, libtorrent::entry &ret, int depth)
 {
 	char myByte;
 	wxString padding(wxT(""));
@@ -20,9 +20,9 @@ int wx_bdecode(wxFileInputStream &file, wxDataInputStream &data, entry &ret, int
 		case 'i':
 			{
 				if (file.Peek() == 'i') data.Read8();
-				ret = entry(entry::int_t);
+				ret = libtorrent::entry(libtorrent::entry::int_t);
 				std::string val = read_until(file, data, 'e');
-				ret.integer() = boost::lexical_cast<entry::integer_type>(val);
+				ret.integer() = boost::lexical_cast<libtorrent::entry::integer_type>(val);
 				if (file.Peek() == 'e') data.Read8();
 				wxLogMessage(wxT("num: ")+wxString(val.c_str(), wxConvUTF8));
 			}
@@ -31,11 +31,11 @@ int wx_bdecode(wxFileInputStream &file, wxDataInputStream &data, entry &ret, int
 		case 'l':
 			{
 				if (file.Peek() == 'l') data.Read8();
-				ret = entry(entry::list_t);
+				ret = libtorrent::entry(libtorrent::entry::list_t);
 				while (file.Peek() != 'e')
 				{
-					ret.list().push_back(entry());
-					entry& list = ret.list().back();
+					ret.list().push_back(libtorrent::entry());
+					libtorrent::entry& list = ret.list().back();
 					wx_bdecode(file, data, list, depth + 1);
 				}
 				if (file.Peek() == 'e') data.Read8();
@@ -45,19 +45,19 @@ int wx_bdecode(wxFileInputStream &file, wxDataInputStream &data, entry &ret, int
 		case 'd':
 			{
 				if (file.Peek() == 'd') data.Read8();
-				ret = entry(entry::dictionary_t);
+				ret = libtorrent::entry(libtorrent::entry::dictionary_t);
 				while (file.Peek() != 'e')
 				{
-					entry key;
+					libtorrent::entry key;
 					wx_bdecode(file, data, key, depth + 1);
-					if (key.type() != entry::string_t)
+					if (key.type() != libtorrent::entry::string_t)
 					{
 						return 0;
 					}
 
-					entry dict;
+					libtorrent::entry dict;
 					wx_bdecode(file, data, dict, depth + 1);
-					ret.dict().insert(std::pair<std::string, entry>(key.string(), dict));
+					ret.dict().insert(std::pair<std::string, libtorrent::entry>(key.string(), dict));
 				}
 				if (file.Peek() == 'e')  data.Read8();
 			}
@@ -66,7 +66,7 @@ int wx_bdecode(wxFileInputStream &file, wxDataInputStream &data, entry &ret, int
 		default:
 			if(isdigit(file.Peek()))
 			{
-				ret = entry(entry::string_t);
+				ret = libtorrent::entry(libtorrent::entry::string_t);
 				std::string len_s = read_until(file, data, ':');
 				if (file.Peek() == ':') data.Read8();
 				int len = std::atoi(len_s.c_str());
@@ -106,17 +106,17 @@ void read_string(wxFileInputStream &file, wxDataInputStream &data, int len, std:
 	//ret = str.ToAscii();
 }
 
-void wx_bencode(wxDataOutputStream &out_data, wxTextOutputStream &out_text, entry e)
+void wx_bencode(wxDataOutputStream &out_data, wxTextOutputStream &out_text, libtorrent::entry e)
 {
 	switch(e.type())
 	{
-		case entry::int_t:
+		case libtorrent::entry::int_t:
 			out_data.Write8('i');
 			out_text.WriteString( wxString::Format(wxT("%u"), e.integer()) );
 			out_data.Write8('e');
 			break;
 
-		case entry::string_t:
+		case libtorrent::entry::string_t:
 			out_text.WriteString( wxString::Format(wxT("%u"), e.string().length()) );
 			out_data.Write8(':');
 			for (int i=0; i<e.string().length(); ++i)
@@ -125,18 +125,18 @@ void wx_bencode(wxDataOutputStream &out_data, wxTextOutputStream &out_text, entr
 			}
 			break;
 
-		case entry::list_t:
+		case libtorrent::entry::list_t:
 			out_data.Write8('l');
-			for (entry::list_type::const_iterator i = e.list().begin(); i != e.list().end(); ++i)
+			for (libtorrent::entry::list_type::const_iterator i = e.list().begin(); i != e.list().end(); ++i)
 			{
 				wx_bencode(out_data, out_text, *i);
 			}
 			out_data.Write8('e');
 			break;
 
-		case entry::dictionary_t:
+		case libtorrent::entry::dictionary_t:
 			out_data.Write8('d');
-			for (entry::dictionary_type::const_iterator i = e.dict().begin(); i != e.dict().end(); ++i)
+			for (libtorrent::entry::dictionary_type::const_iterator i = e.dict().begin(); i != e.dict().end(); ++i)
 			{
 				out_text.WriteString( wxString::Format(wxT("%u"), i->first.length()) );
 				out_data.Write8(':');

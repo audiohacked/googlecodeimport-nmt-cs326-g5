@@ -22,18 +22,6 @@ const wxPoint& pos, const wxSize& size, long style) : wxPanel(parent, id, pos, s
 	httpDownloads = new HttpTransferManager();
 #endif 
 
-	try
-	{
-		state_str.Add(wxString( 	wxT("checking queue") 	));
-		state_str.Add(wxString( 	wxT("checking files") 	));
-		state_str.Add(wxString( 	wxT("connecting") 		));
-		state_str.Add(wxString( 	wxT("dl metadata") 		));
-		state_str.Add(wxString( 	wxT("downloading") 		));
-		state_str.Add(wxString( 	wxT("finished") 		));
-		state_str.Add(wxString( 	wxT("seeding") 			));
-		state_str.Add(wxString( 	wxT("allocating") 		)); 
-	} catch(std::exception&) {}
-
 	//listDownloads->SetColumnWidth(-1, wxLIST_AUTOSIZE_USEHEADER);
 	listDownloads->InsertColumn(0, wxT("Name"), wxLIST_FORMAT_LEFT, 80);
 	listDownloads->InsertColumn(1, wxT("Size"), wxLIST_FORMAT_LEFT, 80);
@@ -76,29 +64,17 @@ int TransferManager::AddTorrentDownload(char const* name, char const* tracker, c
 			wxLogMessage(wxT("torrent name: ") +  wxString(tor.name().c_str(), wxConvUTF8));
 			return wxMessageBox(wxT("Add Torrent Download"), wxT("Right-Click Add"), wxICON_INFORMATION);
 		}*/
+	/*
 	bool keepGoing = true;
 	bool skip = false;
+	*/
 
-	wxProgressDialog dl(wxString::FromAscii(name), wxString::FromAscii(tracker), 100, this, 
-		wxPD_CAN_ABORT | wxPD_APP_MODAL | wxPD_ELAPSED_TIME
-		| wxPD_ESTIMATED_TIME | wxPD_REMAINING_TIME);
-	sha1_hash tor_info_hash = boost::lexical_cast<sha1_hash>(TorrentHash);
+	libtorrent::sha1_hash tor_info_hash = boost::lexical_cast<libtorrent::sha1_hash>(TorrentHash);
 	tor = torrentDownloads->AddTorrent(name, tracker, tor_info_hash);
-	if (tor.is_valid())
-	{
-		while (keepGoing == true)
-		{
-			torrent_status s = tor.status();
-			keepGoing = dl.Update(s.progress * 100, state_str.Item(s.state), &skip);
-			wxMilliSleep(100);
-			if (keepGoing == false)
-			{	
-				torrentDownloads->se.remove_torrent(tor);
-				dl.Destroy();
-			}
-		}
-		return wxOK;
-	}
+	//if (tor.is_valid())
+	//{
+	//	return wxOK;
+	//}
 	return wxOK;
 }
 #endif
@@ -129,8 +105,10 @@ void TransferManager::OnMenuAddTorrent(wxCommandEvent &event)
 		"http://torrent.unix-ag.uni-kl.de/announce", 
 		"396fcb0f80514a92306c2e8e00395fda8db36f9b"
 	);
-	if(answer == wxOK)
+	if(answer == wxCANCEL)
+	{
 		event.Skip();
+	}
 }
 
 void TransferManager::OnMenuAddHttpDownlaod(wxCommandEvent &event)

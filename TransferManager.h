@@ -24,11 +24,10 @@
 
 			wxListCtrl *listDownloads;
 			long int listIndex;
-			wxArrayString state_str;
 						
 			#ifdef __TORRENT_MANAGER_H
 				TorrentTransferManager *torrentDownloads;
-				torrent_handle tor;
+				libtorrent::torrent_handle tor;
 				int AddTorrentDownload(char const* name, char const* tracker, char const* TorrentHash);
 			#endif
 			
