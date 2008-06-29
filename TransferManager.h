@@ -54,11 +54,20 @@
 		public:
 			TransferManager(wxWindow* parent, wxWindowID id, 
 				const wxPoint& pos, const wxSize& size, long style);
+			
+			void OnItemRightClick(wxListEvent &event);
+			void TransferManager::OnMenuUpdateItem(wxCommandEvent &event);
+			
 			void OnContextMenu(wxContextMenuEvent &event);
 			void OnMenuAddTorrent(wxCommandEvent &event);
 			void OnMenuAddHttpDownlaod(wxCommandEvent &event);
+			
+			void OnItemDeselected(wxListEvent &event);
+			void OnItemSelected(wxListEvent &event);
 
 			TransferManagerList *listDownloads;
+			long m_SelectedItem;
+			bool b_ItemSelected;
 
 			#ifdef __HTTP_MANAGER_H
 				int AddHttpDownload(wxString downloadURL);

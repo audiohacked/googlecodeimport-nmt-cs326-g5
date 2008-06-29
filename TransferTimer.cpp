@@ -8,8 +8,8 @@ TransferManagerTimer::TransferManagerTimer(TransferManagerList *listctrl) : wxTi
 
 void TransferManagerTimer::Notify()
 {
-	//ctrl->RefreshItems(0, ctrl->listIndex);
-	ctrl->RefreshItem(0);
+	ctrl->RefreshItems(0, ctrl->listIndex);
+	//ctrl->RefreshItem(0);
 }
 
 void TransferManagerTimer::start()

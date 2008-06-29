@@ -9,14 +9,20 @@ BEGIN_EVENT_TABLE( TransferManager, wxPanel )
 	EVT_CONTEXT_MENU(TransferManager::OnContextMenu)
 	EVT_MENU(MENU_TorrentDownload, TransferManager::OnMenuAddTorrent)
 	EVT_MENU(MENU_HTTPDownload, TransferManager::OnMenuAddHttpDownlaod)
+	EVT_LIST_ITEM_RIGHT_CLICK(LIST_DownloadManager, TransferManager::OnItemRightClick)
+	EVT_MENU(MENU_UpdateItem, TransferManager::OnMenuUpdateItem)
+	EVT_LIST_ITEM_DESELECTED(LIST_DownloadManager, TransferManager::OnItemDeselected)
+	EVT_LIST_ITEM_SELECTED(LIST_DownloadManager, TransferManager::OnItemSelected)
 END_EVENT_TABLE()
 
 TransferManager::TransferManager(wxWindow* parent, wxWindowID id,
 const wxPoint& pos, const wxSize& size, long style) : wxPanel(parent, id, pos, size, style)
 {
-	listDownloads = new TransferManagerList( this, -1, wxDefaultPosition, wxDefaultSize, wxLC_REPORT|wxLC_VIRTUAL );
+	listDownloads = new TransferManagerList( this, LIST_DownloadManager, wxDefaultPosition, wxDefaultSize, wxLC_REPORT|wxLC_VIRTUAL );
 	TransferManagerTimer *timer = new TransferManagerTimer(listDownloads);
 	timer->start();
+	
+	b_ItemSelected = false;
 
 	wxSystemOptions opts;
 	opts.SetOption(wxT("mac.listctrl.always_use_generic"), 1);
@@ -27,15 +33,44 @@ const wxPoint& pos, const wxSize& size, long style) : wxPanel(parent, id, pos, s
 	sizer->SetSizeHints(this);
 }
 
+void TransferManager::OnItemDeselected(wxListEvent &event)
+{
+	b_ItemSelected = false;
+}
+
+void TransferManager::OnItemSelected(wxListEvent &event)
+{
+	b_ItemSelected = true;
+}
+
+void TransferManager::OnItemRightClick(wxListEvent &event)
+{
+	//b_ItemSelected = true;
+	m_SelectedItem = event.GetItem();
+	
+	wxMenu *ItemMenu = new wxMenu();
+	ItemMenu->Append(MENU_UpdateItem, wxT("Update Item"));
+	ItemMenu->Append(MENU_TorrentDownload, wxT("Add Torrent"));
+	ItemMenu->Append(MENU_HTTPDownload, wxT("Add HTTP Download"));
+	PopupMenu(ItemMenu);
+}
+
+void TransferManager::OnMenuUpdateItem(wxCommandEvent &event)
+{
+	listDownloads->RefreshItem(m_SelectedItem);
+}
+
 void TransferManager::OnContextMenu(wxContextMenuEvent &event)
 {
-	//wxPoint pos = event.GetPosition();
-	wxMenu *contextMenu = new wxMenu();
+	if (!b_ItemSelected)
+	{
+		wxMenu *contextMenu = new wxMenu();
 
-	contextMenu->Append(MENU_TorrentDownload, wxT("Add Torrent"));
-	contextMenu->Append(MENU_HTTPDownload, wxT("Add HTTP Download"));
+		contextMenu->Append(MENU_TorrentDownload, wxT("Add Torrent"));
+		contextMenu->Append(MENU_HTTPDownload, wxT("Add HTTP Download"));
 
-	PopupMenu(contextMenu);
+		PopupMenu(contextMenu);
+	}
 }
 
 void TransferManager::OnMenuAddTorrent(wxCommandEvent &event)

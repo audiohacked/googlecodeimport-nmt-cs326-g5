@@ -128,7 +128,7 @@ libtorrent::torrent_handle TorrentTransferManager::AddTorrent(char const* name,
 	h.set_ratio(2.0f);
 	h.set_upload_limit(torrent_upload_limit);
 	h.set_download_limit(torrent_download_limit);
-	//h.resume(); //wxLogMessage(wxT("start torrent"));
+	h.resume(); //wxLogMessage(wxT("start torrent"));
 
 	download_list::torrent_list_type torData;
 	/*torData.dlg = new wxProgressDialog(wxString::FromAscii(name), 
