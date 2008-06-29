@@ -1,7 +1,9 @@
 #include "enum.h"
 #include "common.h"
-#include "TransferManager.h"
 #include "TransferCommon.h"
+#include "TransferTimer.h"
+#include "TransferManager.h"
+
 
 BEGIN_EVENT_TABLE( TransferManager, wxPanel )
 	EVT_CONTEXT_MENU(TransferManager::OnContextMenu)
@@ -13,6 +15,8 @@ TransferManager::TransferManager(wxWindow* parent, wxWindowID id,
 const wxPoint& pos, const wxSize& size, long style) : wxPanel(parent, id, pos, size, style)
 {
 	listDownloads = new TransferManagerList( this, -1, wxDefaultPosition, wxDefaultSize, wxLC_REPORT|wxLC_VIRTUAL );
+	TransferManagerTimer *timer = new TransferManagerTimer(listDownloads);
+	timer->start();
 
 	wxSystemOptions opts;
 	opts.SetOption(wxT("mac.listctrl.always_use_generic"), 1);
@@ -97,37 +101,23 @@ int TransferManagerList::AddTorrentDownload(char const* name, char const* tracke
 {
 	libtorrent::sha1_hash tor_info_hash = boost::lexical_cast<libtorrent::sha1_hash>(TorrentHash);
 	SetItemCount(listIndex+1);
-	// now add torrent info to list control
-	/*long index = InsertItem(listIndex, wxT(""));
-	if (index == -1) {
-		wxLogMessage(wxT("unsuccessful torrent add: bad insert item"));
-		SetItemCount(listIndex);
-		return wxCANCEL;
-	} else {*/
-		tor = torrentDownloads->AddTorrent(name, tracker, tor_info_hash, listIndex);
-		listIndex++;
-		wxLogMessage(wxT("successful torrent add"));
-		wxLogMessage(wxT("torrent name: ") +  wxString(tor.name().c_str(), wxConvUTF8));
-		//return wxMessageBox(wxT("Add Torrent Download"), wxT("Right-Click Add"), wxICON_INFORMATION);
-	//}
-	
+	tor = torrentDownloads->AddTorrent(name, tracker, tor_info_hash, listIndex);
+	listIndex++;
+
 	return wxOK;
 }
 #endif
 
 wxString TransferManagerList::OnGetItemText(long item, long column) const
 {
-	bool http = false;
-	bool torrent = false;
-	
-	if (http)
-	{
-		//return GetHttpItemText(item, column);
-		return wxT("");
-	}
-	else if (torrent)
+	download_handles_t::const_iterator grabItem = list.find(item);
+	if (grabItem->second.type() == download_list::torrent_list_t)
 	{
 		return GetTorrentItemText(item, column);
+	}
+	else if (grabItem->second.type() == download_list::http_list_t)
+	{
+		return wxT("");
 	}
 	else
 	{
@@ -137,8 +127,11 @@ wxString TransferManagerList::OnGetItemText(long item, long column) const
 	
 wxString TransferManagerList::GetTorrentItemText(long item, long column) const
 {
+	libtorrent::torrent_handle h;
 	download_handles_t::const_iterator torItem = list.find(item);
-	libtorrent::torrent_handle h = torItem->second.torrent_list().handle;
+	if (torItem->first == item)
+ 		h = torItem->second.torrent_list().handle;
+
 	if (h.is_valid())
 	{
 		if (column == 0) // name
@@ -149,8 +142,9 @@ wxString TransferManagerList::GetTorrentItemText(long item, long column) const
 
 		if (column == 1) // size
 		{
-			libtorrent::size_type total_size = h.get_torrent_info().total_size();
-			return wxString::Format(wxT("%d"), total_size);
+			//libtorrent::size_type total_size = h.get_torrent_info().total_size();
+			//return wxString::Format(wxT("%d"), total_size);
+			return wxT("");
 		}
 
 		if (column == 2) // progress
@@ -161,8 +155,15 @@ wxString TransferManagerList::GetTorrentItemText(long item, long column) const
 
 		if (column == 3) // status
 		{
-			libtorrent::torrent_status::state_t status = h.status().state;
-			return state_str.Item(status);
+			if (h.is_paused())
+			{
+				return wxT("Paused");
+			}
+			else
+			{
+				libtorrent::torrent_status::state_t status = h.status().state;
+				return state_str.Item(status);
+			}
 		}
 
 		if (column == 4) // download speed
@@ -181,5 +182,9 @@ wxString TransferManagerList::GetTorrentItemText(long item, long column) const
 		{
 			return wxT("Unknown");
 		}
+	}
+	else
+	{
+		return wxT("error");
 	}
 }

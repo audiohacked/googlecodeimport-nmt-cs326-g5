@@ -86,8 +86,8 @@ TorrentTransferManager::TorrentTransferManager(download_handles_t *l)
 	}
 
 	status = se.status();
-	timer = new TorrentManagerTimer(se, l);
-	timer->start();
+	//timer = new TorrentManagerTimer(se, l);
+	//timer->start();
 }
 
 TorrentTransferManager::~TorrentTransferManager()
@@ -123,19 +123,20 @@ libtorrent::torrent_handle TorrentTransferManager::AddTorrent(char const* name,
 	p.auto_managed = false;
 	
 	libtorrent::torrent_handle h = se.add_torrent(p);	
-
-	download_list::torrent_list_type torData;
-	torData.dlg = new wxProgressDialog(wxString::FromAscii(name), wxString::FromAscii(tracker), 100, ::wxGetApp().frame, 
-		wxPD_CAN_ABORT | wxPD_APP_MODAL | wxPD_ELAPSED_TIME
-		| wxPD_ESTIMATED_TIME | wxPD_REMAINING_TIME);
-	torData.handle = h;
-
 	h.set_max_connections(10);
 	h.set_max_uploads(-1);
 	h.set_ratio(2.0f);
 	h.set_upload_limit(torrent_upload_limit);
 	h.set_download_limit(torrent_download_limit);
-	h.resume(); //wxLogMessage(wxT("start torrent"));
+	//h.resume(); //wxLogMessage(wxT("start torrent"));
+
+	download_list::torrent_list_type torData;
+	/*torData.dlg = new wxProgressDialog(wxString::FromAscii(name), 
+		wxString::FromAscii(tracker), 100, ::wxGetApp().frame, 
+		wxPD_CAN_ABORT | wxPD_APP_MODAL | wxPD_ELAPSED_TIME
+		| wxPD_ESTIMATED_TIME | wxPD_REMAINING_TIME);*/
+	torData.handle = h;
+
 	
 	handles->insert(std::make_pair(index, torData));
 	
