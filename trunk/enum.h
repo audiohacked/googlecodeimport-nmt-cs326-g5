@@ -35,6 +35,8 @@
 		MENU_About,
 		MENU_TorrentDownload,
 		MENU_HTTPDownload,
+		MENU_UpdateItem,
+		LIST_DownloadManager,
 		BROWSER_Next,
 		BROWSER_Prev,
 		BROWSER_Stop,
