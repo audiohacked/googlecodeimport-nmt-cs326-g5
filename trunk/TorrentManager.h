@@ -56,7 +56,7 @@
 			libtorrent::session_settings settings;
 			libtorrent::session_status status;
 			download_handles_t *handles;
-			TorrentManagerTimer *timer;
+			//TorrentManagerTimer *timer;
 
 			TorrentTransferManager(download_handles_t *l);
 			~TorrentTransferManager();
