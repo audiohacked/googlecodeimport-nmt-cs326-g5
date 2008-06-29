@@ -1,9 +1,9 @@
 #include "HttpManager.h"
 #include "common.h"
 
-HttpTransferManager::HttpTransferManager()
+HttpTransferManager::HttpTransferManager(download_handles_t *l)
 {
-	
+	handles = l;
 }
 
 HttpTransferManager::~HttpTransferManager()

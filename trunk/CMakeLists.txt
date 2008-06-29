@@ -34,10 +34,11 @@ SET(SRCS
 	common.cpp
 	HttpManager.cpp
 	SettingsDialog.cpp
+	TorrentBencode.cpp
 	TorrentManager.cpp
 	TorrentTimer.cpp
 	TransferManager.cpp
-	TorrentBencode.cpp
+	TransferCommon.cpp
 )
 
 FIND_PACKAGE(wxWidgets)

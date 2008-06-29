@@ -55,13 +55,13 @@
 			libtorrent::session se;
 			libtorrent::session_settings settings;
 			libtorrent::session_status status;
-			handles_t handles;
+			download_handles_t *handles;
 			TorrentManagerTimer *timer;
 
-			TorrentTransferManager();
+			TorrentTransferManager(download_handles_t *l);
 			~TorrentTransferManager();
 			libtorrent::torrent_handle AddTorrent(char const* name, 
-				char const* tracker, libtorrent::sha1_hash const& hash);
+				char const* tracker, libtorrent::sha1_hash const& hash, long index);
 			bool startTransfer();
 			bool cancelTransfer();
 			bool pauseTransfer();
