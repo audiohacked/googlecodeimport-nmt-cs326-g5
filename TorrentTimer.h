@@ -10,7 +10,8 @@
 	#include <wx/utils.h>
 	#include <wx/timer.h>
 	
-	#include "TorrentCommon.h"
+	//#include "TorrentCommon.h"
+	#include "TransferCommon.h"
 
 	#include <libtorrent/config.hpp>
 	#include <libtorrent/entry.hpp>
@@ -19,10 +20,10 @@
 	class TorrentManagerTimer : public wxTimer
 	{
 		public:
-			TorrentManagerTimer(libtorrent::session &s, handles_t &list_hTorrent);
+			TorrentManagerTimer(libtorrent::session &s, download_handles_t *list_handles);
 			void Notify();
 			void start();
-			handles_t *hTorList;
+			download_handles_t *hList;
 			libtorrent::session *ses;
 			wxArrayString state_str;
 			int active_torrent;

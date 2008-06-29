@@ -9,14 +9,17 @@
 	#include <wx/wfstream.h>
 	
 	#include <wx/curl/dialog.h>
-	
+
+	#include "TransferCommon.h"
+		
 	class HttpTransferManager
 	{
 		public:
-			HttpTransferManager();
+			HttpTransferManager(download_handles_t *l);
 			~HttpTransferManager();
 			int AddDownload(wxString url);
 			int GetTransferStyle() const;
+			download_handles_t *handles;
 	};
 	
 #endif

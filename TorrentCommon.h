@@ -13,12 +13,6 @@
 	#include <libtorrent/entry.hpp>
 	#include <libtorrent/session.hpp>
 
-	typedef struct /*wx_torrent_data*/ {
-		wxProgressDialog *dlg;
-		libtorrent::torrent_handle handle;
-	} torrent_data_t;
-
-	//typedef std::map<libtorrent::torrent_handle, wxProgressDialog*> torrent_data_t;
-	typedef std::map<std::string, torrent_data_t> handles_t;
-
+	#include "TorrentCommon.h"
+	
 #endif

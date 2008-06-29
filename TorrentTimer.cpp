@@ -1,8 +1,8 @@
 #include "TorrentTimer.h"
 
-TorrentManagerTimer::TorrentManagerTimer(libtorrent::session &s, handles_t &list_hTorrent) : wxTimer()
+TorrentManagerTimer::TorrentManagerTimer(libtorrent::session &s, download_handles_t *list_handles) : wxTimer()
 {
-	hTorList = &list_hTorrent;
+	hList = list_handles;
 	ses = &s;
 	active_torrent = 0;
 	
@@ -33,13 +33,13 @@ void TorrentManagerTimer::Notify()
 		get torrent status
 		update wxGauge with current downloaded bytes status
 */
-	if(!hTorList->empty())
+	if(!hList->empty())
 	{
-		for (handles_t::iterator i = hTorList->begin(); i != hTorList->end(); ++i)
+		for (download_handles_t::iterator i = hList->begin(); i != hList->end(); ++i)
 		{
 			//wxLogMessage(wxT("TorrentManagerTimer - checking single torrent"));
-			libtorrent::torrent_handle& h = i->second.handle;
-			wxProgressDialog *d = i->second.dlg;
+			libtorrent::torrent_handle& h = i->second.torrent_list().handle;
+			wxProgressDialog *d = i->second.torrent_list().dlg;
 			if (h.is_valid())
 			{
 				bool keepGoing = true;

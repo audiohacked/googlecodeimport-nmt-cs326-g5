@@ -2,8 +2,9 @@
 #include "TorrentManager.h"
 #include "TorrentBencode.h"
 
-TorrentTransferManager::TorrentTransferManager()
+TorrentTransferManager::TorrentTransferManager(download_handles_t *l)
 {
+	handles = l;
 	try
 	{
 		listen_port = 6881;
@@ -85,7 +86,7 @@ TorrentTransferManager::TorrentTransferManager()
 	}
 
 	status = se.status();
-	timer = new TorrentManagerTimer(se, handles);
+	timer = new TorrentManagerTimer(se, l);
 	timer->start();
 }
 
@@ -109,10 +110,8 @@ TorrentTransferManager::~TorrentTransferManager()
 }
 
 libtorrent::torrent_handle TorrentTransferManager::AddTorrent(char const* name,
-	char const* tracker, libtorrent::sha1_hash const& hash)
+	char const* tracker, libtorrent::sha1_hash const& hash, long index)
 {
-	//wxLogMessage(wxT("begin add torrent"));
-	
 	libtorrent::add_torrent_params p;
 	p.name = name;
 	p.save_path = "./download-files/";
@@ -123,19 +122,14 @@ libtorrent::torrent_handle TorrentTransferManager::AddTorrent(char const* name,
 	p.duplicate_is_error = false;
 	p.auto_managed = false;
 	
-	//wxLogMessage(wxT("set torrent params"));
-		
-	//wxLogMessage(wxT("add torrent"));
 	libtorrent::torrent_handle h = se.add_torrent(p);	
 
-	//wxLogMessage(wxT("set torrent dlg & handle into list"));
-	torrent_data_t torData;
+	download_list::torrent_list_type torData;
 	torData.dlg = new wxProgressDialog(wxString::FromAscii(name), wxString::FromAscii(tracker), 100, ::wxGetApp().frame, 
 		wxPD_CAN_ABORT | wxPD_APP_MODAL | wxPD_ELAPSED_TIME
 		| wxPD_ESTIMATED_TIME | wxPD_REMAINING_TIME);
 	torData.handle = h;
 
-	//wxLogMessage(wxT("set torrent conn settings"));
 	h.set_max_connections(10);
 	h.set_max_uploads(-1);
 	h.set_ratio(2.0f);
@@ -143,10 +137,7 @@ libtorrent::torrent_handle TorrentTransferManager::AddTorrent(char const* name,
 	h.set_download_limit(torrent_download_limit);
 	h.resume(); //wxLogMessage(wxT("start torrent"));
 	
-
-	//wxLogMessage(wxT("set handle list"));
-	handles.insert(std::make_pair(name, torData));
+	handles->insert(std::make_pair(index, torData));
 	
-	//wxLogMessage(wxT("ret single torrent handle"));
 	return h;
 }
