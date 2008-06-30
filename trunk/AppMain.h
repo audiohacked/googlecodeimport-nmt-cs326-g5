@@ -35,9 +35,7 @@
 			DDPSTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size, long style);
 			DDPSBrowser *Home;
 			DDPSBrowser *Community;
-			wxWindow *wParent;
-
-			DECLARE_EVENT_TABLE()
+			TransferManager *Downloads;
 	};
 	
 	class DDPSPanel : public wxPanel
@@ -52,7 +50,6 @@
 			void GotoDownloads(wxCommandEvent& event);
 			void ChatRosterOpen(wxCommandEvent& event);
 			DDPSTabbed *tabs;
-			wxWindow *wParent;
 			
 			DECLARE_EVENT_TABLE()
 	};
@@ -71,11 +68,10 @@
 			void Logout(wxCommandEvent& event);
 			DDPSMenu *menu;
 			DDPSPanel *panel;
-			wxWindow *wParent;
-			wxTreeCtrl *rosterList;
 			
 #ifdef CHAT_ENABLED
 			void InitChat();
+			wxTreeCtrl *rosterList;
 			ChatConnThread *thread;
 			ChatWindowRoster *chat;
 			ChatRoster *rosterListener;

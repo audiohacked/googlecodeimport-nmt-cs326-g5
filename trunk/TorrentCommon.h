@@ -13,6 +13,6 @@
 	#include <libtorrent/entry.hpp>
 	#include <libtorrent/session.hpp>
 
-	#include "TorrentCommon.h"
+	#include "TransferCommon.h"
 	
 #endif

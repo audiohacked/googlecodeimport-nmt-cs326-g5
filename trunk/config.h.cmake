@@ -8,6 +8,8 @@
 	#cmakedefine USER_UPLOAD 1
 	
 	#cmakedefine CHAT_ENABLED 1
+	
+	#cmakedefine DEVEL_TESTING 1
 
 	#cmakedefine HOMEPAGE "${HOMEPAGE}"
 
