@@ -8,6 +8,7 @@ OPTION(COMMUNITY_PORTAL "Add Community Support" ON)
 OPTION(USER_UPLOAD "Add User Upload capabilities" ON)
 OPTION(BUILTIN_BROWSER "Add the Built-in Browser Support" ON)
 OPTION(CHAT_ENABLED "Add the Built-in Chat Support" OFF)
+OPTION(DEVEL_TESTING "Skip the login routines" ON)
 
 SET(NEWSPAGE http://ddps.seancrazy.net/contentmanager/news CACHE STRING "Set the URL for Newspage")
 SET(HOMEPAGE http://ddps.seancrazy.net/contentmanager CACHE STRING "Set the URL for Homepage")

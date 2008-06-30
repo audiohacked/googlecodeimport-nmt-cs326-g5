@@ -24,7 +24,6 @@
 		MENU_Home,
 		MENU_Community,
 		MENU_Downloads,
-		//MENU_Tools,
 		MENU_Activate,
 		MENU_Invite,
 		MENU_Add,
@@ -36,7 +35,7 @@
 		MENU_TorrentDownload,
 		MENU_HTTPDownload,
 		MENU_UpdateItem,
-		LIST_DownloadManager,
+		MENU_RemoveItem,
 		BROWSER_Next,
 		BROWSER_Prev,
 		BROWSER_Stop,
@@ -62,7 +61,8 @@
 		BUTTON_Chat,
 		BUTTON_Accept,
 		BUTTON_Cancel,
-		BUTTON_SendMsg
+		BUTTON_SendMsg,
+		LIST_DownloadManager
 	};
 
 #endif

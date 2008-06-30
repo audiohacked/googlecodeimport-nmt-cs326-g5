@@ -25,11 +25,6 @@ BEGIN_EVENT_TABLE( DDPSFrame, wxFrame )
 	EVT_MENU(MENU_Logout, DDPSFrame::Logout)
 END_EVENT_TABLE()
 
-BEGIN_EVENT_TABLE( DDPSTabbed, wxNotebook )
-	//EVT_NOTEBOOK_PAGE_CHANGED(wxID_ANY, DDPSTabbed::OnNotebook)
-	//EVT_NOTEBOOK_PAGE_CHANGING(wxID_ANY, DDPSTabbed::OnNotebook)
-END_EVENT_TABLE()
-
 // Event table for DDPSPanel buttons at the bottom of the program
 BEGIN_EVENT_TABLE( DDPSPanel, wxPanel )
 	EVT_BUTTON(TABB_News, DDPSPanel::GotoNewsTab)
@@ -60,8 +55,6 @@ bool DDPS::OnInit()
 	myLogFile = fopen("log.txt", "a+");
 	wxLogStderr *LogFile = new wxLogStderr(myLogFile);
 	wxLog::SetActiveTarget(LogFile);
-	//wxLogWindow *LogWindow = new wxLogWindow(NULL, wxT("LoggingWindow"));
-	//wxLogChain *logChain = new wxLogChain(LogWindow);
 
 	#ifdef __WXMAC__
 	wxApp::s_macAboutMenuItemId = MENU_About;
@@ -75,7 +68,7 @@ bool DDPS::OnInit()
 	//wxApp::s_macHelpMenuTitleName = "Help";
 	#endif
 		
-	frame = new DDPSFrame(_T("DDPSFrame"), wxPoint(50, 50), wxSize(800,600));
+	frame = new DDPSFrame(_T("DDPSFrame"), wxPoint(50, 50), wxSize(1000,600));
 	frame->Show(TRUE);
 	SetTopWindow(frame);
 		
@@ -86,27 +79,6 @@ int DDPS::OnExit()
 {
 	delete wxLog::SetActiveTarget(NULL);
 	fclose(myLogFile);
-	
-/*
-	if (win->IsShown())
-	{
-		win->Destroy();
-	}
-*/
-
-	//thread->server->FetchConnection()->rosterManager()->removeRosterListener();
-	//delete rosterListener;
-
-	//thread->server->FetchConnection()->disposeMessageSession(cMsg->m_session);
-	//delete cMsg;
-
-	//thread->server->FetchConnection()->disconnect();
-
-	//delete thread->server;
-	//delete server;
-
-	//thread->Delete();
-	//delete thread;
 
 	wxApp::CleanUp();
 }
@@ -128,7 +100,9 @@ DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 	DDPSMenu *menu = new DDPSMenu();
 	SetMenuBar(menu);
 	panel = new DDPSPanel(this, -1, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL|wxNO_BORDER);
-	
+#ifdef DEVEL_TESTING
+	panel->SetFocus();
+#else
 	AppLoginDialog loginDlg(this, -1, wxT("User Login"), wxDefaultPosition, wxDefaultSize);
 	if(loginDlg.ShowModal() == wxID_OK)
 	{
@@ -140,14 +114,13 @@ DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 		//SetStatusText(myApp.myLoginData->Password, 2);
 
 		::wxLogMessage(wxT("Welcome user: ") + myApp.LoginUsername);
-		//::wxLogMessage(wxT("Your password is: ") + myApp.LoginPassword);
 
-#ifdef CHAT_ENABLED
+	#ifdef CHAT_ENABLED
 		thread = new ChatConnThread();
 		InitChat();
 		thread->Run();
 		chat = new ChatWindowRoster(thread->server->FetchConnection());
-#endif
+	#endif
 
 		panel->SetFocus();
 	}
@@ -155,6 +128,7 @@ DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 	{
 		Close(TRUE);
 	}
+#endif
 }
 
 void DDPSFrame::OnExit(wxCommandEvent& event)
@@ -227,7 +201,7 @@ void DDPSFrame::SettingsDialog(wxCommandEvent& event)
 DDPSPanel::DDPSPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	const wxSize &size, long style) : wxPanel(parent, id, pos, size, style)
 {
-	tabs = new DDPSTabbed(this, -1, wxDefaultPosition, wxSize(640,480), 0);
+	tabs = new DDPSTabbed(this, -1, wxDefaultPosition, wxDefaultSize, 0);
 	
 	wxButton *News = new wxButton(this, TABB_News, wxT("News"));
 	wxButton *Settings = new wxButton(this, TABB_Settings, wxT("Settings"));
@@ -360,7 +334,7 @@ DDPSTabbed::DDPSTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	#endif
 
 	#ifdef __TRANSFER_MANAGER_H
-		wxPanel *Downloads = new TransferManager(this, -1, wxDefaultPosition, 
+		Downloads = new TransferManager(this, -1, wxDefaultPosition, 
 			wxDefaultSize, wxTAB_TRAVERSAL|wxCLIP_CHILDREN|wxNO_BORDER);
 		AddPage(Downloads, _T("Downloads"));
 	#endif

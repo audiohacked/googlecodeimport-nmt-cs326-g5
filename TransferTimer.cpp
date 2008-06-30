@@ -14,5 +14,5 @@ void TransferManagerTimer::Notify()
 
 void TransferManagerTimer::start()
 {
-	wxTimer::Start(500);
+	wxTimer::Start(100);
 }

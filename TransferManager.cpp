@@ -50,8 +50,9 @@ void TransferManager::OnItemRightClick(wxListEvent &event)
 	
 	wxMenu *ItemMenu = new wxMenu();
 	ItemMenu->Append(MENU_UpdateItem, wxT("Update Item"));
-	ItemMenu->Append(MENU_TorrentDownload, wxT("Add Torrent"));
-	ItemMenu->Append(MENU_HTTPDownload, wxT("Add HTTP Download"));
+	ItemMenu->Append(MENU_RemoveItem, wxT("Remove Item"));
+	//ItemMenu->Append(MENU_TorrentDownload, wxT("Add Torrent"));
+	//ItemMenu->Append(MENU_HTTPDownload, wxT("Add HTTP Download"));
 	PopupMenu(ItemMenu);
 }
 
@@ -107,13 +108,18 @@ TransferManagerList::TransferManagerList(wxWindow* parent, wxWindowID id,
 	httpDownloads = new HttpTransferManager(&list);
 #endif 
 
-	InsertColumn(0, wxT("Name"), wxLIST_FORMAT_LEFT, 80);
-	InsertColumn(1, wxT("Size"), wxLIST_FORMAT_LEFT, 80);
+	InsertColumn(0, wxT("Name"), wxLIST_FORMAT_LEFT, 60);
+	InsertColumn(1, wxT("Size"), wxLIST_FORMAT_LEFT, 60);
 	InsertColumn(2, wxT("Progress"), wxLIST_FORMAT_LEFT, 80);
-	InsertColumn(3, wxT("Status"), wxLIST_FORMAT_LEFT, 80);
+	InsertColumn(3, wxT("Status"), wxLIST_FORMAT_LEFT, 70);
 	InsertColumn(4, wxT("Down Speed"), wxLIST_FORMAT_LEFT, 100);
 	InsertColumn(5, wxT("Up Speed"), wxLIST_FORMAT_LEFT, 80);
-	InsertColumn(6, wxT("ETA"), wxLIST_FORMAT_LEFT, 80);
+	InsertColumn(6, wxT("ETA"), wxLIST_FORMAT_LEFT, 60);
+	InsertColumn(7, wxT("Downloaded"), wxLIST_FORMAT_LEFT, 100);
+	InsertColumn(8, wxT("Uploaded"), wxLIST_FORMAT_LEFT, 80);
+	InsertColumn(9, wxT("Peers"), wxLIST_FORMAT_LEFT, 60);
+	InsertColumn(10, wxT("Seeds"), wxLIST_FORMAT_LEFT, 60);
+	InsertColumn(11, wxT("Copies"), wxLIST_FORMAT_LEFT, 60);
 
 	try
 	{
@@ -127,8 +133,6 @@ TransferManagerList::TransferManagerList(wxWindow* parent, wxWindowID id,
 		state_str.Add(wxString( 	wxT("allocating") 		)); 
 	} catch(std::exception&) {}
 
-	//SetColumn(7, wxT("Downloaded"), wxLIST_FORMAT_LEFT, 100);
-	//SetColumn(8, wxT("Uploaded"), wxLIST_FORMAT_LEFT, 100);
 }
 
 #ifdef __TORRENT_MANAGER_H
@@ -178,14 +182,14 @@ wxString TransferManagerList::GetTorrentItemText(long item, long column) const
 		if (column == 1) // size
 		{
 			//libtorrent::size_type total_size = h.get_torrent_info().total_size();
-			//return wxString::Format(wxT("%d"), total_size);
-			return wxT("");
+			//return wxString::Format(wxT("%f"), total_size);
+			return wxT("Unknown");
 		}
 
 		if (column == 2) // progress
 		{
 			libtorrent::size_type progress = h.status().total_done;
-			return wxString::Format(wxT("%d"), progress);
+			return wxString::Format(wxT("%f"), progress);
 		}
 
 		if (column == 3) // status
@@ -216,6 +220,38 @@ wxString TransferManagerList::GetTorrentItemText(long item, long column) const
 		if (column == 6) // ETA
 		{
 			return wxT("Unknown");
+		}
+
+		if (column == 7) // Downloaded
+		{
+			libtorrent::size_type downloaded = h.status().total_payload_download;
+			return wxString::Format(wxT("%f"), downloaded);
+		}
+
+		if (column == 8) // Uploaded
+		{
+			libtorrent::size_type uploaded = h.status().total_payload_upload;
+			return wxString::Format(wxT("%f"), uploaded);
+		}
+
+		if (column == 9) // Peers
+		{
+			int connected_peers = h.status().num_connections;
+			int total_peers = h.status().list_peers;
+			return wxString::Format(wxT("%i (%i)"), connected_peers, total_peers);
+		}
+
+		if (column == 10) // Seeds
+		{
+			int connected_seeds = h.status().num_seeds;
+			int total_seeds = h.status().list_seeds;
+			return wxString::Format(wxT("%i (%i)"), connected_seeds, total_seeds);
+		}
+		
+		if (column == 11) // num copies
+		{
+			float num_copies = h.status().distributed_copies;
+			return wxString::Format(wxT("%f"), num_copies);
 		}
 	}
 	else

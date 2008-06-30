@@ -8,8 +8,6 @@
 
 	#include <wx/progdlg.h>
 
-	#include <libtorrent/config.hpp>
-
 	#include <boost/filesystem/operations.hpp>
 	#include <boost/filesystem/convenience.hpp>
 	#include <boost/filesystem/fstream.hpp>
@@ -18,9 +16,8 @@
 	#include <boost/program_options.hpp>
 	#include <boost/regex.hpp>
 
-	#include <libtorrent/extensions/metadata_transfer.hpp>
-	#include <libtorrent/extensions/ut_metadata.hpp>
-	#include <libtorrent/extensions/ut_pex.hpp>
+	#include <libtorrent/config.hpp>
+	#include <libtorrent/version.hpp>
 
 	#include <libtorrent/entry.hpp>
 	#include <libtorrent/bencode.hpp>
@@ -29,14 +26,16 @@
 	#include <libtorrent/identify_client.hpp>
 	#include <libtorrent/alert_types.hpp>
 	#include <libtorrent/ip_filter.hpp>
+
+#if ((LIBTORRENT_VERSION_MINOR > 13) && (LIBTORRENT_VERSION_MAJOR >= 0))
 	#include <libtorrent/magnet_uri.hpp>
 	#include <libtorrent/bitfield.hpp>
+#endif
 	
 	#include <string>
 	
 	#include "TorrentCommon.h"
-	#include "TorrentTimer.h"
-	
+
 	/*
 		construct a session
 		parse torrent files and add to session; or add torrent hashs to session
@@ -56,12 +55,13 @@
 			libtorrent::session_settings settings;
 			libtorrent::session_status status;
 			download_handles_t *handles;
-			//TorrentManagerTimer *timer;
 
 			TorrentTransferManager(download_handles_t *l);
 			~TorrentTransferManager();
+
 			libtorrent::torrent_handle AddTorrent(char const* name, 
 				char const* tracker, libtorrent::sha1_hash const& hash, long index);
+
 			bool startTransfer();
 			bool cancelTransfer();
 			bool pauseTransfer();
@@ -72,6 +72,10 @@
 			bool setTransferSpeed();
 			int getSessionStatus();
 			
+			libtorrent::dht_settings dht_settings;
+			libtorrent::entry dht_state;
+			
+			int byte_kilo;
 			int listen_port;
 			float preferred_ratio;
 			int download_limit;
