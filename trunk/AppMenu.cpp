@@ -44,7 +44,7 @@ DDPSMenu::DDPSMenu() : wxMenuBar()
 	HelpMenu->Append(MENU_Legal, _T("Legal information"));
 	HelpMenu->AppendSeparator();*/
 	HelpMenu->Append(MENU_About, _T("&About"), _T("About DDPS"));
-#ifdef DEVEL_TESTING
+#ifdef DEBUG_MENU
 	wxMenu *DebugMenu = new wxMenu();
 	DebugMenu->Append(MENU_TorrentDownload, wxT("Add Torrent"));
 	DebugMenu->Append(MENU_HTTPDownload, wxT("Add HTTP Download"));
@@ -53,7 +53,7 @@ DDPSMenu::DDPSMenu() : wxMenuBar()
 	/* now we actually append the menus to the menubar */
 	Append(FileMenu, _T("&File"));
 	Append(ViewMenu, _T("&View"));
-#ifdef DEVEL_TESTING
+#ifdef DEBUG_MENU
 	Append(DebugMenu, _T("&Debug"));
 #endif
 	//Append(GamesMenu, _T("&DigiContent"));

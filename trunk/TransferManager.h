@@ -20,7 +20,7 @@
 			~TransferManager();
 			
 			void OnItemRightClick(wxListEvent &event);
-			void TransferManager::OnMenuUpdateItem(wxCommandEvent &event);
+			void OnMenuUpdateItem(wxCommandEvent &event);
 			
 			void OnContextMenu(wxContextMenuEvent &event);
 			void OnMenuAddTorrent(wxCommandEvent &event);
