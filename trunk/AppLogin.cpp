@@ -1,12 +1,50 @@
-#include "AppLogin.h"
+#include <wx/wxprec.h>
+#ifndef WX_PRECOMP
+	#include <wx/wx.h>
+#endif
 
-#include "enum.h" // needed for the MENU_Quit and etc.
+#include <wx/dialog.h>
+#include <wx/textctrl.h>
+#include <wx/statline.h>
+
+#include "AppEnum.h" // needed for the MENU_Quit and etc.
+#include "AppCommon.h"
+#include "AppLogin.h"
 
 BEGIN_EVENT_TABLE( AppLoginDialog, wxDialog )
 	EVT_BUTTON(wxID_CANCEL, AppLoginDialog::Cancel)
 	EVT_BUTTON(wxID_OK, AppLoginDialog::CheckLogin)
-	//EVT_TEXT_ENTER(TEXT_Password, AppLoginDialog::CheckLogin) // need: wxTE_PROCESS_ENTER
+	EVT_TEXT_ENTER(TEXT_Password, AppLoginDialog::CheckLogin) // need: wxTE_PROCESS_ENTER
 END_EVENT_TABLE()
+
+AppLogin::AppLogin()
+{
+	user = pass = wxT("");
+	m_login_ok = false;
+}
+
+AppLogin::~AppLogin()
+{
+	
+}
+
+bool AppLogin::DoLogin()
+{
+	if (wxGetApp().myConfig->cfg_RememberLogin)
+	{
+		user = wxGetApp().myConfig->cfg_LoginUsername;
+		pass = wxGetApp().myConfig->cfg_LoginPassword;
+		m_login_ok = true;
+	}
+	else
+	{
+		AppLoginDialog loginDlg(NULL, -1, wxT("User Login"), wxDefaultPosition, wxDefaultSize);
+		m_login_ok = loginDlg.ShowModal();
+		user = wxGetApp().myConfig->cfg_LoginUsername = loginDlg.username->GetValue();
+		pass = wxGetApp().myConfig->cfg_LoginPassword = loginDlg.password->GetValue();
+	}
+	return m_login_ok;
+}
 
 AppLoginDialog::AppLoginDialog( wxWindow * parent, wxWindowID id, const wxString & title,
                            const wxPoint & pos, const wxSize & size, long style ) 
@@ -15,9 +53,9 @@ AppLoginDialog::AppLoginDialog( wxWindow * parent, wxWindowID id, const wxString
 	wxStaticText *usernameText = new wxStaticText(this, -1, wxT("Account name"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT);
 	username = new wxTextCtrl(this, TEXT_Username, wxT(""), wxDefaultPosition, wxSize(200,20));
 	wxStaticText *passwordText = new wxStaticText(this, -1, wxT("Password"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT);
-	password = new wxTextCtrl(this, TEXT_Password, wxT(""), wxDefaultPosition, wxSize(200,20), wxTE_PASSWORD);
+	password = new wxTextCtrl(this, TEXT_Password, wxT(""), wxDefaultPosition, wxSize(200,20), wxTE_PASSWORD|wxTE_PROCESS_ENTER);
 
-	wxCheckBox *rememberPassword = new wxCheckBox(this, -1, wxT("Remember my password"), wxDefaultPosition, wxDefaultSize);
+	rememberPassword = new wxCheckBox(this, -1, wxT("Remember my password"), wxDefaultPosition, wxDefaultSize);
 	wxButton *Ok_Button = new wxButton(this, wxID_OK, wxT("Login"), wxDefaultPosition, wxDefaultSize);
 	wxButton *Cancel_Button = new wxButton(this, wxID_CANCEL, wxT("Cancel"), wxDefaultPosition, wxDefaultSize);
 
@@ -67,8 +105,7 @@ void AppLoginDialog::Cancel(wxCommandEvent& event)
 							wxString::FromAscii("Confirm"),
                             wxYES_NO, this);
   	if (answer == wxYES)
-    	EndModal(0);
-	
+		EndModal(wxID_CANCEL);
 }
 
 void AppLoginDialog::CheckLogin(wxCommandEvent& event)
@@ -100,16 +137,22 @@ void AppLoginDialog::CheckLogin(wxCommandEvent& event)
 		//}
 		//else
 		//{
+			wxGetApp().myConfig->cfg_RememberLogin = rememberPassword->GetValue();
+			wxGetApp().myConfig->cfg_LoginUsername = username->GetValue();
+			wxGetApp().myConfig->cfg_LoginPassword = password->GetValue();
+
+			EndModal(wxID_OK);
 			event.Skip();
 		//}
 	}
 	else if (answer == false)
 	{
 		wxMessageBox(wxString::FromAscii("Incorrect Login!"), wxString::FromAscii("Login Outcome?"), wxOK, this);
+		event.Skip();
 	}
 	else
 	{
 		wxMessageBox(wxString::FromAscii("Error!"),wxString::FromAscii("Bad message"), wxOK, this);
-		EndModal(0);
+		EndModal(wxID_CANCEL);
 	}
 }

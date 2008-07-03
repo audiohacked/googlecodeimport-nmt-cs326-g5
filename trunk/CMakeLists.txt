@@ -28,17 +28,19 @@ CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake
 	${CMAKE_BINARY_DIR}/config.h ESCAPE_QUOTES)
 
 SET(SRCS 
+	AppCommon.cpp
+	AppConfig.cpp
 	AppLogin.cpp
 	AppMain.cpp
 	AppMenu.cpp
 	BrowserEmbed.cpp
-	common.cpp
 	HttpManager.cpp
 	SettingsDialog.cpp
 	TorrentBencode.cpp
 	TorrentManager.cpp
 	TransferCommon.cpp
 	TransferManager.cpp
+	TransferManagerList.cpp
 	TransferTimer.cpp
 )
 

@@ -1,3 +1,18 @@
+#include <wx/wxprec.h>
+
+#ifndef WX_PRECOMP
+	#include <wx/wx.h>
+#endif
+
+#include <wx/utils.h>
+#include <wx/timer.h>
+
+#include "TransferCommon.h"
+
+#include <libtorrent/config.hpp>
+#include <libtorrent/entry.hpp>
+#include <libtorrent/session.hpp>
+
 #include "TransferManager.h"
 #include "TransferTimer.h"
 

@@ -1,13 +1,14 @@
-#include "common.h"
+#include "AppCommon.h"
 
 
-#include "enum.h" // needed for the MENU_Quit and etc.
+#include "AppEnum.h" // needed for the MENU_Quit and etc.
 
 #ifdef CHAT_ENABLED
 	#include "ChatCommon.h"
 #endif
 
 #include <wx/log.h>
+#include "AppLogin.h"
 
 /* we have here is the event table used for event handling
 	I still have no idea how this works
@@ -23,6 +24,10 @@ BEGIN_EVENT_TABLE( DDPSFrame, wxFrame )
 	EVT_MENU(MENU_Community, DDPSFrame::GotoCommunity)
 	EVT_MENU(MENU_Downloads, DDPSFrame::GotoDownloads)
 	EVT_MENU(MENU_Logout, DDPSFrame::Logout)
+	
+	EVT_MENU(MENU_TorrentDownload, DDPSFrame::OnMenuAddTorrent)
+	EVT_MENU(MENU_HTTPDownload, DDPSFrame::OnMenuAddHttpDownload)
+	
 END_EVENT_TABLE()
 
 // Event table for DDPSPanel buttons at the bottom of the program
@@ -39,6 +44,8 @@ IMPLEMENT_APP(DDPS)
 
 bool DDPS::OnInit()
 {
+	myConfig  = new DDPSConfig();
+	
 	#ifdef __DDPS_PROTOCOL_H
 		wxFileSystem::AddHandler(new wxInternetFSHandler());
 		wxFileSystem::AddHandler(new wxZipFSHandler());
@@ -77,6 +84,7 @@ bool DDPS::OnInit()
 
 int DDPS::OnExit()
 {
+	myConfig->Save();
 	delete wxLog::SetActiveTarget(NULL);
 	fclose(myLogFile);
 
@@ -95,6 +103,7 @@ void DDPSFrame::InitChat()
 DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
 : wxFrame((wxFrame*) NULL, WINDOW_Frame, title, pos, size, wxDEFAULT_FRAME_STYLE, wxT("DDPS"))
 {
+	bool LoginOk = false;
 	CreateStatusBar(3);
 	SetStatusText(wxT("Ready!"), 0);
 	DDPSMenu *menu = new DDPSMenu();
@@ -103,17 +112,14 @@ DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 #ifdef DEVEL_TESTING
 	panel->SetFocus();
 #else
-	AppLoginDialog loginDlg(this, -1, wxT("User Login"), wxDefaultPosition, wxDefaultSize);
-	if(loginDlg.ShowModal() == wxID_OK)
+	AppLogin *login = new AppLogin();
+	if(login->DoLogin())
 	{
-		DDPS &myApp = ::wxGetApp();
-		myApp.LoginUsername = loginDlg.username->GetValue();
-		myApp.LoginPassword = loginDlg.password->GetValue();
-
-		//SetStatusText(myApp.myLoginData->Username, 1);
-		//SetStatusText(myApp.myLoginData->Password, 2);
-
-		::wxLogMessage(wxT("Welcome user: ") + myApp.LoginUsername);
+		wxGetApp().LoginUsername = login->GetUsername();
+		wxGetApp().LoginPassword = login->GetPassword();
+		//SetStatusText(wxGetApp().LoginUsername, 1);
+		//SetStatusText(wxGetApp().LoginPassword, 2);
+		wxLogMessage(wxT("Welcome user: ") + wxGetApp().LoginUsername);
 
 	#ifdef CHAT_ENABLED
 		thread = new ChatConnThread();
@@ -129,6 +135,16 @@ DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 		Close(TRUE);
 	}
 #endif
+}
+
+void DDPSFrame::OnMenuAddTorrent(wxCommandEvent &event)
+{
+	panel->tabs->Downloads->OnMenuAddTorrent(event);
+}
+
+void DDPSFrame::OnMenuAddHttpDownload(wxCommandEvent &event)
+{
+	panel->tabs->Downloads->OnMenuAddHttpDownload(event);
 }
 
 void DDPSFrame::OnExit(wxCommandEvent& event)

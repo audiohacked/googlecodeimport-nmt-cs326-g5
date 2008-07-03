@@ -1,5 +1,5 @@
 //#include "ChatApp.h"
-#include "common.h"
+#include "AppCommon.h"
 #include "ChatCommon.h"
 #include "ChatMessage.h"
 #include "ChatRosterData.h"

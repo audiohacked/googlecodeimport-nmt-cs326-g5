@@ -21,6 +21,7 @@
 	#include "BrowserEmbed.h"
 	#include "TransferManager.h"
 	#include "SettingsDialog.h"
+	#include "AppConfig.h"
 	
 #ifdef CHAT_ENABLED
 	#include "ChatConnectionThread.h"
@@ -66,6 +67,10 @@
 			void GotoCommunity(wxCommandEvent& event);
 			void GotoDownloads(wxCommandEvent& event);
 			void Logout(wxCommandEvent& event);
+			
+			void OnMenuAddTorrent(wxCommandEvent& event);
+			void OnMenuAddHttpDownload(wxCommandEvent& event);
+			
 			DDPSMenu *menu;
 			DDPSPanel *panel;
 			

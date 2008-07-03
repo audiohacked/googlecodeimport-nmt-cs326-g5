@@ -2,7 +2,7 @@
 #include "ChatRosterData.h"
 #include "ChatWindow.h"
 
-#include "enum.h"
+#include AppEnum.h
 
 BEGIN_EVENT_TABLE( ChatWindowChat, wxFrame )
 	EVT_CLOSE(ChatWindowChat::OnCloseWindow)

@@ -1,8 +1,8 @@
 #include "SettingsDialog.h"
-#include "enum.h"
+#include "AppEnum.h"
 #include <stdlib.h>
 
-#include "common.h"
+#include "AppCommon.h"
 
 #define FILENAME "config.ini"
 #define BUFFER "This is the config file"
@@ -23,25 +23,26 @@ SettingsFrame::SettingsFrame(wxWindow * parent, wxWindowID id, const wxString & 
 	
 	//define download directory label and control
 	wxTextCtrl *downloadLocation = new wxTextCtrl(this, 
-		TEXT_DownloadLocation, wxT("./download-files/"), wxDefaultPosition, wxDefaultSize);
+		TEXT_DownloadLocation, wxGetApp().myConfig->cfg_download_location, wxDefaultPosition, wxDefaultSize);
 	wxStaticText* downloadLocationLabel = new wxStaticText ( this, wxID_STATIC,
     	wxT("&Download Location:"), wxDefaultPosition, wxDefaultSize, 0 );
 
 	//download/upload speed label and control
 	wxSpinCtrl* downloadSpeed = new wxSpinCtrl ( this, TEXT_DownloadSpeed,
-    	wxEmptyString, wxDefaultPosition, wxSize(60, -1),
+    	wxString::Format(wxT("%i"), wxGetApp().myConfig->cfg_download_speed), wxDefaultPosition, wxSize(60, -1),
     	wxSP_ARROW_KEYS, 0, 120, 25 );
 	wxStaticText* downloadSpeedLabel = new wxStaticText ( this, wxID_STATIC,
-    	wxT("&Max Download Speed:"), wxDefaultPosition, wxDefaultSize, 0 );
+    	wxT("&Max Download Speed (KBytes/s):"), wxDefaultPosition, wxDefaultSize, 0 );
+
 	wxSpinCtrl* uploadSpeed = new wxSpinCtrl ( this, TEXT_UploadSpeed,
-    	wxEmptyString, wxDefaultPosition, wxSize(60, -1),
+    	wxString::Format(wxT("%i"), wxGetApp().myConfig->cfg_upload_speed), wxDefaultPosition, wxSize(60, -1),
     	wxSP_ARROW_KEYS, 0, 120, 25 );
 	wxStaticText* uploadSpeedLabel = new wxStaticText ( this, wxID_STATIC,
-    	wxT("&Max Upload Speed:"), wxDefaultPosition, wxDefaultSize, 0 );
+    	wxT("&Max Upload Speed (KBytes/s):"), wxDefaultPosition, wxDefaultSize, 0 );
 	
 	//number of peers label and control
 	wxSpinCtrl* numPeers = new wxSpinCtrl ( this, TEXT_NumPeers,
-    	wxEmptyString, wxDefaultPosition, wxSize(60, -1),
+    	wxString::Format(wxT("%i"), wxGetApp().myConfig->cfg_max_peers), wxDefaultPosition, wxSize(60, -1),
     	wxSP_ARROW_KEYS, 0, 120, 25 );
 	wxStaticText* numPeersLabel = new wxStaticText ( this, wxID_STATIC,
     	wxT("&Max Number of Peers:"), wxDefaultPosition, wxDefaultSize, 0 );	
@@ -83,38 +84,10 @@ void SettingsFrame::SaveSettings(wxCommandEvent& WXUNUSED(event))
     wxSpinCtrl* uploadSpd = (wxSpinCtrl*) FindWindow(TEXT_UploadSpeed); 
     wxSpinCtrl* numPeers = (wxSpinCtrl*) FindWindow(TEXT_NumPeers); 
 
-    if (!file.Create(wxT(FILENAME)))
-    {
-    		file.Open(wxT(FILENAME));
-    		file.Clear();
-    }
-   /*size_t i = 0;
-    for (i = 0; i < file.GetLineCount(); i++)
-    {
-        file[i] = text + file[i];
-    }*/
-    file.AddLine(wxT("User configuration"));    
-    
-    if(!downloadLoc->IsEmpty())
-    {
-    	tmpString = wxString::FromAscii("DL_Loc:");
-    	tmpString << downloadLoc->GetValue();
-    	file.AddLine(tmpString);
-	}
-	
-	
-	tmpString = wxString::FromAscii("DL_Speed:");
-	tmpString << downloadSpd->GetValue();
-	file.AddLine(tmpString);
-	
-	tmpString = wxString::FromAscii("UL_Speed:");
-	tmpString << uploadSpd->GetValue();
-	file.AddLine(tmpString);
 
-	tmpString = wxString::FromAscii("NUM_Peers:");
-	tmpString << numPeers->GetValue();
-	file.AddLine(tmpString);
-	
-    file.Write();
+	wxGetApp().myConfig->cfg_download_location = downloadLoc->GetValue();
+	wxGetApp().myConfig->cfg_download_speed = downloadSpd->GetValue();
+	wxGetApp().myConfig->cfg_upload_speed = uploadSpd->GetValue();
+	wxGetApp().myConfig->cfg_max_peers = numPeers->GetValue();
     EndModal(0);
 }

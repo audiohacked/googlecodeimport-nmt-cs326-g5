@@ -1,4 +1,9 @@
-#include "common.h"
+#include <wx/wxprec.h>
+#ifndef WX_PRECOMP
+	#include <wx/wx.h>
+#endif
+
+#include "AppCommon.h"
 
 std::string wxString_to_stdString( wxString str )
 {
