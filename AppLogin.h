@@ -9,7 +9,7 @@
 	#include <wx/textctrl.h>
 	#include <wx/statline.h>
 
-	//#include "enum.h"
+	//#include AppEnum.h
 
 	class AppLoginDialog : public wxDialog
 	{
@@ -24,9 +24,25 @@
 			void CheckLogin(wxCommandEvent& event);
 			wxTextCtrl *username;
 			wxTextCtrl *password;
-			
-		
+			wxCheckBox *rememberPassword;
+
 		DECLARE_EVENT_TABLE()
 
+	};
+	
+	class AppLogin
+	{
+		public:
+			AppLogin();
+			~AppLogin();
+			bool DoLogin();
+			bool IsLoginOk() { return m_login_ok; }
+			wxString GetUsername() { return user; }
+			wxString GetPassword() { return pass; }
+			
+		private:
+			bool m_login_ok;
+			wxString user;
+			wxString pass;
 	};
 #endif //__APP_LOGIN_DLG_H

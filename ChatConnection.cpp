@@ -1,4 +1,4 @@
-#include "common.h"
+#include "AppCommon.h"
 #include "ChatCommon.h"
 #include "ChatConnection.h"
 

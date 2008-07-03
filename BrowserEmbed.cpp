@@ -1,5 +1,5 @@
 #include "BrowserEmbed.h"
-#include "enum.h"
+#include "AppEnum.h"
 
 BEGIN_EVENT_TABLE( DDPSBrowser, wxPanel )
 	EVT_BUTTON(BROWSER_Next, DDPSBrowser::OnNext)

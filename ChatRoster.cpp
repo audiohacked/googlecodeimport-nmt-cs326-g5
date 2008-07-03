@@ -1,11 +1,11 @@
 #include "ChatCommon.h"
-#include "common.h"
+#include "AppCommon.h"
 #include "ChatMessage.h"
 #include "ChatWindow.h"
 #include "ChatRosterData.h"
 #include "ChatRoster.h"
 
-#include "enum.h"
+#include AppEnum.h
 
 BEGIN_EVENT_TABLE( ChatWindowRosterPanel, wxPanel )
 	EVT_TREE_ITEM_ACTIVATED(WINDOW_RosterList, ChatWindowRosterPanel::NewChatWindow)

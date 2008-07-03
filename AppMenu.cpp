@@ -1,6 +1,6 @@
 #include "AppMenu.h"
-
-#include "enum.h"
+#include "config.h"
+#include "AppEnum.h"
 
 /* constructor for our menu bar, it returns our menu bar object */
 DDPSMenu::DDPSMenu() : wxMenuBar()
@@ -44,10 +44,18 @@ DDPSMenu::DDPSMenu() : wxMenuBar()
 	HelpMenu->Append(MENU_Legal, _T("Legal information"));
 	HelpMenu->AppendSeparator();*/
 	HelpMenu->Append(MENU_About, _T("&About"), _T("About DDPS"));
+#ifdef DEVEL_TESTING
+	wxMenu *DebugMenu = new wxMenu();
+	DebugMenu->Append(MENU_TorrentDownload, wxT("Add Torrent"));
+	DebugMenu->Append(MENU_HTTPDownload, wxT("Add HTTP Download"));
+#endif
 
 	/* now we actually append the menus to the menubar */
 	Append(FileMenu, _T("&File"));
 	Append(ViewMenu, _T("&View"));
+#ifdef DEVEL_TESTING
+	Append(DebugMenu, _T("&Debug"));
+#endif
 	//Append(GamesMenu, _T("&DigiContent"));
 	Append(HelpMenu, _T("&Help"));
 }

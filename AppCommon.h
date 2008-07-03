@@ -1,10 +1,6 @@
 #ifndef __COMMON_H
 #define __COMMON_H
-	#include <wx/wxprec.h>
-	#ifndef WX_PRECOMP
-		#include <wx/wx.h>
-	#endif
-
+	#include <wx/app.h>
 	#include "AppMain.h"
 
 	class DDPS : public wxApp
@@ -19,6 +15,7 @@
 			FILE *myLogFile;
 
 			DDPSFrame *frame;
+			DDPSConfig *myConfig;
 	};
 	
 	std::string wxString_to_stdString( wxString str );
