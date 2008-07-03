@@ -9,6 +9,7 @@ OPTION(USER_UPLOAD "Add User Upload capabilities" ON)
 OPTION(BUILTIN_BROWSER "Add the Built-in Browser Support" ON)
 OPTION(CHAT_ENABLED "Add the Built-in Chat Support" OFF)
 OPTION(DEVEL_TESTING "Skip the login routines" ON)
+OPTION(DEBUG_MENU "Enable Debug Menu for Transfer Manager" ON)
 
 SET(NEWSPAGE http://ddps.seancrazy.net/contentmanager/news CACHE STRING "Set the URL for Newspage")
 SET(HOMEPAGE http://ddps.seancrazy.net/contentmanager CACHE STRING "Set the URL for Homepage")
@@ -20,7 +21,7 @@ SET(CHAT_SERVER ddpschat.seancrazy.net CACHE STRING "Set the host for the Chat S
 SET(DDPS_VERSION "1.0")
 SET(CMAKE_FIND_LIBRARY_PREFIXES "")
 SET(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
-SET(wxWidgets_USE_LIBS base core net)
+SET(wxWidgets_USE_LIBS base core net xml)
 
 INCLUDE( ${CMAKE_ROOT}/Modules/UsePkgConfig.cmake )
 

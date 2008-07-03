@@ -9,6 +9,8 @@
 #include <wx/utils.h>
 #include <wx/sysopt.h>
 
+#include <boost/lexical_cast.hpp>
+
 #include "TorrentManager.h"
 #include "HttpManager.h"
 #include "TransferManagerList.h"

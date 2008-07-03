@@ -10,6 +10,8 @@
 	#cmakedefine CHAT_ENABLED 1
 	
 	#cmakedefine DEVEL_TESTING 1
+	
+	#cmakedefine DEBUG_MENU 1
 
 	#cmakedefine HOMEPAGE "${HOMEPAGE}"
 
