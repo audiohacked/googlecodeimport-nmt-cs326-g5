@@ -1,6 +1,6 @@
 PROJECT(wxcurl)
 
-SET(wxWidgets_USE_LIBS base core net)
+SET(wxWidgets_USE_LIBS base core net xml)
 SET(SRCS
 	src/base.cpp
 	src/dav.cpp

@@ -8,13 +8,13 @@
 #include <wx/wx.h>
 #endif
 
-#include <boost/filesystem/operations.hpp>
-#include <boost/filesystem/convenience.hpp>
-#include <boost/filesystem/fstream.hpp>
-#include <boost/filesystem/exception.hpp>
-#include <boost/bind.hpp>
-#include <boost/program_options.hpp>
-#include <boost/regex.hpp>
+//#include <boost/filesystem/operations.hpp>
+//#include <boost/filesystem/convenience.hpp>
+//#include <boost/filesystem/fstream.hpp>
+//#include <boost/filesystem/exception.hpp>
+//#include <boost/bind.hpp>
+//#include <boost/program_options.hpp>
+//#include <boost/regex.hpp>
 
 #include <libtorrent/config.hpp>
 #include <libtorrent/version.hpp>
