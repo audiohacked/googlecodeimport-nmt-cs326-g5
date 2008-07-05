@@ -18,6 +18,12 @@
 #include "TransferTimer.h"
 #include "TransferManagerList.h"
 #include "TransferManager.h"
+#include "TorrentProperties.h"
+
+/*enum
+{
+	TORRENT_Properties
+};*/
 
 BEGIN_EVENT_TABLE( TransferManager, wxPanel )
 	EVT_LIST_ITEM_RIGHT_CLICK(LIST_DownloadManager, TransferManager::OnItemRightClick)
@@ -30,6 +36,7 @@ BEGIN_EVENT_TABLE( TransferManager, wxPanel )
 	EVT_MENU(MENU_StartItem, TransferManager::OnMenuStartItem)
 	EVT_MENU(MENU_StopItem, TransferManager::OnMenuStopItem)
 	EVT_MENU(MENU_PauseItem, TransferManager::OnMenuPauseItem)
+	EVT_MENU(TORRENT_Properties, TransferManager::OnMenuTorrentProperties)
 END_EVENT_TABLE()
 
 TransferManager::TransferManager(wxWindow* parent, wxWindowID id,
@@ -123,7 +130,7 @@ void TransferManager::OnItemRightClick(wxListEvent &event)
 	ItemMenu->Append(-1, wxT("Item Queue - Move Top"));
 	ItemMenu->Append(-1, wxT("Item Queue - Move Bottom"));
 	ItemMenu->AppendSeparator();
-	ItemMenu->Append(-1, wxT("Item Properties"));
+	ItemMenu->Append(TORRENT_Properties, wxT("Item Properties"));
 	
 	PopupMenu(ItemMenu);
 }
@@ -180,4 +187,22 @@ void TransferManager::OnMenuAddHttpDownload(wxCommandEvent &event)
 	);
 	if(answer == wxOK)
 		event.Skip();
+}
+
+void TransferManager::OnMenuTorrentProperties(wxCommandEvent &event)
+{
+	if (b_ItemSelected)
+	{
+		//listDownloads->RefreshItem(m_SelectedItem);
+		libtorrent::torrent_handle h;
+		download_handles_t::const_iterator torItem = listDownloads->list.find(m_SelectedItem);
+		if (torItem->first == m_SelectedItem)
+	 		h = torItem->second.torrent_list().handle;
+
+		if (h.is_valid())
+		{
+			TorrentProperties prop(wxString(h.name().c_str(), wxConvUTF8), h);
+			prop.ShowModal();
+		}
+	}
 }

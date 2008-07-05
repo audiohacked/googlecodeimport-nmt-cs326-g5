@@ -31,6 +31,7 @@
 			void OnMenuStartItem(wxCommandEvent &event);
 			void OnMenuStopItem(wxCommandEvent &event);
 			void OnMenuPauseItem(wxCommandEvent &event);
+			void OnMenuTorrentProperties(wxCommandEvent &event);
 
 			TransferManagerList *listDownloads;
 			TransferManagerTimer *timer;

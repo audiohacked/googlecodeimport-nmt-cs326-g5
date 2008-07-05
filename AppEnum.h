@@ -65,7 +65,8 @@
 		BUTTON_Accept,
 		BUTTON_Cancel,
 		BUTTON_SendMsg,
-		LIST_DownloadManager
+		LIST_DownloadManager,
+		TORRENT_Properties
 	};
 
 #endif

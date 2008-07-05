@@ -1,4 +1,4 @@
-#include "AppCommon.h"
+#include "AppMain.h"
 #include "TorrentManager.h"
 #include "TorrentBencode.h"
 
@@ -158,7 +158,7 @@ TorrentTransferManager::AddTorrentHash(char const* name,
 	p.storage_mode = libtorrent::storage_mode_allocate;
 	p.paused = true;
 	p.duplicate_is_error = false;
-	p.auto_managed = true;
+	p.auto_managed = false;
 	libtorrent::torrent_handle h = se.add_torrent(p);
 #else
 	libtorrent::torrent_handle h = se.add_torrent(tracker, hash, name, save_path);
@@ -216,7 +216,7 @@ TorrentTransferManager::AddTorrentFile(char const* file, long index)
 	p.storage_mode = libtorrent::storage_mode_sparse;
 	p.paused = true;
 	p.duplicate_is_error = false;
-	p.auto_managed = true;
+	p.auto_managed = false;
 
 	libtorrent::torrent_handle h = se.add_torrent(p);
 

@@ -31,14 +31,17 @@ CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake
 SET(SRCS 
 	AppCommon.cpp
 	AppConfig.cpp
+	AppFrame.cpp
 	AppLogin.cpp
 	AppMain.cpp
 	AppMenu.cpp
+	AppPanel.cpp
 	BrowserEmbed.cpp
 	HttpManager.cpp
 	SettingsDialog.cpp
 	TorrentBencode.cpp
 	TorrentManager.cpp
+	TorrentProperties.cpp
 	TransferCommon.cpp
 	TransferManager.cpp
 	TransferManagerList.cpp
