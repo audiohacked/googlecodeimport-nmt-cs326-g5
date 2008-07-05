@@ -1,90 +1,26 @@
 #ifndef __APP_MAIN_H
 #define __APP_MAIN_H
-	#include <wx/wxprec.h>
-	#ifndef WX_PRECOMP
-		#include <wx/wx.h>
-	#endif
 
-	#include <wx/utils.h>
-	#include <wx/choicebk.h>
-
-	#include <wx/notebook.h>
-	#include <wx/panel.h>
-	#include <wx/aboutdlg.h>
-	#include <wx/generic/aboutdlgg.h>
-	#include <wx/treectrl.h>
-	
-	#include "config.h"
-
-	#include "AppMenu.h"
-	#include "AppLogin.h"
-	#include "BrowserEmbed.h"
-	#include "TransferManager.h"
-	#include "SettingsDialog.h"
+	#include <wx/app.h>
+	#include <wx/string.h>
+	#include "AppFrame.h"
 	#include "AppConfig.h"
-	
-#ifdef CHAT_ENABLED
-	#include "ChatConnectionThread.h"
-	#include "ChatRoster.h"
-	#include "ChatMessage.h"
-#endif
-	
 
-	class DDPSTabbed : public wxNotebook
+	class DDPS : public wxApp
 	{
 		public:
-			DDPSTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size, long style);
-			DDPSBrowser *Home;
-			DDPSBrowser *Community;
-			TransferManager *Downloads;
-	};
-	
-	class DDPSPanel : public wxPanel
-	{
-		public:
-			DDPSPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size, long style);
+			virtual bool OnInit();
+			virtual int OnExit();
 
-			void GotoNewsTab(wxCommandEvent&);
-			void GotoSupport(wxCommandEvent&);
-			void GotoHomepage(wxCommandEvent& event);
-			void GotoCommunity(wxCommandEvent& event);
-			void GotoDownloads(wxCommandEvent& event);
-			void ChatRosterOpen(wxCommandEvent& event);
-			DDPSTabbed *tabs;
-			
-			DECLARE_EVENT_TABLE()
-	};
-	
-	class DDPSFrame : public wxFrame
-	{
-		public:
-			DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
-			void OnExit( wxCommandEvent &event);
-			void AboutBox(wxCommandEvent &event);
-			void SettingsDialog(wxCommandEvent &event);
-			void GoToSupportPanel(wxCommandEvent &event);
-			void GotoHomepage(wxCommandEvent& event);
-			void GotoCommunity(wxCommandEvent& event);
-			void GotoDownloads(wxCommandEvent& event);
-			void Logout(wxCommandEvent& event);
-			
-			void OnMenuAddTorrent(wxCommandEvent& event);
-			void OnMenuAddHttpDownload(wxCommandEvent& event);
-			
-			DDPSMenu *menu;
-			DDPSPanel *panel;
-			
-#ifdef CHAT_ENABLED
-			void InitChat();
-			wxTreeCtrl *rosterList;
-			ChatConnThread *thread;
-			ChatWindowRoster *chat;
-			ChatRoster *rosterListener;
-			ChatMsgSess *cMsg;
-			//ChatAccount *cAccount;
-#endif
+			wxString LoginUsername;
+			wxString LoginPassword;
 		
-		DECLARE_EVENT_TABLE()
+			FILE *myLogFile;
+
+			DDPSFrame *frame;
+			DDPSConfig *myConfig;
 	};
+	
+	DECLARE_APP(DDPS)
 
 #endif

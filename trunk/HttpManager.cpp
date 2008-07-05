@@ -1,5 +1,5 @@
 #include "HttpManager.h"
-#include "AppCommon.h"
+#include "AppMain.h"
 
 HttpTransferManager::HttpTransferManager(download_handles_t *l)
 {

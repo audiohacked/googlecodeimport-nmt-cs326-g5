@@ -23,15 +23,15 @@ class SettingsFrame : public wxDialog
 	              const wxPoint & pos = wxDefaultPosition,
 	              const wxSize & size = wxDefaultSize,
 	              long style = wxDEFAULT_DIALOG_STYLE);
-		wxTextCtrl *downloadLocation;
-		wxStaticText* downloadLocationLabel;
-		wxSpinCtrl *downloadSpeed;
-		wxStaticText* downloadSpeedLabel;
-		wxWindow *wParent;
-		
+
 		void OnAccept( wxCommandEvent &event);
 		void OnCancel(wxCommandEvent &event);
 		void SaveSettings(wxCommandEvent& event);
+
+		wxTextCtrl *downloadLocation;
+		wxSpinCtrl *downloadSpeed;
+		wxSpinCtrl* uploadSpeed;
+		wxSpinCtrl* numPeers;
 
 		DECLARE_EVENT_TABLE()
 };

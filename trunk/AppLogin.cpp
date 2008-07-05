@@ -8,7 +8,7 @@
 #include <wx/statline.h>
 
 #include "AppEnum.h" // needed for the MENU_Quit and etc.
-#include "AppCommon.h"
+#include "AppMain.h"
 #include "AppLogin.h"
 
 BEGIN_EVENT_TABLE( AppLoginDialog, wxDialog )
