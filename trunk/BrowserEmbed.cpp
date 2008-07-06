@@ -92,7 +92,7 @@ void DDPSBrowser::BeforeLoad(wxMozillaBeforeLoadEvent &myEvent)
 #endif
 void DDPSBrowser::OnPrev(wxCommandEvent& event)
 {
-	printf("OnPrev..\n");
+	wxLogDebug(wxT("OnPrev..\n"));
 	if (browser->CanGoBack())
 	{
 		browser->GoBack();		
@@ -100,7 +100,7 @@ void DDPSBrowser::OnPrev(wxCommandEvent& event)
 }
 void DDPSBrowser::OnNext(wxCommandEvent& event)
 {
-	printf("OnNext..\n");
+	wxLogDebug(wxT("OnNext..\n"));
 	if ( browser->CanGoForward() )
 	{
 		browser->GoForward();
@@ -108,7 +108,7 @@ void DDPSBrowser::OnNext(wxCommandEvent& event)
 }
 void DDPSBrowser::OnStop(wxCommandEvent& event)
 {
-	printf("OnStop..\n");
+	wxLogDebug(wxT("OnStop..\n"));
 	#ifndef __WXMAC__
 	if ( browser->IsBusy() )
 	{
@@ -120,7 +120,7 @@ void DDPSBrowser::OnStop(wxCommandEvent& event)
 }
 void DDPSBrowser::OnRefresh(wxCommandEvent& event)
 {
-	printf("OnRefresh..\n");
+	wxLogDebug(wxT("OnRefresh..\n"));
 	#ifndef __WXMAC__
 	if ( !browser->IsBusy() )
 	{
@@ -133,12 +133,12 @@ void DDPSBrowser::OnRefresh(wxCommandEvent& event)
 
 void DDPSBrowser::OnHome(wxCommandEvent& event)
 {
-	printf("OnHome..\n");
+	wxLogDebug(wxT("OnHome..\n"));
 	browser->LoadURL(home);
 }
 
 void DDPSBrowser::GotoHomepage(void)
 {
-	printf("GotoHomepage..\n");
+	wxLogDebug(wxT("GotoHomepage..\n"));
 	browser->LoadURL(home);	
 }
