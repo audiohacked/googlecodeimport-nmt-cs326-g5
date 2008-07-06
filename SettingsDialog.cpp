@@ -29,20 +29,23 @@ SettingsFrame::SettingsFrame(wxWindow * parent, wxWindowID id, const wxString & 
 
 	//download/upload speed label and control
 	downloadSpeed = new wxSpinCtrl ( this, TEXT_DownloadSpeed,
-		wxEmptyString, wxDefaultPosition, wxSize(60, -1),
+		wxString::Format(wxT("%d"), wxGetApp().myConfig->cfg_download_speed ),
+		wxDefaultPosition, wxSize(60, -1),
 		wxSP_ARROW_KEYS, -1, 5000, wxGetApp().myConfig->cfg_download_speed );
 	wxStaticText* downloadSpeedLabel = new wxStaticText ( this, wxID_STATIC,
 		wxT("&Max Download Speed (KBytes/s):"), wxDefaultPosition, wxDefaultSize, 0 );
 
 	uploadSpeed = new wxSpinCtrl ( this, TEXT_UploadSpeed,
-		wxEmptyString, wxDefaultPosition, wxSize(60, -1),
+		wxString::Format(wxT("%d"), wxGetApp().myConfig->cfg_upload_speed ),
+		wxDefaultPosition, wxSize(60, -1),
 		wxSP_ARROW_KEYS, -1, 5000, wxGetApp().myConfig->cfg_upload_speed );
 	wxStaticText* uploadSpeedLabel = new wxStaticText ( this, wxID_STATIC,
 		wxT("&Max Upload Speed (KBytes/s):"), wxDefaultPosition, wxDefaultSize, 0 );
 	
 	//number of peers label and control
 	numPeers = new wxSpinCtrl ( this, TEXT_NumPeers,
-		wxEmptyString, wxDefaultPosition, wxSize(60, -1),
+		wxString::Format(wxT("%d"), wxGetApp().myConfig->cfg_max_peers ),
+		wxDefaultPosition, wxSize(60, -1),
 		wxSP_ARROW_KEYS, -1, 5000, wxGetApp().myConfig->cfg_max_peers );
 	wxStaticText* numPeersLabel = new wxStaticText ( this, wxID_STATIC,
 		wxT("&Max Number of Peers:"), wxDefaultPosition, wxDefaultSize, 0 );	

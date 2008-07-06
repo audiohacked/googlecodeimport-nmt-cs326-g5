@@ -12,12 +12,13 @@
 
 	enum
 	{
+		MENU_Quit = wxID_EXIT,
+		MENU_About = wxID_ABOUT,
 		WINDOW_RosterList = wxID_HIGHEST + 1,
 		WINDOW_Frame,
 		MENU_Logout,
 		MENU_Update,
 		MENU_Settings,
-		MENU_Quit,
 		MENU_Mini,
 		MENU_Messenger,
 		MENU_Bandwidth,
@@ -31,7 +32,6 @@
 		MENU_SystemInfo,
 		MENU_Privacy,
 		MENU_Legal,
-		MENU_About,
 		MENU_TorrentDownload,
 		MENU_HTTPDownload,
 		MENU_UpdateItem,

@@ -9,12 +9,15 @@
 	#include "ChatCommon.h"
 #endif
 #include "AppFrame.h"
+#include "AppUpdate.h"
 #include "AppMain.h"
 
 IMPLEMENT_APP(DDPS)
 
 bool DDPS::OnInit()
 {
+	wxUpdateWebUpdaterIfRequired();
+	
 	myConfig  = new DDPSConfig();
 	
 	#ifdef __DDPS_PROTOCOL_H
@@ -34,10 +37,6 @@ bool DDPS::OnInit()
 	wxLogStderr *LogFile = new wxLogStderr(myLogFile);
 	wxLog::SetActiveTarget(LogFile);
 
-	#ifdef __WXMAC__
-	wxApp::s_macAboutMenuItemId = MENU_About;
-	#endif
-	
 	#ifdef __WXMAC__
 	//wxApp::s_macPreferencesMenuItemId = PreferencesID;
 	#endif
