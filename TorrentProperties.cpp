@@ -69,7 +69,9 @@ TorrentProperties::~TorrentProperties()
 void TorrentProperties::TorrentInformation()
 {
 	tor_header_info = new wxStaticText(this, -1, wxT("Torrent Information"));
-
+	wxFont f(*wxNORMAL_FONT);
+	f.SetWeight(wxFONTWEIGHT_BOLD);
+	tor_header_info->SetFont(f);
 
 	tor_name_label = new wxStaticText(this, -1, wxT("Name: "));
 	tor_name = new wxStaticText(this, -1, wxString(handle.name().c_str(), wxConvUTF8));
@@ -123,6 +125,9 @@ void TorrentProperties::TorrentInformation()
 void TorrentProperties::TorrentCreator()
 {
 	tor_header_creator = new wxStaticText(this, -1, wxT("Created By"));
+	wxFont f(*wxNORMAL_FONT);
+	f.SetWeight(wxFONTWEIGHT_BOLD);
+	tor_header_creator->SetFont(f);
 
 	tor_creator_label = new wxStaticText(this, -1, wxT("Creator: "));
 	tor_creator = new wxStaticText(this, -1, wxT("N/A"));

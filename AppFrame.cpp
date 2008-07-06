@@ -201,7 +201,7 @@ void DDPSFrame::OnIconize(wxIconizeEvent& event)
 void DDPSFrame::OnUpdateCheck(wxCommandEvent &)
 {
 	wxUpdateAndExit(this, TRUE, TRUE, wxEmptyString, wxEmptyString, wxEmptyString, 
- 						wxT("http://wxcode.sourceforge.net/components/webupdate/script2.xml"));
+ 						wxT("http://" UPDATEURL "/updates.xml"));
 }
 
 void DDPSFrame::OnLocalCheck(wxCommandEvent &)
@@ -210,6 +210,7 @@ void DDPSFrame::OnLocalCheck(wxCommandEvent &)
  	// a path relative to the local.xml file
  	// (for te --xml and --xrc option, a path relative to the 
   	//  WebUpdater executable location must be used)
-	wxUpdateAndExit(this, TRUE, TRUE, wxEmptyString, wxEmptyString, wxEmptyString, 
- 						wxT("file:../../../website/script3.xml"));
+
+	//wxUpdateAndExit(this, TRUE, TRUE, wxEmptyString, wxEmptyString, wxEmptyString, 
+ 	//					wxT("file:../../../website/script3.xml"));
 }
