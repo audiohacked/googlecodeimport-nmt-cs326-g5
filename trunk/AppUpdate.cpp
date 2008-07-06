@@ -1,45 +1,63 @@
+#include <wx/wxprec.h>
+#ifndef WX_PRECOMP
+	#include <wx/wx.h>
+#endif
+#include <wx/textfile.h>
+#include <wx/filename.h>
+
 #include "AppUpdate.h"
 
-#include <wx/protocol/http.h>
-#include <wx/ffile.h>
- 
-//[...]
-        // progress bar with 100 units ... declared as wxGauge progress;
-	progress = new wxGauge(this, ID_Progress, 100, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL);
-//[...]
- 
-bool GetUpdate::DownloadUpdate()
+/* 
+   THESE ARE THE ONLY REAL MODIFICATION REQUIRED TO INTEGRATE WEBUPDATER
+   IN YOUR PROGRAM USING IT IN THE SIMPLEST WAY (SEE WEBUPDATER DOCS)
+*/
+
+// call this in the event handler used to show the wxWebUpdateDlg
+void wxUpdateAndExit(wxFrame *caller, 
+					bool savelog = FALSE,
+     				bool restart = TRUE,
+     				const wxString &xrc = wxEmptyString, 	// --xrc option won't be given using wxEmptyString
+         			const wxString &res = wxEmptyString,	// --res option won't be given using wxEmptyString
+            		const wxString &xml = wxEmptyString,	// --xml option won't be given using wxEmptyString
+         			const wxString &uri = wxEmptyString)	// --uri option won't be given using wxEmptyString
 {
-	wxHTTP http;
-	http.SetTimeout(120);
-	#ifdef UPDATEURL
-	http.Connect(wxT(UPDATEURL));
-	#else
-	http.Connect(wxT("updateddps.seancrazy.net"));
-	#endif
-	wxInputStream *httpStream = http.GetInputStream(_T("/file.exe"));
+	wxString opts;
  
-	if (http.GetError() == wxPROTO_NOERR)
-	{
-		size_t chunks     = 100;
-		size_t chunkSize  = httpStream->GetSize() / chunks;
-		char *fileContent = new char[chunkSize];
- 
-		wxFFile file(_T("file.exe"), _T("wb"));
- 
-		for (size_t i = 0; i <= chunks; i++)
-		{
-			progress->SetValue(i * 100/chunks);
-			httpStream->Read(fileContent, chunkSize);
- 
-			file.Write(fileContent, httpStream->LastRead());
-		}
-		file.Flush();
- 
-		wxDELETE(fileContent);
+ 	if (savelog)
+  		opts += wxT(" --savelog");
+    if (restart)
+    	opts += wxT(" --restart");
+    if (!xrc.IsEmpty())
+     	opts += wxT(" --xrc=") + xrc;
+    if (!res.IsEmpty())
+    	opts += wxT(" --res=") + res;
+ 	if (!xml.IsEmpty())
+  		opts += wxT(" --xml=") + xml;
+ 	if (!uri.IsEmpty())
+  		opts += wxT(" --uri=") + uri;
+
+#ifdef __WXMSW__
+	wxExecute(wxT("DDPS-Updater.exe") + opts);
+#elif __WXMAC__
+	wxExecute(wxT("./DDPS-Updater.app/Contents/MacOS/DDPS-Updater") + opts);
+#else	
+	wxExecute(wxT("./DDPS-Updater") + opts);
+#endif
+	caller->Close(true);
+}
+
+// to be called in your wxApp::OnInit()
+void wxUpdateWebUpdaterIfRequired()
+{
+#ifdef __WXMSW__
+	wxString newupdater = wxT("_webupdater.exe"), oldupdater = wxT("webupdater.exe");
+#elif __WXMAC__
+	wxString newupdater = wxT("webupdater.app/Contents/MacOS/_webupdater"), oldupdater = wxT("webupdater.app/Contents/MacOS/webupdater");
+#else
+	wxString newupdater = wxT("_webupdater"), oldupdater = wxT("webupdater");	
+#endif
+	if (wxFileName::FileExists(newupdater)) {
+		wxRemoveFile(oldupdater);
+		wxRenameFile(newupdater, oldupdater);
 	}
- 
-	http.Close();
-	wxDELETE(httpStream);
-	return true;
 }

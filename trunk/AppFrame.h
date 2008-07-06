@@ -28,6 +28,9 @@
 			void OnMenuAddHttpDownload(wxCommandEvent& event);
 			void OnIconize(wxIconizeEvent& event);
 			
+			void OnUpdateCheck(wxCommandEvent& event);
+			void OnLocalCheck(wxCommandEvent& event);
+			
 			DDPSMenu *menu;
 			DDPSPanel *panel;
 			

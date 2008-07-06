@@ -16,9 +16,9 @@ DDPSMenu::DDPSMenu() : wxMenuBar()
 		third is the text we see in the status bar of the window
 		*/
 	FileMenu->Append(MENU_Logout, _T("Logout..."), _T("Logout/Login or Change user.."));
-	//FileMenu->Append(MENU_Update, _T("Check for app updates"), _T("Check online for latest version of App"));
+	FileMenu->Append(MENU_Update, _T("Check for app updates"), _T("Check online for latest version of App"));
 	//FileMenu->AppendSeparator(); // add a horizontal separator
-	FileMenu->Append(MENU_Settings, _T("Settings"), _T("Configure DDPS Settings"));
+	//FileMenu->Append(MENU_Settings, _T("Settings"), _T("Configure DDPS Settings"));
 	//FileMenu->AppendSeparator();
 	FileMenu->Append(MENU_Quit, _T("E&xit\tCtrl-Q"), _T("Exit demo"));
 
@@ -43,7 +43,8 @@ DDPSMenu::DDPSMenu() : wxMenuBar()
 	HelpMenu->Append(MENU_Privacy, _T("Privacy policy"));
 	HelpMenu->Append(MENU_Legal, _T("Legal information"));
 	HelpMenu->AppendSeparator();*/
-	HelpMenu->Append(MENU_About, _T("&About"), _T("About DDPS"));
+	HelpMenu->Append(MENU_About, _T("&About DDPS"), _T("About DDPS"));
+
 #ifdef DEBUG_MENU
 	wxMenu *DebugMenu = new wxMenu();
 	DebugMenu->Append(MENU_TorrentDownload, wxT("Add Torrent"));

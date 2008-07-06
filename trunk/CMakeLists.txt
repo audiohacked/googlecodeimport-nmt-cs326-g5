@@ -1,6 +1,7 @@
 PROJECT( DDPS )
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
+#CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 SET(BUILD_SHARED_LIBS ON)
 
@@ -28,6 +29,10 @@ INCLUDE( ${CMAKE_ROOT}/Modules/UsePkgConfig.cmake )
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake
 	${CMAKE_BINARY_DIR}/config.h ESCAPE_QUOTES)
 
+#SET(MYDEF "-DwxUSE_HTTPENGINE")
+#SET(MYDEF "${MYDEF} -DwxUSE_DIALUP_MANAGER")
+#ADD_DEFINITIONS(-DwxUSE_DIALUP_MANAGER)
+
 SET(SRCS 
 	AppCommon.cpp
 	AppConfig.cpp
@@ -36,6 +41,7 @@ SET(SRCS
 	AppMain.cpp
 	AppMenu.cpp
 	AppPanel.cpp
+	AppUpdate.cpp
 	BrowserEmbed.cpp
 	HttpManager.cpp
 	SettingsDialog.cpp
@@ -47,6 +53,11 @@ SET(SRCS
 	TransferManagerList.cpp
 	TransferTimer.cpp
 )
+
+SET(UPDATESRCS
+	webupdate/app/webapp.cpp
+	webupdate/app/webupdatedlg.cpp
+	)
 
 FIND_PACKAGE(wxWidgets)
 
@@ -131,6 +142,12 @@ IF(wxWidgets_FOUND)
 		#SET(CMAKE_CONFIGURATION_TYPES Release)
 	ELSE(WIN32)
 		IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+			SET(MACOSX_EXTRAS_UPDATE webupdate/libwebupdate.dylib)
+			SET(MACOSX_EXTRAS 
+				libtorrent/libtorrent.dylib
+				wxCURL/libwxcurl.dylib
+				${MACOSX_EXTRAS_UPDATE}
+			)
 			SET(MACOSX_BUNDLE_INFO_STRING "")
 			SET(MACOSX_BUNDLE_ICON_FILE "${CMAKE_SOURCE_DIR}/contrib/ddps.icns")
 			SET(MACOSX_BUNDLE_GUI_IDENTIFIER "")
@@ -139,7 +156,10 @@ IF(wxWidgets_FOUND)
 			SET(MACOSX_BUNDLE_SHORT_VERSION_STRING "")
 			SET(MACOSX_BUNDLE_BUNDLE_VERSION "${DDPS_VERSION}")
 			SET(MACOSX_BUNDLE_COPYRIGHT "Copyright 2008 Sean Nelson, Corey Brown, Joshua Barron, Adam Troemne")
-			#SET_SOURCE_FILES_PROPERTIES(apple1_aux1 PROPERTIES MACOSX_PACKAGE_LOCATION MacOSX)
+			SET_SOURCE_FILES_PROPERTIES(
+				${MACOSX_EXTRAS}
+				PROPERTIES
+				MACOSX_PACKAGE_LOCATION MacOS)
 			#SET_SOURCE_FILES_PROPERTIES(apple1_res1 PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
 			SET(GUI_TYPE MACOSX_BUNDLE)
 		ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
@@ -171,11 +191,13 @@ IF(wxWidgets_FOUND)
 	LINK_DIRECTORIES(SHARED
 		${LINK_DIRECTORIES}
 		/opt/local/lib
+		/usr/lib
 	)
 	INCLUDE_DIRECTORIES(
 		${INCLUDE_DIRECTORIES}
 		libtorrent/include
 		libtorrent/include/libtorrent
+		webupdate/include
 	)
 	
 	SUBDIRS(wxCURL)
@@ -184,14 +206,33 @@ IF(wxWidgets_FOUND)
 	INCLUDE_DIRECTORIES(
 		${INCLUDE_DIRECTORIES}
 		${CURL_INCLUDE_DIR}
-		wxCURL/include)
+		wxCURL/include
+		contrib
+		)
 	LINK_DIRECTORIES(SHARED
 		${LINK_DIRECTORIES}
 		${CURL_LINK_DIR})
 	
-	ADD_EXECUTABLE(DDPS ${GUI_TYPE} ${SRCS})
+	ADD_EXECUTABLE(
+		DDPS
+		${GUI_TYPE}
+		${SRCS}
+		${MACOSX_EXTRAS}
+		)
 	TARGET_LINK_LIBRARIES(DDPS torrent curl wxcurl ${wxMoz_LIB} ${wxWidgets_LIBRARIES} ${gloox_LIB})
- 
+
+	#SET_SOURCE_FILES_PROPERTIES(${UPDATESRCS}
+		#PROPERTIES
+		#COMPILE_FLAGS "-DwxUSE_DIALUP_MANAGER=1")
+
+	SUBDIRS(webupdate)
+	ADD_EXECUTABLE(
+		DDPS-Updater
+		${GUI_TYPE}
+		${UPDATESRCS}
+		${MACOSX_EXTRAS_UPDATE}) 
+	TARGET_LINK_LIBRARIES(DDPS-Updater webupdate ${wxWidgets_LIBRARIES})
+	
 ELSE(wxWidgets_FOUND)
 	MESSAGE("wxWidgets not found!")
 ENDIF(wxWidgets_FOUND)

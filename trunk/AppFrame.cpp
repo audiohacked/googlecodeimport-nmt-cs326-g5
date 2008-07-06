@@ -31,7 +31,14 @@
 #include "AppEnum.h" // needed for the MENU_Quit and etc.
 #include "AppLogin.h"
 #include "AppMain.h"
+
+#include "AppUpdate.h"
+
 #include "AppFrame.h"
+
+#if !defined(__WXMSW__) && !defined(__WXPM__)
+    #include "ddps.xpm"
+#endif
 
 // Event Table for frame - used for menu
 BEGIN_EVENT_TABLE( DDPSFrame, wxFrame )
@@ -49,6 +56,8 @@ BEGIN_EVENT_TABLE( DDPSFrame, wxFrame )
 	EVT_MENU(MENU_TorrentDownload, DDPSFrame::OnMenuAddTorrent)
 	EVT_MENU(MENU_HTTPDownload, DDPSFrame::OnMenuAddHttpDownload)
 	
+	EVT_MENU(MENU_Update, DDPSFrame::OnUpdateCheck)
+	//EVT_MENU(Minimal_LocalCheck, MyFrame::OnLocalCheck)
 END_EVENT_TABLE()
 
 #ifdef CHAT_ENABLED
@@ -63,6 +72,8 @@ void DDPSFrame::InitChat()
 DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
 : wxFrame((wxFrame*) NULL, WINDOW_Frame, title, pos, size, wxDEFAULT_FRAME_STYLE, wxT("DDPS"))
 {
+	SetIcon(wxICON(ddps));
+    
 	bool LoginOk = false;
 	CreateStatusBar(3);
 	SetStatusText(wxT("Ready!"), 0);
@@ -184,4 +195,21 @@ void DDPSFrame::OnIconize(wxIconizeEvent& event)
 	{
 		this->Show(TRUE);
 	}
+}
+
+
+void DDPSFrame::OnUpdateCheck(wxCommandEvent &)
+{
+	wxUpdateAndExit(this, TRUE, TRUE, wxEmptyString, wxEmptyString, wxEmptyString, 
+ 						wxT("http://wxcode.sourceforge.net/components/webupdate/script2.xml"));
+}
+
+void DDPSFrame::OnLocalCheck(wxCommandEvent &)
+{
+	// for --uri option you must use an absolute path or 
+ 	// a path relative to the local.xml file
+ 	// (for te --xml and --xrc option, a path relative to the 
+  	//  WebUpdater executable location must be used)
+	wxUpdateAndExit(this, TRUE, TRUE, wxEmptyString, wxEmptyString, wxEmptyString, 
+ 						wxT("file:../../../website/script3.xml"));
 }
