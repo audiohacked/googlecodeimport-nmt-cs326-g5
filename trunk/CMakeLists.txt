@@ -12,26 +12,35 @@ OPTION(CHAT_ENABLED "Add the Built-in Chat Support" OFF)
 OPTION(DEVEL_TESTING "Skip the login routines" ON)
 OPTION(DEBUG_MENU "Enable Debug Menu for Transfer Manager" ON)
 
-SET(NEWSPAGE http://ddps.seancrazy.net/contentmanager/news CACHE STRING "Set the URL for Newspage")
-SET(HOMEPAGE http://ddps.seancrazy.net/contentmanager CACHE STRING "Set the URL for Homepage")
-SET(SUPPORTPAGE http://ddps.seancrazy.net/contentmanager/support CACHE STRING "Set the URL for Supportpage")
-SET(COMMUNITYPAGE http://ddps.seancrazy.net/contentmanager/community CACHE STRING "Set the URL for Community Portal")
+SET(NEWSPAGE
+	http://ddps.seancrazy.net/news
+	CACHE STRING "Set the URL for Newspage")
+SET(HOMEPAGE
+	http://ddps.seancrazy.net/
+	CACHE STRING "Set the URL for Homepage")
+SET(SUPPORTPAGE
+	http://ddps.seancrazy.net/support 
+	CACHE STRING "Set the URL for Supportpage")
+SET(COMMUNITYPAGE
+	http://ddps.seancrazy.net/community
+	CACHE STRING "Set the URL for Community Portal")
 SET(UPDATEURL updateddps.seancrazy.net CACHE STRING "Set the URL for AutoUpdate")
 SET(CHAT_SERVER ddpschat.seancrazy.net CACHE STRING "Set the host for the Chat Server")
 
 SET(DDPS_VERSION "1.0")
+SET(DDPS_UPDATE_VERSION "1.0")
 SET(CMAKE_FIND_LIBRARY_PREFIXES "")
 SET(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
 SET(wxWidgets_USE_LIBS base core net xml)
+
+SUBDIRS(libtorrent)
+SUBDIRS(wxCURL)
+SUBDIRS(webupdate)
 
 INCLUDE( ${CMAKE_ROOT}/Modules/UsePkgConfig.cmake )
 
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake
 	${CMAKE_BINARY_DIR}/config.h ESCAPE_QUOTES)
-
-#SET(MYDEF "-DwxUSE_HTTPENGINE")
-#SET(MYDEF "${MYDEF} -DwxUSE_DIALUP_MANAGER")
-#ADD_DEFINITIONS(-DwxUSE_DIALUP_MANAGER)
 
 SET(SRCS 
 	AppCommon.cpp
@@ -54,12 +63,65 @@ SET(SRCS
 	TransferTimer.cpp
 )
 
-SET(UPDATESRCS
+SET(UPDATE_SRCS
 	webupdate/app/webapp.cpp
 	webupdate/app/webupdatedlg.cpp
+	webupdate/app/app.rc
+	webupdate/app/app.xpm
+	webupdate/app/www.xpm
 	)
 
+PKGCONFIG(libcurl CURL_INCLUDE_DIR CURL_LINK_DIR CURL_LINK_FLAGS CURL_CFLAGS)
 FIND_PACKAGE(wxWidgets)
+FIND_PACKAGE(Boost)
+
+INCLUDE_DIRECTORIES(
+	${CMAKE_SOURCE_DIR}
+	${CMAKE_BINARY_DIR}
+	${CURL_INCLUDE_DIR}
+	contrib
+	libtorrent/include
+	libtorrent/include/libtorrent
+	webupdate/include
+	webupdate/app/
+	wxCURL/include
+)
+
+LINK_DIRECTORIES(SHARED
+	${CURL_LINK_DIR}
+	/opt/local/lib
+	/usr/lib
+)
+
+IF(WIN32)
+	SET(GUI_TYPE WIN32)
+	SET(SRCS ${SRCS} ${CMAKE_SOURCE_DIR}/contrib/ddps.rc)
+ELSE(UNIX)
+	IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+		SET(GUI_TYPE MACOSX_BUNDLE)
+	ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+ENDIF(WIN32)
+
+IF(wxWidgets_FOUND)
+
+	INCLUDE(
+		${INCLUDE}
+		${wxWidgets_USE_FILE}
+	)
+
+	INCLUDE_DIRECTORIES(
+		${INCLUDE_DIRECTORIES}
+		${wxWidgets_INCLUDE_DIRS}
+	)
+ENDIF(wxWidgets_FOUND)
+
+IF(Boost_FOUND)
+	INCLUDE_DIRECTORIES(
+		${INCLUDE_DIRECTORIES}
+		${Boost_INCLUDE_DIRS})
+	LINK_DIRECTORIES(SHARED ${LINK_DIRECTORIES} ${Boost_LIBRARY_DIRS})
+ENDIF(Boost_FOUND)
+
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	#MESSAGE("Using wxWebKitCtrl instead of wxMoz")
@@ -72,167 +134,75 @@ ELSE(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	ELSE(${USE_WXMOZ} MATCHES "shipped")
 		PKGCONFIG(wxmozilla WXMOZ_INCLUDE_DIR WXMOZ_LINK_DIR WXMOZ_LINK_FLAGS WXMOZ_CFLAGS)
 		INCLUDE_DIRECTORIES(
+			${INCLUDE_DIRECTORIES}
 			${WXMOZ_INCLUDE_DIR}
 		)
 		LINK_DIRECTORIES(SHARED
+			${LINK_DIRECTORIES}
 			${WXMOZ_LINK_DIR}
 		)
 		SET(wxMoz_LIB "")
 	ENDIF(${USE_WXMOZ} MATCHES "shipped")
 ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
-SET(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} ${WXMOZ_LINK_FLAGS})
+IF(${CHAT_ENABLED} MATCHES ON)
+	SUBDIRS(gloox/src)
 
-IF(wxWidgets_FOUND)
-
-	FIND_PACKAGE(Boost)
-	IF(${Boost_FOUND})
-		INCLUDE_DIRECTORIES(
-			${INCLUDE_DIRECTORIES}
-			${Boost_INCLUDE_DIRS})
-		LINK_DIRECTORIES(SHARED ${LINK_DIRECTORIES} ${Boost_LIBRARY_DIRS})
-	ENDIF(${Boost_FOUND})
-
-	INCLUDE(
-		${wxWidgets_USE_FILE}
+	SET(SRCS ${SRCS}
+		### Chat
+		ChatCommon.cpp
+		ChatConnection.cpp
+		ChatConnectionThread.cpp
+		ChatMessage.cpp
+		ChatRoster.cpp
+		ChatWindow.cpp
+		ChatRosterData.cpp
 	)
 
 	INCLUDE_DIRECTORIES(
 		${INCLUDE_DIRECTORIES}
-		${CMAKE_SOURCE_DIR}
-		${CMAKE_BINARY_DIR}
-		${wxWidgets_INCLUDE_DIRS}
+		"gloox/src"
 	)
-	IF(WIN32)
-		SET(GUI_TYPE WIN32)
-		SET(SRCS ${SRCS} ${CMAKE_SOURCE_DIR}/contrib/ddps.rc)
-		
-		INCLUDE_DIRECTORIES(
-			${INCLUDE_DIRECTORIES}
-			${CMAKE_SOURCE_DIR}/contrib/includes
-		)
 
-		LINK_LIBRARIES(
-			embed_base_s.lib
-			xpcom.lib
-			xul.lib
-			profdirserviceprovider_s.lib
-			nspr4.lib
-			plc4.lib
-			plds4.lib
-			wxbase28.lib
-			wxbase28_net.lib
-			wxbase28_xml.lib
-			wxmsw28_adv.lib
-			wxmsw28_aui.lib
-			wxmsw28_core.lib
-			wxmsw28_html.lib
-			wxmsw28_media.lib
-			wxmsw28_qa.lib
-			wxmsw28_richtext.lib
-			wxmsw28_xrc.lib
-			wxtiff.lib
-			wxjpeg.lib
-			wxpng.lib
-			wxzlib.lib
-			wxregex.lib
-			wxexpat.lib
-			wxmozilla_lib.lib
-		)
-		#SET(CMAKE_CONFIGURATION_TYPES Release)
-	ELSE(WIN32)
-		IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-			SET(MACOSX_EXTRAS_UPDATE webupdate/libwebupdate.dylib)
-			SET(MACOSX_EXTRAS 
-				libtorrent/libtorrent.dylib
-				wxCURL/libwxcurl.dylib
-				${MACOSX_EXTRAS_UPDATE}
-			)
-			SET(MACOSX_BUNDLE_INFO_STRING "")
-			SET(MACOSX_BUNDLE_ICON_FILE "${CMAKE_SOURCE_DIR}/contrib/ddps.icns")
-			SET(MACOSX_BUNDLE_GUI_IDENTIFIER "")
-			SET(MACOSX_BUNDLE_LONG_VERSION_STRING "")
-			SET(MACOSX_BUNDLE_BUNDLE_NAME "${PROJECT_NAME}")
-			SET(MACOSX_BUNDLE_SHORT_VERSION_STRING "")
-			SET(MACOSX_BUNDLE_BUNDLE_VERSION "${DDPS_VERSION}")
-			SET(MACOSX_BUNDLE_COPYRIGHT "Copyright 2008 Sean Nelson, Corey Brown, Joshua Barron, Adam Troemne")
-			SET_SOURCE_FILES_PROPERTIES(
-				${MACOSX_EXTRAS}
-				PROPERTIES
-				MACOSX_PACKAGE_LOCATION MacOS)
-			#SET_SOURCE_FILES_PROPERTIES(apple1_res1 PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
-			SET(GUI_TYPE MACOSX_BUNDLE)
-		ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-	ENDIF(WIN32)
+	SET(gloox_LIB gloox)
+ENDIF(${CHAT_ENABLED} MATCHES ON)
 
-	IF(${CHAT_ENABLED} MATCHES ON)
-		SET(SRCS ${SRCS}
-			### Chat
-			ChatCommon.cpp
-			ChatConnection.cpp
-			ChatConnectionThread.cpp
-			ChatMessage.cpp
-			ChatRoster.cpp
-			ChatWindow.cpp
-			ChatRosterData.cpp
-		)
+SET(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} ${WXMOZ_LINK_FLAGS} ${CURL_LINK_FLAGS})
 
-		SUBDIRS(gloox/src)
 
-		INCLUDE_DIRECTORIES(
-			${INCLUDE_DIRECTORIES}
-			"gloox/src"
-		)
+IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+	SET(MACOSX_EXTRAS_UPDATE webupdate/libwebupdate.dylib)
+	SET(MACOSX_BUNDLE_INFO_STRING "")
+	#SET(MACOSX_BUNDLE_ICON_FILE "${CMAKE_SOURCE_DIR}/contrib/ddps-update.icns")
+	SET(MACOSX_BUNDLE_GUI_IDENTIFIER "")
+	SET(MACOSX_BUNDLE_LONG_VERSION_STRING "")
+	SET(MACOSX_BUNDLE_BUNDLE_NAME "${PROJECT_NAME}-Updater")
+	SET(MACOSX_BUNDLE_SHORT_VERSION_STRING "")
+	SET(MACOSX_BUNDLE_BUNDLE_VERSION "${DDPS_UPDATE_VERSION}")
+	SET(MACOSX_BUNDLE_COPYRIGHT "Copyright 2008 Sean Nelson")
+#	#SET_SOURCE_FILES_PROPERTIES(${MACOSX_EXTRAS_UPDATE} PROPERTIES MACOSX_PACKAGE_LOCATION MacOS)
+ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+ADD_EXECUTABLE(DDPS-Updater ${GUI_TYPE} ${UPDATE_SRCS}) 
+TARGET_LINK_LIBRARIES(DDPS-Updater webupdate ${wxWidgets_LIBRARIES})
 
-		SET(gloox_LIB gloox)
-	ENDIF(${CHAT_ENABLED} MATCHES ON)
 
-	SUBDIRS(libtorrent)
-	LINK_DIRECTORIES(SHARED
-		${LINK_DIRECTORIES}
-		/opt/local/lib
-		/usr/lib
+IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+	SET(MACOSX_EXTRAS_UPDATE webupdate/libwebupdate.dylib)
+	SET(MACOSX_EXTRAS 
+		libtorrent/libtorrent.dylib
+		wxCURL/libwxcurl.dylib
+		${MACOSX_EXTRAS_UPDATE}
 	)
-	INCLUDE_DIRECTORIES(
-		${INCLUDE_DIRECTORIES}
-		libtorrent/include
-		libtorrent/include/libtorrent
-		webupdate/include
-	)
-	
-	SUBDIRS(wxCURL)
-	PKGCONFIG(libcurl CURL_INCLUDE_DIR CURL_LINK_DIR CURL_LINK_FLAGS CURL_CFLAGS)
-	SET(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} ${CURL_LINK_FLAGS})
-	INCLUDE_DIRECTORIES(
-		${INCLUDE_DIRECTORIES}
-		${CURL_INCLUDE_DIR}
-		wxCURL/include
-		contrib
-		)
-	LINK_DIRECTORIES(SHARED
-		${LINK_DIRECTORIES}
-		${CURL_LINK_DIR})
-	
-	ADD_EXECUTABLE(
-		DDPS
-		${GUI_TYPE}
-		${SRCS}
-		${MACOSX_EXTRAS}
-		)
-	TARGET_LINK_LIBRARIES(DDPS torrent curl wxcurl ${wxMoz_LIB} ${wxWidgets_LIBRARIES} ${gloox_LIB})
-
-	#SET_SOURCE_FILES_PROPERTIES(${UPDATESRCS}
-		#PROPERTIES
-		#COMPILE_FLAGS "-DwxUSE_DIALUP_MANAGER=1")
-
-	SUBDIRS(webupdate)
-	ADD_EXECUTABLE(
-		DDPS-Updater
-		${GUI_TYPE}
-		${UPDATESRCS}
-		${MACOSX_EXTRAS_UPDATE}) 
-	TARGET_LINK_LIBRARIES(DDPS-Updater webupdate ${wxWidgets_LIBRARIES})
-	
-ELSE(wxWidgets_FOUND)
-	MESSAGE("wxWidgets not found!")
-ENDIF(wxWidgets_FOUND)
+	SET(MACOSX_BUNDLE_INFO_STRING "")
+	SET(MACOSX_BUNDLE_ICON_FILE "${CMAKE_SOURCE_DIR}/contrib/ddps2.icns")
+	SET(MACOSX_BUNDLE_GUI_IDENTIFIER "")
+	SET(MACOSX_BUNDLE_LONG_VERSION_STRING "")
+	SET(MACOSX_BUNDLE_BUNDLE_NAME "${PROJECT_NAME}")
+	SET(MACOSX_BUNDLE_SHORT_VERSION_STRING "")
+	SET(MACOSX_BUNDLE_BUNDLE_VERSION "${DDPS_VERSION}")
+	SET(MACOSX_BUNDLE_COPYRIGHT 
+		"Copyright 2008 Sean Nelson, Corey Brown, Joshua Barron, Adam Troemne")
+	#SET_SOURCE_FILES_PROPERTIES(${MACOSX_EXTRAS} PROPERTIES MACOSX_PACKAGE_LOCATION MacOS)
+ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+ADD_EXECUTABLE(DDPS ${GUI_TYPE} ${SRCS})
+TARGET_LINK_LIBRARIES(DDPS torrent curl wxcurl ${wxMoz_LIB} ${wxWidgets_LIBRARIES} ${gloox_LIB})
