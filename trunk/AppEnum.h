@@ -44,6 +44,7 @@
 		BROWSER_Stop,
 		BROWSER_Refresh,
 		BROWSER_Home,
+		BROWSER_WebView,
 		TABB_News,
 		TABB_Settings,
 		TABB_Support,

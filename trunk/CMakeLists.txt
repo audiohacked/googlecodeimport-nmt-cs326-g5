@@ -11,6 +11,7 @@ OPTION(BUILTIN_BROWSER "Add the Built-in Browser Support" ON)
 OPTION(CHAT_ENABLED "Add the Built-in Chat Support" OFF)
 OPTION(DEVEL_TESTING "Skip the login routines" ON)
 OPTION(DEBUG_MENU "Enable Debug Menu for Transfer Manager" ON)
+OPTION(USE_WEBKIT "Enable use of wxWebKit for Browser" OFF)
 
 SET(NEWSPAGE
 	http://ddps.seancrazy.net/news
@@ -27,8 +28,8 @@ SET(COMMUNITYPAGE
 SET(UPDATEURL updateddps.seancrazy.net CACHE STRING "Set the URL for AutoUpdate")
 SET(CHAT_SERVER ddpschat.seancrazy.net CACHE STRING "Set the host for the Chat Server")
 
-SET(DDPS_VERSION "1.0")
-SET(DDPS_UPDATE_VERSION "1.0")
+SET(DDPS_VERSION "1.0.0")
+SET(DDPS_UPDATE_VERSION "1.0.0")
 SET(CMAKE_FIND_LIBRARY_PREFIXES "")
 SET(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
 SET(wxWidgets_USE_LIBS base core net xml)
@@ -99,16 +100,19 @@ IF(WIN32)
 ELSE(UNIX)
 	IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 		SET(GUI_TYPE MACOSX_BUNDLE)
+		SET(USE_WEBKIT ON)
 	ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 ENDIF(WIN32)
 
-IF(wxWidgets_FOUND)
+IF(${USE_WEBKIT} MATCHES ON)
+	SET(WEBKIT_LIBS wxwebkit)
+ENDIF(${USE_WEBKIT} MATCHES ON)
 
+IF(wxWidgets_FOUND)
 	INCLUDE(
 		${INCLUDE}
 		${wxWidgets_USE_FILE}
 	)
-
 	INCLUDE_DIRECTORIES(
 		${INCLUDE_DIRECTORIES}
 		${wxWidgets_INCLUDE_DIRS}
@@ -161,7 +165,7 @@ IF(${CHAT_ENABLED} MATCHES ON)
 
 	INCLUDE_DIRECTORIES(
 		${INCLUDE_DIRECTORIES}
-		"gloox/src"
+		gloox/src
 	)
 
 	SET(gloox_LIB gloox)
@@ -205,4 +209,4 @@ IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	#SET_SOURCE_FILES_PROPERTIES(${MACOSX_EXTRAS} PROPERTIES MACOSX_PACKAGE_LOCATION MacOS)
 ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 ADD_EXECUTABLE(DDPS ${GUI_TYPE} ${SRCS})
-TARGET_LINK_LIBRARIES(DDPS torrent curl wxcurl ${wxMoz_LIB} ${wxWidgets_LIBRARIES} ${gloox_LIB})
+TARGET_LINK_LIBRARIES(DDPS torrent curl wxcurl ${wxMoz_LIB} ${wxWidgets_LIBRARIES} ${gloox_LIB} ${WEBKIT_LIBS})
