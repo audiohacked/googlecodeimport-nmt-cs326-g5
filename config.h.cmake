@@ -2,16 +2,18 @@
 #define __CONFIG_H
 
 	#cmakedefine COMMUNITY_PORTAL 1
-	
+
 	#cmakedefine BUILTIN_BROWSER 1
 
 	#cmakedefine USER_UPLOAD 1
-	
+
 	#cmakedefine CHAT_ENABLED 1
-	
+
 	#cmakedefine DEVEL_TESTING 1
-	
+
 	#cmakedefine DEBUG_MENU 1
+
+	#cmakedefine USE_WEBKIT 1
 
 	#cmakedefine HOMEPAGE "${HOMEPAGE}"
 
@@ -20,9 +22,9 @@
 	#cmakedefine COMMUNITYPAGE "${COMMUNITYPAGE}"
 
 	#cmakedefine NEWSPAGE "${NEWSPAGE}"
-	
+
 	#cmakedefine UPDATEURL "${UPDATEURL}"
-	
+
 	#cmakedefine CHAT_SERVER "${CHAT_SERVER}"
-	
+
 #endif
