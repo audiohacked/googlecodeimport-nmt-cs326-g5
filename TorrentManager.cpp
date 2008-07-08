@@ -70,7 +70,8 @@ TorrentTransferManager::TorrentTransferManager(download_handles_t *l)
 	se.listen_on(std::make_pair(wxGetApp().myConfig->cfg_listen_port, wxGetApp().myConfig->cfg_listen_port+10));
 	se.set_settings(settings);
 	
-	se.set_severity_level(libtorrent::alert::info);
+	//se.set_severity_level(libtorrent::alert::info);
+	se.set_alert_mask(libtorrent::alert::all_categories);
 
 #if ((LIBTORRENT_VERSION_MINOR > 13) && (LIBTORRENT_VERSION_MAJOR >= 0))
 	wxFile ses_state_file_handle(wxT(".ses_state"));
@@ -118,6 +119,9 @@ TorrentTransferManager::TorrentTransferManager(download_handles_t *l)
 	//se.add_dht_router(std::make_pair(std::string("router.utorrent.com"), 6881));
 	//se.add_dht_router(std::make_pair(std::string("router.bitcomet.com"), 554));
 	*/
+	
+	alert_timer = new TorrentAlertTimer(se);
+	alert_timer->start();
 }
 
 TorrentTransferManager::~TorrentTransferManager()

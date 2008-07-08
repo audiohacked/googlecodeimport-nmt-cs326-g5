@@ -32,7 +32,7 @@ SET(DDPS_VERSION "1.0.0")
 SET(DDPS_UPDATE_VERSION "1.0.0")
 SET(CMAKE_FIND_LIBRARY_PREFIXES "")
 SET(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
-SET(wxWidgets_USE_LIBS base core net xml)
+SET(wxWidgets_USE_LIBS base core net xml xrc)
 
 SUBDIRS(libtorrent)
 SUBDIRS(wxCURL)
@@ -55,6 +55,7 @@ SET(SRCS
 	BrowserEmbed.cpp
 	HttpManager.cpp
 	SettingsDialog.cpp
+	TorrentAlertTimer.cpp
 	TorrentBencode.cpp
 	TorrentManager.cpp
 	TorrentProperties.cpp

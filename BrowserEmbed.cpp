@@ -86,15 +86,12 @@ void DDPSBrowser::BeforeLoad(wxWebViewBeforeLoadEvent &event)
 		} 
 		else if (url.GetServer() == wxString::FromAscii("torrentDownload"))
 		{
-			wxGetApp().frame->panel->tabs->Downloads->listDownloads->AddTorrentFileDownload(
-				"original.torrent"
-			);
-			//wxString name = url.GetPath().AfterFirst("/").BeforeFirst("/");
-			wxString hash = url.GetPath().AfterFirst(wxChar("/")).BeforeFirst(wxChar("@"));
-			wxString tracker = url.GetPath().AfterFirst(wxChar("@"));
+			wxGetApp().frame->panel->tabs->Downloads->listDownloads->AddTorrentFileDownload("original.torrent");
+			wxString hash = url.GetPath().AfterFirst(wxChar('/')).BeforeFirst(wxChar('@'));
+			wxString tracker = url.GetPath().AfterFirst(wxChar('@'));
 			wxLogDebug(wxT("DDPS Protocol Torrent Hash -- ") + hash);
 			wxLogDebug(wxT("DDPS Protocol Torrent Tracker -- ") + tracker);
-			//wParent->Downloads->listDownloads->AddTorrentDownload( name, tracker, hash );
+			//wxGetApp().frame->panel->tabs->Downloads->listDownloads->AddTorrentDownload( hash.mb_str(), tracker.mb_str(), hash.mb_str() );
 			event.Cancel();
 		}
 		else if (url.GetServer() == wxString::FromAscii("httpDownload"))
@@ -109,7 +106,7 @@ void DDPSBrowser::BeforeLoad(wxWebViewBeforeLoadEvent &event)
 
 void DDPSBrowser::OnPrev(wxCommandEvent& event)
 {
-	wxLogDebug(wxT("OnPrev..\n"));
+	wxLogDebug(wxT("OnPrev.."));
 	if (browser->CanGoBack())
 	{
 		browser->GoBack();		
@@ -117,7 +114,7 @@ void DDPSBrowser::OnPrev(wxCommandEvent& event)
 }
 void DDPSBrowser::OnNext(wxCommandEvent& event)
 {
-	wxLogDebug(wxT("OnNext..\n"));
+	wxLogDebug(wxT("OnNext.."));
 	if ( browser->CanGoForward() )
 	{
 		browser->GoForward();
@@ -125,7 +122,7 @@ void DDPSBrowser::OnNext(wxCommandEvent& event)
 }
 void DDPSBrowser::OnStop(wxCommandEvent& event)
 {
-	wxLogDebug(wxT("OnStop..\n"));
+	wxLogDebug(wxT("OnStop.."));
 #ifndef __WXMAC__
 	if ( browser->IsBusy() )
 	{
@@ -137,7 +134,7 @@ void DDPSBrowser::OnStop(wxCommandEvent& event)
 }
 void DDPSBrowser::OnRefresh(wxCommandEvent& event)
 {
-	wxLogDebug(wxT("OnRefresh..\n"));
+	wxLogDebug(wxT("OnRefresh.."));
 #ifndef __WXMAC__
 	if ( !browser->IsBusy() )
 	{
@@ -150,12 +147,12 @@ void DDPSBrowser::OnRefresh(wxCommandEvent& event)
 
 void DDPSBrowser::OnHome(wxCommandEvent& event)
 {
-	wxLogDebug(wxT("OnHome..\n"));
+	wxLogDebug(wxT("OnHome.."));
 	browser->LoadURL(home);
 }
 
 void DDPSBrowser::GotoHomepage(void)
 {
-	wxLogDebug(wxT("GotoHomepage..\n"));
+	wxLogDebug(wxT("GotoHomepage.."));
 	browser->LoadURL(home);	
 }

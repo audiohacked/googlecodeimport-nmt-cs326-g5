@@ -3,6 +3,7 @@
 
 	#include <libtorrent/session.hpp>
 	#include "TorrentCommon.h"
+	#include "TorrentAlertTimer.h"
 
 	/*
 		construct a session
@@ -23,6 +24,7 @@
 			libtorrent::session_settings settings;
 			libtorrent::session_status status;
 			download_handles_t *handles;
+			TorrentAlertTimer *alert_timer;
 
 			TorrentTransferManager(download_handles_t *l);
 			~TorrentTransferManager();
