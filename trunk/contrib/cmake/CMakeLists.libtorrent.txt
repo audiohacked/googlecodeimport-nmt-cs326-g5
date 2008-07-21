@@ -11,6 +11,7 @@ SET(SRCS
 	src/disk_io_thread.cpp
 	src/entry.cpp
 	src/enum_net.cpp
+	src/error_code.cpp
 	src/escape_string.cpp
 	src/file_pool.cpp
 	src/file_storage.cpp
