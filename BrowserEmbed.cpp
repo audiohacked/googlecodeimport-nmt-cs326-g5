@@ -86,12 +86,12 @@ void DDPSBrowser::BeforeLoad(wxWebViewBeforeLoadEvent &event)
 		} 
 		else if (url.GetServer() == wxString::FromAscii("torrentDownload"))
 		{
-			wxGetApp().frame->panel->tabs->Downloads->listDownloads->AddTorrentFileDownload("original.torrent");
+			//wxGetApp().frame->panel->tabs->Downloads->listDownloads->AddTorrentFileDownload("original.torrent");
 			wxString hash = url.GetPath().AfterFirst(wxChar('/')).BeforeFirst(wxChar('@'));
 			wxString tracker = url.GetPath().AfterFirst(wxChar('@'));
-			wxLogDebug(wxT("DDPS Protocol Torrent Hash -- ") + hash);
-			wxLogDebug(wxT("DDPS Protocol Torrent Tracker -- ") + tracker);
-			//wxGetApp().frame->panel->tabs->Downloads->listDownloads->AddTorrentDownload( hash.mb_str(), tracker.mb_str(), hash.mb_str() );
+			//wxLogDebug(wxT("DDPS Protocol Torrent Hash -- ") + hash);
+			//wxLogDebug(wxT("DDPS Protocol Torrent Tracker -- ") + tracker);
+			wxGetApp().frame->panel->tabs->Downloads->listDownloads->AddTorrentDownload( hash.mb_str(), tracker.mb_str(), hash.mb_str() );
 			event.Cancel();
 		}
 		else if (url.GetServer() == wxString::FromAscii("httpDownload"))

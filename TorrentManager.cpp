@@ -8,14 +8,6 @@
 #include <wx/wx.h>
 #endif
 
-//#include <boost/filesystem/operations.hpp>
-//#include <boost/filesystem/convenience.hpp>
-//#include <boost/filesystem/fstream.hpp>
-//#include <boost/filesystem/exception.hpp>
-//#include <boost/bind.hpp>
-//#include <boost/program_options.hpp>
-//#include <boost/regex.hpp>
-
 #include <libtorrent/config.hpp>
 #include <libtorrent/version.hpp>
 
@@ -37,7 +29,7 @@
 #include "TorrentCommon.h"
 
 #include <libtorrent/extensions/metadata_transfer.hpp>
-//#include <libtorrent/extensions/ut_pex.hpp>
+#include <libtorrent/extensions/ut_pex.hpp>
 #include <libtorrent/extensions/ut_metadata.hpp>
 
 int byte_kilo = 1000;
@@ -58,7 +50,7 @@ TorrentTransferManager::TorrentTransferManager(download_handles_t *l)
 	se.start_natpmp();
 	se.start_lsd();
 	
-	//se.add_extension(&libtorrent::create_ut_pex_plugin);
+	se.add_extension(&libtorrent::create_ut_pex_plugin);
 	se.add_extension(&libtorrent::create_metadata_plugin);
 	se.add_extension(&libtorrent::create_ut_metadata_plugin);
 
@@ -89,9 +81,9 @@ TorrentTransferManager::TorrentTransferManager(download_handles_t *l)
 #endif
 
 
-	/*dht_settings.max_peers_reply=20;
+	dht_settings.max_peers_reply=wxGetApp().myConfig->cfg_max_peers;
 	dht_settings.search_branching=5;
-	dht_settings.service_port=listen_port;
+	dht_settings.service_port=wxGetApp().myConfig->cfg_listen_port;
 	dht_settings.max_fail_count=3;
 	se.set_dht_settings(dht_settings);
 
@@ -107,18 +99,17 @@ TorrentTransferManager::TorrentTransferManager(download_handles_t *l)
 		}
 		else
 		{
-			//se.start_dht();
+			se.start_dht();
 		}
 	}
 	else
 	{
-		//se.start_dht();
+		se.start_dht();
 	}
 
-	//se.add_dht_router(std::make_pair(std::string("router.bittorrent.com"), 6881));
-	//se.add_dht_router(std::make_pair(std::string("router.utorrent.com"), 6881));
-	//se.add_dht_router(std::make_pair(std::string("router.bitcomet.com"), 554));
-	*/
+	se.add_dht_router(std::make_pair(std::string("router.bittorrent.com"), 6881));
+	se.add_dht_router(std::make_pair(std::string("router.utorrent.com"), 6881));
+	se.add_dht_router(std::make_pair(std::string("router.bitcomet.com"), 554));
 	
 	alert_timer = new TorrentAlertTimer(se);
 	alert_timer->start();

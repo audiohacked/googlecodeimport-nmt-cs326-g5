@@ -67,7 +67,7 @@ static const wxString state_str[] = {
 
 TransferManagerList::TransferManagerList(wxWindow* parent, wxWindowID id,
 	const wxPoint& pos=wxDefaultPosition, const wxSize& size=wxDefaultSize,
-	long style=wxLC_REPORT|wxLC_VIRTUAL) : wxListCtrl(parent, id, pos, size, style)
+	long style=wxLC_REPORT|wxLC_VIRTUAL|wxLC_SINGLE_SEL) : wxListCtrl(parent, id, pos, size, style)
 {
 	listIndex = 0;
 
