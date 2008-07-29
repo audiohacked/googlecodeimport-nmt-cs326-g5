@@ -27,7 +27,7 @@ SET(SRCS
 	src/logger.cpp
 	src/lsd.cpp
 	src/magnet_uri.cpp
-	src/mapped_storage.cpp
+#	src/mapped_storage.cpp
 	src/natpmp.cpp
 	src/parse_url.cpp
 	src/peer_connection.cpp
