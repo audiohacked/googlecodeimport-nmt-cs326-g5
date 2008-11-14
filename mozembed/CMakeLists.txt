@@ -2,6 +2,7 @@ PROJECT( mozembed )
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
+CMAKE_POLICY(SET CMP0005 NEW)
 SET(BUILD_SHARED_LIBS ON)
 SET(wxWidgets_USE_LIBS base core net)
 
@@ -14,80 +15,41 @@ SET(mozembed_SRCS
 	wx/wxMozProfile.cpp 
 )
 
-SET(mozebmed_HDRS
+SET(mozembed_HDRS
 	common/embed.h
 )
 
 FIND_PACKAGE(wxWidgets)
-#PKG_CHECK_MODULES(MOZ libxul libxul-embedding-unstable mozilla-js gtk+2.0)
 
-IF(WIN32)
-	SET(XPCOM_INCLUDE_DIRS "C:\\wxMozilla\\mozilla\\include")
-	SET(XPCOM_LIBRARY_DIRS "C:\\wxMozilla\\mozilla\\lib")
-ELSE(WIN32)
-#	IF(${MOZ_USE} MATCHES "FF")
-#		PKG_CHECK_MODULES(XPCOM firefox-xpcom)
-#	ENDIF(${MOZ_USE} MATCHES "FF")
-	
-#	IF(${MOZ_USE} MATCHES "XUL")
-		PKG_CHECK_MODULES(XPCOM libxul)
-#	ENDIF(${MOZ_USE} MATCHES "XUL")
+PKG_CHECK_MODULES(EMBED REQUIRED libxul libxul-embedding-unstable mozilla-js)
+FIND_PACKAGE(GTK)
 
-#	IF(${MOZ_USE} MATCHES "MOZ")
-#		PKG_CHECK_MODULES(XPCOM mozilla-xpcom)
-#	ENDIF(${MOZ_USE} MATCHES "MOZ")
+SET(mozembed_CFLAGS "${EMBED_CFLAGS_OTHER} ${GTK_CFLAGS_OTHER}" CACHE STRING "CXX Flags for mozembed")
 
-	FIND_PACKAGE(GTK)
-#	PKG_CHECK_MODULES(GTK gtk+-2.0)
-ENDIF(WIN32)
-
-IF(wxWidgets_FOUND)
-	
-	ADD_DEFINITIONS( -DMOZILLA_INTERNAL_API -DMOZILLA_HOME='"${XPCOM_PREFIX}"' )
-	
-	IF(WIN32)
-		LINK_LIBRARIES(embed_base_s)
-	ENDIF(WIN32)
-
-
-#	IF(UNIX)
-#		IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-#			LINK_LIBRARIES()
-#		ELSE(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-#			LINK_LIBRARIES(gtkembedmoz)
-#		ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-#	ENDIF(UNIX)
-	
-
-	SET(CMAKE_CXX_FLAGS "${XPCOM_CFLAGS} ${GTK_CFLAGS}")
+IF(wxWidgets_FOUND AND EMBED_FOUND)
+	SET(CMAKE_CXX_FLAGS "-fshort-wchar -DXPCOM_GLUE -DXP_UNIX -DJS_THREADSAFE")
 	INCLUDE(${wxWidgets_USE_FILE})
 	INCLUDE_DIRECTORIES(
 		${wxWidgets_INCLUDE_DIRS}
 		${GTK_INCLUDE_DIRS}
-		${XPCOM_INCLUDE_DIRS}		
+		${EMBED_INCLUDE_DIRS}
+		common
+		wx
 	)
 
 	LINK_DIRECTORIES(
-		${XPCOM_LIBRARY_DIRS}
+		${LINK_DIRECTORIES}
+		${EMBED_LIBRARY_DIRS}
 	)
 
 	LINK_LIBRARIES(
 		${LINK_LIBRARIES}
-		${XPCOM_LIBRARIES}
-		#xpcom
-		#nspr4
-		#plds4
-		#plc4
+		${EMBED_LIBRARIES}
 	)
 	
-	ADD_LIBRARY(mozebmed ${mozebmed_SRCS} ${mozebmed_HDRS})
-	TARGET_LINK_LIBRARIES(mozebmed ${XPCOM_LDFLAGS} ${wxWidgets_LIBRARIES} ${GTK_LDFLAGS})
+	ADD_LIBRARY(mozembed ${mozembed_SRCS} ${mozembed_HDRS})
+	TARGET_LINK_LIBRARIES(mozembed ${EMBED_LDFLAGS} ${wxWidgets_LIBRARIES} ${GTK_LDFLAGS})
 
-ELSE(wxWidgets_FOUND)
+ELSE(wxWidgets_FOUND AND EMBED_FOUND)
 	MESSAGE("wxWidgets not found!")
-ENDIF(wxWidgets_FOUND)
-
-#MOZ_CFLAGS=-DMOZ_DLL_SUFFIX="\".so\"" `pkg-config --cflags libxul libxul-embedding-unstable mozilla-js`
-#MOZ_LIBS=`pkg-config --libs libxul libxul-embedding-unstable mozilla-js`
-#CFLAGS=-fno-rtti -I../common $(MOZ_CFLAGS) `wx-config --unicode --cxxflags` `pkg-config --cflags gtk+-2.0` 
-#LDFLAGS=`wx-config --libs core` $(MOZ_LIBS)
+ENDIF(wxWidgets_FOUND AND EMBED_FOUND)

@@ -21,11 +21,7 @@
 			void OnStop(wxCommandEvent& event);
 			void OnRefresh(wxCommandEvent& event);
 			void OnHome(wxCommandEvent& event);
-			#ifndef __WXMAC__
-			void BeforeLoad(wxMozillaBeforeLoadEvent &event);
-			#else
-			void BeforeLoad(wxWebViewBeforeLoadEvent &event);
-			#endif
+			void BeforeLoad(wxCommandEvent &event);
 
 			DECLARE_EVENT_TABLE()			
 	};
