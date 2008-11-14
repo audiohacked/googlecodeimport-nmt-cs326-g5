@@ -37,10 +37,6 @@ SET(CMAKE_FIND_LIBRARY_PREFIXES "")
 SET(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
 SET(wxWidgets_USE_LIBS base core net xml xrc)
 
-SUBDIRS(libtorrent)
-SUBDIRS(wxCURL)
-SUBDIRS(webupdate)
-
 INCLUDE( ${CMAKE_ROOT}/Modules/FindPkgConfig.cmake )
 
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake
@@ -83,7 +79,20 @@ FIND_PACKAGE(wxWidgets)
 #SET(Boost_USE_MULTITHREAD OFF)
 FIND_PACKAGE(Boost)
 
+
+
+SUBDIRS(libtorrent)
+SUBDIRS(wxCURL)
+SUBDIRS(webupdate)
+
+SUBDIRS(mozembed)
+INCLUDE_DIRECTORIES(mozembed/wx)
+SET(wxMoz_LIB mozembed)
+
+
+
 INCLUDE_DIRECTORIES(
+	${INCLUDE_DIRECTORIES}
 	${CMAKE_SOURCE_DIR}
 	${CMAKE_BINARY_DIR}
 	${CURL_INCLUDE_DIRS}
@@ -140,9 +149,9 @@ ENDIF(Boost_FOUND)
 #ELSE(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 #	SET(USE_WXMOZ shipped CACHE SRING "Select system or shipped wxMozilla library")
 #	IF(${USE_WXMOZ} MATCHES "shipped")
-		SUBDIRS(mozembed)
-		INCLUDE_DIRECTORIES(mozembed)
-		SET(wxMoz_LIB mozembed)
+#		SUBDIRS(mozembed)
+#		INCLUDE_DIRECTORIES(mozembed)
+#		SET(wxMoz_LIB mozembed)
 #	ELSE(${USE_WXMOZ} MATCHES "shipped")
 #		PKG_CHECK_MODULES(WXMOZ wxmozilla)
 #		INCLUDE_DIRECTORIES(

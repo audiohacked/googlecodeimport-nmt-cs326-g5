@@ -8,7 +8,7 @@
 	
 	#include <wx/listctrl.h>
 
-	#include "HttpManager.h"
+	//#include "HttpManager.h"
 	#include "TransferTimer.h"
 	#include "TransferManagerList.h"
 	

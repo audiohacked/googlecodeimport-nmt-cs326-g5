@@ -8,8 +8,8 @@
 
 	#include <wx/notebook.h>
 	#include <wx/panel.h>
-	#include <wx/aboutdlg.h>
-	#include <wx/generic/aboutdlgg.h>
+	//#include <wx/aboutdlg.h>
+	//#include <wx/generic/aboutdlgg.h>
 	#include <wx/treectrl.h>
 	
 	#include "config.h"

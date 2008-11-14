@@ -2,6 +2,7 @@
 #define __WXMOZVIEW_H__
 
 #include <wx/wx.h>
+#include <wx/validate.h>
 
 class wxMozViewListener;
 class nsIInterfaceRequestor;
