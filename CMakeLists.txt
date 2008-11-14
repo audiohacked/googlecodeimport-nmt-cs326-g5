@@ -135,27 +135,27 @@ IF(Boost_FOUND)
 ENDIF(Boost_FOUND)
 
 
-IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+#IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	#MESSAGE("Using wxWebKitCtrl instead of wxMoz")
-ELSE(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-	SET(USE_WXMOZ shipped CACHE SRING "Select system or shipped wxMozilla library")
-	IF(${USE_WXMOZ} MATCHES "shipped")
-		SUBDIRS(wxMoz)
-		INCLUDE_DIRECTORIES(wxMoz)
-		SET(wxMoz_LIB wxMoz)
-	ELSE(${USE_WXMOZ} MATCHES "shipped")
-		PKG_CHECK_MODULES(WXMOZ wxmozilla)
-		INCLUDE_DIRECTORIES(
-			${INCLUDE_DIRECTORIES}
-			${WXMOZ_INCLUDE_DIRS}
-		)
-		LINK_DIRECTORIES(SHARED
-			${LINK_DIRECTORIES}
-			${WXMOZ_LIBRARY_DIRS}
-		)
-		SET(wxMoz_LIB "")
-	ENDIF(${USE_WXMOZ} MATCHES "shipped")
-ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+#ELSE(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+#	SET(USE_WXMOZ shipped CACHE SRING "Select system or shipped wxMozilla library")
+#	IF(${USE_WXMOZ} MATCHES "shipped")
+		SUBDIRS(mozembed)
+		INCLUDE_DIRECTORIES(mozembed)
+		SET(wxMoz_LIB mozembed)
+#	ELSE(${USE_WXMOZ} MATCHES "shipped")
+#		PKG_CHECK_MODULES(WXMOZ wxmozilla)
+#		INCLUDE_DIRECTORIES(
+#			${INCLUDE_DIRECTORIES}
+#			${WXMOZ_INCLUDE_DIRS}
+#		)
+#		LINK_DIRECTORIES(SHARED
+#			${LINK_DIRECTORIES}
+#			${WXMOZ_LIBRARY_DIRS}
+#		)
+#		SET(wxMoz_LIB "")
+#	ENDIF(${USE_WXMOZ} MATCHES "shipped")
+#ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
 IF(${CHAT_ENABLED} MATCHES ON)
 	SUBDIRS(gloox/src)

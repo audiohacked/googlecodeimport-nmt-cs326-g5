@@ -19,23 +19,17 @@ BEGIN_EVENT_TABLE( DDPSBrowser, wxPanel )
 	EVT_BUTTON(BROWSER_Stop, DDPSBrowser::OnStop)
 	EVT_BUTTON(BROWSER_Refresh, DDPSBrowser::OnRefresh)
 	EVT_BUTTON(BROWSER_Home, DDPSBrowser::OnHome)
-#ifndef __WXMAC__
-	EVT_MOZILLA_BEFORE_LOAD(DDPSBrowser::BeforeLoad)
-#else
-	EVT_WEBVIEW_BEFORE_LOAD(BROWSER_WebView, DDPSBrowser::BeforeLoad)
-#endif
+	
+	EVT_COMMAND(wxID_ANY, wxEVT_MOZVIEW_TITLE_CHANGED, MyFrame::TitleChanged)
+	EVT_COMMAND(wxID_ANY, wxEVT_MOZVIEW_LOCATION_CHANGED, MyFrame::LocationChanged)
+	EVT_COMMAND(wxID_ANY, wxEVT_MOZVIEW_STATUS_CHANGED, MyFrame::StatusChanged)
 END_EVENT_TABLE()
 
 DDPSBrowser::DDPSBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size) 
 : wxPanel(parent, id, pos, size)
 {
 	wParent = parent;
-#ifndef __WXMAC__
-	browser = new wxMozillaBrowser(this, -1, wxDefaultPosition, wxDefaultSize, wxBORDER);
-#else
-	browser = new wxWebView(this, BROWSER_WebView, wxDefaultPosition, wxDefaultSize);
-	browser->MakeEditable(false);
-#endif
+	browser = new wxMozView(this, -1, wxDefaultPosition, wxDefaultSize, wxBORDER);
 	
 	wxButton *back, *forward, *refresh, *stop, *home;
 	
@@ -65,41 +59,51 @@ DDPSBrowser::~DDPSBrowser()
 }
 
 
-#ifndef __WXMAC__
-void DDPSBrowser::BeforeLoad(wxMozillaBeforeLoadEvent &event)
-#else
-void DDPSBrowser::BeforeLoad(wxWebViewBeforeLoadEvent &event)
-#endif
+void DDPSBrowser::LoadURI(wxString& uri)
+{
+    browser->LoadURI(uri);
+}
+
+void DDPSBrowser::TitleChanged(wxCommandEvent& event)
+{
+    this->SetTitle(event.GetString());
+}
+
+void DDPSBrowser::StatusChanged(wxCommandEvent& event)
+{
+    this->SetStatusText(event.GetString());
+}
+
+void DDPSBrowser::LocationChanged(wxCommandEvent& event)
+{
+    this->txtLocation_->SetValue(event.GetString());
+}
+
+void DDPSBrowser::BeforeLoad(wxCommandEvent &event)
 {
 	wxURL url(event.GetURL());
-	
-	if (url.GetScheme() == wxString::FromAscii("ddps"))
+	if (url.GetScheme() == wxString("ddps", wxConvUTF8))
 	{
 		event.Cancel();
-		wxLogDebug(wxT("DDPS Protocol Intercepted -- ") + event.GetURL());
-		
-		if (url.GetServer() == wxString::FromAscii("browser"))
+		wxLogDebug(wxString("DDPS Protocol Intercepted -- ", wxConvUTF8) + event.GetURL());
+		if (url.GetServer() == wxString("browser", wxConvUTF8))
 		{
-			wxString dest = wxT("http:/")+url.GetPath();
-			wxLogDebug(dest);
-			browser->LoadURL( dest );
+			//wxLogDebug(wxT("http:/")+url.GetPath());
+			browser->LoadURL( wxT("http:/")+url.GetPath() );
 		} 
-		else if (url.GetServer() == wxString::FromAscii("torrentDownload"))
+		else if (url.GetServer() == wxString("torrentDownload", wxConvUTF8))
 		{
-			//wxGetApp().frame->panel->tabs->Downloads->listDownloads->AddTorrentFileDownload("original.torrent");
 			wxString hash = url.GetPath().AfterFirst(wxChar('/')).BeforeFirst(wxChar('@'));
 			wxString tracker = url.GetPath().AfterFirst(wxChar('@'));
 			//wxLogDebug(wxT("DDPS Protocol Torrent Hash -- ") + hash);
 			//wxLogDebug(wxT("DDPS Protocol Torrent Tracker -- ") + tracker);
 			wxGetApp().frame->panel->tabs->Downloads->listDownloads->AddTorrentDownload( hash.mb_str(), tracker.mb_str(), hash.mb_str() );
-			event.Cancel();
+			//wxGetApp().frame->panel->tabs->Downloads->listDownloads->AddTorrentFileDownload("original.torrent");
 		}
-		else if (url.GetServer() == wxString::FromAscii("httpDownload"))
+		else if (url.GetServer() == wxString("httpDownload", wxConvUTF8))
 		{
-//http://gentoo.osuosl.org/releases/x86/2008.0_beta2/installcd/install-x86-minimal-2008.0_beta2.iso
-			wxString addr = wxT("http:/")+url.GetPath();
+			wxString addr = wxString("http:/", wxConvUTF8)+url.GetPath();
 			//wxGetApp().frame->panel->tabs->Downloads->listDownloads->httpDownloads->AddDownload( addr );
-			event.Cancel();
 		}
 	}
 }

@@ -2,13 +2,8 @@
 #define __BROWSER_EMBED_H
 	#include "config.h"
 
-	#ifndef __WXMAC__
-		#include <wxMoz/wxMozillaBrowser.h>
-		#include <wxMoz/wxMozillaEvents.h>
-	#else
-		#include <WebView.h>
-	#endif
-
+	#include "wxMozView.h"
+	
 	class DDPSBrowser : public wxPanel
 	{
 		public:
@@ -16,11 +11,7 @@
 			~DDPSBrowser();
 			
 			void GotoHomepage(void);
-			#ifndef __WXMAC__
-				wxMozillaBrowser *browser;
-			#else
-				wxWebView *browser;
-			#endif
+			wxMozView *browser;
 			wxString home;
 			wxWindow *wParent;
 			
