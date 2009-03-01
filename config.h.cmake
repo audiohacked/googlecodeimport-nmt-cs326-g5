@@ -14,6 +14,14 @@
 	#cmakedefine DEBUG_MENU 1
 
 	#cmakedefine USE_WEBKIT 1
+	
+	#cmakedefine DOWNLOADER 1
+	
+	#cmakedefine UPDATER 1
+	
+	#cmakedefine TORRENT 1
+	
+	#cmakedefine IMG_BUTTONS 1
 
 	#cmakedefine HOMEPAGE "${HOMEPAGE}"
 

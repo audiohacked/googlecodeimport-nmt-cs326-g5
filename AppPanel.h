@@ -3,16 +3,24 @@
 	#include <wx/notebook.h>
 	#include <wx/panel.h>
 	
-	#include "BrowserEmbed.h"
+#ifdef BUILTIN_BROWSER
+    #include "BrowserEmbed.h"
+#endif
+#ifdef DOWNLOADER
 	#include "TransferManager.h"
+#endif
 
 	class DDPSTabbed : public wxNotebook
 	{
 		public:
 			DDPSTabbed(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size, long style);
+#ifdef BUILTIN_BROWSER
 			DDPSBrowser *Home;
 			DDPSBrowser *Community;
+#endif
+#ifdef DOWNLOADER
 			TransferManager *Downloads;
+#endif
 	};
 	
 	class DDPSPanel : public wxPanel
