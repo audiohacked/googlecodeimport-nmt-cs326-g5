@@ -59,4 +59,5 @@ int DDPS::OnExit()
 	fclose(myLogFile);
 
 	wxApp::CleanUp();
+	return 0;
 }

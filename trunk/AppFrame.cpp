@@ -16,8 +16,13 @@
 
 	#include "AppMenu.h"
 	#include "AppLogin.h"
-	#include "BrowserEmbed.h"
+#ifdef BUILTIN_BROWSER
+    #include "BrowserEmbed.h"
+#endif
+
+#ifdef DOWNLOADER
 	#include "TransferManager.h"
+#endif
 	#include "SettingsDialog.h"
 	#include "AppConfig.h"
 	
@@ -45,19 +50,31 @@ BEGIN_EVENT_TABLE( DDPSFrame, wxFrame )
 	EVT_ICONIZE(DDPSFrame::OnIconize)
 
 	EVT_MENU(MENU_Quit, DDPSFrame::OnExit) /* when we click Quit in the menu system this event closes	the window and cleans up */
+#ifdef BROKEN_ABOUTBOX
 	EVT_MENU(MENU_About, DDPSFrame::AboutBox) /* when we click Help->About_This_App this event opens the about box */
+#endif /* BROKEN_ABOUTBOX */
 	EVT_MENU(MENU_Support, DDPSFrame::GoToSupportPanel)
 	EVT_MENU(MENU_Settings, DDPSFrame::SettingsDialog) // open the settings dialog when file->settings is clicked
+#ifdef BUILTIN_BROWSER
 	EVT_MENU(MENU_Home, DDPSFrame::GotoHomepage)
+	#ifdef COMMUNITY_PORTAL
 	EVT_MENU(MENU_Community, DDPSFrame::GotoCommunity)
-	EVT_MENU(MENU_Downloads, DDPSFrame::GotoDownloads)
+	#endif /* COMMUNITY_PORTAL */
+#endif /* BUILTIN_BROWSER */
+
 	EVT_MENU(MENU_Logout, DDPSFrame::Logout)
-	
+#ifdef DOWNLOADER
+    #ifdef TORRENT	
 	EVT_MENU(MENU_TorrentDownload, DDPSFrame::OnMenuAddTorrent)
+    #endif /* TORRENT */
+	EVT_MENU(MENU_Downloads, DDPSFrame::GotoDownloads)
 	EVT_MENU(MENU_HTTPDownload, DDPSFrame::OnMenuAddHttpDownload)
-	
+#endif /* DOWNLOADER */
+
+#ifdef UPDATER	
 	EVT_MENU(MENU_Update, DDPSFrame::OnUpdateCheck)
 	//EVT_MENU(Minimal_LocalCheck, MyFrame::OnLocalCheck)
+#endif
 END_EVENT_TABLE()
 
 #ifdef CHAT_ENABLED
@@ -108,15 +125,19 @@ DDPSFrame::DDPSFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 #endif
 }
 
+#ifdef TORRENT
 void DDPSFrame::OnMenuAddTorrent(wxCommandEvent &event)
 {
 	panel->tabs->Downloads->OnMenuAddTorrent(event);
 }
+#endif
 
+#ifdef DOWNLOADER
 void DDPSFrame::OnMenuAddHttpDownload(wxCommandEvent &event)
 {
 	panel->tabs->Downloads->OnMenuAddHttpDownload(event);
 }
+#endif
 
 void DDPSFrame::OnExit(wxCommandEvent& event)
 {
@@ -130,6 +151,7 @@ void DDPSFrame::OnExit(wxCommandEvent& event)
 	Close(TRUE);
 }
 
+#ifdef BROKEN_ABOUTBOX
 void DDPSFrame::AboutBox(wxCommandEvent& WXUNUSED(event))
 {
 	DDPS &myApp = ::wxGetApp();
@@ -145,6 +167,7 @@ void DDPSFrame::AboutBox(wxCommandEvent& WXUNUSED(event))
 		wxAboutBox(info);
 	#endif
 }
+#endif
 
 void DDPSFrame::GoToSupportPanel(wxCommandEvent& event)
 {

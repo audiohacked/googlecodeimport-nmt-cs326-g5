@@ -15,8 +15,12 @@
 #include "config.h"
 #include "AppMenu.h"
 #include "AppLogin.h"
-#include "BrowserEmbed.h"
-#include "TransferManager.h"
+#ifdef BUILTIN_BROWSER
+    #include "BrowserEmbed.h"
+#endif
+#ifdef DOWNLOADER
+	#include "TransferManager.h"
+#endif
 #include "SettingsDialog.h"
 #include "AppConfig.h"
 
@@ -26,6 +30,14 @@
 	#include "ChatCommon.h"
 #endif
 #include "AppPanel.h"
+
+#ifdef IMG_BUTTONS
+	#include <wx/button.h>
+	#include <wx/image.h>
+	#include <wx/bitmap.h>
+	#include <wx/bmpbuttn.h>
+#endif
+
 
 // Event table for DDPSPanel buttons at the bottom of the program
 BEGIN_EVENT_TABLE( DDPSPanel, wxPanel )
@@ -41,13 +53,56 @@ DDPSPanel::DDPSPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos,
 	const wxSize &size, long style) : wxPanel(parent, id, pos, size, style)
 {
 	tabs = new DDPSTabbed(this, -1, wxDefaultPosition, wxDefaultSize, 0);
+#ifdef IMG_BUTTONS
+	/*
+    wxImage news_img = wxImage("./image/news.png");
+	wxImage settings_img = wxImage("./image/settings.png");
+	wxImage support_img = wxImage("./image/support.png");
+	wxImage chat_img = wxImage("./image/friends.png");
+	*/
+
 	
+	wxBitmapButton *News = new wxBitmapButton(this, TABB_News, 
+        wxBitmap("./images/icon_button_news.bmp", wxBITMAP_TYPE_BMP ),
+		wxDefaultPosition, wxDefaultSize, style=wxBU_AUTODRAW);
+    News->SetBitmapHover(
+        wxBitmap("./images/icon_button_news_mouseover.bmp", wxBITMAP_TYPE_BMP ));
+    News->SetBitmapSelected(
+        wxBitmap("./images/icon_button_news_mousedown.bmp", wxBITMAP_TYPE_BMP ));
+
+	wxBitmapButton *Settings = new wxBitmapButton(this, TABB_Settings,
+        wxBitmap("./images/icon_button_settings.bmp", wxBITMAP_TYPE_BMP ),
+		wxDefaultPosition, wxDefaultSize, style=wxBU_AUTODRAW);
+    Settings->SetBitmapHover(
+        wxBitmap("./images/icon_button_settings_mouseover.bmp", wxBITMAP_TYPE_BMP ));
+    Settings->SetBitmapSelected(
+        wxBitmap("./images/icon_button_settings_mousedown.bmp", wxBITMAP_TYPE_BMP ));
+
+	wxBitmapButton *Support = new wxBitmapButton(this, TABB_Support,
+        wxBitmap("./images/icon_button_support.bmp", wxBITMAP_TYPE_BMP ),
+		wxDefaultPosition, wxDefaultSize, style=wxBU_AUTODRAW);
+    Support->SetBitmapHover(
+        wxBitmap("./images/icon_button_support_mouseover.bmp", wxBITMAP_TYPE_BMP ));
+    Support->SetBitmapSelected(
+        wxBitmap("./images/icon_button_support_mousedown.bmp", wxBITMAP_TYPE_BMP ));
+
+	#ifdef CHAT_ENABLED
+	wxBitmapButton *InstaMessenger = new wxBitmapButton(this, BUTTON_Chat,
+        wxBitmap("./images/icon_button_friends.bmp", wxBITMAP_TYPE_BMP ),
+		wxDefaultPosition, wxDefaultSize, style=wxBU_AUTODRAW);
+    InstaMessenger->SetBitmapHover(
+        wxBitmap("./images/icon_button_friends_mouseover.bmp", wxBITMAP_TYPE_BMP ));
+    InstaMessenger->SetBitmapSelected(
+        wxBitmap("./images/icon_button_friends_mousedown.bmp", wxBITMAP_TYPE_BMP ));
+	#endif /* CHAT_ENABLED */
+#else
 	wxButton *News = new wxButton(this, TABB_News, wxT("News"));
 	wxButton *Settings = new wxButton(this, TABB_Settings, wxT("Settings"));
 	wxButton *Support = new wxButton(this, TABB_Support, wxT("Support"));
-#ifdef CHAT_ENABLED
+	#ifdef CHAT_ENABLED
 	wxButton *InstaMessenger = new wxButton(this, BUTTON_Chat, wxT("InstaMessenger"));
-#endif
+	#endif /* CHAT_ENABLED */
+#endif /* IMG_BUTTONS */
 	
 	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 	wxBoxSizer *button_sizer = new wxBoxSizer(wxHORIZONTAL);
