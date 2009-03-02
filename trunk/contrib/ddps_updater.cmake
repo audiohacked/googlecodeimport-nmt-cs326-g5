@@ -23,7 +23,7 @@ IF(${UPDATER} MATCHES ON)
         webupdate/include
         webupdate/app/
     )
-    ADD_LIBRARY(webupdate SHARED ${WEBUPDATE_SRCS})
+    ADD_LIBRARY(webupdate ${WEBUPDATE_SRCS})
     TARGET_LINK_LIBRARIES(webupdate ${wxWidgets_LIBRARIES})
 
     IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
