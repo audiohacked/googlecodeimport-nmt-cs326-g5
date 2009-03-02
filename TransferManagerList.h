@@ -6,8 +6,14 @@
 		#include <wx/wx.h>
 	#endif
 
+	#include "TransferCommon.h"
+
+#ifdef TORRENT_DOWNLOADER
 	#include "TorrentManager.h"
+#endif
+#ifdef HTTP_DOWNLOADER
 	#include "HttpManager.h"
+#endif
 
 	class TransferManagerList : public wxListCtrl
 	{

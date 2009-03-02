@@ -11,8 +11,6 @@
 
 #include <boost/lexical_cast.hpp>
 
-#include "TorrentManager.h"
-#include "HttpManager.h"
 #include "TransferManagerList.h"
 
 enum column_id_t
@@ -39,19 +37,19 @@ struct column_t
 	int width;
 	wxString tooltip;
 } TorrentCol[] = {
-	{ id: LIST_COL_NAME, name: wxT("Name"), width: 60 },
-	{ id: LIST_COL_SIZE, name: wxT("Size"), width: 60 },
-	{ id: LIST_COL_PROGRESS, name: wxT("Progress"), width: 80 },
-	{ id: LIST_COL_STATUS, name: wxT("Status"), width: 70 },
-	{ id: LIST_COL_DOWNSPEED, name: wxT("Down Speed"), width: 100 },
-	{ id: LIST_COL_UPSPEED, name: wxT("Up Speed"), width: 80 },
-	{ id: LIST_COL_ETA, name: wxT("ETA"), width: 45 },
-	{ id: LIST_COL_DOWNSIZE, name: wxT("Downloaded"), width: 100 },
-	{ id: LIST_COL_UPSIZE, name: wxT("Uploaded"), width: 80 },
-	{ id: LIST_COL_PEERS, name: wxT("Peers"), width: 60 },
-	{ id: LIST_COL_SEEDS, name: wxT("Seeds"), width: 60 },
-	{ id: LIST_COL_COPIES, name: wxT("Copies"), width: 60 },
-	{ id: LIST_COL_METADATA, name: wxT("metadata?"), width: 80 }
+	{ LIST_COL_NAME, wxT("Name"), 60, wxEmptyString },
+	{ LIST_COL_SIZE, wxT("Size"), 60, wxEmptyString },
+	{ LIST_COL_PROGRESS, wxT("Progress"), 80, wxEmptyString },
+	{ LIST_COL_STATUS, wxT("Status"), 70, wxEmptyString },
+	{ LIST_COL_DOWNSPEED, wxT("Down Speed"), 100, wxEmptyString },
+	{ LIST_COL_UPSPEED, wxT("Up Speed"), 80, wxEmptyString },
+	{ LIST_COL_ETA, wxT("ETA"), 45, wxEmptyString },
+	{ LIST_COL_DOWNSIZE, wxT("Downloaded"), 100, wxEmptyString },
+	{ LIST_COL_UPSIZE, wxT("Uploaded"), 80, wxEmptyString },
+	{ LIST_COL_PEERS, wxT("Peers"), 60, wxEmptyString },
+	{ LIST_COL_SEEDS, wxT("Seeds"), 60, wxEmptyString },
+	{ LIST_COL_COPIES, wxT("Copies"), 60, wxEmptyString },
+	{ LIST_COL_METADATA, wxT("metadata?"), 80, wxEmptyString }
 };
 
 static const wxString state_str[] = {
@@ -134,6 +132,7 @@ wxString TransferManagerList::OnGetItemText(long item, long column) const
 	
 wxString TransferManagerList::GetTorrentItemText(long item, long column) const
 {
+#ifdef TORRENT_DOWNLOADER
 	libtorrent::torrent_handle h;
 	libtorrent::torrent_status s;
 	download_handles_t::const_iterator torItem = list.find(item);
@@ -226,4 +225,7 @@ wxString TransferManagerList::GetTorrentItemText(long item, long column) const
 	{
 		return wxT("Error");
 	}
+#else
+	return wxT("Error");
+#endif
 }
