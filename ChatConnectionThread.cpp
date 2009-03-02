@@ -10,6 +10,7 @@ ChatConnThread::ChatConnThread() : wxThread()
 void *ChatConnThread::Entry()
 {
 	server->FetchConnection()->connect( true );
+	return 0;
 }
 
 void ChatConnThread::OnExit()
