@@ -2,6 +2,7 @@
 #define __APP_CONFIG_H
 
 	#include <wx/fileconf.h>
+	#include <wx/string.h>
 
 	class DDPSConfig : public wxFileConfig
 	{

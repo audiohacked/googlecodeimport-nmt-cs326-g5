@@ -4,6 +4,8 @@
 	#include <wx/frame.h>
 	#include <wx/treectrl.h>
 
+	#include <config.h>
+
 	#include "AppMenu.h"
 	#include "AppPanel.h"
 #ifdef CHAT_ENABLED
