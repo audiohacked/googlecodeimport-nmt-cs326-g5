@@ -12,6 +12,14 @@ IF(${TORRENT} MATCHES ON)
 		TorrentProperties.h
 	)
 
+	#add_definitions(-D_WINSOCK2API_)
+	set(shared OFF)
+	set(encryption OFF)
+	#set(unicode OFF)
+	#set(deprecated-functions OFF)
+	set(build_tests OFF)
+	set(build_examples OFF)
+
 	ADD_SUBDIRECTORY(libtorrent)
 
 	INCLUDE_DIRECTORIES(

@@ -9,7 +9,9 @@
 #include <wx/utils.h>
 #include <wx/sysopt.h>
 
-#include "HttpManager.h"
+#ifdef HTTP_DOWNLOADER
+	#include "HttpManager.h"
+#endif
 
 
 #include "AppEnum.h"
@@ -18,7 +20,9 @@
 #include "TransferTimer.h"
 #include "TransferManagerList.h"
 #include "TransferManager.h"
+#ifdef TORRENT
 #include "TorrentProperties.h"
+#endif
 
 /*enum
 {
@@ -75,6 +79,7 @@ void TransferManager::OnItemSelected(wxListEvent &event)
 
 void TransferManager::OnMenuStartItem(wxCommandEvent &event)
 {
+#ifdef TORRENT_DOWNLOADER
 	if (b_ItemSelected)
 	{
 		libtorrent::torrent_handle h;
@@ -88,6 +93,7 @@ void TransferManager::OnMenuStartItem(wxCommandEvent &event)
 				h.resume();
 		}
 	}
+#endif
 }
 
 void TransferManager::OnMenuStopItem(wxCommandEvent &event)
@@ -97,6 +103,7 @@ void TransferManager::OnMenuStopItem(wxCommandEvent &event)
 
 void TransferManager::OnMenuPauseItem(wxCommandEvent &event)
 {
+#ifdef TORRENT_DOWNLOADER
 	if (b_ItemSelected)
 	{
 		libtorrent::torrent_handle h;
@@ -110,6 +117,7 @@ void TransferManager::OnMenuPauseItem(wxCommandEvent &event)
 				h.pause();
 		}
 	}
+#endif
 }
 
 void TransferManager::OnItemRightClick(wxListEvent &event)
@@ -137,6 +145,7 @@ void TransferManager::OnItemRightClick(wxListEvent &event)
 
 void TransferManager::OnMenuUpdateItem(wxCommandEvent &event)
 {
+#ifdef TORRENT_DOWNLOADER
 	if (b_ItemSelected)
 	{
 		//listDownloads->RefreshItem(m_SelectedItem);
@@ -150,6 +159,7 @@ void TransferManager::OnMenuUpdateItem(wxCommandEvent &event)
 			h.force_recheck();
 		}
 	}
+#endif
 }
 
 void TransferManager::OnContextMenu(wxContextMenuEvent &event)
@@ -167,6 +177,7 @@ void TransferManager::OnContextMenu(wxContextMenuEvent &event)
 
 void TransferManager::OnMenuAddTorrent(wxCommandEvent &event)
 {
+#ifdef TORRENT_DOWNLOADER
 	/*int answer = listDownloads->AddTorrentDownload(
 		"OOo_2.4.1_MacOSXIntel_install_en-US",
 		"http://www.ooodev.org:6969/",
@@ -178,19 +189,23 @@ void TransferManager::OnMenuAddTorrent(wxCommandEvent &event)
 	
 	if(answer == wxCANCEL)
 		event.Skip();
+#endif
 }
 
 void TransferManager::OnMenuAddHttpDownload(wxCommandEvent &event)
 {
+#ifdef HTTP_DOWNLOADER
 	int answer = listDownloads->httpDownloads->AddDownload(
 		wxT("http://gentoo.osuosl.org/releases/x86/2008.0_beta2/installcd/install-x86-minimal-2008.0_beta2.iso")
 	);
 	if(answer == wxOK)
 		event.Skip();
+#endif
 }
 
 void TransferManager::OnMenuTorrentProperties(wxCommandEvent &event)
 {
+#ifdef TORRENT_DOWNLOADER
 	if (b_ItemSelected)
 	{
 		//listDownloads->RefreshItem(m_SelectedItem);
@@ -205,4 +220,5 @@ void TransferManager::OnMenuTorrentProperties(wxCommandEvent &event)
 			prop.ShowModal();
 		}
 	}
+#endif
 }

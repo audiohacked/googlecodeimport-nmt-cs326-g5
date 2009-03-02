@@ -8,24 +8,31 @@
 
 	#include <wx/progdlg.h>
 	
+#ifdef HTTP_DOWNLOADER
 	#include <wx/curl/dialog.h>
+#endif
 
+#ifdef TORRENT_DOWNLOADER
 	#include <libtorrent/config.hpp>
 	#include <libtorrent/session.hpp>
+#endif
 
 	#include <map>
 	#include <utility>
 
 	typedef struct {
 		wxProgressDialog *dlg;
+#ifdef TORRENT_DOWNLOADER
 		libtorrent::torrent_handle handle;
+#endif
 	} torrent_data_t;
 
 	typedef struct {
+#ifdef HTTP_DOWNLOADER
 		wxCurlDownloadDialog *dlg;
+#endif
 		long i;
 	} http_data_t;
-
 	template<int v1, int v2>
 	struct max2 { enum { value = v1>v2?v1:v2 }; };
 

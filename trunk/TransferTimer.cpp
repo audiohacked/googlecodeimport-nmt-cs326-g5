@@ -9,9 +9,11 @@
 
 #include "TransferCommon.h"
 
+#ifdef TORRENT_DOWNLOADER
 #include <libtorrent/config.hpp>
 #include <libtorrent/entry.hpp>
 #include <libtorrent/session.hpp>
+#endif
 
 #include "TransferManager.h"
 #include "TransferTimer.h"
