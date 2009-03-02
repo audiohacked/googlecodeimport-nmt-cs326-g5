@@ -4,18 +4,18 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 SET(BUILD_SHARED_LIBS OFF)
 
-OPTION(BUILTIN_BROWSER "Add the Built-in Browser Support" OFF)
-OPTION(CHAT_ENABLED "Add the Built-in Chat Support" OFF)
-OPTION(TORRENT "Add BitTorrent Support" OFF)
-OPTION(UPDATER "Add Updater Support" OFF)
-OPTION(DOWNLOADER "Add Downloader Support" OFF)
-OPTION(BROKEN_ABOUTBOX "Enable the Broken AboutBox" OFF)
-OPTION(COMMUNITY_PORTAL "Add Community Support" OFF)
-OPTION(USER_UPLOAD "Add User Upload capabilities" OFF)
-OPTION(DEVEL_TESTING "Skip the login routines" ON)
-OPTION(DEBUG_MENU "Enable Debug Menu for Transfer Manager" ON)
-OPTION(USE_WEBKIT "Enable use of wxWebKit for Browser" OFF)
-OPTION(IMG_BUTTONS "Enable use of Bitmap-styled Buttons" ON)
+OPTION(BROKEN_ABOUTBOX  "Enable the Broken AboutBox"              ON)
+OPTION(BUILTIN_BROWSER  "Add the Built-in Browser Support"       OFF)
+OPTION(CHAT_ENABLED     "Add the Built-in Chat Support"           ON)
+OPTION(COMMUNITY_PORTAL "Add the Built-in Community Support"     OFF)
+OPTION(DOWNLOADER       "Add the Built-in Downloader Support"    OFF)
+OPTION(DEVEL_TESTING    "Skip the login routines"                OFF)
+OPTION(DEBUG_MENU       "Enable Debug Menu for Transfer Manager" OFF)
+OPTION(IMG_BUTTONS      "Enable use of Bitmap-styled Buttons"     ON)
+OPTION(TORRENT          "Add the Built-in BitTorrent Support"    OFF)
+OPTION(UPDATER          "Add the Built-in Updater Support"       OFF)
+OPTION(USER_UPLOAD      "Add User Upload capabilities"           OFF)
+OPTION(USE_WEBKIT       "Enable use of wxWebKit for Browser"     OFF)
 
 SET(NEWSPAGE
 	http://ddps.seancrazy.net/news
@@ -40,11 +40,10 @@ SET(DDPS_VERSION "1.0.0")
 SET(DDPS_UPDATE_VERSION "1.0.0")
 SET(CMAKE_FIND_LIBRARY_PREFIXES "")
 SET(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
-SET(wxWidgets_USE_LIBS base core net xml xrc)
-CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake
-	${CMAKE_BINARY_DIR}/config.h ESCAPE_QUOTES)
+SET(wxWidgets_USE_DEBUG ON)
+SET(wxWidgets_USE_STATIC ON)
 
-FIND_PACKAGE(wxWidgets)
+FIND_PACKAGE(wxWidgets COMPONENTS base core net xml xrc)
 
 SET(SRCS 
 	AppCommon.cpp
@@ -83,8 +82,6 @@ INCLUDE_DIRECTORIES(
 LINK_DIRECTORIES(
     ${LINK_DIRECTORIES}
 	${CMAKE_BINARY_DIR}
-	/opt/local/lib
-	/usr/lib
 )
 
 IF(wxWidgets_FOUND)
@@ -99,11 +96,20 @@ ENDIF(wxWidgets_FOUND)
 
 INCLUDE( ${CMAKE_SOURCE_DIR}/contrib/ddps_option_logic.cmake )
 
+INCLUDE( ${CMAKE_SOURCE_DIR}/contrib/ddps_sys_linux.cmake )
+INCLUDE( ${CMAKE_SOURCE_DIR}/contrib/ddps_sys_osx.cmake )
+INCLUDE( ${CMAKE_SOURCE_DIR}/contrib/ddps_sys_win32.cmake )
+
 INCLUDE( ${CMAKE_SOURCE_DIR}/contrib/ddps_browser.cmake )
 INCLUDE( ${CMAKE_SOURCE_DIR}/contrib/ddps_chat.cmake )
 INCLUDE( ${CMAKE_SOURCE_DIR}/contrib/ddps_downloader.cmake )
 INCLUDE( ${CMAKE_SOURCE_DIR}/contrib/ddps_torrent.cmake )
 INCLUDE( ${CMAKE_SOURCE_DIR}/contrib/ddps_updater.cmake )
+
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake
+	${CMAKE_BINARY_DIR}/config.h ESCAPE_QUOTES)
+
+INCLUDE( ${CMAKE_SOURCE_DIR}/contrib/ddps_custom_commands.cmake )
 
 ADD_EXECUTABLE(DDPS ${GUI_TYPE} ${SRCS} ${HDRS})
 TARGET_LINK_LIBRARIES(DDPS ${wxWidgets_LIBRARIES} ${DDPS_LIBS})

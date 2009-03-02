@@ -10,6 +10,8 @@ IF(WIN32)
 	SET(DDPS_LIBS ${DDPS_LIBS} ${SYS_WIN32_LIBS})
 	#IF(MSVC)
 	#	# msvc2005 deprecated warnings
+	#	ADD_DEFINITIONS(-D_CRT_SECURE_NO_WARNINGS)
+	#	ADD_DEFINITIONS(-D_CRT_NONSTDC_NO_WARNINGS)
 	#	ADD_DEFINITIONS(-D_CRT_SECURE_NO_DEPRECATE)
 	#	ADD_DEFINITIONS(-D_CRT_NONSTDC_NO_DEPRECATE)
 	#	ADD_DEFINITIONS(-Zc:wchar_t-)
@@ -20,4 +22,9 @@ IF(WIN32)
 	#	ADD_DEFINITIONS(-wd4503) # decorated name length exceeded
 	#	ADD_DEFINITIONS(-wd4786) # identifier was truncated to '255' characters in the debug information
 	#ENDIF(MSVC)
+	
+	IF(${DOWNLOADER} MATCHES ON)
+		SET(WIN32_CURL_LIB wsock32.lib winmm.lib)
+	ENDIF(${DOWNLOADER} MATCHES ON)
+
 ENDIF(WIN32)

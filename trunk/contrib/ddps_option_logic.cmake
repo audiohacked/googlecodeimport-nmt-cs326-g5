@@ -1,7 +1,3 @@
 IF((${TORRENT} MATCHES ON) AND (${DOWNLOADER} MATCHES OFF))
 	SET(DOWNLOADER ON)
 ENDIF((${TORRENT} MATCHES ON) AND (${DOWNLOADER} MATCHES OFF))
-
-INCLUDE(${CMAKE_SOURCE_DIR}/contrib/ddps_sys_linux.cmake)
-INCLUDE(${CMAKE_SOURCE_DIR}/contrib/ddps_sys_osx.cmake)
-INCLUDE(${CMAKE_SOURCE_DIR}/contrib/ddps_sys_win32.cmake)
