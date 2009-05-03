@@ -1,16 +1,15 @@
 #ifndef __TRANSFER_TIMER_H
 #define __TRANSFER_TIMER_H
 
-	#include <wx/timer.h>
-	#include "TransferManagerList.h"
+	#include "TransferManager.h"
 	
-	class TransferManagerTimer : public wxTimer
+	class TransferManagerTimer : public QTimer
 	{
 		public:
-			TransferManagerTimer(TransferManagerList *listctrl);
+			TransferManagerTimer(TransferManager *listctrl, QObject *parent);
 			void Notify();
 			void start();
-			TransferManagerList *ctrl;
+			TransferManager *ctrl;
 	};
 
 #endif

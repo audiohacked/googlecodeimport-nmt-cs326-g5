@@ -1,84 +1,147 @@
-#include <wx/wxprec.h>
-#ifndef WX_PRECOMP
-	#include <wx/wx.h>
-#endif
+#include <QtGui>
+#include <QtWebKit>
 
-#include <wx/filesys.h>
-#include <wx/fs_inet.h>
-#include <wx/fs_zip.h>
-#include <wx/fs_mem.h>
-#include <wx/url.h>
-
-#include "AppEnum.h"
-#include "AppMain.h"
 #include "BrowserEmbed.h"
+#include "config.h"
 
-BEGIN_EVENT_TABLE( DDPSBrowser, wxPanel )
-	EVT_BUTTON(BROWSER_Next, DDPSBrowser::OnNext)
-	EVT_BUTTON(BROWSER_Prev, DDPSBrowser::OnPrev)
-	EVT_BUTTON(BROWSER_Stop, DDPSBrowser::OnStop)
-	EVT_BUTTON(BROWSER_Refresh, DDPSBrowser::OnRefresh)
-	EVT_BUTTON(BROWSER_Home, DDPSBrowser::OnHome)
+DDPSBrowser::DDPSBrowser(QWidget *parent) 
+: QWidget(parent)
+{
+	browser = new DDPSBrowserView(parent);
 	
-	EVT_COMMAND(wxID_ANY, wxEVT_MOZVIEW_TITLE_CHANGED, MyFrame::TitleChanged)
-	EVT_COMMAND(wxID_ANY, wxEVT_MOZVIEW_LOCATION_CHANGED, MyFrame::LocationChanged)
-	EVT_COMMAND(wxID_ANY, wxEVT_MOZVIEW_STATUS_CHANGED, MyFrame::StatusChanged)
-END_EVENT_TABLE()
-
-DDPSBrowser::DDPSBrowser(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size) 
-: wxPanel(parent, id, pos, size)
-{
-	wParent = parent;
-	browser = new wxMozView(this, -1, wxDefaultPosition, wxDefaultSize, wxBORDER);
+	QPushButton *back, *forward, *refresh, *stop, *home;
 	
-	wxButton *back, *forward, *refresh, *stop, *home;
+	back 	= new QPushButton(tr("Back"));
+	back->show();
 	
-	back 	= new wxButton(this, BROWSER_Prev, 		wxT("Back"));
-	forward = new wxButton(this, BROWSER_Next, 		wxT("Forward"));
-	refresh = new wxButton(this, BROWSER_Refresh, 	wxT("Refresh"));
-	stop 	= new wxButton(this, BROWSER_Stop, 		wxT("Stop"));
-	home 	= new wxButton(this, BROWSER_Home, 		wxT("Home"));
+	forward = new QPushButton(tr("Forward"));
+	forward->show();
 	
-	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
-	wxBoxSizer *browser_buttons_sizer = new wxBoxSizer(wxHORIZONTAL);
+	refresh = new QPushButton(tr("Refresh"));
+	refresh->show();
+	
+	stop 	= new QPushButton(tr("Stop"));
+	stop->show();
+	
+	home 	= new QPushButton(tr("Home"));
+	home->show();
 
-	browser_buttons_sizer->Add(back, 0, wxALL, 10);
-	browser_buttons_sizer->Add(forward, 0, wxALL, 10);
-	browser_buttons_sizer->Add(refresh, 0, wxALL, 10);
-	browser_buttons_sizer->Add(stop, 0, wxALL, 10);
-	browser_buttons_sizer->Add(home, 0, wxALL, 10);
+	connect(back,		SIGNAL(clicked()), this, SLOT(OnPrev())		);
+	connect(forward,	SIGNAL(clicked()), this, SLOT(OnNext())		);
+	connect(refresh,	SIGNAL(clicked()), this, SLOT(OnRefresh())	);
+	connect(stop,		SIGNAL(clicked()), this, SLOT(OnStop())		);
+	connect(home,		SIGNAL(clicked()), this, SLOT(OnHome())		);
+	
+	QVBoxLayout *mainLayout = new QVBoxLayout;
+	QHBoxLayout *buttonLayout = new QHBoxLayout;
 
-	sizer->Add(browser_buttons_sizer, 0,  wxALIGN_TOP, 5);
-	sizer->Add(browser, 1, wxEXPAND|wxALL, 5);
-	SetSizer(sizer);
+	buttonLayout->addWidget(back);
+	buttonLayout->addWidget(forward);
+	buttonLayout->addWidget(refresh);
+	buttonLayout->addWidget(stop);
+	buttonLayout->addWidget(home);
+
+	mainLayout->addLayout(buttonLayout);
+	mainLayout->addWidget(browser);
+	setLayout(mainLayout);
+	browser->show();
 }
 
-DDPSBrowser::~DDPSBrowser()
+DDPSBrowserView::DDPSBrowserView(QWidget *parent)
+	:QWebView(parent)
 {
-	delete browser;
+	page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
+	connect(page(), SIGNAL(linkClicked(const QUrl &)), this, SLOT(myProtocol(const QUrl &)) );
+	page()->settings()->setAttribute(QWebSettings::AutoLoadImages, true);
+	page()->settings()->setAttribute(QWebSettings::JavascriptEnabled, true);
+	page()->settings()->setAttribute(QWebSettings::PluginsEnabled, true);
 }
 
-
-void DDPSBrowser::LoadURI(wxString& uri)
+void DDPSBrowser::OnPrev()
 {
-    browser->LoadURI(uri);
+	if (browser->history()->canGoBack())
+	{
+		browser->back();		
+	}
 }
-
-void DDPSBrowser::TitleChanged(wxCommandEvent& event)
+void DDPSBrowser::OnNext()
 {
-    this->SetTitle(event.GetString());
+	if ( browser->history()->canGoForward() )
+	{
+		browser->forward();
+	}
 }
-
-void DDPSBrowser::StatusChanged(wxCommandEvent& event)
+void DDPSBrowser::OnStop()
 {
-    this->SetStatusText(event.GetString());
+	browser->stop();
 }
-
-void DDPSBrowser::LocationChanged(wxCommandEvent& event)
+void DDPSBrowser::OnRefresh()
 {
-    this->txtLocation_->SetValue(event.GetString());
+	browser->reload();
 }
 
+void DDPSBrowser::OnHome()
+{
+	browser->load(home);
+}
+
+void DDPSBrowser::GotoHomepage()
+{
+	browser->load(home);	
+}
+
+void DDPSBrowserView::myProtocol(const QUrl &url)
+{
+	QUrl newurl = url;
+	if (url.scheme() == tr("ddps"))
+	{
+		if (url.host() == tr("browser"))
+		{
+			/*
+			QString str = QString("browser: http:/")+url.path();
+			QMessageBox msgBox;
+			msgBox.setText(str);
+			msgBox.setStandardButtons(QMessageBox::Ok);
+			msgBox.setDefaultButton(QMessageBox::Ok);
+			msgBox.exec();
+			*/
+			newurl = QUrl(tr("http:/")+url.path());
+		}
+		else if (url.host() == tr("torrentdownload"))
+		{
+			QString tracker;
+			QString hash;
+			QRegExp regex("(\\w+)@(.*)$");
+
+			if (regex.indexIn(url.path()) != -1)
+			{
+				tracker = regex.cap(2);
+				hash = regex.cap(1);
+			}
+
+			QString str = QString("torrent tracker: ")+tracker+QString("\n hash: ")+hash;
+			/*QMessageBox msgBox;
+			msgBox.setText(str);
+			msgBox.setStandardButtons(QMessageBox::Ok);
+			msgBox.setDefaultButton(QMessageBox::Ok);
+			msgBox.exec();*/
+			return;
+		}
+		else if (url.host() == tr("httpdownload"))
+		{
+			QString str = QString("http download: http:/")+url.path();
+			/*QMessageBox msgBox;
+			msgBox.setText(str);
+			msgBox.setStandardButtons(QMessageBox::Ok);
+			msgBox.setDefaultButton(QMessageBox::Ok);
+			msgBox.exec();*/
+			return;
+		}
+	}
+	setUrl(newurl);
+	emit linkClicked(newurl);
+}
+/*
 void DDPSBrowser::BeforeLoad(wxCommandEvent &event)
 {
 	wxURL url(event.GetURL());
@@ -107,56 +170,4 @@ void DDPSBrowser::BeforeLoad(wxCommandEvent &event)
 		}
 	}
 }
-
-void DDPSBrowser::OnPrev(wxCommandEvent& event)
-{
-	wxLogDebug(wxT("OnPrev.."));
-	if (browser->CanGoBack())
-	{
-		browser->GoBack();		
-	}
-}
-void DDPSBrowser::OnNext(wxCommandEvent& event)
-{
-	wxLogDebug(wxT("OnNext.."));
-	if ( browser->CanGoForward() )
-	{
-		browser->GoForward();
-	}
-}
-void DDPSBrowser::OnStop(wxCommandEvent& event)
-{
-	wxLogDebug(wxT("OnStop.."));
-#ifndef __WXMAC__
-	if ( browser->IsBusy() )
-	{
-		browser->Stop();
-	}
-#else
-	browser->Stop();
-#endif
-}
-void DDPSBrowser::OnRefresh(wxCommandEvent& event)
-{
-	wxLogDebug(wxT("OnRefresh.."));
-#ifndef __WXMAC__
-	if ( !browser->IsBusy() )
-	{
-		browser->Reload();
-	}
-#else
-	browser->Reload();
-#endif
-}
-
-void DDPSBrowser::OnHome(wxCommandEvent& event)
-{
-	wxLogDebug(wxT("OnHome.."));
-	browser->LoadURL(home);
-}
-
-void DDPSBrowser::GotoHomepage(void)
-{
-	wxLogDebug(wxT("GotoHomepage.."));
-	browser->LoadURL(home);	
-}
+*/

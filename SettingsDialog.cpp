@@ -1,82 +1,74 @@
+#include <QtGui>
+#include "AppConfig.h"
 #include "SettingsDialog.h"
-#include "AppEnum.h"
-#include <stdlib.h>
 
-#include "AppMain.h"
-
-#define FILENAME "config.ini"
-#define BUFFER "This is the config file"
-
-BEGIN_EVENT_TABLE( SettingsFrame, wxDialog )
-	EVT_BUTTON(wxID_OK, SettingsFrame::SaveSettings)
-END_EVENT_TABLE()
-
-
-//constructor for thDDPSFramee settings frame
-SettingsFrame::SettingsFrame(wxWindow * parent, wxWindowID id, const wxString & title,
-                           const wxPoint & pos, const wxSize & size, long style ) 
-: wxDialog(parent, id, title, pos, size)
+//constructor for the settings frame
+SettingsWidget::SettingsWidget(QWidget *parent) 
+: QDialog(parent)
 {
+	settings_cfg = new DDPSConfig;
+
 	//define ok and cancel buttons
-	wxButton *Ok_Button = new wxButton(this, wxID_OK, wxT("Accept"), wxDefaultPosition, wxDefaultSize);
-	wxButton *Cancel_Button = new wxButton(this, wxID_CANCEL, wxT("Cancel"), wxDefaultPosition, wxDefaultSize);
-	
+	QPushButton *Ok_Button = new QPushButton(tr("Accept"), this);
+	connect(Ok_Button, SIGNAL(clicked()), this, SLOT(accept()));
+
+	QPushButton *Cancel_Button = new QPushButton(tr("Cancel"), this);
+	connect(Cancel_Button, SIGNAL(clicked()), this, SLOT(reject()));
+
 	//define download directory label and control
-	downloadLocation = new wxTextCtrl(this, 
-		TEXT_DownloadLocation, wxGetApp().myConfig->cfg_download_location, wxDefaultPosition, wxDefaultSize);
-	wxStaticText* downloadLocationLabel = new wxStaticText ( this, wxID_STATIC,
-		wxT("&Download Location:"), wxDefaultPosition, wxDefaultSize, 0 );
+	downloadLocation = new QLineEdit(settings_cfg->cfg_download_location, this);
+	QLabel* downloadLocationLabel = new QLabel ( tr("Download Location:"), this );
 
 	//download/upload speed label and control
-	downloadSpeed = new wxSpinCtrl ( this, TEXT_DownloadSpeed,
-		wxString::Format(wxT("%d"), wxGetApp().myConfig->cfg_download_speed ),
-		wxDefaultPosition, wxSize(60, -1),
-		wxSP_ARROW_KEYS, -1, 5000, wxGetApp().myConfig->cfg_download_speed );
-	wxStaticText* downloadSpeedLabel = new wxStaticText ( this, wxID_STATIC,
-		wxT("&Max Download Speed (KBytes/s):"), wxDefaultPosition, wxDefaultSize, 0 );
+	downloadSpeed = new QSpinBox(this);
+	downloadSpeed->setValue(settings_cfg->cfg_download_speed);
+	downloadSpeed->setRange( -1, 5000);
+	QLabel* downloadSpeedLabel = new QLabel ( tr("Max Download Speed (KBytes/s):"), this );
 
-	uploadSpeed = new wxSpinCtrl ( this, TEXT_UploadSpeed,
-		wxString::Format(wxT("%d"), wxGetApp().myConfig->cfg_upload_speed ),
-		wxDefaultPosition, wxSize(60, -1),
-		wxSP_ARROW_KEYS, -1, 5000, wxGetApp().myConfig->cfg_upload_speed );
-	wxStaticText* uploadSpeedLabel = new wxStaticText ( this, wxID_STATIC,
-		wxT("&Max Upload Speed (KBytes/s):"), wxDefaultPosition, wxDefaultSize, 0 );
+	uploadSpeed = new QSpinBox ( this );
+	uploadSpeed->setValue(settings_cfg->cfg_upload_speed);
+	uploadSpeed->setRange(-1, 5000);
+	QLabel* uploadSpeedLabel = new QLabel ( tr("Max Upload Speed (KBytes/s):"), this );
 	
 	//number of peers label and control
-	numPeers = new wxSpinCtrl ( this, TEXT_NumPeers,
-		wxString::Format(wxT("%d"), wxGetApp().myConfig->cfg_max_peers ),
-		wxDefaultPosition, wxSize(60, -1),
-		wxSP_ARROW_KEYS, -1, 5000, wxGetApp().myConfig->cfg_max_peers );
-	wxStaticText* numPeersLabel = new wxStaticText ( this, wxID_STATIC,
-		wxT("&Max Number of Peers:"), wxDefaultPosition, wxDefaultSize, 0 );	
+	numPeers = new QSpinBox ( this );
+	numPeers->setValue(settings_cfg->cfg_max_peers);
+	numPeers->setRange(-1, 5000);
+	QLabel* numPeersLabel = new QLabel ( tr("Max Number of Peers:"), this );	
 
-	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
-	wxBoxSizer *button_sizer = new wxBoxSizer(wxHORIZONTAL);
-	wxBoxSizer *top_sizer = new wxBoxSizer(wxVERTICAL);
-	sizer->Add(top_sizer, 0, wxALIGN_TOP, 5);
-	sizer->Add(button_sizer, 0, wxALIGN_BOTTOM, 5);
+	QVBoxLayout *mLayout = new QVBoxLayout;
+	QVBoxLayout *sLayout = new QVBoxLayout;
+	QHBoxLayout *bLayout = new QHBoxLayout;
 
-	button_sizer->Add(Ok_Button, 0, wxALL, 10);
-	button_sizer->Add(Cancel_Button, 0, wxALL, 10);
+	bLayout->addWidget(Ok_Button);
+	bLayout->addWidget(Cancel_Button);
 
-	top_sizer->Add(downloadLocationLabel, 0,wxALIGN_CENTER_VERTICAL|wxALL, 5); 
-	top_sizer->Add(downloadLocation, 1, wxEXPAND|wxALL, 5);
-	top_sizer->Add(downloadSpeedLabel, 0,wxALIGN_CENTER_VERTICAL|wxALL, 5); 
-	top_sizer->Add(downloadSpeed, 1, wxEXPAND|wxALL, 5);
-	top_sizer->Add(uploadSpeedLabel, 0,wxALIGN_CENTER_VERTICAL|wxALL, 5); 
-	top_sizer->Add(uploadSpeed, 1, wxEXPAND|wxALL, 5);
-	top_sizer->Add(numPeersLabel, 0,wxALIGN_CENTER_VERTICAL|wxALL, 5); 
-	top_sizer->Add(numPeers, 1, wxEXPAND|wxALL, 5);
+	sLayout->addWidget(downloadLocationLabel); 
+	sLayout->addWidget(downloadLocation);
+	sLayout->addWidget(downloadSpeedLabel); 
+	sLayout->addWidget(downloadSpeed);
+	sLayout->addWidget(uploadSpeedLabel); 
+	sLayout->addWidget(uploadSpeed);
+	sLayout->addWidget(numPeersLabel); 
+	sLayout->addWidget(numPeers);
 
-	SetSizer(sizer);
-	sizer->SetSizeHints(this);
+	mLayout->addLayout(sLayout);
+	mLayout->addLayout(bLayout);
+
+	setLayout(mLayout);
 }
 
-void SettingsFrame::SaveSettings(wxCommandEvent& WXUNUSED(event))
+void SettingsWidget::SaveSettings()
 {
-	wxGetApp().myConfig->cfg_download_location = downloadLocation->GetValue();
-	wxGetApp().myConfig->cfg_download_speed = downloadSpeed->GetValue();
-	wxGetApp().myConfig->cfg_upload_speed = uploadSpeed->GetValue();
-	wxGetApp().myConfig->cfg_max_peers = numPeers->GetValue();
-	EndModal(0);
+	settings_cfg->cfg_download_location = downloadLocation->text();
+	settings_cfg->cfg_download_speed = downloadSpeed->value();
+	settings_cfg->cfg_upload_speed = uploadSpeed->value();
+	settings_cfg->cfg_max_peers = numPeers->value();
+	settings_cfg->Save();
+}
+
+void SettingsWidget::accept()
+{
+	SaveSettings();
+	done(QDialog::Accepted);
 }

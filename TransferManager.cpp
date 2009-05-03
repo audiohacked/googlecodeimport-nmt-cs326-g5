@@ -1,224 +1,152 @@
-#include <wx/wxprec.h>
-
-#ifndef WX_PRECOMP
-	#include <wx/wx.h>
-#endif
-
-#include <wx/listctrl.h>
-#include <wx/progdlg.h>
-#include <wx/utils.h>
-#include <wx/sysopt.h>
-
-#ifdef HTTP_DOWNLOADER
-	#include "HttpManager.h"
-#endif
-
-
-#include "AppEnum.h"
-#include "AppCommon.h"
-#include "TransferCommon.h"
+#include <QtGui>
 #include "TransferTimer.h"
-#include "TransferManagerList.h"
 #include "TransferManager.h"
-#ifdef TORRENT
-#include "TorrentProperties.h"
-#endif
 
-/*enum
+TransferManager::TransferManager(QWidget *parent) : QTreeWidget(parent)
 {
-	TORRENT_Properties
-};*/
+	QStringList col_labels;
+		col_labels << "Name" << "Size" << "Progress" << "Status" << "Down Speed" 
+		<< "Up Speed" << "Downloaded" << "Uploaded" << "Peers" << "Seeds" << "Copies" << "metadata?";
+	setColumnCount(col_labels.count());
+	setHeaderLabels(col_labels);
 
-BEGIN_EVENT_TABLE( TransferManager, wxPanel )
-	EVT_LIST_ITEM_RIGHT_CLICK(LIST_DownloadManager, TransferManager::OnItemRightClick)
-	EVT_LIST_ITEM_DESELECTED(LIST_DownloadManager, TransferManager::OnItemDeselected)
-	EVT_LIST_ITEM_SELECTED(LIST_DownloadManager, TransferManager::OnItemSelected)
-	//EVT_CONTEXT_MENU(TransferManager::OnContextMenu)
-	//EVT_MENU(MENU_TorrentDownload, TransferManager::OnMenuAddTorrent)
-	//EVT_MENU(MENU_HTTPDownload, TransferManager::OnMenuAddHttpDownlaod)
-	EVT_MENU(MENU_UpdateItem, TransferManager::OnMenuUpdateItem)
-	EVT_MENU(MENU_StartItem, TransferManager::OnMenuStartItem)
-	EVT_MENU(MENU_StopItem, TransferManager::OnMenuStopItem)
-	EVT_MENU(MENU_PauseItem, TransferManager::OnMenuPauseItem)
-	EVT_MENU(TORRENT_Properties, TransferManager::OnMenuTorrentProperties)
-END_EVENT_TABLE()
+	timer = new TransferManagerTimer(this, this);
 
-TransferManager::TransferManager(wxWindow* parent, wxWindowID id,
-const wxPoint& pos, const wxSize& size, long style) : wxPanel(parent, id, pos, size, style)
-{
-	listDownloads = new TransferManagerList( this, LIST_DownloadManager, wxDefaultPosition, wxDefaultSize, wxLC_REPORT|wxLC_VIRTUAL );
-	timer = new TransferManagerTimer(listDownloads);
+	createItemRoots();
+
 	timer->start();
-	
-	b_ItemSelected = false;
-
-	wxSystemOptions opts;
-	opts.SetOption(wxT("mac.listctrl.always_use_generic"), 1);
-
-	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
-	sizer->Add(listDownloads, 1, wxEXPAND|wxALL, 5);
-	SetSizer(sizer);
-	sizer->SetSizeHints(this);
 }
 
 TransferManager::~TransferManager()
 {
-	timer->Stop();
+	timer->stop();
 }
 
-void TransferManager::OnItemDeselected(wxListEvent &event)
+void TransferManager::createItemRoots()
 {
-	b_ItemSelected = false;
+	games = new QTreeWidgetItem(this, QStringList("Games"));
+	games_installed = new QTreeWidgetItem(games, QStringList("Installed"));
+	games_ninstalled = new QTreeWidgetItem(games, QStringList("Not Installed"));
+
+	media = new QTreeWidgetItem(this, QStringList("Media"));
+	media_installed = new QTreeWidgetItem(media, QStringList("Installed"));
+	media_ninstalled = new QTreeWidgetItem(media, QStringList("Not Installed"));
+
+	tools = new QTreeWidgetItem(this, QStringList("Tools"));
+	tools_installed = new QTreeWidgetItem(tools, QStringList("Installed"));
+	tools_ninstalled = new QTreeWidgetItem(tools, QStringList("Not Installed"));
+
+	add_item(media_installed, QStringList()<< "Media Test 1" << "str1");
+	add_item(media_installed, QStringList("Media Test 2"));
+	add_item(media_ninstalled, QStringList("Media Test 3"));
+	add_item(media_ninstalled, QStringList("Media Test 4"));
 }
 
-void TransferManager::OnItemSelected(wxListEvent &event)
+void TransferManager::add_item(QTreeWidgetItem *item, QStringList &list )
 {
-	b_ItemSelected = true;
-	m_SelectedItem = event.GetItem();
+	QTreeWidgetItem *newItem = new QTreeWidgetItem(list);
+	item->addChild(newItem);
 }
 
-void TransferManager::OnMenuStartItem(wxCommandEvent &event)
+void TransferManager::TransferItemClicked(QTreeWidgetItem *item, const QPoint &iPostion)
 {
-#ifdef TORRENT_DOWNLOADER
-	if (b_ItemSelected)
-	{
-		libtorrent::torrent_handle h;
-		download_handles_t::const_iterator torItem = listDownloads->list.find(m_SelectedItem);
-		if (torItem->first == m_SelectedItem)
-	 		h = torItem->second.torrent_list().handle;
+	m_SelectedItem = item;
 
-		if (h.is_valid())
-		{
-			if (h.is_paused())
-				h.resume();
-		}
-	}
-#endif
-}
-
-void TransferManager::OnMenuStopItem(wxCommandEvent &event)
-{
+	QMenu *ItemMenu = new QMenu(this);
 	
-}
+	QAction *update_item = new QAction(tr("Update Item"), this);
+	ItemMenu->addAction(update_item);
+	connect(update_item, SIGNAL(triggered()), this, SLOT(OnMenuUpdateItem()));
 
-void TransferManager::OnMenuPauseItem(wxCommandEvent &event)
-{
-#ifdef TORRENT_DOWNLOADER
-	if (b_ItemSelected)
-	{
-		libtorrent::torrent_handle h;
-		download_handles_t::const_iterator torItem = listDownloads->list.find(m_SelectedItem);
-		if (torItem->first == m_SelectedItem)
-	 		h = torItem->second.torrent_list().handle;
-
-		if (h.is_valid())
-		{
-			if (!h.is_paused())
-				h.pause();
-		}
-	}
-#endif
-}
-
-void TransferManager::OnItemRightClick(wxListEvent &event)
-{
-	//b_ItemSelected = true;
-	m_SelectedItem = event.GetItem();
+	QAction *remove_item = new QAction(tr("Remove Item"), this);
+	ItemMenu->addAction(remove_item);
+	connect(remove_item, SIGNAL(triggered()), this, SLOT(OnMenuRemoveItem()));
 	
-	wxMenu *ItemMenu = new wxMenu();
-	ItemMenu->Append(MENU_UpdateItem, wxT("Update Item"));
-	ItemMenu->Append(MENU_RemoveItem, wxT("Remove Item"));
-	ItemMenu->AppendSeparator();
-	ItemMenu->Append(MENU_StartItem, wxT("Start Item"));
-	ItemMenu->Append(MENU_StopItem, wxT("Stop Item"));
-	ItemMenu->Append(MENU_PauseItem, wxT("Pause Item"));
-	ItemMenu->AppendSeparator();
-	ItemMenu->Append(-1, wxT("Item Queue - Move Up"));
-	ItemMenu->Append(-1, wxT("Item Queue - Move Down"));
-	ItemMenu->Append(-1, wxT("Item Queue - Move Top"));
-	ItemMenu->Append(-1, wxT("Item Queue - Move Bottom"));
-	ItemMenu->AppendSeparator();
-	ItemMenu->Append(TORRENT_Properties, wxT("Item Properties"));
-	
-	PopupMenu(ItemMenu);
+	ItemMenu->addSeparator();
+
+	QAction *start_item = new QAction(tr("Start Item"), this);
+	ItemMenu->addAction(start_item);
+	connect(start_item, SIGNAL(triggered()), this, SLOT(OnMenuStartItem()));
+
+	QAction *stop_item = new QAction(tr("Stop Item"), this);
+	ItemMenu->addAction(stop_item);
+	connect(stop_item, SIGNAL(triggered()), this, SLOT(OnMenuStopItem()));
+
+	QAction *pause_item = new QAction(tr("Pause Item"), this);
+	ItemMenu->addAction(pause_item);
+	connect(pause_item, SIGNAL(triggered()), this, SLOT(OnMenuPauseItem()));
+
+	ItemMenu->addSeparator();
+
+	QAction *property_item = new QAction(tr("Item Properties"), this);
+	ItemMenu->addAction(property_item);
+	connect(property_item, SIGNAL(triggered()), this, SLOT(OnMenuAddTorrent()));
+
+	ItemMenu->exec(this->mapToGlobal(iPostion));
 }
 
-void TransferManager::OnMenuUpdateItem(wxCommandEvent &event)
+void TransferManager::contextMenuEvent(QContextMenuEvent *event)
 {
-#ifdef TORRENT_DOWNLOADER
-	if (b_ItemSelected)
+	QTreeWidgetItem *item = 0;
+
+	item = this->itemAt(event->pos());
+
+	if(0 == item)
 	{
-		//listDownloads->RefreshItem(m_SelectedItem);
-		libtorrent::torrent_handle h;
-		download_handles_t::const_iterator torItem = listDownloads->list.find(m_SelectedItem);
-		if (torItem->first == m_SelectedItem)
-	 		h = torItem->second.torrent_list().handle;
+		QMenu *contextMenu = new QMenu(this);
+		
+		QAction *add_torrent = new QAction(tr("Add Torrent"), this);
+		contextMenu->addAction(add_torrent);
+		connect(add_torrent, SIGNAL(triggered()), this, SLOT(OnMenuAddTorrent()));
 
-		if (h.is_valid())
-		{
-			h.force_recheck();
-		}
+		QAction *add_httpdl = new QAction(tr("Add HTTP Download"), this);
+		contextMenu->addAction(add_httpdl);
+		connect(add_httpdl, SIGNAL(triggered()), this, SLOT(OnMenuAddHttpDownload()));
+
+		contextMenu->exec(this->mapToGlobal(event->pos()));
 	}
-#endif
-}
-
-void TransferManager::OnContextMenu(wxContextMenuEvent &event)
-{
-	if (!b_ItemSelected)
+	else
 	{
-		wxMenu *contextMenu = new wxMenu();
-
-		contextMenu->Append(MENU_TorrentDownload, wxT("Add Torrent"));
-		contextMenu->Append(MENU_HTTPDownload, wxT("Add HTTP Download"));
-
-		PopupMenu(contextMenu);
+		TransferItemClicked(item, event->pos());
 	}
 }
 
-void TransferManager::OnMenuAddTorrent(wxCommandEvent &event)
+void TransferManager::OnItemDeselected()
 {
-#ifdef TORRENT_DOWNLOADER
-	/*int answer = listDownloads->AddTorrentDownload(
-		"OOo_2.4.1_MacOSXIntel_install_en-US",
-		"http://www.ooodev.org:6969/",
-		"cdb13e1d5c15e768a0244f858e88df746a475d8b"
-	);*/
-	int answer = listDownloads->AddTorrentFileDownload(
-		"original.torrent"
-	);
-	
-	if(answer == wxCANCEL)
-		event.Skip();
-#endif
 }
 
-void TransferManager::OnMenuAddHttpDownload(wxCommandEvent &event)
+void TransferManager::OnItemSelected()
 {
-#ifdef HTTP_DOWNLOADER
-	int answer = listDownloads->httpDownloads->AddDownload(
-		wxT("http://gentoo.osuosl.org/releases/x86/2008.0_beta2/installcd/install-x86-minimal-2008.0_beta2.iso")
-	);
-	if(answer == wxOK)
-		event.Skip();
-#endif
 }
 
-void TransferManager::OnMenuTorrentProperties(wxCommandEvent &event)
+void TransferManager::OnMenuStartItem()
 {
-#ifdef TORRENT_DOWNLOADER
-	if (b_ItemSelected)
-	{
-		//listDownloads->RefreshItem(m_SelectedItem);
-		libtorrent::torrent_handle h;
-		download_handles_t::const_iterator torItem = listDownloads->list.find(m_SelectedItem);
-		if (torItem->first == m_SelectedItem)
-	 		h = torItem->second.torrent_list().handle;
+}
 
-		if (h.is_valid())
-		{
-			TorrentProperties prop(wxString(h.name().c_str(), wxConvUTF8), h);
-			prop.ShowModal();
-		}
-	}
-#endif
+void TransferManager::OnMenuStopItem()
+{
+}
+
+void TransferManager::OnMenuPauseItem()
+{
+}
+
+void TransferManager::OnMenuUpdateItem()
+{
+}
+
+void TransferManager::OnMenuRemoveItem()
+{
+}
+
+void TransferManager::OnMenuAddTorrent()
+{
+}
+
+void TransferManager::OnMenuAddHttpDownload()
+{
+}
+
+void TransferManager::OnMenuTorrentProperties()
+{
 }

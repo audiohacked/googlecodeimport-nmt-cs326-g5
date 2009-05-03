@@ -1,38 +1,35 @@
 #ifndef __APP_CONFIG_H
 #define __APP_CONFIG_H
 
-	#include <wx/fileconf.h>
-	#include <wx/string.h>
+	#include <QtGui>
 
-	class DDPSConfig : public wxFileConfig
+	class DDPSConfig : public QSettings
 	{
+		Q_OBJECT
 		public:
 			DDPSConfig();
-			~DDPSConfig();
+			//~DDPSConfig();
 
-			void Save();
-			void Load();
-
-			wxFileConfig *m_cfg;
-			wxString m_configfile;
+			QSettings *m_cfg;
+			QString m_configfile;
 
 			// GUI
 			bool cfg_RememberLogin;
-			wxString cfg_LoginUsername;
-			wxString cfg_LoginPassword;
+			QString cfg_LoginUsername;
+			QString cfg_LoginPassword;
 
 			// Transfer
-			wxString cfg_download_location;
-			wxString cfg_proxy;
-			wxString cfg_proxy_login;
-			wxString cfg_proxy_type;
+			QString cfg_download_location;
+			QString cfg_proxy;
+			QString cfg_proxy_login;
+			QString cfg_proxy_type;
 
 			// HTTP Transfer
 
 			// BitTorrent
-			wxString cfg_log_level;
-			wxString cfg_ipfilter_file;
-			wxString cfg_allocation_mode;
+			QString cfg_log_level;
+			QString cfg_ipfilter_file;
+			QString cfg_allocation_mode;
 			int cfg_download_speed;
 			int cfg_upload_speed;
 			int cfg_max_peers;
@@ -44,5 +41,8 @@
 			int cfg_bind_port_start;
 			int cfg_bind_port_end;
 			int cfg_preferred_ratio; // float for libtorrent (divide by 100)
+		public slots:
+			void Save();
+			void Load();
 	};
 #endif

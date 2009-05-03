@@ -1,22 +1,18 @@
 #ifndef __HTTP_MANAGER_H
 #define __HTTP_MANAGER_H
-	#include <wx/wxprec.h>
-	#ifndef WX_PRECOMP
-		#include <wx/wx.h>
-	#endif
-	#include <wx/wfstream.h>
-	#include <wx/curl/dialog.h>
 
-	#include "TransferCommon.h"
+#include <QtGui>
+#include <QtNetwork>
 		
-	class HttpTransferManager
+class HttpTransferManager : public QWidget
 	{
 		public:
-			HttpTransferManager(download_handles_t *l);
+			HttpTransferManager(QWidget *parent = 0);
 			~HttpTransferManager();
-			int AddDownload(wxString url);
-			int GetTransferStyle() const;
-			download_handles_t *handles;
+		public slots:
+			int AddDownload(QString url);
+		private:
+			Q_OBJECT
 	};
 	
 #endif

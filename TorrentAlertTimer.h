@@ -1,9 +1,9 @@
 #ifndef __TORRENT_ALERT_TIMER_H
 #define __TORRENT_ALERT_TIMER_H
 
-	#include <wx/timer.h>
-		
-	class TorrentAlertTimer : public wxTimer
+	#include <QtGui>
+	
+	class TorrentAlertTimer : public QTimer
 	{
 		public:
 			TorrentAlertTimer(libtorrent::session& s);

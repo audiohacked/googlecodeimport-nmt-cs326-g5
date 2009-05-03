@@ -1,15 +1,15 @@
 #ifndef __TORRENT_PROPERTIES_H
 #define __TORRENT_PROPERTIES_H
 
+	#include <QtGui>
 	#include <wx/string.h>
 	#include <wx/dialog.h>
-
 	#include <libtorrent/session.hpp>
 
 	class TorrentProperties : public wxDialog
 	{
 		public:
-			TorrentProperties(wxString const& title, libtorrent::torrent_handle &h);
+			TorrentProperties(QString const& title, libtorrent::torrent_handle &h, QWidget *parent);
 			~TorrentProperties();
 		private:
 			void TorrentInformation();
@@ -19,25 +19,25 @@
 			libtorrent::torrent_status s;
 			libtorrent::torrent_info const& i;
 			
-			wxStaticText *tor_header_info;
-			wxStaticText *tor_name_label;
-			wxStaticText *tor_name;
-			wxStaticText *tor_size_label;
-			wxStaticText *tor_size;
-			wxStaticText *tor_tracker_label;
-			wxTextCtrl *tor_tracker;
-			wxStaticText *tor_hash_label;
-			wxStaticText *tor_hash;
-			wxStaticText *tor_secure_label;
-			wxStaticText *tor_secure;
-			wxStaticText *tor_comment_label;
-			wxTextCtrl *tor_comment;
+			QLabel *tor_header_info;
+			QLabel *tor_name_label;
+			QLabel *tor_name;
+			QLabel *tor_size_label;
+			QLabel *tor_size;
+			QLabel *tor_tracker_label;
+			QLineEdit *tor_tracker;
+			QLabel *tor_hash_label;
+			QLabel *tor_hash;
+			QLabel *tor_secure_label;
+			QLabel *tor_secure;
+			QLabel *tor_comment_label;
+			QLineEdit *tor_comment;
 			
-			wxStaticText *tor_header_creator;
-			wxStaticText *tor_creator_label;
-			wxStaticText *tor_creator;
-			wxStaticText *tor_date_label;
-			wxStaticText *tor_date;
+			QLabel *tor_header_creator;
+			QLabel *tor_creator_label;
+			QLabel *tor_creator;
+			QLabel *tor_date_label;
+			QLabel *tor_date;
 			
 	};
 

@@ -1,65 +1,31 @@
-#include "HttpManager.h"
-#include "AppMain.h"
+#include <QtGui>
+#include <QtNetwork>
 
-HttpTransferManager::HttpTransferManager(download_handles_t *l)
+#include "HttpManager.h"
+
+HttpTransferManager::HttpTransferManager(QWidget *parent)
+: QWidget(parent)
 {
-	handles = l;
 }
 
 HttpTransferManager::~HttpTransferManager()
+{	
+}
+
+int HttpTransferManager::AddDownload(QString url)
 {
+	if (url.isEmpty())
+		return -1;     // user hit cancel
+
+	QString filename = url.split('/', QString::SkipEmptyParts).last();
+	QUrl *dl_url = new QUrl(url);
+
+	QMessageBox::information(this, tr("HttpDownload-HttpTransferManager"), tr("filename: ")+filename+tr(" \turl: ")+url);
+
+	QFile *dl_file = new QFile(filename);
 	
-}
+	QHttp *dl = new QHttp(dl_url->host(), dl_url->port());
+	dl->get(dl_url->path(), dl_file);
 
-int HttpTransferManager::AddDownload(wxString url)
-{
-	DDPS &myApp = ::wxGetApp();
-	if (url.empty())
-		return wxCANCEL;     // user hit cancel
-
-	wxString filename = url.AfterLast( wxChar('/') );
-
-	wxLogMessage(wxT("filename: ")+filename+wxT(" \turl: ")+url);
-
-	wxBitmap bmp;
-	wxFileOutputStream fos( filename );
-	wxCurlDownloadDialog dlg(url, &fos,
-							filename,
-							wxT("Your message goes here...\nNote that the bitmap below can be hidden/customized."),
-							bmp,
-							myApp.frame,
-							GetTransferStyle());
-	dlg.SetVerbose(TRUE);
-
-	if (!dlg.IsOk())
-		return wxCANCEL;
-
-	wxCurlDialogReturnFlag flag = dlg.RunModal();
-
-	if (flag == wxCDRF_SUCCESS && fos.GetLength() < 10000)
-	{
-		fos.Close();
-		return wxOK;
-	}
-}
-
-int HttpTransferManager::GetTransferStyle() const
-{
-    int ret = 0;
-
-	ret |= wxCTDS_ELAPSED_TIME;
-	ret |= wxCTDS_ESTIMATED_TIME;
-	ret |= wxCTDS_REMAINING_TIME;
-	ret |= wxCTDS_SPEED;
-	ret |= wxCTDS_SIZE;
-	ret |= wxCTDS_URL;
-	//ret |= wxCTDS_CONN_SETTINGS_AUTH;
-	//ret |= wxCTDS_CONN_SETTINGS_PORT;
-	//ret |= wxCTDS_CONN_SETTINGS_PROXY;
-	ret |= wxCTDS_CAN_ABORT;
-	ret |= wxCTDS_CAN_START;
-	//ret |= wxCTDS_CAN_PAUSE;
-	//ret |= wxCTDS_AUTO_CLOSE;
-
-    return ret;
+	return 0;
 }
