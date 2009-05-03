@@ -2,7 +2,6 @@
 #define __TORRENT_MANAGER_H
 
 	#include <libtorrent/session.hpp>
-	#include "TorrentCommon.h"
 	#include "TorrentAlertTimer.h"
 
 	/*
@@ -16,7 +15,7 @@
 		destruct session object
 
 	*/
-	
+	class DDPSConfig;
 	class TorrentTransferManager
 	{
 		public:
@@ -25,7 +24,7 @@
 			libtorrent::session_status status;
 			download_handles_t *handles;
 			TorrentAlertTimer *alert_timer;
-
+			DDPSConfig *torrent_cfg;
 			TorrentTransferManager(download_handles_t *l);
 			~TorrentTransferManager();
 

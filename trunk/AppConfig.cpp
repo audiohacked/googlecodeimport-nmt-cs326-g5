@@ -1,42 +1,14 @@
-#include <wx/wxprec.h>
-
-#ifndef WX_PRECOMP
-#	include <wx/wx.h>
-#endif
-
-//	#include <wx/datstrm.h>
-#include <wx/wfstream.h>
-//	#include <wx/ffile.h>
-//	#include <wx/txtstrm.h>
-
+#include <QtGui>
 #include "AppConfig.h"
 
-DDPSConfig::DDPSConfig()
+DDPSConfig::DDPSConfig(): QSettings("./rc_ddps", QSettings::IniFormat)
 {
-	wxFile *conf_file;
-	m_configfile = wxT(".ddps_rc");
-
-	if (!wxFile::Exists(m_configfile))
-	{
-		conf_file = new wxFile();
-		conf_file->Create(m_configfile);
-		conf_file->Close();
-	}
-
-	wxFileInputStream input_config_file( m_configfile );
-
-	m_cfg = new wxFileConfig( (wxInputStream&)input_config_file );
-
 	Load();
-}
-
-DDPSConfig::~DDPSConfig()
-{
-	delete wxConfigBase::Set((wxConfigBase*)NULL);
 }
 
 void DDPSConfig::Save()
 {
+	qDebug("Saving Config File");
 	if (cfg_RememberLogin)
 	{
 		cfg_LoginUsername;
@@ -44,69 +16,68 @@ void DDPSConfig::Save()
 	}
 	else
 	{
-		cfg_LoginUsername = wxT("");
-		cfg_LoginPassword = wxT("");
+		cfg_LoginUsername = QString("");
+		cfg_LoginPassword = QString("");
 	}
 	
-	m_cfg->Write(wxT("/GUI/LoginUsername"), cfg_LoginUsername);
-	m_cfg->Write(wxT("/GUI/LoginPassword"), cfg_LoginPassword); // in md5/sha1 hash format
-	m_cfg->Write(wxT("/GUI/RememberLogin"), (bool)cfg_RememberLogin);
+	setValue("/GUI/LoginUsername", cfg_LoginUsername);
+	setValue("/GUI/LoginPassword", cfg_LoginPassword); // in md5/sha1 hash format
+	setValue("/GUI/RememberLogin", cfg_RememberLogin);
 
 	// Transfer
-	m_cfg->Write(wxT("/Transfers/download_location"), cfg_download_location);
-	m_cfg->Write(wxT("/Transfers/proxy"), cfg_proxy);
-	m_cfg->Write(wxT("/Transfers/proxy_login"), cfg_proxy_login);
-	m_cfg->Write(wxT("/Transfers/proxy_type"), cfg_proxy_type);
+	setValue("/Transfers/download_location", cfg_download_location);
+	setValue("/Transfers/proxy", cfg_proxy);
+	setValue("/Transfers/proxy_login", cfg_proxy_login);
+	setValue("/Transfers/proxy_type", cfg_proxy_type);
 
 	// HTTP Transfer
 
 	// BitTorrent
-	m_cfg->Write(wxT("/BitTorrent/download_speed"), (int)cfg_download_speed);
-	m_cfg->Write(wxT("/BitTorrent/upload_speed"), (int)cfg_upload_speed);
-	m_cfg->Write(wxT("/BitTorrent/max_peers"), (int)cfg_max_peers);
-	m_cfg->Write(wxT("/BitTorrent/listen_port"), (int)cfg_listen_port);
-	m_cfg->Write(wxT("/BitTorrent/upload_slots_limit"), (int)cfg_upload_slots_limit);
-	m_cfg->Write(wxT("/BitTorrent/half_open_limit"), (int)cfg_half_open_limit);
-	m_cfg->Write(wxT("/BitTorrent/poll_interval"), (int)cfg_poll_interval);
-	m_cfg->Write(wxT("/BitTorrent/wait_retry"), (int)cfg_wait_retry);
-	m_cfg->Write(wxT("/BitTorrent/bind_port_start"), (int)cfg_bind_port_start);
-	m_cfg->Write(wxT("/BitTorrent/bind_port_end"), (int)cfg_bind_port_end);
-	m_cfg->Write(wxT("/BitTorrent/preferred_ratio"), (int)cfg_preferred_ratio);
-	m_cfg->Write(wxT("/BitTorrent/log_level"), cfg_log_level);
-	m_cfg->Write(wxT("/BitTorrent/ipfilter_file"), cfg_ipfilter_file);
-	m_cfg->Write(wxT("/BitTorrent/allocation_mod"), cfg_allocation_mode);
+	setValue("/BitTorrent/download_speed", cfg_download_speed);
+	setValue("/BitTorrent/upload_speed", cfg_upload_speed);
+	setValue("/BitTorrent/max_peers", cfg_max_peers);
+	setValue("/BitTorrent/listen_port", cfg_listen_port);
+	setValue("/BitTorrent/upload_slots_limit", cfg_upload_slots_limit);
+	setValue("/BitTorrent/half_open_limit", cfg_half_open_limit);
+	setValue("/BitTorrent/poll_interval", cfg_poll_interval);
+	setValue("/BitTorrent/wait_retry", cfg_wait_retry);
+	setValue("/BitTorrent/bind_port_start", cfg_bind_port_start);
+	setValue("/BitTorrent/bind_port_end", cfg_bind_port_end);
+	setValue("/BitTorrent/preferred_ratio", cfg_preferred_ratio);
+	setValue("/BitTorrent/log_level", cfg_log_level);
+	setValue("/BitTorrent/ipfilter_file", cfg_ipfilter_file);
+	setValue("/BitTorrent/allocation_mode", cfg_allocation_mode);
 	
-	wxFileOutputStream output_config_file(m_configfile);
-	m_cfg->Save(output_config_file);
 }
 
 void DDPSConfig::Load()
 {
-	m_cfg->Read(wxT("/GUI/RememberLogin"), &cfg_RememberLogin, false);
-	m_cfg->Read(wxT("/GUI/LoginUsername"), &cfg_LoginUsername, wxT(""));
-	m_cfg->Read(wxT("/GUI/LoginPassword"), &cfg_LoginPassword, wxT(""));
+	qDebug("Loading Config File");
+	cfg_RememberLogin = value("/GUI/RememberLogin", false).toBool();
+	cfg_LoginUsername = value("/GUI/LoginUsername", "").toString();
+	cfg_LoginPassword = value("/GUI/LoginPassword", "").toString();
 
 	// Transfer
-	m_cfg->Read(wxT("/Transfers/download_location"), &cfg_download_location, wxT("./download-files/"));
-	m_cfg->Read(wxT("/Transfers/proxy"), &cfg_proxy, wxT(""));
-	m_cfg->Read(wxT("/Transfers/proxy_login"), &cfg_proxy_login, wxT(""));
-	m_cfg->Read(wxT("/Transfers/proxy_type"), &cfg_proxy_type, wxT("socks5"));
+	cfg_download_location = value("/Transfers/download_location", "./download-files/").toString();
+	cfg_proxy= value("/Transfers/proxy", "").toString();
+	cfg_proxy_login = value("/Transfers/proxy_login", "").toString();
+	cfg_proxy_type = value("/Transfers/proxy_type", "socks5").toString();
 
 	// HTTP Transfer
 
 	// BitTorrent
-	m_cfg->Read(wxT("/BitTorrent/download_speed"), &cfg_download_speed, 200);
-	m_cfg->Read(wxT("/BitTorrent/upload_speed"), &cfg_upload_speed, 190);
-	m_cfg->Read(wxT("/BitTorrent/max_peers"), &cfg_max_peers, 30);
-	m_cfg->Read(wxT("/BitTorrent/listen_port"), &cfg_listen_port, 6881);
-	m_cfg->Read(wxT("/BitTorrent/upload_slots_limit"), &cfg_upload_slots_limit, 3);
-	m_cfg->Read(wxT("/BitTorrent/half_open_limit"), &cfg_half_open_limit, 10);
-	m_cfg->Read(wxT("/BitTorrent/poll_interval"), &cfg_poll_interval, 2);
-	m_cfg->Read(wxT("/BitTorrent/wait_retry"), &cfg_wait_retry, 30);
-	m_cfg->Read(wxT("/BitTorrent/bind_port_start"), &cfg_bind_port_start, 0);
-	m_cfg->Read(wxT("/BitTorrent/bind_port_end"), &cfg_bind_port_end, 0);
-	m_cfg->Read(wxT("/BitTorrent/preferred_ratio"), &cfg_preferred_ratio, 200);
-	m_cfg->Read(wxT("/BitTorrent/log_level"), &cfg_log_level, wxT("info"));
-	m_cfg->Read(wxT("/BitTorrent/ipfilter_file"), &cfg_ipfilter_file, wxT(""));
-	m_cfg->Read(wxT("/BitTorrent/allocation_mod"), &cfg_allocation_mode, wxT("full"));
+	cfg_download_speed = value("/BitTorrent/download_speed", 200).toInt();
+	cfg_upload_speed = value("/BitTorrent/upload_speed", 190).toInt();
+	cfg_max_peers = value("/BitTorrent/max_peers", 30).toInt();
+	cfg_listen_port = value("/BitTorrent/listen_port", 6881).toInt();
+	cfg_upload_slots_limit = value("/BitTorrent/upload_slots_limit", 3).toInt();
+	cfg_half_open_limit = value("/BitTorrent/half_open_limit", 10).toInt();
+	cfg_poll_interval = value("/BitTorrent/poll_interval", 2).toInt();
+	cfg_wait_retry = value("/BitTorrent/wait_retry", 30).toInt();
+	cfg_bind_port_start = value("/BitTorrent/bind_port_start", 0).toInt();
+	cfg_bind_port_end = value("/BitTorrent/bind_port_end", 0).toInt();
+	cfg_preferred_ratio = value("/BitTorrent/preferred_ratio", 200).toInt();
+	cfg_log_level = value("/BitTorrent/log_level", "info").toString();
+	cfg_ipfilter_file = value("/BitTorrent/ipfilter_file", "").toString();
+	cfg_allocation_mode = value("/BitTorrent/allocation_mode", "full").toString();
 }

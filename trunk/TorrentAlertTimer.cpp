@@ -1,11 +1,4 @@
-#include <wx/wxprec.h>
-
-#ifndef WX_PRECOMP
-	#include <wx/wx.h>
-#endif
-
-#include <wx/utils.h>
-#include <wx/timer.h>
+#include <QtGui>
 
 #include <libtorrent/config.hpp>
 #include <libtorrent/entry.hpp>
@@ -15,7 +8,7 @@
 
 #include "TorrentAlertTimer.h"
 
-TorrentAlertTimer::TorrentAlertTimer(libtorrent::session &s) : wxTimer(), session(s)
+TorrentAlertTimer::TorrentAlertTimer(libtorrent::session &s) : QTimer(), session(s)
 {
 }
 
@@ -33,7 +26,7 @@ void TorrentAlertTimer::Notify()
 		{
 			//event_string << esc("33");
 		}
-		wxLogDebug(wxString(a->message().c_str(), wxConvUTF8));
+		//QLogDebug(wxString(a->message().c_str(), wxConvUTF8));
 		handle_alert(a.get());
 		a = session.pop_alert();
 	}
@@ -41,7 +34,7 @@ void TorrentAlertTimer::Notify()
 
 void TorrentAlertTimer::start()
 {
-	wxTimer::Start(100);
+	QTimer::Start(100);
 }
 
 void TorrentAlertTimer::handle_alert(libtorrent::alert *a)
