@@ -52,14 +52,14 @@ DDPSTabbed::DDPSTabbed(QWidget *parent)
 	: QTabWidget(parent)
 {
 #ifdef BUILTIN_BROWSER
-	Home = new DDPSBrowser;
+	Home = new DDPSBrowser(this);
 	Home->home = QUrl(HOMEPAGE);
 	Home->GotoHomepage();
 	addTab(Home, tr("Browser"));
 #endif
 
 #ifdef COMMUNITY_PORTAL
-	Community = new DDPSBrowser;
+	Community = new DDPSBrowser(this);
 	Community->home = QUrl(COMMUNITYPAGE);
 	Community->GotoHomepage();
 	addTab(Community, tr("Community"));

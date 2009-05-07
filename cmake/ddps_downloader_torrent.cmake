@@ -1,5 +1,4 @@
 IF(${TORRENT_DOWNLOADER} MATCHES ON)
-	INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_libtorrent.cmake )
 	SET(SRCS ${SRCS} 
 		TorrentAlertTimer.cpp
 #		TorrentBencode.cpp

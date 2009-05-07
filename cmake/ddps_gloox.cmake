@@ -1,3 +1,4 @@
+IF(${CHAT_ENABLED} MATCHES ON)
 include( FindZLIB )
 include( CheckFunctionExists )
 
@@ -20,8 +21,11 @@ INCLUDE_DIRECTORIES(
 	gloox/src
 )
 
-add_library( gloox STATIC ${gloox_SRCS} )
+set_source_files_properties( gloox/src/connectiontcpbase.cpp PROPERTIES COMPILE_FLAGS -Dsocklen_t=int)
+
+add_library( gloox ${gloox_SRCS} )
 target_link_libraries( gloox ${LIBS} )
 
 SET(gloox_LIB gloox)
 SET(DDPS_LIBS ${DDPS_LIBS} ${gloox_LIB})
+ENDIF(${CHAT_ENABLED} MATCHES ON)

@@ -4,13 +4,16 @@
 	#include <QtGui>
 	#include <QtWebKit>
 	class DDPSBrowserView;
+	class DDPSTabbed;
+	class TransferManager;
 	class DDPSBrowser : public QWidget
 	{
 		public:
-			DDPSBrowser(QWidget *parent = 0);
+			DDPSBrowser(DDPSTabbed *f, QWidget *parent = 0);
 			void GotoHomepage();
 			QUrl home;
 			DDPSBrowserView *browser;
+			DDPSTabbed *frame;
 		public slots:
 			void OnPrev();
 			void OnNext();
@@ -26,7 +29,9 @@
 	class DDPSBrowserView : public QWebView
 	{
 		public:
-			DDPSBrowserView(QWidget *parent =0);
+			DDPSBrowserView(DDPSTabbed *f, QWidget *parent =0);
+			DDPSBrowser *browserWidget;
+			DDPSTabbed *frame;
 		public slots:
 			void myProtocol(const QUrl &url);
 		signals:

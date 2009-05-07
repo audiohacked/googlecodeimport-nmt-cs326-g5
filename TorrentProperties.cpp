@@ -38,9 +38,9 @@ TorrentProperties::TorrentProperties(QString const& title, libtorrent::torrent_h
 	cLayout->addWidget(tor_date, 			1, 1);
 
 	mLayout->addWidget(tor_header_info);
-	mLayout->addWidget(iLayout);
+	mLayout->addLayout(iLayout);
 	mLayout->addWidget(tor_header_creator);
-	mLayout->addWidget(cLayout);
+	mLayout->addLayout(cLayout);
 
 	setLayout(mLayout);
 }
@@ -52,45 +52,72 @@ TorrentProperties::~TorrentProperties()
 
 void TorrentProperties::TorrentInformation()
 {
-	tor_header_info = new QLabel(tr("Torrent Information"));
-	tor_name_label = new QLabel(tr("Name: "));
-	tor_name = new QLabel(tr(handle.name().c_str()));
+	tor_header_info = new QLabel(QString("Torrent Information"));
+	tor_name_label = new QLabel(QString("Name: "));
+	tor_name = new QLabel(QString::fromStdString(handle.name()));
 
 
-	tor_size_label = new QLabel(tr("Size: "));
-	tor_size = new QLabel(tr(""));
+	tor_size_label = new QLabel(QString("Size: "));
+	tor_size = new QLabel(QString(""));
+	QString qTorSizeStr;
+	QString qTorTotalSize;
+	QString qTorNumFiles;
 	if (i.total_size() > 1000)
+	{
 		if (i.total_size() > 1000000)
+		{
 			if (i.total_size() > 1000000000) 
-				tor_size->setText(QString::sprintf("%i Files, %d GBytes", i.num_files(), i.total_size()/1000000000));
-			else tor_size->setText(wxString::sprintf("%i Files, %d MBytes", i.num_files(), i.total_size()/1000000));
-		else tor_size->setText(wxString::sprintf("%i Files, %d KBytes", i.num_files(), i.total_size()/1000));
-	else tor_size->setText(wxString::sprintf("%i Files, %d Bytes", i.num_files(), i.total_size()));
+			{
+				qTorTotalSize.setNum((float)i.total_size()/1000000000, 'g', 2);
+				qTorNumFiles.setNum(i.num_files());
+				qTorSizeStr = QString("%1 Files, %2 GBytes").arg( qTorNumFiles, qTorTotalSize );
+			}
+			else
+			{
+				qTorTotalSize.setNum((float)i.total_size()/1000000, 'g', 2);
+				qTorNumFiles.setNum(i.num_files());
+				qTorSizeStr = QString("%1 Files, %2 MBytes").arg( qTorNumFiles, qTorTotalSize );
+			}
+		}
+		else
+		{
+			qTorTotalSize.setNum((float)i.total_size()/1000, 'g', 2);
+			qTorNumFiles.setNum(i.num_files());
+			qTorSizeStr = QString("%1 Files, %2 KBytes").arg( qTorNumFiles, qTorTotalSize );
+		}
+	}
+	else
+	{
+		qTorTotalSize.setNum((float)i.total_size(), 'g', 2);
+		qTorNumFiles.setNum(i.num_files());
+		qTorSizeStr = QString("%1 Files, %2 Bytes").arg( qTorNumFiles, qTorTotalSize );
+	}
+	tor_size->setText(qTorSizeStr);
 
 
-	tor_tracker_label = new QLabel(tr("Trackers: "));
-	tor_tracker = new QLineEdit(tr(""));
+	tor_tracker_label = new QLabel(QString("Trackers: "));
+	tor_tracker = new QLineEdit(QString(""));
 	QString tracker_str("");
 	for (std::vector<libtorrent::announce_entry>::const_iterator j=i.trackers().begin(); j < i.trackers().end(); ++j)
 	{
-		tracker_str += QString((*j).url.c_str()) + tr("\n");
+		tracker_str += QString((*j).url.c_str()) + QString("\n");
 	}
 	tor_tracker->setText(tracker_str);
 
 
-	tor_hash_label = new QLabel(tr("Hash: "));
+	tor_hash_label = new QLabel(QString("Hash: "));
 	tor_hash = new QLabel(QString(boost::lexical_cast<std::string>(i.info_hash()).c_str()));
 
 
-	tor_secure_label = new QLabel(tr("Secure: "));
-	tor_secure = new QLabel(tr(""));
+	tor_secure_label = new QLabel(QString("Secure: "));
+	tor_secure = new QLabel(QString(""));
 	if (i.priv())
-		tor_secure->setText(tr("Private Torrent"));
+		tor_secure->setText(QString("Private Torrent"));
 	else
-		tor_secure->setText(tr("Public Torrent"));
+		tor_secure->setText(QString("Public Torrent"));
 
 
-	tor_comment_label = new QLabel(tr("Comment: "));
+	tor_comment_label = new QLabel(QString("Comment: "));
 	tor_comment = new QLineEdit(QString(i.comment().c_str()));
 }
 
@@ -99,13 +126,13 @@ void TorrentProperties::TorrentInformation()
 //#include <iostream>
 void TorrentProperties::TorrentCreator()
 {
-	tor_header_creator = new QLabel(tr("Created By"));
-	tor_creator_label = new QLabel(tr("Creator: "));
-	tor_creator = new QLabel(tr("N/A"));
+	tor_header_creator = new QLabel(QString("Created By"));
+	tor_creator_label = new QLabel(QString("Creator: "));
+	tor_creator = new QLabel(QString("N/A"));
 	//QString(i.creator().c_str(), wxConvUTF8)
 	
-	tor_date_label = new QLabel(tr("Date: "));
-	tor_date = new QLabel(tr(""));
+	tor_date_label = new QLabel(QString("Date: "));
+	tor_date = new QLabel(QString(""));
 	//std::string date_str = to_simple_string(i.creation_date().get());
 	//tor_date.setText( QString(date_str.c_str()) );
 }

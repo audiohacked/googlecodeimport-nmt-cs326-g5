@@ -2,11 +2,9 @@
 #define __TORRENT_PROPERTIES_H
 
 	#include <QtGui>
-	#include <wx/string.h>
-	#include <wx/dialog.h>
 	#include <libtorrent/session.hpp>
 
-	class TorrentProperties : public wxDialog
+	class TorrentProperties : public QDialog
 	{
 		public:
 			TorrentProperties(QString const& title, libtorrent::torrent_handle &h, QWidget *parent);
