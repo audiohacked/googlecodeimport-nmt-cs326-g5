@@ -12,8 +12,8 @@ OPTION(DOWNLOADER         "Add the Built-in Downloader Support"       ON)
 #OPTION(DEVEL_TESTING      "Skip the login routines"                   ON)
 #OPTION(DEBUG_MENU         "Enable Debug Menu for Transfer Manager"   OFF)
 #OPTION(IMG_BUTTONS        "Enable use of Bitmap-styled Buttons"      OFF)
-OPTION(HTTP_DOWNLOADER    "Add the Built-in HTTP Downloader Support"  ON)
-OPTION(TORRENT_DOWNLOADER "Add the Built-in BitTorrent Support"      OFF)
+OPTION(HTTP_DOWNLOADER    "Add the Built-in HTTP Downloader Support" OFF)
+OPTION(TORRENT_DOWNLOADER "Add the Built-in BitTorrent Support"       ON)
 OPTION(UPDATER            "Add the Built-in Updater Support"         OFF)
 
 SET(NEWSPAGE
@@ -91,6 +91,7 @@ INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_sys_win32.cmake )
 
 INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_boost.cmake )
 INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_gloox.cmake )
+INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_libtorrent.cmake )
 
 INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_browser.cmake )
 INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_chat.cmake )

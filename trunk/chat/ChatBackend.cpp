@@ -212,12 +212,12 @@ void ChatRoster::handleMessage( const Message &msg, MessageSession *msgSes )
 	QString from = QString::fromStdString(msgSes->target().username());
 	QString text = QString::fromStdString(msg.body());
 	qDebug() << "handle incomming Messages:" << from ;//<< "; has Win?: "<< contact->hasWin;
-	for each (QTreeWidgetItem *i in tree->root->takeChildren())
+	QTreeWidgetItemIterator it(tree->root, QTreeWidgetItemIterator::UserFlag);
+	while(*it)
 	{
-		ChatContactItemData *contact = (ChatContactItemData*)i;
+		ChatContactItemData *contact = (ChatContactItemData*)*it;
 		if(contact->jid.username() == msgSes->target().username())
 		{
-			tree->root->addChild(i);
 			if (contact->hasWin)
 			{
 				contact->win->show();
@@ -228,10 +228,7 @@ void ChatRoster::handleMessage( const Message &msg, MessageSession *msgSes )
 				qDebug() << "For some reason this contact has no window!";
 			}
 		}
-		else
-		{
-			tree->root->addChild(i);
-		}
+		++it;
 	}
 }
 

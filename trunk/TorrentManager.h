@@ -16,22 +16,24 @@
 
 	*/
 	class DDPSConfig;
+	class TransferManager;
 	class TorrentTransferManager
 	{
 		public:
+			TransferManager *tree;
 			libtorrent::session se;
 			libtorrent::session_settings settings;
 			libtorrent::session_status status;
-			download_handles_t *handles;
 			TorrentAlertTimer *alert_timer;
 			DDPSConfig *torrent_cfg;
-			TorrentTransferManager(download_handles_t *l);
+			TorrentTransferManager(TransferManager *t);
 			~TorrentTransferManager();
 
-			libtorrent::torrent_handle AddMagnetURI(char const* uri, long index);
-			libtorrent::torrent_handle AddTorrentFile(char const* file, long index);
+			libtorrent::torrent_handle AddTorrentFile(char const* file);
 			libtorrent::torrent_handle AddTorrentHash(char const* name, 
-				char const* tracker, libtorrent::sha1_hash const& hash, long index);
+				char const* tracker, std::string hash);
+
+			void update_item_tree();
 
 			bool startTransfer();
 			bool cancelTransfer();

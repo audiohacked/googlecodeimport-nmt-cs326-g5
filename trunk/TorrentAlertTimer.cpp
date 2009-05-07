@@ -6,10 +6,14 @@
 #include <libtorrent/session.hpp>
 #include <libtorrent/alert_types.hpp>
 
+#include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/fstream.hpp>
+
 #include "TorrentAlertTimer.h"
 
 TorrentAlertTimer::TorrentAlertTimer(libtorrent::session &s) : QTimer(), session(s)
 {
+	connect(this, SIGNAL(timeout()), this, SLOT(Notify()));
 }
 
 void TorrentAlertTimer::Notify()
@@ -18,23 +22,18 @@ void TorrentAlertTimer::Notify()
 	a = session.pop_alert();
 	while (a.get())
 	{
-		if (a->category() & libtorrent::alert::error_notification)
+		/*if (a->category() & libtorrent::alert::error_notification)
 		{
 			//event_string << esc("31");
 		}
 		else if (a->category() & (libtorrent::alert::peer_notification | libtorrent::alert::storage_notification))
 		{
 			//event_string << esc("33");
-		}
-		//QLogDebug(wxString(a->message().c_str(), wxConvUTF8));
+		}*/
+		qDebug() << QString::fromStdString( a->message() );
 		handle_alert(a.get());
 		a = session.pop_alert();
 	}
-}
-
-void TorrentAlertTimer::start()
-{
-	QTimer::Start(100);
 }
 
 void TorrentAlertTimer::handle_alert(libtorrent::alert *a)

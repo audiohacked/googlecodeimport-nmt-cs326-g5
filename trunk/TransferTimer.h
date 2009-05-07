@@ -5,11 +5,14 @@
 	
 	class TransferManagerTimer : public QTimer
 	{
+		Q_OBJECT
 		public:
 			TransferManagerTimer(TransferManager *listctrl, QObject *parent);
-			void Notify();
-			void start();
 			TransferManager *ctrl;
+		public slots:
+			void Notify();
+		private:
 	};
+
 
 #endif

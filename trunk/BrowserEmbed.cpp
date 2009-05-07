@@ -1,13 +1,16 @@
 #include <QtGui>
 #include <QtWebKit>
 
+#include "AppWidget.h"
+#include "TransferManager.h"
 #include "BrowserEmbed.h"
 #include "config.h"
 
-DDPSBrowser::DDPSBrowser(QWidget *parent) 
+DDPSBrowser::DDPSBrowser(DDPSTabbed *f, QWidget *parent) 
 : QWidget(parent)
 {
-	browser = new DDPSBrowserView(parent);
+	frame = f;
+	browser = new DDPSBrowserView(f, parent);
 	
 	QPushButton *back, *forward, *refresh, *stop, *home;
 	
@@ -47,9 +50,10 @@ DDPSBrowser::DDPSBrowser(QWidget *parent)
 	browser->show();
 }
 
-DDPSBrowserView::DDPSBrowserView(QWidget *parent)
+DDPSBrowserView::DDPSBrowserView(DDPSTabbed *f, QWidget *parent)
 	:QWebView(parent)
 {
+	frame = f;
 	page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
 	connect(page(), SIGNAL(linkClicked(const QUrl &)), this, SLOT(myProtocol(const QUrl &)) );
 	page()->settings()->setAttribute(QWebSettings::AutoLoadImages, true);
@@ -120,6 +124,7 @@ void DDPSBrowserView::myProtocol(const QUrl &url)
 			}
 
 			QString str = QString("torrent tracker: ")+tracker+QString("\n hash: ")+hash;
+			//frame->Downloads->add_item_tor();
 			/*QMessageBox msgBox;
 			msgBox.setText(str);
 			msgBox.setStandardButtons(QMessageBox::Ok);
@@ -130,11 +135,13 @@ void DDPSBrowserView::myProtocol(const QUrl &url)
 		else if (url.host() == tr("httpdownload"))
 		{
 			QString str = QString("http download: http:/")+url.path();
+			QUrl newurl = QUrl(tr("http:/")+url.path());
 			/*QMessageBox msgBox;
 			msgBox.setText(str);
 			msgBox.setStandardButtons(QMessageBox::Ok);
 			msgBox.setDefaultButton(QMessageBox::Ok);
 			msgBox.exec();*/
+			frame->Downloads->add_item_http(frame->Downloads->media_installed, newurl);
 			return;
 		}
 	}

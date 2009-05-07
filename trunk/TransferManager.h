@@ -1,14 +1,23 @@
 #ifndef __TRANSFER_MANAGER_H
 #define __TRANSFER_MANAGER_H
 	#include <QtGui>
+
 	class TransferManagerTimer;
+	class TorrentTransferManager;
+	class TorrentDataItem;
+	class HttpDataItem;
+	class TransferUpdateViewThread;
 	class TransferManager : public QTreeWidget
 	{
+		Q_OBJECT
 		public:
 			TransferManager(QWidget *parent = 0);
 			~TransferManager();
 			void add_item(QTreeWidgetItem *item, QStringList &list );
+			void add_item_tor(QTreeWidgetItem *item, TorrentDataItem *tor );
+			void add_item_http(QTreeWidgetItem *item, const QUrl &url);
 			TransferManagerTimer *timer;
+			TorrentTransferManager *tor;
 			QTreeWidgetItem *games_installed;
 			QTreeWidgetItem *media_installed;
 			QTreeWidgetItem *tools_installed;
@@ -35,7 +44,6 @@
 			QTreeWidgetItem *games;
 			QTreeWidgetItem *media;
 			QTreeWidgetItem *tools;
-			Q_OBJECT
 	};
 
 #endif
