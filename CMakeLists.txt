@@ -12,7 +12,7 @@ OPTION(DOWNLOADER         "Add the Built-in Downloader Support"       ON)
 #OPTION(DEVEL_TESTING      "Skip the login routines"                   ON)
 #OPTION(DEBUG_MENU         "Enable Debug Menu for Transfer Manager"   OFF)
 #OPTION(IMG_BUTTONS        "Enable use of Bitmap-styled Buttons"      OFF)
-OPTION(HTTP_DOWNLOADER    "Add the Built-in HTTP Downloader Support" OFF)
+OPTION(HTTP_DOWNLOADER    "Add the Built-in HTTP Downloader Support"  ON)
 OPTION(TORRENT_DOWNLOADER "Add the Built-in BitTorrent Support"       ON)
 OPTION(UPDATER            "Add the Built-in Updater Support"         OFF)
 
@@ -104,6 +104,7 @@ CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake
 	${CMAKE_BINARY_DIR}/config.h ESCAPE_QUOTES)
 
 #INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_custom_commands.cmake )
+INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_packaging.cmake )
 
 QT4_WRAP_CPP( MOC_SRCS ${HDRS})
 
