@@ -1,8 +1,5 @@
 #ifndef __DB_MANAGER_H
 #define __DB_MANAGER_H
-	#include <QtGui>
-	//#include <QtNetwork>
-	#include <QtSql>
 	class DBManager
 	{
 		private:

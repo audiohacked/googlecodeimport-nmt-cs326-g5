@@ -1,12 +1,5 @@
 #ifndef __CHAT_ROSTER_WINDOW_H
 #define __CHAT_ROSTER_WINDOW_H
-	#include <wx/wxprec.h>
-	#ifndef WX_PRECOMP
-		#include <wx/wx.h>
-	#endif
-	
-	#include <wx/treectrl.h>
-
 	class ChatWindowRosterPanel : public wxPanel
 	{
 		public:

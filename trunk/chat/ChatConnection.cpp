@@ -1,3 +1,10 @@
+#include <client.h>
+#include <presencehandler.h>
+#include <presence.h>
+#include <connectionlistener.h>
+#include <connectiontcpclient.h>
+#include <disco.h>
+#include <gloox.h>
 #include "ChatConnection.h"
 
 ChatConn::ChatConn()

@@ -1,7 +1,6 @@
 #ifndef __APP_FRAME_H
 #define __APP_FRAME_H
 	#include <QtGui>
-	
 	class DDPSBrowser;
 	class DDPSTabbed;
 	class SettingsWidget;

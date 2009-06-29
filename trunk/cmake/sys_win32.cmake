@@ -30,4 +30,7 @@ IF(WIN32)
 		# identifier was truncated to '255' characters in the debug information
 		ADD_DEFINITIONS(-wd4786)
 	ENDIF(MSVC)
+
+	#set_source_files_properties( gloox/src/connectiontcpbase.cpp PROPERTIES COMPILE_FLAGS -Dsocklen_t=int)
+
 ENDIF(WIN32)

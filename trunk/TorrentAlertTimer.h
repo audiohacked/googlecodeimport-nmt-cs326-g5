@@ -1,14 +1,12 @@
 #ifndef __TORRENT_ALERT_TIMER_H
 #define __TORRENT_ALERT_TIMER_H
-
-	#include <QtGui>
+#include <QtGui>
 
 	#include <libtorrent/config.hpp>
 	#include <libtorrent/entry.hpp>
 	#include <libtorrent/bencode.hpp>
 	#include <libtorrent/session.hpp>
 	#include <libtorrent/alert_types.hpp>
-
 	#include <boost/filesystem/operations.hpp>
 	#include <boost/filesystem/fstream.hpp>
 

@@ -1,4 +1,5 @@
 #include <QtGui>
+#include <QObject>
 #include "AppConfig.h"
 
 DDPSConfig::DDPSConfig(): QSettings("./rc_ddps", QSettings::IniFormat)

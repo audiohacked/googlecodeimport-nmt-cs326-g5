@@ -1,8 +1,6 @@
 #ifndef __CHAT_WINDOW_H
 #define __CHAT_WINDOW_H
-
 	#include <QtGui>
-		
 	#include <client.h>
 	#include <message.h>
 	#include <messagehandler.h>
@@ -12,8 +10,7 @@
 	#include <chatstatehandler.h>
 	#include <chatstatefilter.h>
 	#include <gloox.h>
-	using namespace gloox;
-	
+	using namespace gloox;	
 	class ChatContactItemData;
 	class ChatWindowChat : public QDialog
 	{
@@ -33,7 +30,6 @@
 		private:
 			Q_OBJECT
 	};
-	
 /*	
 	class ChatWindowGroupChat : public QWidget
 	{

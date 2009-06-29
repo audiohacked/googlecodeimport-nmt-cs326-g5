@@ -1,25 +1,4 @@
-#include <gloox/client.h>
-#include <gloox/connectionlistener.h>
-#include <gloox/mucroomhandler.h>
-#include <gloox/mucroom.h>
-#include <gloox/disco.h>
-#include <gloox/presence.h>
-#include <gloox/message.h>
-#include <gloox/dataform.h>
-#include <gloox/gloox.h>
-#include <gloox/lastactivity.h>
-#include <gloox/loghandler.h>
-#include <gloox/logsink.h>
 using namespace gloox;
-
-#include <stdio.h>
-#include <locale.h>
-#include <string>
-
-#ifdef WIN32
-#include <windows.h>
-#endif
-
 class ChatGroup : public MUCRoomHandler
 {
   public:

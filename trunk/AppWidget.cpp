@@ -1,11 +1,10 @@
 #include <QtGui>
 #include <QtWebKit>
-#include <QtDebug>
 
+#include "chat/ChatRoster.h"
+#include "SettingsDialog.h"
 #include "TransferManager.h"
 #include "BrowserEmbed.h"
-#include "SettingsDialog.h"
-#include "chat/ChatRoster.h"
 #include "AppWidget.h"
 #include "config.h"
 
@@ -15,7 +14,9 @@ DDPSFrame::DDPSFrame(QWidget *parent)
 	//log_file = new QFile("./ddps.log");
 	//log_file->open(QIODevice::WriteOnly | QIODevice::Append);
 	//log = new QDebug(log_file);
+	#if CHAT_ENABLED
 	chat = new ChatWindowRoster(this);
+	#endif
 	
 	tabs = new DDPSTabbed;
 	tabs->show();

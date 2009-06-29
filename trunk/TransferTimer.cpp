@@ -1,10 +1,6 @@
 #include <QtGui>
-
-#include "TorrentManager.h"
-#include "TransferManagerData.h"
 #include "TransferManager.h"
 #include "TransferTimer.h"
-
 TransferManagerTimer::TransferManagerTimer(TransferManager *listctrl, QObject *parent) : QTimer(parent)
 {
 	ctrl = listctrl;

@@ -1,7 +1,10 @@
 #include <QtGui>
+#if CRYPTO
+#include <QtCrypto>
+#endif
+
 #include "AppConfig.h"
 #include "AppLogin.h"
-
 
 AppLoginWindow::AppLoginWindow(QWidget *parent)
 : QDialog(parent)

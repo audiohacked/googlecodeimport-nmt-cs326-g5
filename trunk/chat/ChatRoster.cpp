@@ -1,9 +1,8 @@
 #include <QtGui>
+#include "ChatBackend.h"
 #include "ChatWindow.h"
 #include "ChatRosterData.h"
-#include "ChatBackend.h"
 #include "ChatRoster.h"
-
 ChatWindowRoster::ChatWindowRoster(QWidget *parent)
 :QDialog(parent)
 {

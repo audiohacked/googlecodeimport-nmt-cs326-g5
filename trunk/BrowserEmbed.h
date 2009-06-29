@@ -1,13 +1,13 @@
 #ifndef __BROWSER_EMBED_H
 #define __BROWSER_EMBED_H
-
-	#include <QtGui>
 	#include <QtWebKit>
+
 	class DDPSBrowserView;
 	class DDPSTabbed;
 	class TransferManager;
 	class DDPSBrowser : public QWidget
 	{
+		Q_OBJECT
 		public:
 			DDPSBrowser(DDPSTabbed *f, QWidget *parent = 0);
 			void GotoHomepage();
@@ -23,11 +23,11 @@
 		private:
 			//void linkClicked(const QUrl &url);
 			//void loadStarted();
-			Q_OBJECT
 	};
 
 	class DDPSBrowserView : public QWebView
 	{
+		Q_OBJECT
 		public:
 			DDPSBrowserView(DDPSTabbed *f, QWidget *parent =0);
 			DDPSBrowser *browserWidget;
@@ -38,7 +38,6 @@
 			void linkClicked(const QUrl &url);
 		private:
 			QUrl myurl;
-			Q_OBJECT
 	};
 
 #endif

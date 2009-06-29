@@ -1,5 +1,4 @@
-#include "ChatWindow.h"
-#include "ChatBackend.h"
+#include <QtGui>
 #include "ChatRosterData.h"
 
 ChatContactItemData::ChatContactItemData(QString contact, QString contact_jid)

@@ -1,10 +1,23 @@
 #include <QtGui>
-
+#include <client.h>
+#include <rostermanager.h>
+#include <message.h>
+#include <messagehandler.h>
+#include <messagesessionhandler.h>
+#include <messageeventhandler.h>
+#include <messageeventfilter.h>
+#include <chatstatehandler.h>
+#include <chatstatefilter.h>
+#include <presencehandler.h>
+#include <presence.h>
+#include <connectionlistener.h>
+#include <connectiontcpclient.h>
+#include <disco.h>
+#include <gloox.h>
 #include "AppConfig.h"
-
-#include "ChatWindow.h"
-#include "ChatRosterData.h"
 #include "ChatRoster.h"
+#include "ChatRosterData.h"
+#include "ChatWindow.h"
 #include "ChatBackend.h"
 
 ChatRoster::ChatRoster(ChatRosterTree *t, QObject *parent)

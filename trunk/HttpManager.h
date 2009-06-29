@@ -1,23 +1,7 @@
 #ifndef __HTTP_MANAGER_H
 #define __HTTP_MANAGER_H
-
 #include <QtGui>
 #include <QtNetwork>
-
-class FtpDownload;
-class HttpDownload;
-class HttpTransferManager : public QObject
-{
-	Q_OBJECT
-	public:
-		HttpTransferManager(QObject *parent = 0);
-		~HttpTransferManager(){};
-		HttpDownload *http;
-		FtpDownload *ftp;
-	public slots:
-		void AddDownload(const QUrl &url);
-};
-
 class FtpDownload : public QObject
 {
 	Q_OBJECT
@@ -51,6 +35,18 @@ signals:
 private slots:
 	void httpDone(bool error);
 	void file_progress(int done, int total);
+};
+
+class HttpTransferManager : public QObject
+{
+	Q_OBJECT
+	public:
+		HttpTransferManager(QObject *parent = 0);
+		~HttpTransferManager(){};
+		HttpDownload *http;
+		FtpDownload *ftp;
+	public slots:
+		void AddDownload(const QUrl &url);
 };
 
 #endif

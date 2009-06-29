@@ -2,6 +2,9 @@
 #define __APP_LOGIN_DLG_H
 
 #include <QtGui>
+#if CRYPTO
+#include <QtCrypto>
+#endif
 
 class DDPSConfig;
 

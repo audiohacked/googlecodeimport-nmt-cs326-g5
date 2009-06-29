@@ -1,25 +1,9 @@
 #include <QtGui>
-
-#include <libtorrent/config.hpp>
-#include <libtorrent/version.hpp>
-
-#include <libtorrent/session.hpp>
-#include <libtorrent/entry.hpp>
-#include <libtorrent/bencode.hpp>
-
-#include <libtorrent/identify_client.hpp>
-#include <libtorrent/alert_types.hpp>
-#include <libtorrent/ip_filter.hpp>
-
-#include <libtorrent/extensions/metadata_transfer.hpp>
-#include <libtorrent/extensions/ut_pex.hpp>
-#include <libtorrent/extensions/ut_metadata.hpp>
-
-#include "TransferManager.h"
-#include "TransferManagerData.h"
-#include "TorrentManager.h"
-//#include "TorrentBencode.h"
 #include "AppConfig.h"
+#include "TransferManager.h"
+#include "TransferManagerDataTor.h"
+#include "TorrentAlertTimer.h"
+#include "TorrentManager.h"
 
 int byte_kilo = 1000;
 
