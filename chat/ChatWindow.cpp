@@ -1,7 +1,4 @@
-#include <QtGui>
-
 #include "ChatRosterData.h"
-#include "ChatBackend.h"
 #include "ChatWindow.h"
 
 ChatWindowChat::ChatWindowChat(ChatContactItemData *id, QWidget *parent)

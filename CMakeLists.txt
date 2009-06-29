@@ -1,6 +1,6 @@
 PROJECT( DDPS )
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+CMAKE_MINIMUM_REQUIRED( VERSION 2.6 FATAL_ERROR )
 
 OPTION( BUILD_SHARED_LIBS "Set to OFF to build static libraries" OFF )
 #SET(CMAKE_CONFIGURATION_TYPES Debug Release RelWithDebInfo)
@@ -8,6 +8,7 @@ OPTION( BUILD_SHARED_LIBS "Set to OFF to build static libraries" OFF )
 OPTION(BUILTIN_BROWSER    "Add the Built-in Browser Support"          ON)
 OPTION(CHAT_ENABLED       "Add the Built-in Chat Support"             ON)
 OPTION(COMMUNITY_PORTAL   "Add the Built-in Community Support"        ON)
+OPTION(CRYPTO             "Add Crypto via QCA"                       OFF)
 OPTION(DOWNLOADER         "Add the Built-in Downloader Support"       ON)
 #OPTION(DEVEL_TESTING      "Skip the login routines"                   ON)
 #OPTION(DEBUG_MENU         "Enable Debug Menu for Transfer Manager"   OFF)
@@ -83,28 +84,29 @@ LINK_DIRECTORIES(
 	${CMAKE_BINARY_DIR}
 )
 
-INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_option_logic.cmake )
+INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/option_logic.cmake )
 
-INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_sys_linux.cmake )
-INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_sys_osx.cmake )
-INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_sys_win32.cmake )
+INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/sys_linux.cmake )
+INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/sys_osx.cmake )
+INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/sys_win32.cmake )
 
-INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_boost.cmake )
-INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_gloox.cmake )
-INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_libtorrent.cmake )
+INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/qca.cmake )
+INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/libtorrent.cmake )
+INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/boost.cmake )
+INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/gloox.cmake )
 
-INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_browser.cmake )
-INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_chat.cmake )
-INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_downloader.cmake )
-INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_downloader_http.cmake )
-INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_downloader_torrent.cmake )
-#INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_updater.cmake )
+INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/browser.cmake )
+INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/chat.cmake )
+INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/downloader.cmake )
+INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/downloader_http.cmake )
+INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/downloader_torrent.cmake )
+#INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/updater.cmake )
 
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake
 	${CMAKE_BINARY_DIR}/config.h ESCAPE_QUOTES)
 
-#INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_custom_commands.cmake )
-INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/ddps_packaging.cmake )
+#INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/custom_commands.cmake )
+INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/packaging.cmake )
 
 QT4_WRAP_CPP( MOC_SRCS ${HDRS})
 

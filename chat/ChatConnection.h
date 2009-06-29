@@ -1,19 +1,8 @@
 #ifndef __CHAT_CONNECTION_H
 #define __CHAT_CONNECTION_H
-
 	#include <QtGui>
 
-	#include <client.h>
-	
-	#include <presencehandler.h>
-	#include <presence.h>
-	
-	#include <connectionlistener.h>
-	#include <connectiontcpclient.h>
-	#include <disco.h>
-	#include <gloox.h>
 	using namespace gloox;
-
 	class ChatConn : public ConnectionListener, PresenceHandler, QWidget
 	{
 		public:

@@ -1,6 +1,5 @@
 #include <QtGui>
-#include <QtNetwork>
-
+#include "TransferManagerData.h"
 #include "HttpManager.h"
 
 HttpTransferManager::HttpTransferManager(QObject *parent)

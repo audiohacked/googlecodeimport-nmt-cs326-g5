@@ -1,6 +1,14 @@
 #include <QtGui>
-#include "ChatMessage.h"
-#include "ChatRosterData.h"
+#include <client.h>
+#include <message.h>
+#include <messagehandler.h>
+#include <messagesessionhandler.h>
+#include <messageeventhandler.h>
+#include <messageeventfilter.h>
+#include <chatstatehandler.h>
+#include <chatstatefilter.h>
+#include <gloox.h>
+#include "JabberMessage.h"
 
 /**
 new incoming chat:

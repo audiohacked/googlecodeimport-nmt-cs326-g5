@@ -1,15 +1,11 @@
 #ifndef __CHAT_ROSTER_DATA_H
 #define __CHAT_ROSTER_DATA_H
-
-	#include <QtGui>
-	
 	#include <client.h>
 	#include <gloox.h>
+	#include <QtGui>
 	using namespace gloox;
-
 	class ChatMsgSess;
 	class ChatWindowChat;
-
 	class ChatContactItemData : public QTreeWidgetItem
 	{
 		public:

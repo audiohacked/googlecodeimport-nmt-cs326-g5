@@ -1,0 +1,10 @@
+cmake_policy(VERSION 2.6)
+
+ADD_SUBDIRECTORY(qca)
+
+INCLUDE_DIRECTORIES(
+	${INCLUDE_DIRECTORIES}
+	qca/include/QtCrypto
+)
+
+SET(DDPS_LIBS ${DDPS_LIBS} libqca)

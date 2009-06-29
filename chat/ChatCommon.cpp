@@ -1,5 +1,8 @@
-#include "ChatCommon.h"
-#include "ChatRosterData.h"
+#include <string>
+#include <client.h>
+#include <gloox.h>
+
+using namespace gloox;
 
 std::string wx2glooxString( wxString str )
 {

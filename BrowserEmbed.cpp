@@ -1,8 +1,7 @@
 #include <QtGui>
 #include <QtWebKit>
-
-#include "AppWidget.h"
 #include "TransferManager.h"
+#include "AppWidget.h"
 #include "BrowserEmbed.h"
 #include "config.h"
 

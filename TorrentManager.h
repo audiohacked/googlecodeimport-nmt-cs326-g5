@@ -1,9 +1,18 @@
 #ifndef __TORRENT_MANAGER_H
 #define __TORRENT_MANAGER_H
+#include <QtGui>
 
+	#include <libtorrent/config.hpp>
+	#include <libtorrent/version.hpp>
 	#include <libtorrent/session.hpp>
-	#include "TorrentAlertTimer.h"
-
+	#include <libtorrent/entry.hpp>
+	#include <libtorrent/bencode.hpp>
+	#include <libtorrent/identify_client.hpp>
+	#include <libtorrent/alert_types.hpp>
+	#include <libtorrent/ip_filter.hpp>
+	#include <libtorrent/extensions/metadata_transfer.hpp>
+	#include <libtorrent/extensions/ut_pex.hpp>
+	#include <libtorrent/extensions/ut_metadata.hpp>
 	/*
 		construct a session
 		parse torrent files and add to session; or add torrent hashs to session
@@ -15,6 +24,7 @@
 		destruct session object
 
 	*/
+	class TorrentAlertTimer;
 	class DDPSConfig;
 	class TransferManager;
 	class TorrentTransferManager

@@ -1,9 +1,8 @@
 #include <QtGui>
-
-#include "TransferTimer.h"
-#include "TorrentManager.h"
 #include "HttpManager.h"
+#include "TransferTimer.h"
 #include "TransferManagerData.h"
+#include "TransferManagerDataTor.h"
 #include "TransferManager.h"
 
 TransferManager::TransferManager(QWidget *parent) : QTreeWidget(parent)
@@ -15,7 +14,9 @@ TransferManager::TransferManager(QWidget *parent) : QTreeWidget(parent)
 	setHeaderLabels(col_labels);
 
 	timer = new TransferManagerTimer(this, this);
+#ifdef TORRENT_DOWNLOADER
 	tor = new TorrentTransferManager(this);
+#endif
 	//http = new HttpTransferManager(this);
 
 	createItemRoots();
@@ -60,10 +61,12 @@ void TransferManager::add_item(QTreeWidgetItem *item, QStringList &list )
 	item->addChild(newItem);
 }
 
+#ifdef TORRENT_DOWNLOADER
 void TransferManager::add_item_tor(QTreeWidgetItem *item, TorrentDataItem *tor )
 {
 	item->addChild(tor);
 }
+#endif
 
 void TransferManager::add_item_http(QTreeWidgetItem *item, const QUrl &url)
 {
@@ -147,6 +150,7 @@ void TransferManager::OnItemSelected()
 
 void TransferManager::OnMenuStartItem()
 {
+#ifdef TORRENT_DOWNLOADER
 	if (m_SelectedItem->type() == (QTreeWidgetItem::UserType+1))
 	{
 		TorrentDataItem *tor = (TorrentDataItem*)m_SelectedItem;
@@ -154,10 +158,14 @@ void TransferManager::OnMenuStartItem()
 	}
 	else if (m_SelectedItem->type() == (QTreeWidgetItem::UserType+2))
 		return;
+#else
+	return;
+#endif
 }
 
 void TransferManager::OnMenuStopItem()
 {
+#ifdef TORRENT_DOWNLOADER
 	if (m_SelectedItem->type() == (QTreeWidgetItem::UserType+1))
 	{
 		TorrentDataItem *tor = (TorrentDataItem*)m_SelectedItem;
@@ -165,10 +173,14 @@ void TransferManager::OnMenuStopItem()
 	}
 	else if (m_SelectedItem->type() == (QTreeWidgetItem::UserType+2))
 		return;
+#else
+	return;
+#endif
 }
 
 void TransferManager::OnMenuPauseItem()
 {
+#ifdef TORRENT_DOWNLOADER
 	if (m_SelectedItem->type() == (QTreeWidgetItem::UserType+1))
 	{
 		TorrentDataItem *tor = (TorrentDataItem*)m_SelectedItem;
@@ -176,10 +188,14 @@ void TransferManager::OnMenuPauseItem()
 	}
 	else if (m_SelectedItem->type() == (QTreeWidgetItem::UserType+2))
 		return;
+#else
+	return;
+#endif
 }
 
 void TransferManager::OnMenuUpdateItem()
 {
+#ifdef TORRENT_DOWNLOADER
 	if (m_SelectedItem->type() == (QTreeWidgetItem::UserType+1))
 	{
 		TorrentDataItem *i = (TorrentDataItem*)m_SelectedItem;
@@ -190,10 +206,15 @@ void TransferManager::OnMenuUpdateItem()
 		HttpDataItem *i = (HttpDataItem*)m_SelectedItem;
 		i->update_item();
 	}
+#else
+	HttpDataItem *i = (HttpDataItem*)m_SelectedItem;
+	i->update_item();
+#endif
 }
 
 void TransferManager::OnMenuRemoveItem()
 {
+#ifdef TORRENT_DOWNLOADER
 	if (m_SelectedItem->type() == (QTreeWidgetItem::UserType+1))
 	{
 		TorrentDataItem *i = (TorrentDataItem*)m_SelectedItem;
@@ -201,13 +222,17 @@ void TransferManager::OnMenuRemoveItem()
 	}
 	else if (m_SelectedItem->type() == (QTreeWidgetItem::UserType+2))
 		return;
-
+#else
+	return;
+#endif
 }
 
 void TransferManager::OnMenuAddTorrent()
 {
+#ifdef TORRENT_DOWNLOADER
 	//tor->AddTorrentHash("test", "http://torrent.ubuntu.com:6969/announce", "60d5d82328b4547511fdeac9bf4d0112daa0ce00");
 	tor->AddTorrentFile("./test.torrent");
+#endif
 }
 
 void TransferManager::OnMenuAddHttpDownload()

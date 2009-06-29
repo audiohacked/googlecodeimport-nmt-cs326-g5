@@ -21,8 +21,6 @@ INCLUDE_DIRECTORIES(
 	gloox/src
 )
 
-set_source_files_properties( gloox/src/connectiontcpbase.cpp PROPERTIES COMPILE_FLAGS -Dsocklen_t=int)
-
 add_library( gloox ${gloox_SRCS} )
 target_link_libraries( gloox ${LIBS} )
 

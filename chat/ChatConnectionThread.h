@@ -1,10 +1,7 @@
 #ifndef __CHAT_CONNECTION_THREAD_H
 #define __CHAT_CONNECTION_THREAD_H
-
 	#include <QtGui>
-	
-	#include "ChatConnection.h"
-
+	class ChatConn;
 	class ChatConnThread : public QThread
 	{
 		public:

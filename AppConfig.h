@@ -1,6 +1,5 @@
 #ifndef __APP_CONFIG_H
 #define __APP_CONFIG_H
-
 	#include <QtGui>
 
 	class DDPSConfig : public QSettings

@@ -1,4 +1,6 @@
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+	set_source_files_properties( gloox/src/connectionsocks5proxy.cpp PROPERTIES COMPILE_FLAGS -Du_short="unsigned short")
+
 	LINK_DIRECTORIES(
 		${LINK_DIRECTORIES}
 		/opt/local/lib

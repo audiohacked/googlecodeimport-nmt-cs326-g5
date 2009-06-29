@@ -1,3 +1,4 @@
+#include <QtGui>
 #include <QtSql>
 #include "DBManager.h"
 

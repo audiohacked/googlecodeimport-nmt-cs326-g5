@@ -1,12 +1,9 @@
 #include <QtGui>
-
-#include "AppConfig.h"
-#include "AppLogin.h"
-#include "AppWidget.h"
 #include "BrowserEmbed.h"
 #include "chat/ChatRoster.h"
 #include "SettingsDialog.h"
-
+#include "AppWidget.h"
+#include "AppLogin.h"
 #include "AppMain.h"
 #include "config.h"
 

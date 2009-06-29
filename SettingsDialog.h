@@ -1,7 +1,6 @@
 #ifndef __SETTINGS_DIALOG_H
 #define __SETTINGS_DIALOG_H
-
-#include <QtGui>
+	#include <QtGui>
 
 class DDPSConfig;
 

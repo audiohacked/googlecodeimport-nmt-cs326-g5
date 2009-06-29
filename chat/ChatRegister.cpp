@@ -1,3 +1,4 @@
+#include "ChatRegister.h"
 void ChatRegisterUser::NewAccount()
 {
 	j = new Client( "localhost" );

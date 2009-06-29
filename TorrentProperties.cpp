@@ -1,9 +1,6 @@
 #include <QtGui>
-
 #include <boost/lexical_cast.hpp>
-
 #include <libtorrent/session.hpp>
-
 #include "TorrentProperties.h"
 
 TorrentProperties::TorrentProperties(QString const& title, libtorrent::torrent_handle &h, QWidget *parent)
@@ -121,9 +118,6 @@ void TorrentProperties::TorrentInformation()
 	tor_comment = new QLineEdit(QString(i.comment().c_str()));
 }
 
-//#include <boost/date_time/gregorian/gregorian.hpp>
-//#include <boost/date_time/posix_time/posix_time.hpp>
-//#include <iostream>
 void TorrentProperties::TorrentCreator()
 {
 	tor_header_creator = new QLabel(QString("Created By"));

@@ -5,6 +5,8 @@
 	#cmakedefine CHAT_SERVER "${CHAT_SERVER}"
 	#cmakedefine COMMUNITY_PORTAL 1
 	#cmakedefine COMMUNITYPAGE "${COMMUNITYPAGE}"
+	#cmakedefine CRYPTO 1
+	#cmakedefine CRYPTO_ENABLED 1
 	//#cmakedefine DEBUG_MENU 1
 	//#cmakedefine DEVEL_TESTING 1
 	#cmakedefine DOWNLOADER 1

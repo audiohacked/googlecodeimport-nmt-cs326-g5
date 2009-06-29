@@ -1,7 +1,6 @@
 #ifndef __APP_MAIN_H
 #define __APP_MAIN_H
-
-#include <QtGui>
+	#include <QtGui>
 
 class DDPSConfig;
 class DDPSFrame;

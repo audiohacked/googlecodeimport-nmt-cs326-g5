@@ -1,8 +1,7 @@
 #ifndef __TRANSFER_TIMER_H
 #define __TRANSFER_TIMER_H
-
-	#include "TransferManager.h"
-	
+#include <QtGui>
+	class TransferManager;
 	class TransferManagerTimer : public QTimer
 	{
 		Q_OBJECT
@@ -13,6 +12,4 @@
 			void Notify();
 		private:
 	};
-
-
 #endif

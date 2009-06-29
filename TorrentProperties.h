@@ -1,9 +1,6 @@
 #ifndef __TORRENT_PROPERTIES_H
 #define __TORRENT_PROPERTIES_H
-
-	#include <QtGui>
-	#include <libtorrent/session.hpp>
-
+#include <QtGui>
 	class TorrentProperties : public QDialog
 	{
 		public:

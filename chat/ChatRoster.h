@@ -1,13 +1,10 @@
 #ifndef __CHAT_ROSTER_H
 #define __CHAT_ROSTER_H
-
 	#include <QtGui>
-
 	class ChatContactItemData;
 	class ChatGroupItemData;
 	class ChatRosterTree;
 	class ChatRoster;
-
 	class ChatWindowRoster : public QDialog
 	{
 		public:

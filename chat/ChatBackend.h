@@ -1,36 +1,26 @@
 #ifndef __CHAT_BACKEND_H
 #define __CHAT_BACKEND_H
 	#include <QtGui>
-	
 	#include <client.h>
 	#include <rostermanager.h>
-	
 	#include <message.h>
 	#include <messagehandler.h>
-	
 	#include <messagesessionhandler.h>
-	
 	#include <messageeventhandler.h>
 	#include <messageeventfilter.h>
-	
 	#include <chatstatehandler.h>
 	#include <chatstatefilter.h>
-
 	#include <presencehandler.h>
 	#include <presence.h>
-	
 	#include <connectionlistener.h>
 	#include <connectiontcpclient.h>
 	#include <disco.h>
-
 	#include <gloox.h>
 	using namespace gloox;
-
 	class ChatRosterTree;
 	class ChatConnThread;
 	class ChatContactItemData;
 	class DDPSConfig;
-
 	class ChatRoster : public QObject, RosterListener, ConnectionListener, 
 		PresenceHandler, MessageSessionHandler, MessageHandler
 	{
