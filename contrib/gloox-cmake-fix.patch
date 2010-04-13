@@ -1,0 +1,13 @@
+Index: CMakeLists.txt
+===================================================================
+--- CMakeLists.txt	(revision 4359)
++++ CMakeLists.txt	(working copy)
+@@ -22,7 +22,7 @@
+         set( GLOOX_WITH_SCHANNEL false CACHE BOOL "Enable SChannel" )
+ endif( WIN32 )
+ 
+-set( CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules/" )
++set( CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules/" )
+ 
+ if( GLOOX_ENABLE_MAINTAINER )
+         set( CMAKE_CXX_FLAGS "-Wshadow -Werror" CACHE STRING "Maintainer Flags" FORCE )
