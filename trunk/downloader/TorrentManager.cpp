@@ -10,6 +10,7 @@ int byte_kilo = 1000;
 TorrentTransferManager::TorrentTransferManager(TransferManager *t)
 {
 	torrent_cfg = new DDPSConfig;
+	torrent_cfg->Load();
 	tree = t;
 	
 	qDebug() << "TorrentTransferManager";
@@ -94,6 +95,8 @@ TorrentTransferManager::~TorrentTransferManager()
 	se.stop_lsd();
 	se.stop_natpmp();
 	se.stop_upnp();
+
+	torrent_cfg->Save();
 }
 
 libtorrent::torrent_handle

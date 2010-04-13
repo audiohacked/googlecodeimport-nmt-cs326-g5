@@ -1,5 +1,8 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
+	<qresource prefix="/stylesheets">
+		<file alias="default.qss">default.qss</file>
+	</qresource>
 	<qresource prefix="/ui">
 		<file alias="login.ui">AppLoginWindow.ui</file>
 	</qresource>

@@ -31,6 +31,7 @@ ChatRoster::ChatRoster(ChatRosterTree *t, QObject *parent)
 void ChatRoster::exec()
 {
 	chat_cfg = new DDPSConfig;
+	chat_cfg->Load();
 	qDebug() << "ChatRoster::exec";
 	std::string username = chat_cfg->cfg_LoginUsername.toStdString();
 	std::string password = chat_cfg->cfg_LoginPassword.toStdString();
@@ -69,6 +70,7 @@ void ChatRoster::stop()
 	conn->disconnect();
 	chat_connected = false;
 	t->stop();
+	chat_cfg->Save();
 }
 
 void ChatRoster::onConnect()

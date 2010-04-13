@@ -87,6 +87,12 @@ AppLoginWindow::AppLoginWindow(QWidget *parent)
 	}
 
 }
+
+AppLoginWindow::~AppLoginWindow()
+{
+	login_cfg->Save();
+}
+
 void AppLoginWindow::create_account()
 {
 	return;
