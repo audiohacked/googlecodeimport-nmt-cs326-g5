@@ -1,4 +1,13 @@
 #include <QtGui>
+
+/*
+#ifdef Q_WS_MAC
+#include <QUiLoader>  // build fine with Qt install from dmg
+#else
+#include <QtUiTools/QUiLoader>   // CMake 2.4.3+ finds QtUiTools correctly
+#endif
+*/
+
 #if CRYPTO
 #include <QtCrypto>
 #endif
@@ -9,6 +18,7 @@
 AppLoginWindow::AppLoginWindow(QWidget *parent)
 : QDialog(parent)
 {
+#if 1	
 	QLabel *userText = new QLabel(tr("Account name:"), this);
 	QLabel *passText = new QLabel(tr("Password: "), this);
 	QLabel *fetchText = new QLabel(tr("Forgot your login info?"), this);
@@ -55,10 +65,20 @@ AppLoginWindow::AppLoginWindow(QWidget *parent)
 	mainLayout->addSpacing(1);
 	mainLayout->addLayout(o1Layout);
 	mainLayout->addLayout(o2Layout);
+#else
+	QUiLoader loader;
+	QFile file(":/ui/login.ui");
+	file.open(QFile::ReadOnly);
+	QWidget *myWidget = loader.load(&file, this);
+	file.close();
 
+	QVBoxLayout *mainLayout = new QVBoxLayout;
+	mainLayout->addWidget(myWidget);
+#endif
 	setLayout(mainLayout);
 
 	login_cfg = new DDPSConfig;
+	login_cfg->Load();
 	if (login_cfg->cfg_RememberLogin)
 	{
 		username->setText(login_cfg->cfg_LoginUsername);

@@ -2,6 +2,7 @@
 #include "BrowserEmbed.h"
 #include "chat/ChatRoster.h"
 #include "SettingsDialog.h"
+#include "AppConfig.h"
 #include "AppWidget.h"
 #include "AppLogin.h"
 #include "AppMain.h"
@@ -21,6 +22,11 @@ int main(int argc, char *argv[])
 	AppLoginWindow *login = new AppLoginWindow;
 	if (login->exec())
 	{
+		DDPSConfig *app_cfg = new DDPSConfig;
+		app_cfg->Load();
+		QString rc_file = QString("skins/")+app_cfg->cfg_GuiSkin+QString("/default.rcc");
+		qDebug() << rc_file;
+		QResource::registerResource(rc_file);
 		win->show();
 		return app.exec();
 	}

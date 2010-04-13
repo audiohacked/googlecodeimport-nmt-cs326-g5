@@ -14,6 +14,7 @@ public:
 	AppLoginWindow(QWidget *parent = 0);
 	QString GetUsername() { return user; }
 	QString GetPassword() { return pass; }
+
 public slots:
 	virtual void accept();
 	//virtual void reject();

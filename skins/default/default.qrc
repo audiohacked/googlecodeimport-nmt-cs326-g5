@@ -1,0 +1,12 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+	<qresource prefix="/ui">
+		<file alias="login.ui">AppLoginWindow.ui</file>
+	</qresource>
+	<qresource prefix="/downloader">
+		<file>httpdownloader.ui</file>
+	</qresource>
+	<qresource prefix="/chat" lang="en">
+		<file>buddylist.ui</file>
+	</qresource>
+</RCC>

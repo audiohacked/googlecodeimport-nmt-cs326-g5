@@ -16,6 +16,9 @@
 			bool cfg_RememberLogin;
 			QString cfg_LoginUsername;
 			QString cfg_LoginPassword;
+			QString cfg_GuiResourceFile;
+			QString cfg_GuiStyleSheet;
+			QString cfg_GuiSkin;
 
 			// Transfer
 			QString cfg_download_location;
