@@ -3,7 +3,7 @@
 
 #include "chat/ChatRoster.h"
 #include "SettingsDialog.h"
-#include "TransferManager.h"
+#include "downloader/TransferManager.h"
 #include "BrowserEmbed.h"
 #include "AppWidget.h"
 #include "config.h"

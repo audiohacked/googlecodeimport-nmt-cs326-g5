@@ -1,16 +1,16 @@
 IF(${TORRENT_DOWNLOADER} MATCHES ON)
 	SET(SRCS ${SRCS} 
-		TorrentAlertTimer.cpp
-#		TorrentBencode.cpp
-		TorrentManager.cpp
-		TorrentProperties.cpp
-		TransferManagerDataTor.cpp
+		downloader/TorrentAlertTimer.cpp
+#		downloader/TorrentBencode.cpp
+		downloader/TorrentManager.cpp
+		downloader/TorrentProperties.cpp
+		downloader/TransferManagerDataTor.cpp
 	)
 	SET(HDRS ${HDRS} 
-		TorrentAlertTimer.h
-#		TorrentBencode.h
-		TorrentManager.h
-		TorrentProperties.h
-		TransferManagerDataTor.h
+		downloader/TorrentAlertTimer.h
+#		downloader/TorrentBencode.h
+		downloader/TorrentManager.h
+		downloader/TorrentProperties.h
+		downloader/TransferManagerDataTor.h
 	)
 ENDIF(${TORRENT_DOWNLOADER} MATCHES ON)

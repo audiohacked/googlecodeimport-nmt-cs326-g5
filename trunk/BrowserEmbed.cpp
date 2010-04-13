@@ -1,6 +1,6 @@
 #include <QtGui>
 #include <QtWebKit>
-#include "TransferManager.h"
+#include "downloader/TransferManager.h"
 #include "AppWidget.h"
 #include "BrowserEmbed.h"
 #include "config.h"
