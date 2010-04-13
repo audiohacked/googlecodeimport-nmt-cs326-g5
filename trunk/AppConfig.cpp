@@ -4,7 +4,7 @@
 
 DDPSConfig::DDPSConfig(): QSettings("./rc_ddps", QSettings::IniFormat)
 {
-	Load();
+	//Load();
 }
 
 void DDPSConfig::Save()
@@ -20,10 +20,13 @@ void DDPSConfig::Save()
 		cfg_LoginUsername = QString("");
 		cfg_LoginPassword = QString("");
 	}
-	
+
 	setValue("/GUI/LoginUsername", cfg_LoginUsername);
 	setValue("/GUI/LoginPassword", cfg_LoginPassword); // in md5/sha1 hash format
 	setValue("/GUI/RememberLogin", cfg_RememberLogin);
+	setValue("/GUI/GuiResourceFile", cfg_GuiResourceFile);
+	setValue("/GUI/GuiStyleSheet", cfg_GuiStyleSheet);
+	setValue("/GUI/GuiSkin", "default");
 
 	// Transfer
 	setValue("/Transfers/download_location", cfg_download_location);
@@ -48,7 +51,7 @@ void DDPSConfig::Save()
 	setValue("/BitTorrent/log_level", cfg_log_level);
 	setValue("/BitTorrent/ipfilter_file", cfg_ipfilter_file);
 	setValue("/BitTorrent/allocation_mode", cfg_allocation_mode);
-	
+
 }
 
 void DDPSConfig::Load()
@@ -57,6 +60,9 @@ void DDPSConfig::Load()
 	cfg_RememberLogin = value("/GUI/RememberLogin", false).toBool();
 	cfg_LoginUsername = value("/GUI/LoginUsername", "").toString();
 	cfg_LoginPassword = value("/GUI/LoginPassword", "").toString();
+	cfg_GuiResourceFile = value("/GUI/GuiResourceFile", "default").toString();
+	cfg_GuiStyleSheet = value("/GUI/GuiStyleSheet", "default").toString();
+	cfg_GuiSkin = value("/GUI/GuiSkin", "default").toString();
 
 	// Transfer
 	cfg_download_location = value("/Transfers/download_location", "./download-files/").toString();
