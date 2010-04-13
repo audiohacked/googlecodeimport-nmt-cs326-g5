@@ -8,16 +8,19 @@ class SettingsWidget : public QDialog
 {	
 	public:
 		SettingsWidget(QWidget *parent = 0);
+		~SettingsWidget();
 	public slots:
 		virtual void accept();
+		void GetSkinListing();
 		//virtual void reject();
-		void SaveSettings();
+		//void SaveSettings();
 	private:
 		DDPSConfig *settings_cfg;
 		QLineEdit *downloadLocation;
 		QSpinBox *downloadSpeed;
-		QSpinBox* uploadSpeed;
-		QSpinBox* numPeers;
+		QSpinBox *uploadSpeed;
+		QSpinBox *numPeers;
+		QComboBox *skinSelect;
 		Q_OBJECT
 };
 

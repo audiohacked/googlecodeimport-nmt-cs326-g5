@@ -5,6 +5,7 @@
 DDPSConfig::DDPSConfig(): QSettings("./rc_ddps", QSettings::IniFormat)
 {
 	//Load();
+	qDebug() << "Settings Configuration";
 }
 
 void DDPSConfig::Save()
@@ -26,7 +27,7 @@ void DDPSConfig::Save()
 	setValue("/GUI/RememberLogin", cfg_RememberLogin);
 	setValue("/GUI/GuiResourceFile", cfg_GuiResourceFile);
 	setValue("/GUI/GuiStyleSheet", cfg_GuiStyleSheet);
-	setValue("/GUI/GuiSkin", "default");
+	setValue("/GUI/GuiSkin", cfg_GuiSkin);
 
 	// Transfer
 	setValue("/Transfers/download_location", cfg_download_location);

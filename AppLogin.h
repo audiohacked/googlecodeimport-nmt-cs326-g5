@@ -12,6 +12,7 @@ class AppLoginWindow : public QDialog
 {
 public:
 	AppLoginWindow(QWidget *parent = 0);
+	~AppLoginWindow();
 	QString GetUsername() { return user; }
 	QString GetPassword() { return pass; }
 

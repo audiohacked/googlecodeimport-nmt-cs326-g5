@@ -8,11 +8,14 @@
 #include "AppMain.h"
 #include "config.h"
 
+#define CUSTOM_QSS ":/stylesheets/default.qss"
+#define TEST_QSS ":/qss/coffee.qss"
+
 void LogOutput(QtMsgType type, const char *msg);
 
 int main(int argc, char *argv[])
 {
-	qInstallMsgHandler(LogOutput);
+	//qInstallMsgHandler(LogOutput);
 	QApplication app(argc, argv);
 
 	app.setApplicationName("DDPS");
@@ -24,9 +27,21 @@ int main(int argc, char *argv[])
 	{
 		DDPSConfig *app_cfg = new DDPSConfig;
 		app_cfg->Load();
-		QString rc_file = QString("skins/")+app_cfg->cfg_GuiSkin+QString("/default.rcc");
-		qDebug() << rc_file;
-		QResource::registerResource(rc_file);
+		QString skin = app_cfg->cfg_GuiSkin;
+		app_cfg->Save();
+		delete app_cfg;
+
+		/* Resource Skinning */
+		QString resource_file = QString("skins/")+skin+QString("/default.rcc");
+		qDebug() << "Resource File: " << resource_file;
+		QResource::registerResource(resource_file);
+
+		/* StyleSheet Skinning */
+		QFile stylesheet_file(TEST_QSS);
+		stylesheet_file.open(QFile::ReadOnly);
+		QString styleSheet = QLatin1String(stylesheet_file.readAll());
+		qApp->setStyleSheet(styleSheet);
+
 		win->show();
 		return app.exec();
 	}

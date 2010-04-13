@@ -7,6 +7,7 @@ SettingsWidget::SettingsWidget(QWidget *parent)
 : QDialog(parent)
 {
 	settings_cfg = new DDPSConfig;
+	settings_cfg->Load();
 
 	//define ok and cancel buttons
 	QPushButton *Ok_Button = new QPushButton(tr("Accept"), this);
@@ -14,6 +15,10 @@ SettingsWidget::SettingsWidget(QWidget *parent)
 
 	QPushButton *Cancel_Button = new QPushButton(tr("Cancel"), this);
 	connect(Cancel_Button, SIGNAL(clicked()), this, SLOT(reject()));
+
+	skinSelect = new QComboBox(this);
+	GetSkinListing();
+	QLabel *skinSelectLabel = new QLabel(tr("Skin:"), this);
 
 	//define download directory label and control
 	downloadLocation = new QLineEdit(settings_cfg->cfg_download_location, this);
@@ -43,6 +48,8 @@ SettingsWidget::SettingsWidget(QWidget *parent)
 	bLayout->addWidget(Ok_Button);
 	bLayout->addWidget(Cancel_Button);
 
+	sLayout->addWidget(skinSelectLabel);
+	sLayout->addWidget(skinSelect);
 	sLayout->addWidget(downloadLocationLabel); 
 	sLayout->addWidget(downloadLocation);
 	sLayout->addWidget(downloadSpeedLabel); 
@@ -58,17 +65,30 @@ SettingsWidget::SettingsWidget(QWidget *parent)
 	setLayout(mLayout);
 }
 
-void SettingsWidget::SaveSettings()
+SettingsWidget::~SettingsWidget()
+{
+	settings_cfg->Save();
+}
+
+void SettingsWidget::GetSkinListing()
+{
+	int index;
+	QDir *skins = new QDir("./skins");
+	QStringList entrylist = skins->entryList(QStringList("[a-zA-Z1-9]*"), QDir::Dirs, QDir::Name);
+	skinSelect->addItems(entrylist);
+	qDebug() << "Skin Name: " << settings_cfg->cfg_GuiSkin;
+	index = skinSelect->findText(settings_cfg->cfg_GuiSkin);
+	qDebug() << "Skin Index: " << index;
+	skinSelect->setCurrentIndex(index);
+}
+
+void SettingsWidget::accept()
 {
 	settings_cfg->cfg_download_location = downloadLocation->text();
 	settings_cfg->cfg_download_speed = downloadSpeed->value();
 	settings_cfg->cfg_upload_speed = uploadSpeed->value();
 	settings_cfg->cfg_max_peers = numPeers->value();
+	settings_cfg->cfg_GuiSkin = skinSelect->currentText();
 	settings_cfg->Save();
-}
-
-void SettingsWidget::accept()
-{
-	SaveSettings();
 	done(QDialog::Accepted);
 }
