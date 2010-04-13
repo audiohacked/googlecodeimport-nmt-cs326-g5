@@ -84,7 +84,7 @@ INCLUDE_DIRECTORIES(
 )
 
 LINK_DIRECTORIES(
-    ${LINK_DIRECTORIES}
+	${LINK_DIRECTORIES}
 	${CMAKE_BINARY_DIR}
 )
 
@@ -93,6 +93,7 @@ INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/sys_linux.cmake )
 INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/sys_osx.cmake )
 INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/sys_win32.cmake )
 INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/boost.cmake )
+INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/qca.cmake )
 INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/libtorrent.cmake )
 INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/gloox.cmake )
 INCLUDE( ${CMAKE_SOURCE_DIR}/cmake/browser.cmake )
