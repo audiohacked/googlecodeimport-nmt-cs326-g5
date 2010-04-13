@@ -5,16 +5,16 @@ IF(${TORRENT_DOWNLOADER} MATCHES ON)
 
 	#ADD_DEFINITIONS(-D_WINSOCK2API_)
 
-	ADD_SUBDIRECTORY(libtorrent)
+	ADD_SUBDIRECTORY(downloader/libtorrent)
 
 	LINK_DIRECTORIES( ${LINK_DIRECTORIES} ${Boost_LIBRARY_DIRS} )
 
 	INCLUDE_DIRECTORIES(
 		${INCLUDE_DIRECTORIES}
 		${Boost_INCLUDE_DIR}
-		libtorrent/include
-		libtorrent/zlib
-		libtorrent/include/libtorrent
+		downloader/libtorrent/include
+		downloader/libtorrent/zlib
+		downloader/libtorrent/include/libtorrent
 		openssl/include
 	)
 	

@@ -1,8 +1,8 @@
 IF(${HTTP_DOWNLOADER} MATCHES ON)
     SET(SRCS ${SRCS} 
-    	HttpManager.cpp
+    	downloader/HttpManager.cpp
     )
     SET(HDRS ${HDRS} 
-    	HttpManager.h
+    	downloader/HttpManager.h
     )
 ENDIF(${HTTP_DOWNLOADER} MATCHES ON)

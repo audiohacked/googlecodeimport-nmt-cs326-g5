@@ -1,12 +1,12 @@
 IF(${DOWNLOADER} MATCHES ON)
 	SET(SRCS ${SRCS} 
-		TransferManager.cpp
-		TransferManagerData.cpp
-		TransferTimer.cpp
+		downloader/TransferManager.cpp
+		downloader/TransferManagerData.cpp
+		downloader/TransferTimer.cpp
 	)
 	SET(HDRS ${HDRS} 
-		TransferManager.h
-		TransferManagerData.h
-		TransferTimer.h
+		downloader/TransferManager.h
+		downloader/TransferManagerData.h
+		downloader/TransferTimer.h
 	)
 ENDIF(${DOWNLOADER} MATCHES ON)
